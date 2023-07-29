@@ -1,0 +1,25 @@
+<form #f="ngForm">
+  <div class="flex flex-wrap">
+    <app-flight
+      lable="Origin"
+      name="origin"
+      [(ngModel)]="formData.origin"
+    ></app-flight>
+    <app-flight
+      lable="Destination"
+      name="destination"
+      [(ngModel)]="formData.destination"
+    ></app-flight>
+    <app-datepicker
+      placeholder="your departure date"
+      label="departure Date"
+      name="departureDate"
+      [(ngModel)]="formData.departureDate"
+    ></app-datepicker>
+  </div>
+  <app-pasengers
+    name="pasengers"
+    [(ngModel)]="formData.pasengers"
+  ></app-pasengers>
+  {{ f.value | json }}
+</form>

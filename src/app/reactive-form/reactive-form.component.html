@@ -1,0 +1,35 @@
+<form [formGroup]="cityForm">
+  form value ? {{ cityForm.value | json }} is form valid ?
+  {{ cityForm.valid | json }}
+  <h2 style="text-align: center">reactiv form</h2>
+  <hr style="margin: 10px" />
+  <div>
+    <div class="flex flex-wrap">
+      <app-flight formControlName="origin" lable="origin"></app-flight>
+      <app-flight
+        formControlName="destination"
+        lable="destination"
+      ></app-flight>
+
+      <app-datepicker
+        formControlName="departureDate"
+        placeholder="your departure date"
+        label="departure Date"
+      ></app-datepicker>
+      <app-datepicker
+        formControlName="returnDate"
+        placeholder="your return date"
+        label="return Date"
+      ></app-datepicker>
+    </div>
+
+    <hr style="margin: 10px" />
+    <app-pasengers formControlName="cityInput"></app-pasengers>
+    <mat-radio-group formControlName="radio" aria-label="Select an option">
+      <mat-radio-button *ngFor="let option of options" [value]="option"
+        >{{ option }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</form>
+{{ cityForm.value | json }}

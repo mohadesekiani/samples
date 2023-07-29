@@ -1,0 +1,26 @@
+<div class="m-2">
+  <div>{{ lable }}</div>
+  <mat-form-field>
+    <mat-label> select {{ lable }}</mat-label>
+    <input
+      matInput
+      placeholder="select"
+      type="text"
+      [matAutocomplete]="auto"
+      required
+      (input)="onCityInputChange($event)"
+      [(ngModel)]="value"
+    />
+    <!-- <mat-error>{{ getErrorMessage() }}</mat-error> -->
+  </mat-form-field>
+
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option
+      *ngFor="let city of filteredCities"
+      [value]="filteredCities"
+      (click)="optionSelected(city)"
+    >
+      {{ city }}
+    </mat-option>
+  </mat-autocomplete>
+</div>
