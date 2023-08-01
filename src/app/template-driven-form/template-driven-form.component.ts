@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class TemplateDrivenFormComponent {
   formData: any = {};
+  showDrop = false;
+  options = [
+    { label: 'Women Only', value: 'Women Only' },
+    { label: 'Men Only', value: 'Men Only' },
+    { label: 'General', value: 'General' },
+  ];
+
 }

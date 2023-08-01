@@ -8,8 +8,13 @@ import { MaterialModule } from '../material/material.module';
 import { DatepickerComponent } from './form/fields/datepicker/datepicker.component';
 import { FlightComponent } from './form/fields/flight/flight.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-const COMPONENTS = [DatepickerComponent, FlightComponent, PasengersComponent];
+import { GeneralComponent } from './form/fields/general/general.component';
+const COMPONENTS = [
+  DatepickerComponent,
+  FlightComponent,
+  PasengersComponent,
+  GeneralComponent,
+];
 
 @NgModule({
   declarations: [COMPONENTS],

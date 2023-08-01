@@ -17,9 +17,66 @@
       [(ngModel)]="formData.departureDate"
     ></app-datepicker>
   </div>
-  <app-pasengers
-    name="pasengers"
-    [(ngModel)]="formData.pasengers"
-  ></app-pasengers>
+  <div class="flex flex-wrap">
+    <app-pasengers
+      style="width: 45%"
+      name="pasengers"
+      [(ngModel)]="formData.pasengers"
+    ></app-pasengers>
+    <div class="w-1/2" style="border: 1px solid red">
+      <div>General</div>
+      <div class="w-1/2 p-4">
+        <!-- <span>my input value: {{ value | json }}</span> -->
+        <div class="m-2 flex flex-wrap">
+          <div class="m-auto" style="text-align: center">
+            {{ formData.option }}
+          </div>
+          <div>
+            <button (click)="showDrop = !showDrop">
+              <i class="fa fa-users"></i>
+            </button>
+          </div>
+
+          <div class="bg-white" *ngIf="showDrop">
+            <div class="form-group">
+              <label for="option">OPtion</label>
+              <div class="form-control">
+                <label class="radio-inline">
+                  <input
+                    type="radio"
+                    id="WomenOnly"
+                    name="option"
+                    value="Women Only"
+                    [(ngModel)]="formData.option"
+                  />
+                  Women Only
+                </label>
+                <label class="radio-inline">
+                  <input
+                    type="radio"
+                    id="MenOnly"
+                    name="option"
+                    value="Men Only"
+                    [(ngModel)]="formData.option"
+                  />
+                  Men Only
+                </label>
+                <label class="radio-inline">
+                  <input
+                    type="radio"
+                    id="General"
+                    name="option"
+                    value="General"
+                    [(ngModel)]="formData.option"
+                  />
+                  General
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   {{ f.value | json }}
 </form>
