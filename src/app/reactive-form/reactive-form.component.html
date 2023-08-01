@@ -24,12 +24,27 @@
     </div>
 
     <hr style="margin: 10px" />
-    <app-pasengers formControlName="cityInput"></app-pasengers>
-    <mat-radio-group formControlName="radio" aria-label="Select an option">
-      <mat-radio-button *ngFor="let option of options" [value]="option"
-        >{{ option }}
-      </mat-radio-button>
-    </mat-radio-group>
+
+    <div class="flex flex-wrap">
+      <div class="w-1/2">
+        <span class="m-2">passanger</span>
+
+        <app-pasengers formControlName="cityInput"></app-pasengers>
+      </div>
+      <div class="w-1/2">
+        <span class="m-2">general</span>
+        <div class="m-3">
+          <mat-radio-group
+            formControlName="radio"
+            aria-label="Select an option"
+          >
+            <mat-radio-button *ngFor="let option of options" [value]="option"
+              >{{ option }}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
   </div>
 </form>
 {{ cityForm.value | json }}
