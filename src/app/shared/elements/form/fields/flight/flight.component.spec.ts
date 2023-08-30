@@ -4,13 +4,17 @@ import { FlightComponent } from './flight.component';
 
 fdescribe('SUT: FlightComponent', () => {
   let sut: FlightComponent;
-  let dataService = {} as AbstractDataService;
+  const fakeCities = ['city1', 'city2'];
+  const dataService = jasmine.createSpyObj<AbstractDataService>({
+    getFakedata: of(fakeCities)
+  });
   const valueAccessor = jasmine.createSpyObj({
     onChange: () => { }
   });
 
   beforeEach(() => {
     sut = new FlightComponent(dataService);
+    sut.registerOnChange(valueAccessor.onChange);
   });
 
   it('should create', () => {
@@ -57,22 +61,23 @@ fdescribe('SUT: FlightComponent', () => {
     }));
     expect(valueAccessor.onChange).toHaveBeenCalled();
     expect(valueAccessor.onChange).toHaveBeenCalledWith(null);
+    // TODO onTocuh
 
   });
 
   it('should call dataService.getFakedata and set filteredCities properly ', () => {
-  // arrange
-  sut.loading = true
-  const fakeCities = ['city1','city2'];
-  sut.filteredCities = [];
-  sut.registerOnChange(valueAccessor.onChange);
-  dataService.getFakedata = jasmine.createSpy().and.returnValue(of(fakeCities));
-  // act
-  sut.onCityInputChange('cit');
+    // arrange
+    sut.loading = true
+    sut.filteredCities = [];
 
-  // assert
-  expect(dataService.getFakedata).toHaveBeenCalledWith('cit');
-  expect(sut.filteredCities).toEqual(fakeCities);
-  expect(sut.loading).toBe(false)
+    // act
+    sut.onCityInputChange('cit');
+
+    // assert
+    expect(dataService.getFakedata).toHaveBeenCalledWith('cit');
+    expect(sut.filteredCities).toEqual(fakeCities);
+    expect(sut.loading).toBe(false)
   });
+
+  //TODO Coverage 100%
 });

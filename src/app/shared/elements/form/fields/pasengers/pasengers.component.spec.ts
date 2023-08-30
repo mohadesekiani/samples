@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PasengersComponent } from './pasengers.component';
 
-describe('PasengersComponent', () => {
+describe('SUT(integration): PasengersComponent', () => {
   let component: PasengersComponent;
   let fixture: ComponentFixture<PasengersComponent>;
 
@@ -19,16 +19,14 @@ describe('PasengersComponent', () => {
     expect(component).toBeTruthy();
   });
 
-    it('#increase() should toggle #incriment', () => {
-      const comp = new PasengersComponent();
-      let item = 1;
-      expect(comp.passanger[item].value)
-        .toBe(0);
-      comp.increase(item)
-      expect(comp.passanger[item].value)
-        .toBe(1);
+  // TODO move to unit test
+  it('#increase() should toggle #incriment', () => {
+    const comp = new PasengersComponent();
+    let item = 1;
+    expect(comp.passanger[item].value).toBe(0);
 
-    });
+    comp.increase(item)
 
-
+    expect(comp.passanger[item].value).toBe(1);
+  });
 });

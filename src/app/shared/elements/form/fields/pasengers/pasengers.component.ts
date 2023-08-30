@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
+export interface IPassengerTypes {
+  Adult: number; Children: number; Infant: number;
+}
 @Component({
   selector: 'app-pasengers',
   templateUrl: './pasengers.component.html',
@@ -17,15 +19,15 @@ export class PasengersComponent implements ControlValueAccessor {
   // ########################################################
   //              control value accessor scope              #
   // ########################################################
-  value: { Adult: number; Children: number; Infant: number } = {
+  value: IPassengerTypes = {
     Adult: 0,
     Children: 0,
     Infant: 0,
   };
   disabled = false;
   touched = false;
-  onChange = (value) => {};
-  onTouched = () => {};
+  onChange = (value) => { };
+  onTouched = () => { };
 
   writeValue(obj: any): void {
     this.value = obj;

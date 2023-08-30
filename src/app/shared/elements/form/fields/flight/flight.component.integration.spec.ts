@@ -37,4 +37,6 @@ describe('SUT(integration): FlightComponent', () => {
 
     expect(sut.filteredCities).toEqual([])
   });
+   //TODO Coverage 100%
+
 });

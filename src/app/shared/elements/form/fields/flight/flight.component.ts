@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
+
 @Component({
   selector: 'app-flight',
   templateUrl: './flight.component.html',
@@ -22,7 +23,7 @@ export class FlightComponent implements ControlValueAccessor {
   filteredCities!: Array<any>;
   citySelect = '';
   showCityNotFound = true;
-  loading!: boolean;
+  loading = false;
 
   constructor(
     private dataService: AbstractDataService
@@ -30,6 +31,11 @@ export class FlightComponent implements ControlValueAccessor {
     if (!dataService) {
       throw new Error('dataService is empty');
     }
+  }
+
+  @HostListener('focusin')
+  onFocus() {
+    this.markAsTouched();
   }
 
   onChange = (value) => { };
@@ -52,10 +58,10 @@ export class FlightComponent implements ControlValueAccessor {
   }
 
   markAsTouched() {
-    if (!this.touched) {
-      this.onTouched();
-      this.touched = true;
-    }
+    if (this.touched) { return; }
+
+    this.onTouched();
+    this.touched = true;
   }
 
   onCityInputChange(value: string) {
@@ -93,7 +99,6 @@ export class FlightComponent implements ControlValueAccessor {
     // this.showCityNotFound = this.filteredCities.length === 0;
     // this.showCityNotFound = false;
     // this.onChange(this.value);
-    // this.markAsTouched();
   }
 
   optionSelected(city: string) {
