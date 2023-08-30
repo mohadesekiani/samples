@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormComponent } from './reactive-form.component';
 
-import { ReactiveFormComponent } from './ReactiveFormComponent';
 
 describe('ReactiveFormComponent', () => {
   let component: ReactiveFormComponent;
@@ -8,6 +11,11 @@ describe('ReactiveFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports:[
+        BrowserModule,
+        ReactiveFormsModule,
+        SharedModule,
+      ],
       declarations: [ReactiveFormComponent],
     });
     fixture = TestBed.createComponent(ReactiveFormComponent);

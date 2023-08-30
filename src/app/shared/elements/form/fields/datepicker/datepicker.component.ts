@@ -1,5 +1,6 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-datepicker',
@@ -14,15 +15,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class DatepickerComponent implements ControlValueAccessor {
-  // ########################################################
-  //              control value accessor scope              #
-  // ########################################################
-  value: any = '';
-
+  [x: string]: any;
+  @Input() label!: string;
+  @Input() min!: Date;
+  @Input() max!: Date;
+  @Input() value!: Date;
+  // TODO  [(value)]="value"
+  // @Output() valueChange = new EventEmitter();
   disabled = false;
   touched = false;
-  onChange = (value) => {};
-  onTouched = () => {};
+  // @ViewChild('picker') picker!: MatDatepicker<any> ;
+
+  onChange = (value) => { };
+  onTouched = () => { };
 
   writeValue(obj: any): void {
     this.value = obj;
@@ -41,31 +46,16 @@ export class DatepickerComponent implements ControlValueAccessor {
   }
 
   markAsTouched() {
-    if (!this.touched) {
-      this.onTouched();
-      this.touched = true;
-    }
-  }
-  // ########################################################
+    if (this.touched) { return; }
 
-  @Input() label;
-  set(value) {
-    if (!this.disabled) {
-      this.value = value;
-      this.onChange(this.value);
-      this.markAsTouched();
-    }
+    this.onTouched();
+    this.touched = true;
   }
-  dateValueChanged(value) {
+
+  dateValueChanged(value: Date) {
     this.value = value;
+    // check is between min and max
     this.onChange(this.value);
     this.markAsTouched();
   }
-  // date: Array<any> = [
-  //   { title: 'Departure Date', selectedDate: null },
-  //   { title: 'Return Date', selectedDate: null },
-  // ];
-  // logDate(item: any) {
-  //   console.log(item.title + ':', item.selectedDate);
-  // }
 }

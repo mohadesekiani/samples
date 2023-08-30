@@ -1,16 +1,19 @@
 <div class="m-2">
-  <div>{{ label }}</div>
+  <div id="label">{{ label }}</div>
   <mat-form-field>
     <mat-label>{{ label }}</mat-label>
     <input
       matInput
       [matDatepicker]="picker"
       placeholder="PlaceHolder"
-      (click)="picker.open(); dateValueChanged(value)"
-      (dateChange)="dateValueChanged(value)"
-      [(ngModel)]="value"
+      [disabled]="disabled"
+      (click)="picker.open()"
+      (dateChange)="dateValueChanged($event.value)"
+      [value]="value"
+      id="input"
     />
-    <mat-hint>MM/DD/YYYY</mat-hint>
+    <!-- dateValueChanged(value) -->
+    <mat-hint [align]="'start'">MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>

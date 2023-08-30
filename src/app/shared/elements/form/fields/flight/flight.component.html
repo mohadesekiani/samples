@@ -7,9 +7,10 @@
       placeholder="select"
       type="text"
       [matAutocomplete]="auto"
-      required
-      (input)="onCityInputChange($event)"
-      [(ngModel)]="value"
+
+      (ngModelChange)="onCityInputChange($event)"
+      [ngModel]="value"
+      id="input"
     />
     <!-- <mat-error>{{ getErrorMessage() }}</mat-error> -->
   </mat-form-field>

@@ -1,21 +1,43 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DatepickerComponent } from "./datepicker.component"
 
-import { DatepickerComponent } from './datepicker.component';
+describe('SUT: DatepickerComponent', () => {
+  let sut: DatepickerComponent;
 
-describe('DatepickerComponent', () => {
-  let component: DatepickerComponent;
-  let fixture: ComponentFixture<DatepickerComponent>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [DatepickerComponent]
-    });
-    fixture = TestBed.createComponent(DatepickerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    sut = new DatepickerComponent();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(sut).toBeTruthy();
   });
-});
+
+
+  it('should not set value when payload value is less than min', () => {
+    // arrang
+    sut.min = new Date('2020/05/05');
+
+    // act
+    sut.dateValueChanged(new Date('2020/05/04'));
+
+    // assert
+    expect(sut.value.toDateString()).not.toBe(new Date('2020/05/04').toDateString());
+    expect(sut.value.toDateString()).toBe(sut.min.toDateString());
+
+  });
+
+  // max scenario
+  it('should not set value when payload value is more then max', () => {
+    // arrang
+    sut.max = new Date('2020/05/10');
+
+    // act
+    sut.dateValueChanged(new Date('2020/05/11'));
+
+    // assert
+    expect(sut.value.toDateString()).not.toBe(new Date('2020/05/11').toDateString());
+    expect(sut.value.toDateString()).toBe(sut.max.toDateString());
+
+  });
+  // disable
+})

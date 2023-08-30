@@ -18,4 +18,17 @@ describe('PasengersComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+    it('#increase() should toggle #incriment', () => {
+      const comp = new PasengersComponent();
+      let item = 1;
+      expect(comp.passanger[item].value)
+        .toBe(0);
+      comp.increase(item)
+      expect(comp.passanger[item].value)
+        .toBe(1);
+
+    });
+
+
 });

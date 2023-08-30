@@ -13,8 +13,8 @@ export class FakeDataService {
 
   public getFakedata(serchvalue: string): Observable<any> {
     return of(
-      fakeData.cities.filter((city) => city.toLowerCase().includes(serchvalue))
-    ).pipe(delay(3000));
+      fakeData.cities.filter((city) => city.toLowerCase().includes(serchvalue.toLowerCase()))
+    ).pipe(delay(0));
   }
   constructor() {}
 }
