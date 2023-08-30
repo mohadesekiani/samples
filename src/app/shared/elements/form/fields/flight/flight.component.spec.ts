@@ -2,14 +2,16 @@ import { of } from 'rxjs';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { FlightComponent } from './flight.component';
 
-fdescribe('SUT: FlightComponent', () => {
+describe('SUT: FlightComponent', () => {
   let sut: FlightComponent;
   const fakeCities = ['city1', 'city2'];
   const dataService = jasmine.createSpyObj<AbstractDataService>({
     getFakedata: of(fakeCities)
   });
   const valueAccessor = jasmine.createSpyObj({
-    onChange: () => { }
+    onChange: () => { },
+    onTouched:() => {},
+
   });
 
   beforeEach(() => {
@@ -35,12 +37,21 @@ fdescribe('SUT: FlightComponent', () => {
   });
 
   it('should set onChange with proper value when registerOnChange called', () => {
+    //arreng
+    const onTouchedSpy = spyOn(sut, 'onTouched');
+
     // act
     sut.registerOnChange(valueAccessor.onChange);
+    sut.markAsTouched();
 
     // assert
-    expect(sut.onChange).toBe(valueAccessor.onChange);
     // todo test markAsTouched
+    expect(sut.onChange).toBe(valueAccessor.onChange);
+    //?valueAccessor.onTouched
+    expect(onTouchedSpy).toHaveBeenCalled();
+    expect(sut.touched).toBe(true);
+
+
   });
 
   it('should be clean variables related with value when value is less than 2', () => {
@@ -49,6 +60,7 @@ fdescribe('SUT: FlightComponent', () => {
     sut.showCityNotFound = true;
     sut.value = 'some_city';
     sut.registerOnChange(valueAccessor.onChange);
+    sut.registerOnTouched(valueAccessor.onTouched)
 
     // act
     sut.onCityInputChange('s');
@@ -62,6 +74,8 @@ fdescribe('SUT: FlightComponent', () => {
     expect(valueAccessor.onChange).toHaveBeenCalled();
     expect(valueAccessor.onChange).toHaveBeenCalledWith(null);
     // TODO onTocuh
+    expect(valueAccessor.onTouched).toHaveBeenCalled();
+
 
   });
 
@@ -80,4 +94,5 @@ fdescribe('SUT: FlightComponent', () => {
   });
 
   //TODO Coverage 100%
+
 });

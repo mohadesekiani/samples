@@ -4,11 +4,12 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
+import { Input } from '@angular/core';
+import { MatAutocomplete } from '@angular/material/autocomplete';
 
-describe('SUT(integration): FlightComponent', () => {
+describe('SUT(Integration): FlightComponent', () => {
   let sut: FlightComponent;
   let fixture: ComponentFixture<FlightComponent>;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -24,19 +25,45 @@ describe('SUT(integration): FlightComponent', () => {
     fixture = TestBed.createComponent(FlightComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();
+
   });
 
   it('should create', () => {
     expect(sut).toBeTruthy();
   });
 
-  it('should return true for input less than 2 characters', () => {
-    //Arrang
-    const inputElement: HTMLInputElement = TestUtil.nativeElement(fixture, '#input');
-    inputElement.value = 'S';
 
-    expect(sut.filteredCities).toEqual([])
-  });
+  it('should be bind lable',()=>{
+    //arrange
+    sut.lable ='some_lable';
+    fixture.detectChanges();
+    const label :HTMLElement = TestUtil.nativeElement(fixture,'#label');
+
+    //assert
+    expect(label.innerText).toBe('some_lable')
+  })
+  it('should be bind placeholder',()=>{
+    //arrange
+    const input: HTMLInputElement = TestUtil.nativeElement(fixture, '#input');
+
+    //assert
+    expect(input.placeholder).toBe('select')
+    expect(input.type).toBe('text')
+  })
+  it('should bind matAutocomplete to auto',()=>{
+    //arrange
+    const matAutocompleteDirective = TestUtil.directiveElement(fixture,MatAutocomplete)
+    const matAutocomplete = TestUtil.queryComponent(fixture, 'mat-autocomplete');
+
+    //act
+    fixture.detectChanges();
+
+    //assert
+    expect(matAutocomplete).toBeTruthy()
+    expect(matAutocompleteDirective).toBe(matAutocomplete);
+  })
+
+
    //TODO Coverage 100%
 
 });

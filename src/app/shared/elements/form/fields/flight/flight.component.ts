@@ -81,7 +81,6 @@ export class FlightComponent implements ControlValueAccessor {
         next: (res) => {
           console.log(res);
           this.loading = false;
-
           this.filteredCities = res;
           console.log(res);
         },
@@ -114,7 +113,6 @@ export class FlightComponent implements ControlValueAccessor {
     this.filteredCities = [];
     this.value = null;
     this.showCityNotFound = false;
-
     this.onChange(this.value);
     this.markAsTouched();
   }

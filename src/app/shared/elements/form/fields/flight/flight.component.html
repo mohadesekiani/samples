@@ -1,5 +1,5 @@
 <div class="m-2">
-  <div>{{ lable }}</div>
+  <div id="label">{{ lable }}</div>
   <mat-form-field>
     <mat-label> select {{ lable }}</mat-label>
     <input
@@ -7,10 +7,9 @@
       placeholder="select"
       type="text"
       [matAutocomplete]="auto"
-
+      id="input"
       (ngModelChange)="onCityInputChange($event)"
       [ngModel]="value"
-      id="input"
     />
     <!-- <mat-error>{{ getErrorMessage() }}</mat-error> -->
   </mat-form-field>

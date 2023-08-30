@@ -68,11 +68,11 @@ describe('SUT(Integration): DatepickerComponent', () => {
     sut.label = 'some_label';
     fixture.detectChanges();
     await fixture.whenStable();
-    //TODO: write utility for fixture
     const hint: MatHint = TestUtil.directiveElement(fixture, MatHint)
     const input: HTMLInputElement = TestUtil.nativeElement(fixture, '#input');
     // act
-    datePicker.dateChange.emit({ value: payload_value } as MatDatepickerInputEvent<any, any>);
+    datePicker.dateChange.emit(
+      { value: payload_value } as MatDatepickerInputEvent<any, any>);
     fixture.detectChanges();
 
     // assert
@@ -111,7 +111,8 @@ describe('SUT(Integration): DatepickerComponent', () => {
   // [matDatepicker]="picker"
   it('should bind matDatepicker to picker', () => {
     // Arrange
-    const matDatepickerDirective = TestUtil.directiveElement(fixture, MatDatepicker)
+    const matDatepickerDirective =
+    TestUtil.directiveElement(fixture, MatDatepicker)
 
     // Act
     fixture.detectChanges();

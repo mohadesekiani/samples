@@ -19,14 +19,4 @@ describe('SUT(integration): PasengersComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // TODO move to unit test
-  it('#increase() should toggle #incriment', () => {
-    const comp = new PasengersComponent();
-    let item = 1;
-    expect(comp.passanger[item].value).toBe(0);
-
-    comp.increase(item)
-
-    expect(comp.passanger[item].value).toBe(1);
-  });
 });
