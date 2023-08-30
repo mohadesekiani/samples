@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { FlightComponent } from './flight.component';
 
@@ -35,7 +36,7 @@ fdescribe('SUT: FlightComponent', () => {
 
     // assert
     expect(sut.onChange).toBe(valueAccessor.onChange);
-    // todo test markAsTouched 
+    // todo test markAsTouched
   });
 
   it('should be clean variables related with value when value is less than 2', () => {
@@ -56,5 +57,20 @@ fdescribe('SUT: FlightComponent', () => {
     }));
     expect(valueAccessor.onChange).toHaveBeenCalled();
     expect(valueAccessor.onChange).toHaveBeenCalledWith(null);
+
+  });
+
+  it('should call dataService.getFakedata and set filteredCities properly ', () => {
+  // arrange
+  const fakeCities = ['city1','city2'];
+  sut.filteredCities = [];
+  sut.registerOnChange(valueAccessor.onChange);
+  dataService.getFakedata = jasmine.createSpy().and.returnValue(of(fakeCities));
+  // act
+  sut.onCityInputChange('cit');
+
+  // assert
+  expect(dataService.getFakedata).toHaveBeenCalledWith('cit');
+  expect(sut.filteredCities).toEqual(fakeCities);
   });
 });

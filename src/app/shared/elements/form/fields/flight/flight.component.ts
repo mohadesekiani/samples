@@ -22,7 +22,7 @@ export class FlightComponent implements ControlValueAccessor {
   filteredCities!: Array<any>;
   citySelect = '';
   showCityNotFound = true;
-  loading: boolean;
+  loading!: boolean;
 
   constructor(
     private dataService: AbstractDataService
