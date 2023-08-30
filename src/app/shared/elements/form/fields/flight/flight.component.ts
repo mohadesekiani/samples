@@ -14,14 +14,11 @@ import { ABDataService } from 'src/app/core/services/data/abstract-data.service'
   ],
 })
 export class FlightComponent implements ControlValueAccessor {
-  // ########################################################
-  //              control value accessor scope              #
-  // ########################################################
   value: string = '';
   disabled = false;
   touched = false;
-  onChange = (value) => {};
-  onTouched = () => {};
+  onChange = (value) => { };
+  onTouched = () => { };
 
   writeValue(obj: any): void {
     this.value = obj;
@@ -45,43 +42,55 @@ export class FlightComponent implements ControlValueAccessor {
       this.touched = true;
     }
   }
-  // ########################################################
 
   filteredCities: any;
   citySelect: string = '';
   showCityNotFound = true;
   @Input() lable;
-  constructor(private dataService: ABDataService) {}
+  constructor(private dataService: ABDataService) { }
 
   onCityInputChange(e: Event) {
-    if ((<HTMLInputElement>e.target).value.length >= 2) {
-      const searchValue = (e.target as HTMLInputElement).value.toLowerCase();
-      this.filteredCities = this.dataService
-        .getFakedata(searchValue)
-        .subscribe({
-          next: (res) => {
-            console.log(res);
+    if (this.isLessThanValidValue(e)) {
+      this.clean();
 
-            this.filteredCities = res;
-            console.log(res);
-          },
-          error: (err) => {
-            console.log('3');
-            console.log(err);
-          },
-          complete: () => {
-            console.log('4');
-          },
-        });
-
-      this.showCityNotFound = this.filteredCities.length === 0;
-      this.showCityNotFound = false;
-    } else {
-      this.filteredCities = [];
-      this.showCityNotFound = false;
+      return;
     }
+
+    const searchValue = (e.target as HTMLInputElement).value.toLowerCase();
+    this.filteredCities = this.dataService
+      .getFakedata(searchValue)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+
+          this.filteredCities = res;
+          console.log(res);
+        },
+        error: (err) => {
+          console.log('3');
+          console.log(err);
+        },
+        complete: () => {
+          console.log('4');
+        },
+      });
+
+    this.showCityNotFound = this.filteredCities.length === 0;
+    this.showCityNotFound = false;
     this.onChange(this.value);
     this.markAsTouched();
+  }
+
+  private clean() {
+    this.filteredCities = [];
+    this.showCityNotFound = false;
+
+    this.onChange(this.value);
+    this.markAsTouched();
+  }
+
+  private isLessThanValidValue(e: Event) {
+    return (<HTMLInputElement>e.target).value.length < 2;
   }
 
   optionSelected(city: string) {
