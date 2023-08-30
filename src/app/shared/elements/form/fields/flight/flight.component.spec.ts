@@ -62,6 +62,7 @@ fdescribe('SUT: FlightComponent', () => {
 
   it('should call dataService.getFakedata and set filteredCities properly ', () => {
   // arrange
+  sut.loading = true
   const fakeCities = ['city1','city2'];
   sut.filteredCities = [];
   sut.registerOnChange(valueAccessor.onChange);
@@ -72,5 +73,6 @@ fdescribe('SUT: FlightComponent', () => {
   // assert
   expect(dataService.getFakedata).toHaveBeenCalledWith('cit');
   expect(sut.filteredCities).toEqual(fakeCities);
+  expect(sut.loading).toBe(false)
   });
 });
