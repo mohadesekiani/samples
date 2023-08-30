@@ -15,10 +15,10 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
   ],
 })
 export class FlightComponent implements ControlValueAccessor {
-  @Input() lable = '';
+  @Input() label = '';
   value: any = '';
   filterText = '';
-  disabled = false;
+  disabled!: boolean;
   touched = false;
   filteredCities!: Array<any>;
   citySelect = '';
@@ -53,7 +53,7 @@ export class FlightComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledStates(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
@@ -74,30 +74,29 @@ export class FlightComponent implements ControlValueAccessor {
     }
 
     // const searchValue = this.value.toLowerCase();
-    this.loading = true;
-    // todo finalize pipe to this.loading = false;
-    this.dataService.getFakedata(this.filterText)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.loading = false;
-          this.filteredCities = res;
-          console.log(res);
-        },
-        error: (err) => {
-          this.loading = false;
-          console.log('3');
-          console.log(err);
-        },
-        complete: () => {
-          this.loading = false;
-          console.log('4');
-        },
-      });
+    this.loadData();
 
     // this.showCityNotFound = this.filteredCities.length === 0;
     // this.showCityNotFound = false;
     // this.onChange(this.value);
+  }
+
+  private loadData() {
+    // todo finalize pipe to this.loading = false;
+    this.loading = true;
+    this.dataService.getFakeData(this.filterText)
+      .subscribe({
+        next: (res) => {
+          this.loading = false;
+          this.filteredCities = res;
+        },
+        error: (err) => {
+          this.loading = false;
+        },
+        complete: () => {
+          this.loading = false;
+        },
+      });
   }
 
   optionSelected(city: string) {

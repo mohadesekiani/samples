@@ -33,26 +33,27 @@ describe('SUT(Integration): FlightComponent', () => {
   });
 
 
-  it('should be bind lable',()=>{
+  it('should be bind lable', () => {
     //arrange
-    sut.lable ='some_lable';
+    sut.label = 'some_lable';
     fixture.detectChanges();
-    const label :HTMLElement = TestUtil.nativeElement(fixture,'#label');
+    const label: HTMLElement = TestUtil.nativeElement(fixture, '#label');
 
     //assert
     expect(label.innerText).toBe('some_lable')
   })
-  it('should be bind placeholder',()=>{
+  it('should be bind placeholder', () => {
     //arrange
     const input: HTMLInputElement = TestUtil.nativeElement(fixture, '#input');
 
     //assert
     expect(input.placeholder).toBe('select')
     expect(input.type).toBe('text')
-  })
-  it('should bind matAutocomplete to auto',()=>{
+  });
+
+  it('should bind matAutocomplete to auto', () => {
     //arrange
-    const matAutocompleteDirective = TestUtil.directiveElement(fixture,MatAutocomplete)
+    const matAutocompleteDirective = TestUtil.directiveElement(fixture, MatAutocomplete)
     const matAutocomplete = TestUtil.queryComponent(fixture, 'mat-autocomplete');
 
     //act
@@ -61,9 +62,9 @@ describe('SUT(Integration): FlightComponent', () => {
     //assert
     expect(matAutocomplete).toBeTruthy()
     expect(matAutocompleteDirective).toBe(matAutocomplete);
-  })
+  });
 
 
-   //TODO Coverage 100%
+  //TODO Coverage 100%
 
 });

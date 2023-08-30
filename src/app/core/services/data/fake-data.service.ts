@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import * as fakeData from './mock-data';
 import { delay, Observable, of } from 'rxjs';
+import { AbstractDataService } from './abstract-data.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FakeDataService {
+export class FakeDataService extends AbstractDataService {
+  constructor() {
+    super();
+  }
+
   /**
-   * recive filter serchvalue
+   * receive filter searchValue
    * @returns
    */
 
-  public getFakedata(serchvalue: string): Observable<any> {
+  public getFakeData(searchValue: string): Observable<any> {
     return of(
-      fakeData.cities.filter((city) => city.toLowerCase().includes(serchvalue.toLowerCase()))
+      fakeData.cities.filter((city) => city.toLowerCase().includes(searchValue.toLowerCase()))
     ).pipe(delay(0));
   }
-  constructor() {}
 }

@@ -1,25 +1,28 @@
 <div class="m-2">
-  <div id="label">{{ lable }}</div>
+  <div id="label">{{ label }}</div>
   <mat-form-field>
-    <mat-label> select {{ lable }}</mat-label>
-    <input
-      matInput
-      placeholder="select"
-      type="text"
-      [matAutocomplete]="auto"
-      id="input"
-      (ngModelChange)="onCityInputChange($event)"
-      [ngModel]="value"
-    />
+    <mat-label> select {{ label }}</mat-label>
+    <input matInput
+           placeholder="select"
+           type="text"
+           [matAutocomplete]="auto"
+           id="input"
+           (ngModelChange)="onCityInputChange($event)"
+           [ngModel]="value" />
+    <!-- (input)="onCityInputChange($event.target['value'])" -->
     <!-- <mat-error>{{ getErrorMessage() }}</mat-error> -->
   </mat-form-field>
+  <!-- 
+    # call filter method 
+    # bind fake data
+    # select from fake data
+    # on select => onChange call with selected item 
+   -->
 
   <mat-autocomplete #auto="matAutocomplete">
-    <mat-option
-      *ngFor="let city of filteredCities"
-      [value]="filteredCities"
-      (click)="optionSelected(city)"
-    >
+    <mat-option *ngFor="let city of filteredCities"
+                [value]="filteredCities"
+                (click)="optionSelected(city)">
       {{ city }}
     </mat-option>
   </mat-autocomplete>

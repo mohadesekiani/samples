@@ -30,7 +30,7 @@ export class PasengersComponent implements ControlValueAccessor {
   onTouched = () => { };
 
   writeValue(obj: any): void {
-    this.value = obj;
+    this.value = { ...this.value, ...obj };
   }
 
   registerOnChange(fn: any): void {
