@@ -6,7 +6,7 @@ fdescribe('SUT: FlightComponent', () => {
   let dataService = {} as AbstractDataService;
   const valueAccessor = jasmine.createSpyObj({
     onChange: () => { }
-  })
+  });
 
   beforeEach(() => {
     sut = new FlightComponent(dataService);
@@ -35,6 +35,7 @@ fdescribe('SUT: FlightComponent', () => {
 
     // assert
     expect(sut.onChange).toBe(valueAccessor.onChange);
+    // todo test markAsTouched 
   });
 
   it('should be clean variables related with value when value is less than 2', () => {

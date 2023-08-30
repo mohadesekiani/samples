@@ -19,9 +19,10 @@ export class FlightComponent implements ControlValueAccessor {
   filterText = '';
   disabled = false;
   touched = false;
-  filteredCities: any;
+  filteredCities!: Array<any>;
   citySelect = '';
   showCityNotFound = true;
+  loading: boolean;
 
   constructor(
     private dataService: AbstractDataService
@@ -67,24 +68,27 @@ export class FlightComponent implements ControlValueAccessor {
     }
 
     // const searchValue = this.value.toLowerCase();
+    this.loading = true;
+    // todo finalize pipe to this.loading = false;
+    this.dataService.getFakedata(this.filterText)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.loading = false;
 
-    // this.filteredCities = this.dataService
-    //   .getFakedata(searchValue)
-    //   .subscribe({
-    //     next: (res) => {
-    //       console.log(res);
-
-    //       this.filteredCities = res;
-    //       console.log(res);
-    //     },
-    //     error: (err) => {
-    //       console.log('3');
-    //       console.log(err);
-    //     },
-    //     complete: () => {
-    //       console.log('4');
-    //     },
-    //   });
+          this.filteredCities = res;
+          console.log(res);
+        },
+        error: (err) => {
+          this.loading = false;
+          console.log('3');
+          console.log(err);
+        },
+        complete: () => {
+          this.loading = false;
+          console.log('4');
+        },
+      });
 
     // this.showCityNotFound = this.filteredCities.length === 0;
     // this.showCityNotFound = false;
