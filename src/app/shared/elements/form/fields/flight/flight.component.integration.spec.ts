@@ -105,27 +105,28 @@ fdescribe('SUT(Integration): FlightComponent', () => {
     expect(input.value).toBe(sut.value);
   });
   // // (click)="optionSelected(city)"
-  // it('should call optionSelected when a city option is clicked', () => {
-  //   // arrange
-  //   sut.filteredCities = ['New York'];
-  //   spyOn(sut, 'optionSelected');
-  //   const cityOption = TestUtil.queryComponent(fixture, 'mat-option');
-  //   fixture.detectChanges();
-  //   if (cityOption) {
-  //     //act
-  //     cityOption.click();
-  //     fixture.detectChanges();
-  //     //assert
-  //     expect(sut.optionSelected).toHaveBeenCalledWith('New York');
-  //   }
-  // });
+  it('should call optionSelected when a city option is clicked', () => {
+    // arrange
+    sut.filteredCities = ['New York'];
+    spyOn(sut, 'optionSelected');
+    const cityOption = TestUtil.queryComponent(fixture, 'mat-option');
+    fixture.detectChanges();
+    if (cityOption) {
+      //act
+      cityOption.click();
+      fixture.detectChanges();
+      //assert
+      expect(sut.optionSelected).toHaveBeenCalledWith('New York');
+    }
+  });
 
-  fit('should be bind filtercities to value', () => {
+  it('should be bind filtercities to value', () => {
     const cityOption = TestUtil.queryComponent(fixture, 'mat-option');
     sut.filteredCities = ['New York'];
     fixture.detectChanges();
 
     expect(cityOption.value).toEqual(sut.filteredCities);
   });
+
   //TODO Coverage 100%
 });
