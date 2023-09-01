@@ -4,18 +4,18 @@ import { FlightComponent } from './flight.component';
 
 // spy of sut methods in unit tests is not valid
 
-fdescribe('SUT: FlightComponent', () => {
+describe('SUT: FlightComponent', () => {
   let sut: FlightComponent;
   const fakeCities = ['city1', 'city2'];
   const dataService = jasmine.createSpyObj<AbstractDataService>({
-    getFakeData: of(fakeCities)
+    getFakeData: of(fakeCities),
   });
   const valueAccessor = jasmine.createSpyObj<{
-    onChange: (e) => { },
-    onTouched: () => { }
+    onChange: (e) => {};
+    onTouched: () => {};
   }>({
-    onChange: (e) => { },
-    onTouched: () => { }
+    onChange: (e) => {},
+    onTouched: () => {},
   });
 
   beforeEach(() => {
@@ -31,7 +31,9 @@ fdescribe('SUT: FlightComponent', () => {
 
   it('should be throw exception with null dataService', () => {
     // assert
-    expect(() => new FlightComponent(null as any)).toThrowError('dataService is empty');
+    expect(() => new FlightComponent(null as any)).toThrowError(
+      'dataService is empty'
+    );
   });
 
   it('should be set #value when onCityInputChange called with proper value', () => {
@@ -43,7 +45,6 @@ fdescribe('SUT: FlightComponent', () => {
   });
 
   it('should set ControlValueAccessor methods when constructor called', () => {
-
     // assert
     expect(sut.onTouched).toBe(valueAccessor.onTouched);
     expect(sut.onChange).toBe(valueAccessor.onChange);
@@ -77,11 +78,13 @@ fdescribe('SUT: FlightComponent', () => {
     sut.onCityInputChange('s');
 
     // assert
-    expect(sut).toEqual(jasmine.objectContaining({
-      filteredCities: [],
-      showCityNotFound: false,
-      value: null
-    }));
+    expect(sut).toEqual(
+      jasmine.objectContaining({
+        filteredCities: [],
+        showCityNotFound: false,
+        value: null,
+      })
+    );
     expect(valueAccessor.onChange).toHaveBeenCalled();
     expect(valueAccessor.onChange).toHaveBeenCalledWith(null);
     expect(valueAccessor.onTouched).toHaveBeenCalled();
@@ -89,7 +92,7 @@ fdescribe('SUT: FlightComponent', () => {
 
   it('should call dataService.getFakeData and set filteredCities properly ', () => {
     // arrange
-    sut.loading = true
+    sut.loading = true;
     sut.filteredCities = [];
 
     // act
@@ -98,9 +101,8 @@ fdescribe('SUT: FlightComponent', () => {
     // assert
     expect(dataService.getFakeData).toHaveBeenCalledWith('cit');
     expect(sut.filteredCities).toEqual(fakeCities);
-    expect(sut.loading).toBe(false)
+    expect(sut.loading).toBe(false);
   });
 
   //TODO Coverage 100%
-
 });

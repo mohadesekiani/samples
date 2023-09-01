@@ -2,13 +2,15 @@
   <div id="label">{{ label }}</div>
   <mat-form-field>
     <mat-label> select {{ label }}</mat-label>
-    <input matInput
-           placeholder="select"
-           type="text"
-           [matAutocomplete]="auto"
-           id="input"
-           (ngModelChange)="onCityInputChange($event)"
-           [ngModel]="value" />
+    <input
+      matInput
+      placeholder="select"
+      type="text"
+      [matAutocomplete]="auto"
+      id="input"
+      (ngModelChange)="onCityInputChange($event)"
+      [ngModel]="value"
+    />
     <!-- (input)="onCityInputChange($event.target['value'])" -->
     <!-- <mat-error>{{ getErrorMessage() }}</mat-error> -->
   </mat-form-field>
@@ -20,9 +22,12 @@
    -->
 
   <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let city of filteredCities"
-                [value]="filteredCities"
-                (click)="optionSelected(city)">
+    <mat-option
+      id="option"
+      *ngFor="let city of filteredCities"
+      [value]="filteredCities"
+      (click)="optionSelected(city)"
+    >
       {{ city }}
     </mat-option>
   </mat-autocomplete>
