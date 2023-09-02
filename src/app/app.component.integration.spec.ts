@@ -15,8 +15,7 @@ describe('TemplateDrivenFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, SharedModule,FormsModule,BrowserModule,RouterModule.forRoot(routes),
-      ],
+      imports: [NoopAnimationsModule, SharedModule,FormsModule,BrowserModule],
       declarations: [AppComponent],
       providers: [AbstractDataService],
       schemas: [
