@@ -1,23 +1,10 @@
-import {
-  ComponentFixture,
-  TestBed,
-  async,
-  fakeAsync,
-  tick,
-} from '@angular/core/testing';
+import {ComponentFixture,TestBed} from '@angular/core/testing';
 import { FlightComponent } from './flight.component';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
-import { Input } from '@angular/core';
-import {
-  MatAutocomplete,
-  MatAutocompleteModule,
-  MatAutocompleteOrigin,
-  MatAutocompleteSelectedEvent,
-  MatAutocompleteTrigger,
-} from '@angular/material/autocomplete';
+import { MatAutocomplete } from '@angular/material/autocomplete';
 // #1 should be all component have unit test and integration test file
 // #2 prepare selectors and ...
 

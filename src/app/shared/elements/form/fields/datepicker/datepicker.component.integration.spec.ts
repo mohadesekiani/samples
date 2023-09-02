@@ -2,7 +2,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
 
 import { MatHint, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { DatepickerComponent } from './datepicker.component';

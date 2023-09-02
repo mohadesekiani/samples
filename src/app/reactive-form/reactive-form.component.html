@@ -1,14 +1,14 @@
 <form [formGroup]="cityForm">
   <!-- form value ? {{ cityForm.value | json }} is form valid ?
   {{ cityForm.valid | json }} -->
-  <h2 style="text-align: center">*** reactiv form ***</h2>
+  <h2 style="text-align: center">*** reactive form ***</h2>
   <hr style="margin: 10px" />
   <div>
     <div class="flex flex-wrap">
-      <app-flight formControlName="origin" lable="origin"></app-flight>
+      <app-flight formControlName="origin" label="origin"></app-flight>
       <app-flight
         formControlName="destination"
-        lable="destination"
+        label="destination"
       ></app-flight>
 
       <app-datepicker
@@ -27,9 +27,9 @@
 
     <div class="flex flex-wrap">
       <div class="w-1/2">
-        <span class="m-2">passanger</span>
+        <span class="m-2">passengers</span>
 
-        <app-pasengers formControlName="cityInput"></app-pasengers>
+        <app-passengers formControlName="cityInput"></app-passengers>
       </div>
       <div class="w-1/2">
         <span class="m-2">general</span>

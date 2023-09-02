@@ -1,12 +1,12 @@
 <form #f="ngForm">
   <div class="flex flex-wrap">
     <app-flight
-      lable="Origin"
+      label="Origin"
       name="origin"
       [(ngModel)]="formData.origin"
     ></app-flight>
     <app-flight
-      lable="Destination"
+      label="Destination"
       name="destination"
       [(ngModel)]="formData.destination"
     ></app-flight>
@@ -20,11 +20,11 @@
   <div class="flex flex-wrap">
     <div class="w-1/2">
       <span class="m-2">passenger</span>
-      <app-pasengers
+      <app-passengers
         style="width: 45%"
-        name="pasengers"
-        [(ngModel)]="formData.pasengers"
-      ></app-pasengers>
+        name="passengers"
+        [(ngModel)]="formData.passengers"
+      ></app-passengers>
     </div>
     <div class="w-1/2">
       <span class="m-2">General</span>

@@ -4,18 +4,18 @@ export interface IPassengerTypes {
   Adult: number; Children: number; Infant: number;
 }
 @Component({
-  selector: 'app-pasengers',
-  templateUrl: './pasengers.component.html',
-  styleUrls: ['./pasengers.component.scss'],
+  selector: 'app-passengers',
+  templateUrl: './passengers.component.html',
+  styleUrls: ['./passengers.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: PasengersComponent,
+      useExisting: PassengersComponent,
     },
   ],
 })
-export class PasengersComponent implements ControlValueAccessor {
+export class PassengersComponent implements ControlValueAccessor {
   // ########################################################
   //              control value accessor scope              #
   // ########################################################
@@ -54,13 +54,13 @@ export class PasengersComponent implements ControlValueAccessor {
   // ########################################################
   showDrop = false;
   //rename
-  passanger: Array<any> = [
+  passenger: Array<any> = [
     { value: 0, name: 'Adult' },
     { value: 0, name: 'Children' },
     { value: 0, name: 'Infant', increase: this.InfantIncrease },
   ];
 
-  decrese(item) {
+  decrees(item) {
     if (item.value > 0) item.value = item.value - 1;
   }
 
@@ -73,9 +73,9 @@ export class PasengersComponent implements ControlValueAccessor {
     if (item.value === 0) item.value = 1;
   }
 
-  refresValue() {
+  refersValue() {
     let newValue = { Adult: 0, Children: 0, Infant: 0 };
-    this.passanger.forEach((item) => {
+    this.passenger.forEach((item) => {
       newValue[item.name] = item.value;
     });
     this.value = newValue;

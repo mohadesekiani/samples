@@ -1,11 +1,5 @@
-<!-- <button></button>
-<span>my input value: {{ value | json }}</span> -->
-<!-- <button (click)="set(1)">111111</button>
-<button (click)="set(2)">222222</button>
-<button (click)="set(3)">333333</button>
-<span *ngIf="disabled">input is disabled</span> -->
+
 <div class="p-4">
-  <!-- <span>my input value: {{ value | json }}</span> -->
   <div class="m-2 flex flex-wrap"
        style="width: 95%">
     <div class="m-auto"
@@ -31,20 +25,20 @@
     <div class="bg-white"
          *ngIf="showDrop"
          style="width: 100%">
-      <div *ngFor="let item of passanger"
+      <div *ngFor="let item of passenger"
            class="flex flex-wrap my-4 mx-auto"
            style="text-align: center">
         <span class="font-bold py-2 px-4 mx-4 w-1/2">{{ item.name }}</span>
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 (click)="
               item.increase ? item.increase(item) : increase(item);
-              refresValue()
+              refersValue()
             ">
           +
         </button>
         <span class="font-bold py-2 px-4">{{ item.value }}</span>
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                (click)="decrese(item); refresValue()">
+                (click)="decrees(item); refersValue()">
           -
         </button>
       </div>
