@@ -18,11 +18,15 @@ import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
+// #1 should be all component have unit test and integration test file
+// #2 prepare selectors and ...
 
 describe('SUT(Integration): FlightComponent', () => {
   let sut: FlightComponent;
   let fixture: ComponentFixture<FlightComponent>;
   let input: HTMLInputElement;
+  let matAutocomplete: MatAutocomplete;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, SharedModule],
@@ -33,10 +37,13 @@ describe('SUT(Integration): FlightComponent', () => {
     sut = fixture.componentInstance;
     fixture.detectChanges();
     input = TestUtil.nativeElement(fixture, 'input[matInput]')
+    matAutocomplete = TestUtil.queryComponent(fixture, 'mat-autocomplete');
   });
 
   it('should create', () => {
     expect(sut).toBeTruthy();
+    expect(matAutocomplete).toBeTruthy();
+    expect(input).toBeTruthy();
   });
 
   it('should be bind label', () => {
@@ -59,14 +66,7 @@ describe('SUT(Integration): FlightComponent', () => {
 
   it('should bind matAutocomplete to auto', () => {
     //arrange
-    const matAutocompleteDirective = TestUtil.directiveElement(
-      fixture,
-      MatAutocomplete
-    );
-    const matAutocomplete = TestUtil.queryComponent(
-      fixture,
-      'mat-autocomplete'
-    );
+    const matAutocompleteDirective = TestUtil.directiveElement(fixture, MatAutocomplete);
 
     //act
     fixture.detectChanges();

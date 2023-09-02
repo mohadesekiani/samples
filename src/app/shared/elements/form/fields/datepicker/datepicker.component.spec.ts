@@ -14,7 +14,7 @@ describe('SUT: DatepickerComponent', () => {
 
 
   it('should not set value when payload value is less than min', () => {
-    // arrang
+    // arrange
     sut.min = new Date('2020/05/05');
 
     // act
@@ -28,7 +28,7 @@ describe('SUT: DatepickerComponent', () => {
 
   // max scenario
   it('should not set value when payload value is more then max', () => {
-    // arrang
+    // arrange
     sut.max = new Date('2020/05/10');
 
     // act
@@ -37,7 +37,6 @@ describe('SUT: DatepickerComponent', () => {
     // assert
     expect(sut.value.toDateString()).not.toBe(new Date('2020/05/11').toDateString());
     expect(sut.value.toDateString()).toBe(sut.max.toDateString());
-
   });
   // disable
 })

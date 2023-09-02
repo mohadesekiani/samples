@@ -3,18 +3,16 @@ import { By } from "@angular/platform-browser";
 
 export class TestUtil {
   static directiveElement(fixture: ComponentFixture<any>, directive: any) {
-    const dirctive = fixture.debugElement.query(By.directive(directive)).injector.get<any>(directive);
-    return dirctive;
+    return fixture.debugElement.query(By.directive(directive)).injector.get<any>(directive);
   }
 
   static queryElement(fixture: ComponentFixture<any>, cssSelector, directiveElement) {
-    const selector = fixture.debugElement.query(By.css(cssSelector)).injector.get<any>(directiveElement);
-    return selector;
+    return fixture.debugElement.query(By.css(cssSelector)).injector.get<any>(directiveElement);
   }
 
   static queryComponent(fixture: ComponentFixture<any>, cssSelector) {
-    const debugeElement = fixture.debugElement.query(By.css(cssSelector));
-    return debugeElement.componentInstance;
+    const debugElement = fixture.debugElement.query(By.css(cssSelector));
+    return debugElement.componentInstance;
   }
 
   static nativeElement(fixture: ComponentFixture<any>, element) {
