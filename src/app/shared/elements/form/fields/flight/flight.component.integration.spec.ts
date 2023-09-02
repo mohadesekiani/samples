@@ -107,17 +107,17 @@ fdescribe('SUT(Integration): FlightComponent', () => {
   // // (click)="optionSelected(city)"
   it('should call optionSelected when a city option is clicked', () => {
     // arrange
+
     sut.filteredCities = ['New York'];
     spyOn(sut, 'optionSelected');
     const cityOption = TestUtil.queryComponent(fixture, 'mat-option');
     fixture.detectChanges();
-    if (cityOption) {
-      //act
-      cityOption.click();
-      fixture.detectChanges();
-      //assert
-      expect(sut.optionSelected).toHaveBeenCalledWith('New York');
-    }
+    //act
+    cityOption.click();
+    fixture.detectChanges();
+    //assert
+    expect(sut.optionSelected).toHaveBeenCalledWith('New York');
+
   });
 
   it('should be bind filtercities to value', () => {
