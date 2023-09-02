@@ -1,9 +1,6 @@
-
 <div class="p-4">
-  <div class="m-2 flex flex-wrap"
-       style="width: 95%">
-    <div class="m-auto"
-         style="text-align: center">
+  <div class="m-2 flex flex-wrap" style="width: 95%">
+    <div class="m-auto" style="text-align: center">
       <span>
         {{ value.Adult }}
         <i class="fa fa-user"></i>
@@ -18,27 +15,33 @@
       </span>
     </div>
     <div>
-      <button (click)="showDrop = !showDrop">
+      <button id="btnPassanger" (click)="showDrop = !showDrop">
         <i class="fa fa-users"></i>
       </button>
     </div>
-    <div class="bg-white"
-         *ngIf="showDrop"
-         style="width: 100%">
-      <div *ngFor="let item of passenger"
-           class="flex flex-wrap my-4 mx-auto"
-           style="text-align: center">
+    <div class="bg-white" *ngIf="showDrop" id="drop" style="width: 100%">
+      <div
+        id="dropItem"
+        *ngFor="let item of passenger"
+        class="flex flex-wrap my-4 mx-auto"
+        style="text-align: center"
+      >
         <span class="font-bold py-2 px-4 mx-4 w-1/2">{{ item.name }}</span>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                (click)="
-              item.increase ? item.increase(item) : increase(item);
-              refersValue()
-            ">
+        <button
+          id="btnIncr"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          (click)="
+            item.increase ? item.increase(item) : increase(item); refersValue()
+          "
+        >
           +
         </button>
         <span class="font-bold py-2 px-4">{{ item.value }}</span>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                (click)="decrees(item); refersValue()">
+        <button
+          id="btndecr"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          (click)="decrees(item); refersValue()"
+        >
           -
         </button>
       </div>

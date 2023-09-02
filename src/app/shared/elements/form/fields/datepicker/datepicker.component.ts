@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 
@@ -26,8 +32,8 @@ export class DatepickerComponent implements ControlValueAccessor {
   touched = false;
   // @ViewChild('picker') picker!: MatDatepicker<any> ;
 
-  onChange = (value) => { };
-  onTouched = () => { };
+  onChange = (value) => {};
+  onTouched = () => {};
 
   writeValue(obj: any): void {
     this.value = obj;
@@ -46,7 +52,9 @@ export class DatepickerComponent implements ControlValueAccessor {
   }
 
   markAsTouched() {
-    if (this.touched) { return; }
+    if (this.touched) {
+      return;
+    }
 
     this.onTouched();
     this.touched = true;
@@ -55,7 +63,14 @@ export class DatepickerComponent implements ControlValueAccessor {
   dateValueChanged(value: Date) {
     this.value = value;
     // check is between min and max
-    this.onChange(this.value);
+    if (this.value < new Date('2020/05/05')) {
+      this.value = new Date('2020/05/05');
+      this.onChange(this.value);
+    }
+    if (this.value > new Date('2020/05/10')) {
+      this.value = new Date('2020/05/10');
+      this.onChange(this.value);
+    }
     this.markAsTouched();
   }
 }
