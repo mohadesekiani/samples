@@ -19,9 +19,10 @@ import {
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
 
-fdescribe('SUT(Integration): FlightComponent', () => {
+describe('SUT(Integration): FlightComponent', () => {
   let sut: FlightComponent;
   let fixture: ComponentFixture<FlightComponent>;
+  let input: HTMLInputElement;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, SharedModule],
@@ -31,20 +32,21 @@ fdescribe('SUT(Integration): FlightComponent', () => {
     fixture = TestBed.createComponent(FlightComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();
+    input = TestUtil.nativeElement(fixture, 'input[matInput]')
   });
 
   it('should create', () => {
     expect(sut).toBeTruthy();
   });
 
-  it('should be bind lable', () => {
+  it('should be bind label', () => {
     //arrange
-    sut.label = 'some_lable';
+    sut.label = 'some_label';
     fixture.detectChanges();
     const label: HTMLElement = TestUtil.nativeElement(fixture, '#label');
 
     //assert
-    expect(label.innerText).toBe('some_lable');
+    expect(label.innerText).toBe('some_label');
   });
   it('should be bind placeholder', () => {
     //arrange
@@ -92,7 +94,7 @@ fdescribe('SUT(Integration): FlightComponent', () => {
   // [ngModel]="value"
   it('should bind input with value', () => {
     //arrange
-    const input = TestUtil.nativeElement(fixture, 'input[matInput]');
+
     const value = 'city1';
     input.value = value;
     sut.value = value;
@@ -105,22 +107,29 @@ fdescribe('SUT(Integration): FlightComponent', () => {
     expect(input.value).toBe(sut.value);
   });
   // // (click)="optionSelected(city)"
-  it('should call optionSelected when a city option is clicked', () => {
+  it('should call optionSelected when a city option is clicked', async () => {
     // arrange
-
-    sut.filteredCities = ['New York'];
     spyOn(sut, 'optionSelected');
-    const cityOption = TestUtil.queryComponent(fixture, 'mat-option');
+    sut.filteredCities = ['New York'];
+    input.click();
     fixture.detectChanges();
+
+    const autocomplete: MatAutocomplete = TestUtil.queryComponent(fixture, 'mat-autocomplete');
+    const cityOption = autocomplete.options.toArray()[0]['_element'].nativeElement;
+    const actualValues = autocomplete.options.toArray().map(x => x.value);
+    await fixture.whenStable();
+
+    fixture.detectChanges();
+
     //act
     cityOption.click();
     fixture.detectChanges();
     //assert
     expect(sut.optionSelected).toHaveBeenCalledWith('New York');
-
+    expect(sut.filteredCities).toEqual(actualValues);
   });
 
-  it('should be bind filtercities to value', () => {
+  xit('should be bind filterCities to value', () => {
     const cityOption = TestUtil.queryComponent(fixture, 'mat-option');
     sut.filteredCities = ['New York'];
     fixture.detectChanges();

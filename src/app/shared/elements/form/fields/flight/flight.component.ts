@@ -99,7 +99,7 @@ export class FlightComponent implements ControlValueAccessor {
       });
   }
 
-  optionSelected(city: string) {
+  optionSelected(city: any) {
     let newValue = city;
     this.value = newValue;
     this.filteredCities = [];
