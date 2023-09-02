@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormComponent } from './reactive-form.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AbstractDataService } from '../core/services/data/abstract-data.service';
 
 
 describe('ReactiveFormComponent', () => {
@@ -23,6 +24,9 @@ describe('ReactiveFormComponent', () => {
       ],
       declarations: [
         ReactiveFormComponent
+      ],
+      providers:[
+        AbstractDataService
       ],
       schemas: [
         NO_ERRORS_SCHEMA

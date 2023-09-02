@@ -4,8 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { AbstractDataService } from '../core/services/data/abstract-data.service';
+import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 describe('TemplateDrivenFormComponent', () => {
@@ -14,7 +15,7 @@ describe('TemplateDrivenFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, SharedModule,FormsModule,BrowserModule],
+      imports: [NoopAnimationsModule, SharedModule,FormsModule,BrowserModule,RouterTestingModule],
       declarations: [TemplateDrivenFormComponent],
       providers: [AbstractDataService],
       schemas: [

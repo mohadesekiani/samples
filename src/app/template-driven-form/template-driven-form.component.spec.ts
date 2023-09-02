@@ -8,5 +8,8 @@ describe('SUT: TemplateDrivenFormComponent', () => {
     sut = new TemplateDrivenFormComponent();
   });
 
+  it('should be create', () => {
+    expect(sut).toBeTruthy();
+  })
 
 })
