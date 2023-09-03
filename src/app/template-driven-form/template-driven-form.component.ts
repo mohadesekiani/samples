@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IFlight } from '../models/flight.model';
+import { GeneralTypesEnum } from '../models/general-types.enum';
 
 @Component({
   selector: 'app-template-driven-form',
@@ -9,10 +10,6 @@ import { IFlight } from '../models/flight.model';
 export class TemplateDrivenFormComponent {
   formData: Partial<IFlight> = {};
   showDrop = false;
-  options = [
-    { label: 'Women Only', value: 'Women Only' },
-    { label: 'Men Only', value: 'Men Only' },
-    { label: 'General', value: 'General' },
-  ];
+  generalTypes = Object.values(GeneralTypesEnum).map(value => ({ title: value.replace(/([a-z])([A-Z])/g, '$1 $2'), value: value }));
 
 }

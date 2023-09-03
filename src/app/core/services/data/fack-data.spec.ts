@@ -19,7 +19,6 @@ describe('SUT: FakeDataService', () => {
     let actual: Array<string> = [];
     
     sut.getFakeData(searchValue).subscribe((res) => {
-      debugger
       actual = res;
     });
     tick(3000);

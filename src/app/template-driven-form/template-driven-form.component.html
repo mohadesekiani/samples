@@ -1,37 +1,30 @@
 <form #f="ngForm">
   <div class="flex flex-wrap">
-    <app-flight
-      label="Origin"
-      name="origin"
-      [(ngModel)]="formData.origin"
-    ></app-flight>
-    <app-flight
-      label="Destination"
-      name="destination"
-      [(ngModel)]="formData.destination"
-    ></app-flight>
-    <app-datepicker
-      placeholder="your departure date"
-      label="departure Date"
-      name="departureDate"
-      [(ngModel)]="formData.departureDate"
-    ></app-datepicker>
+    <app-flight label="Origin"
+                name="origin"
+                [(ngModel)]="formData.origin"></app-flight>
+    <app-flight label="Destination"
+                name="destination"
+                [(ngModel)]="formData.destination"></app-flight>
+    <app-datepicker placeholder="your departure date"
+                    label="departure Date"
+                    name="departureDate"
+                    [(ngModel)]="formData.departureDate"></app-datepicker>
   </div>
   <div class="flex flex-wrap">
     <div class="w-1/2">
       <span class="m-2">passenger</span>
-      <app-passengers
-        style="width: 45%"
-        name="passengers"
-        [(ngModel)]="formData.passengers"
-      ></app-passengers>
+      <app-passengers style="width: 45%"
+                      name="passengers"
+                      [(ngModel)]="formData.passengers"></app-passengers>
     </div>
     <div class="w-1/2">
       <span class="m-2">General</span>
       <div class="w-1/2 p-4">
         <!-- <span>my input value: {{ value | json }}</span> -->
         <div class="m-2 flex flex-wrap">
-          <div class="m-auto" style="text-align: center">
+          <div class="m-auto"
+               style="text-align: center">
             {{ formData.option }}
           </div>
           <div>
@@ -40,38 +33,18 @@
             </button>
           </div>
         </div>
-        <div class="bg-white" *ngIf="showDrop">
+        <div class="bg-white"
+             *ngIf="showDrop">
           <div class="form-group">
-            <div class="form-control m-2 flex flex-col ...">
-              <label class="radio-inline">
-                <input
-                  type="radio"
-                  id="WomenOnly"
-                  name="option"
-                  value="Women Only"
-                  [(ngModel)]="formData.option"
-                />
-                Women Only
-              </label>
-              <label class="radio-inline">
-                <input
-                  type="radio"
-                  id="MenOnly"
-                  name="option"
-                  value="Men Only"
-                  [(ngModel)]="formData.option"
-                />
-                Men Only
-              </label>
-              <label class="radio-inline">
-                <input
-                  type="radio"
-                  id="General"
-                  name="option"
-                  value="General"
-                  [(ngModel)]="formData.option"
-                />
-                General
+            <div class="form-control m-2 flex flex-col">
+              <label class="radio-inline"
+                     *ngFor="let general of generalTypes">
+                <input type="radio"
+                       id="WomenOnly"
+                       name="option"
+                       [value]="general.value"
+                       [(ngModel)]="formData.option" />
+                {{general.title}}
               </label>
             </div>
           </div>
@@ -79,5 +52,5 @@
       </div>
     </div>
   </div>
-  {{ f.value | json }}
+  <!-- {{ f.value | json }} -->
 </form>
