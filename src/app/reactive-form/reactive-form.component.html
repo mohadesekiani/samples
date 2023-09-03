@@ -35,11 +35,11 @@
         <span class="m-2">general</span>
         <div class="m-3">
           <mat-radio-group
-            formControlName="radio"
+            formControlName="classType"
             aria-label="Select an option"
           >
-            <mat-radio-button *ngFor="let option of options" [value]="option"
-              >{{ option }}
+            <mat-radio-button *ngFor="let option of options" [value]="option.value"
+              >{{ option.title }}
             </mat-radio-button>
           </mat-radio-group>
         </div>
@@ -47,4 +47,4 @@
     </div>
   </div>
 </form>
-<!-- {{ cityForm.value | json }} -->
+{{ cityForm.value | json }}

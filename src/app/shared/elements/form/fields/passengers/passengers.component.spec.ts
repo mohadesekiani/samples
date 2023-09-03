@@ -1,6 +1,6 @@
 import { PassengersComponent } from './passengers';
 
-fdescribe('SUT: PassengersComponent', () => {
+describe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   const valueAccessor = jasmine.createSpyObj<{
     onChange: (e) => {};
@@ -25,7 +25,7 @@ fdescribe('SUT: PassengersComponent', () => {
   });
 
   // decrees(item)
-  fit('should decrease item.value by 1 when item.value is greater than 0', () => {
+  it('should decrease item.value by 1 when item.value is greater than 0', () => {
     const item = { value: 3 };
     const item2 = { value: 0 };
     sut.decrees(item);
@@ -34,9 +34,31 @@ fdescribe('SUT: PassengersComponent', () => {
     expect(item2.value).toBe(0);
   });
   // increase(item)
-  it('should ', () => {});
+  it('should increase item value by 1 ', () => {
+    const item = { value: 0 };
+    sut.increase(item)
+    expect(item.value).toBe(1)
+  });
   // InfantIncrease(item)
-  it('should ', () => {});
+  it('should set item value to 1 if it is 0', () => {
+    const item =  { value: 0, name: 'Infant' }
+    sut.InfantIncrease(item)
+    expect(item.value).toBe(1)
+
+  });
   // refersValue()
-  it('should ', () => {});
+  it('should update the value property and call onChange, markAsTouched', async() => {
+    sut.passenger = [
+      { name: 'Adult', value: 2 },
+      { name: 'Children', value: 1 },
+      { name: 'Infant', value: 0 },
+    ];
+    spyOn(sut, 'onChange');
+    spyOn(sut, 'markAsTouched');
+    sut.refersValue();
+    expect(sut.onChange).toHaveBeenCalledWith(sut.value);
+    expect(sut.markAsTouched).toHaveBeenCalled();
+    expect(sut.value).toEqual({ Adult: 2, Children: 1, Infant: 0 })
+
+  });
 });

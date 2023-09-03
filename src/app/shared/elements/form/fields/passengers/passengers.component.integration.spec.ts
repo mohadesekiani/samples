@@ -7,7 +7,11 @@ import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
 describe('SUT(Integration): PassengersComponent', () => {
   let sut: PassengersComponent;
   let fixture: ComponentFixture<PassengersComponent>;
-
+  let btnPassenger: HTMLButtonElement;
+  // let drop;
+  // let dropItem;
+  // let btnIncr;
+  // let btnDecr: HTMLButtonElement;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, SharedModule],
@@ -16,45 +20,31 @@ describe('SUT(Integration): PassengersComponent', () => {
     fixture = TestBed.createComponent(PassengersComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();
+    btnPassenger = TestUtil.nativeElement(fixture,'#btnPassenger');
+    //drop = TestUtil.nativeElement(fixture, '#drop');
+    //dropItem = TestUtil.nativeElement(fixture,'#dropItem');
+    //btnIncr = TestUtil.nativeElement(fixture,'#btnIncr');
+    //btnDecr = TestUtil.nativeElement(fixture,'#btnDecr');
+    fixture.detectChanges();
+
   });
   it('should create', () => {
     expect(sut).toBeTruthy();
   });
   //(click)="showDrop = !showDrop"
   it('should set showDrop when click', () => {
-    const btn: HTMLButtonElement = TestUtil.nativeElement(
-      fixture,
-      '#btnPassanger'
-    );
+
     sut.showDrop = false;
-    btn.click();
+    btnPassenger.click();
     fixture.detectChanges();
     expect(sut.showDrop).toBe(true);
   });
   //*ngIf="showDrop"
-  it('', () => {
-    const drop: HTMLButtonElement = TestUtil.nativeElement(fixture, '#drop');
-  });
-  //*ngFor="let item of passenger"
-  it('', () => {
-    const dropItem: HTMLButtonElement = TestUtil.nativeElement(
-      fixture,
-      '#dropItem'
-    );
+  it('should display the content when showDrop is true', () => {
+    sut.showDrop = false;
+    btnPassenger.click();
+    fixture.detectChanges();
+    expect( sut.showDrop).toBe(true);
   });
 
-  //(click)="item.increase ? item.increase(item) : increase(item); refersValue()"
-  it('', () => {
-    const btnIncr: HTMLButtonElement = TestUtil.nativeElement(
-      fixture,
-      '#btnIncr'
-    );
-  });
-  // (click)="decrees(item); refersValue()"
-  it('', () => {
-    const btndecr: HTMLButtonElement = TestUtil.nativeElement(
-      fixture,
-      '#btndecr'
-    );
-  });
 });

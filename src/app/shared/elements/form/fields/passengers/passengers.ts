@@ -18,6 +18,7 @@ export interface IPassengerTypes {
   ],
 })
 export class PassengersComponent implements ControlValueAccessor {
+  [x: string]: any;
   value: IPassengerTypes = {
     Adult: 0,
     Children: 0,

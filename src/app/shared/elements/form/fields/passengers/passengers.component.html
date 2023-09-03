@@ -15,7 +15,7 @@
       </span>
     </div>
     <div>
-      <button id="btnPassanger" (click)="showDrop = !showDrop">
+      <button id="btnPassenger" (click)="showDrop = !showDrop">
         <i class="fa fa-users"></i>
       </button>
     </div>
@@ -27,20 +27,14 @@
         style="text-align: center"
       >
         <span class="font-bold py-2 px-4 mx-4 w-1/2">{{ item.name }}</span>
-        <button
-          id="btnIncr"
+        <button id="btnIncr" (click)="item.increase ? item.increase(item) : increase(item); refersValue()"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          (click)="
-            item.increase ? item.increase(item) : increase(item); refersValue()
-          "
         >
           +
         </button>
         <span class="font-bold py-2 px-4">{{ item.value }}</span>
-        <button
-          id="btndecr"
+        <button id="btnDecr" (click)="decrees(item); refersValue()"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          (click)="decrees(item); refersValue()"
         >
           -
         </button>

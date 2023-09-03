@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IFlight } from '../models/flight.model';
 
 @Component({
   selector: 'app-template-driven-form',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./template-driven-form.component.scss'],
 })
 export class TemplateDrivenFormComponent {
-  formData: any = {};
+  formData: Partial<IFlight> = {};
   showDrop = false;
   options = [
     { label: 'Women Only', value: 'Women Only' },
