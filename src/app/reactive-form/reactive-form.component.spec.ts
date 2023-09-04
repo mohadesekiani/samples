@@ -2,22 +2,26 @@ import { FormBuilder } from "@angular/forms";
 import { ReactiveFormComponent } from "./reactive-form.component";
 import { ClassTypesEnum } from "../models/class-types.enum";
 import { TravelTypesEnum } from "../models/travel-types.enum";
+import { Router } from "@angular/router";
 
 fdescribe('SUT: ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
   let fb: FormBuilder;
-
+  let router: jasmine.SpyObj<Router>;
+  let flightForm;
 
   beforeEach(() => {
     fb = new FormBuilder();
-    sut = new ReactiveFormComponent(fb);
+    router = jasmine.createSpyObj('Router', ['navigate']);
+    sut = new ReactiveFormComponent(fb, router);
     sut.today = new Date()
     sut.ngOnInit()
+    flightForm = sut.flightForm;
+
   });
 
   it('should be create', () => {
     expect(sut).toBeTruthy();
-    //expect(sut.options).toEqual(['First', 'Business', 'Economy', 'Premium']);
     expect(sut.classTypes).toEqual([
       { title: 'First Class', value: ClassTypesEnum.FirstClass },
       { title: 'Business', value: ClassTypesEnum.Business },
@@ -26,31 +30,22 @@ fdescribe('SUT: ReactiveFormComponent', () => {
     ]);
   });
 
-  it('should be create form with defualt value', () => {
+  it('should be create form with default value', () => {
     // arrange
     const expectedFormValue = {
+      passengers: null,
+      travelType: TravelTypesEnum.OneWay,
       departureDate: sut.today,
-      returnDate: null,
+      // returnDate:{ value: null, disabled: true },
       origin: null,
       destination: null,
       classType: null
     }
+
     // assert
     expect(sut.flightForm.value).toEqual(expectedFormValue);
-    // TODO how check returnDate
   });
-  //TODO add test same top test with proper value
-
-  it('should create the cityForm with expected controls and validators', () => {
-    const cityForm = sut.flightForm;
-    const cityInput = cityForm.get('cityInput');
-    const origin = cityForm.get('origin');
-    const destination = cityForm.get('destination');
-    const returnDate = cityForm.get('returnDate');
-    const departureDate = cityForm.get('departureDate');
-  })
-
-  it('should be set required error to origin controller when origin is empty', ()=>{
+  it('should be set required error to origin controller when origin is empty', () => {
     // arrange
     const origin = sut.flightForm.get('origin');
     // act
@@ -58,16 +53,54 @@ fdescribe('SUT: ReactiveFormComponent', () => {
     // assert
     expect(origin?.hasError('required')).toBeTrue();
   });
+  // TODO* add test same top test with proper value
 
-  it('should be enabled returnDate controller when travelType is RoundTrip', ()=>{
+  it('should be set required error to origin controller when origin is proper value', () => {
     // arrange
-    const travelType = sut.flightForm.get('travelType');
-    const returnDate = sut.flightForm.get('returnDate');
-    
+    const origin = sut.flightForm.get('origin');
+    // act
+    origin?.setValue('some_text');
+    // assert
+    expect(origin?.hasError('required')).toBeFalse();
+  });
+
+  it('should be enabled returnDate controller when travelType is RoundTrip', () => {
+    // arrange
+    const travelType = flightForm.get('travelType');
+    const returnDate = flightForm.get('returnDate');
     // act
     travelType?.setValue(TravelTypesEnum.RoundTrip);
-    
     // assert
     expect(returnDate?.enabled).toBeTrue();
+  })
+
+  // onSubmit
+  it('should check form is valid then go to result page ', () => {
+    flightForm.setValue({
+      passengers: { Adult: 1, Children: 1, Infant: 1 },
+      travelType: "OneWay",
+      departureDate: "2023-09-04T11:53:30.877Z",
+      origin: "San Antonio",
+      returnDate: "2023-09-04T11:53:30.877Z",
+      destination: "San Antonio",
+      classType: "FirstClass"
+    })
+    sut.submit();
+
+    expect(router.navigate).toHaveBeenCalledWith(['/Train']);
+  })
+  it('should check form is valid then go to result alert', () => {
+    spyOn(window, 'alert');
+    sut.flightForm.setValue({
+      passengers: { Adult: 1, Children: -1, Infant: 10 },
+      travelType: "OneWay",
+      departureDate: null,
+      origin: null,
+      returnDate: null,
+      destination: null,
+      classType: null
+    })
+    sut.submit();
+    expect(window.alert).toHaveBeenCalledWith('فرم ثبت نشد');
   })
 })
