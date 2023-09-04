@@ -38,7 +38,6 @@ export class ReactiveFormComponent implements OnInit {
 
   private createForm() {
     this.flightForm = this.fb.group({
-      //TODO* add passengers
       passengers: [null, [Validators.required]],
       travelType: [TravelTypesEnum.OneWay],
       departureDate: [this.today],
@@ -47,7 +46,7 @@ export class ReactiveFormComponent implements OnInit {
       destination: [null, [Validators.required]],
       classType: [null],
     });
-  
+
     this.setTravelTypeListener();
     // flig
 
@@ -69,9 +68,7 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   submit() {
-    //TODO *should check form is valid then go to result page
     if (this.flightForm.valid) {
-      // console.log(this.flightForm.value);
       this.router.navigate(['/Train']);
     } else {
       alert('فرم ثبت نشد')
