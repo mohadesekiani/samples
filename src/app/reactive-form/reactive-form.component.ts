@@ -60,13 +60,10 @@ export class ReactiveFormComponent implements OnInit {
       distinctUntilChanged(),
       skip(1)
     ).subscribe(travelType => {
-      console.log(travelType);
-
       if (travelType == TravelTypesEnum.RoundTrip) {
         returnDateCtrl?.enable();
         return;
       }
-      // TODO add test
       returnDateCtrl?.disable();
     });
   }
