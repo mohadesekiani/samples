@@ -1,33 +1,34 @@
 import { Component } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { GeneralTypesEnum, PassengerTypesEnum } from 'src/app/models/general-types.enum';
+
+type EnumKeys = keyof typeof PassengerTypesEnum;
 export interface IPassengerTypes {
+  // [key in keyof typeof  PassengerTypesEnum]: number;
+  // [ket: string]: number;
   Adult: number;
-  Children: number;
+  Child: number;
   Infant: number;
-}
+};
+
 @Component({
   selector: 'app-passengers',
   templateUrl: './passengers.component.html',
   styleUrls: ['./passengers.component.scss'],
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: PassengersComponent,
-    },
+    { provide: NG_VALUE_ACCESSOR, multi: true, useExisting: PassengersComponent },
   ],
 })
 export class PassengersComponent implements ControlValueAccessor {
-  [x: string]: any;
   value: IPassengerTypes = {
     Adult: 0,
-    Children: 0,
+    Child: 0,
     Infant: 0,
   };
   disabled = false;
   touched = false;
-  onChange = (value) => {};
-  onTouched = () => {};
+  onChange = (value) => { };
+  onTouched = () => { };
 
   writeValue(obj: any): void {
     this.value = { ...this.value, ...obj };
@@ -55,12 +56,14 @@ export class PassengersComponent implements ControlValueAccessor {
   //rename
   passenger: Array<any> = [
     { value: 0, name: 'Adult' },
-    { value: 0, name: 'Children' },
-    { value: 0, name: 'Infant', increase: this.InfantIncrease },
+    { value: 0, name: 'Child' },
+    { value: 0, name: 'Infant', increase: this.infantIncrease },
   ];
 
   decrees(item) {
-    if (item.value > 0) item.value = item.value - 1;
+    if (item.value <= 0) { return; }
+
+    item.value = item.value - 1;
   }
 
   increase(item) {
@@ -68,12 +71,12 @@ export class PassengersComponent implements ControlValueAccessor {
     console.log(item.value);
   }
 
-  InfantIncrease(item) {
+  infantIncrease(item) {
     if (item.value === 0) item.value = 1;
   }
 
   refersValue() {
-    let newValue = { Adult: 0, Children: 0, Infant: 0 };
+    let newValue = { Adult: 0, Child: 0, Infant: 0 };
     this.passenger.forEach((item) => {
       newValue[item.name] = item.value;
     });

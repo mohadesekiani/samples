@@ -1,4 +1,4 @@
-import { PassengersComponent } from './passengers';
+import { IPassengerTypes, PassengersComponent } from './passengers';
 
 describe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
@@ -25,13 +25,16 @@ describe('SUT: PassengersComponent', () => {
   });
 
   // decrees(item)
+  it('should not decrease item.value when item.value is 0', () => {
+    const item2 = { value: 0 };
+    sut.decrees(item2);
+    expect(item2.value).toBe(0);
+  });
+
   it('should decrease item.value by 1 when item.value is greater than 0', () => {
     const item = { value: 3 };
-    const item2 = { value: 0 };
     sut.decrees(item);
-    sut.decrees(item2);
     expect(item.value).toBe(2);
-    expect(item2.value).toBe(0);
   });
   // increase(item)
   it('should increase item value by 1 ', () => {
@@ -42,7 +45,7 @@ describe('SUT: PassengersComponent', () => {
   // InfantIncrease(item)
   it('should set item value to 1 if it is 0', () => {
     const item =  { value: 0, name: 'Infant' }
-    sut.InfantIncrease(item)
+    sut.infantIncrease(item)
     expect(item.value).toBe(1)
 
   });
@@ -50,7 +53,7 @@ describe('SUT: PassengersComponent', () => {
   it('should update the value property and call onChange, markAsTouched', async() => {
     sut.passenger = [
       { name: 'Adult', value: 2 },
-      { name: 'Children', value: 1 },
+      { name: 'Child', value: 1 },
       { name: 'Infant', value: 0 },
     ];
     spyOn(sut, 'onChange');
@@ -58,7 +61,9 @@ describe('SUT: PassengersComponent', () => {
     sut.refersValue();
     expect(sut.onChange).toHaveBeenCalledWith(sut.value);
     expect(sut.markAsTouched).toHaveBeenCalled();
-    expect(sut.value).toEqual({ Adult: 2, Children: 1, Infant: 0 })
 
+    expect(sut.value).toEqual({ Adult: 2, Child: 1, Infant: 0 } as IPassengerTypes)
   });
+
+
 });

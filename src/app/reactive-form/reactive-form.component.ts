@@ -7,6 +7,7 @@ import {
 import { ClassTypesEnum } from '../models/class-types.enum'
 import { TravelTypesEnum } from '../models/travel-types.enum';
 import { Router } from '@angular/router';
+import { distinctUntilChanged, skip, startWith } from 'rxjs';
 @Component({
   selector: 'app-reactive-form',
   templateUrl: './reactive-form.component.html',
@@ -26,7 +27,8 @@ export class ReactiveFormComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder, private router: Router
+    private fb: FormBuilder,
+    private router: Router
   ) {
   }
 
@@ -45,15 +47,22 @@ export class ReactiveFormComponent implements OnInit {
       destination: [null, [Validators.required]],
       classType: [null],
     });
+  
     this.setTravelTypeListener();
+    // flig
+
   }
 
   private setTravelTypeListener() {
     const returnDateCtrl = this.flightForm.get('returnDate');
-    this.flightForm.get('travelType')?.valueChanges.subscribe(travelType => {
+    this.flightForm.get('travelType')?.valueChanges.pipe(
+      startWith(TravelTypesEnum.OneWay),
+      distinctUntilChanged(),
+      skip(1)
+    ).subscribe(travelType => {
       console.log(travelType);
 
-      if (travelType) {
+      if (travelType == TravelTypesEnum.RoundTrip) {
         returnDateCtrl?.enable();
         return;
       }
@@ -61,15 +70,13 @@ export class ReactiveFormComponent implements OnInit {
       returnDateCtrl?.disable();
     });
   }
+
   submit() {
     //TODO *should check form is valid then go to result page
     if (this.flightForm.valid) {
-      console.log(this.flightForm.value);
-
+      // console.log(this.flightForm.value);
       this.router.navigate(['/Train']);
     } else {
-      console.log(this.flightForm.value);
-
       alert('فرم ثبت نشد')
     }
   }
