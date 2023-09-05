@@ -33,7 +33,7 @@ fdescribe('SUT: ReactiveFormComponent', () => {
   it('should be create form with default value', () => {
     // arrange
     const expectedFormValue = {
-      passengers: null,
+      passengers: { Adult: 0, Child: 0, Infant: 0 },
       travelType: TravelTypesEnum.OneWay,
       departureDate: sut.today,
       origin: null,
