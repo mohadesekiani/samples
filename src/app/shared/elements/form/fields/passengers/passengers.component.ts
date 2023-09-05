@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { GeneralTypesEnum, PassengerTypesEnum } from 'src/app/models/general-types.enum';
 
 type EnumKeys = keyof typeof PassengerTypesEnum;
@@ -20,6 +20,36 @@ export interface IPassengerTypes {
   ],
 })
 export class PassengersComponent implements ControlValueAccessor {
+  constructor(private fb: FormBuilder) { }
+  ngOnInit() {
+    this.createForm()
+  }
+  createForm() {
+    this.passengerForm = this.fb.group<any>({
+      passengers: [null, [Validators.required]]
+    }, {
+      validators: [this.numberZero(),this.childrenCountValidator() ]
+    })
+  }
+  numberZero(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      let passengers: IPassengerTypes = control.get("passengers")?.value;
+      if (passengers?.Infant === 0 && passengers?.Adult === 0 && passengers?.Child === 0) {
+        return { checkedNumberZero: true };
+      }
+      return null;
+    };
+  }
+  childrenCountValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      let passengers: IPassengerTypes = control.get("passengers")?.value;
+      if (passengers?.Infant > passengers?.Adult) {
+        return { max: { actual: passengers.Infant, max: passengers.Adult } };
+      }
+      return null;
+    };
+  }
+  passengerForm!: FormGroup
   value: IPassengerTypes = {
     Adult: 0,
     Child: 0,

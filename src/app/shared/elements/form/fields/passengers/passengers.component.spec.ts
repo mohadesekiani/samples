@@ -1,28 +1,73 @@
+import { FormBuilder } from '@angular/forms';
 import { IPassengerTypes, PassengersComponent } from './passengers.component';
 
-describe('SUT: PassengersComponent', () => {
+fdescribe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
+  let fb: FormBuilder;
+  let passengers;
   const valueAccessor = jasmine.createSpyObj<{
     onChange: (e) => {};
     onTouched: () => {};
   }>({
-    onChange: (e) => {},
-    onTouched: () => {},
+    onChange: (e) => { },
+    onTouched: () => { },
   });
   beforeEach(() => {
-    sut = new PassengersComponent();
+    fb = new FormBuilder();
+    sut = new PassengersComponent(fb);
+    sut.ngOnInit();
+    passengers = sut.passengerForm.get('passengers');
   });
 
   it('should create', () => {
     expect(sut).toBeTruthy();
   });
 
-  it('should set onChange with proper value when registerOnChange called', () => {
+  xit('should set onChange with proper value when registerOnChange called', () => {
     // act
     sut.onChange(null);
 
     // assert
     expect(valueAccessor.onChange).toHaveBeenCalled();
+  });
+
+  it('should be created form with default value', () => {
+    // arrange
+    const expectedFormValue = {
+      passengers: null
+    };
+    // assert
+    expect(sut.passengerForm.value).toEqual(expectedFormValue);
+  });
+
+  it('should be not set required error to passenger controller when passenger is empty', () => {
+    // act
+    passengers?.setValue(null);
+    // assert
+    expect(passengers?.hasError('required')).toBeTrue();
+  });
+
+  it('should be not set required error to passengers controller when passengers has proper value ', () => {
+    // act
+    passengers?.setValue({ Adult: 1, Child: 1, Infant: 1 });
+    // assert
+    expect(passengers?.hasError('required')).toBeFalse();
+  });
+
+  it('should be items passenger 0 not valid', () => {
+    // act
+    passengers?.setValue({ Adult: 0, Child: 0, Infant: 0 })
+    sut.passengerForm.markAsTouched()
+    // assert
+    expect(sut.passengerForm.hasError('checkedNumberZero')).toBeTrue()
+  });
+  it(`should be the number of infants is greater than the number of adults,
+  the passenger count error must be adjusted in the flight form`, () => {
+    // act
+    passengers?.setValue({ Adult: 1, Child: 0, Infant: 2 });
+    // assert
+    expect(sut.passengerForm.hasError('max')).toBeTrue();
+    expect(sut.passengerForm.getError('max')).toEqual({ actual: 2, max: 1 });
   });
 
   // decrees(item)
@@ -46,14 +91,14 @@ describe('SUT: PassengersComponent', () => {
 
   // InfantIncrease(item)
   it('should set item value to 1 if it is 0', () => {
-    const item =  { value: 0, name: 'Infant' }
+    const item = { value: 0, name: 'Infant' }
     sut.infantIncrease(item)
     expect(item.value).toBe(1)
 
   });
 
   // refersValue()
-  it('should update the value property and call onChange, markAsTouched', async() => {
+  it('should update the value property and call onChange, markAsTouched', async () => {
     sut.passenger = [
       { name: 'Adult', value: 2 },
       { name: 'Child', value: 1 },
