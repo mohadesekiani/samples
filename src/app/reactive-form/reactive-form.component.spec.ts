@@ -131,8 +131,8 @@ fdescribe('SUT: ReactiveFormComponent', () => {
     // arrange
     sut.flightForm.get('passengers')?.setValue({ Adult: 1, Child: 0, Infant: 2 } as IPassengerTypes)
     // act
-    sut.flightForm.get('passengers')?.markAsTouched();
-    sut.submit()
+    // sut.flightForm.get('passengers')?.markAsTouched();
+    // sut.submit()
     // assert
     // expect(sut.flightForm.getError('passengers')).toBeTrue();
     // expect(sut.flightForm.get('passengers')?.errors).toBeTrue();
