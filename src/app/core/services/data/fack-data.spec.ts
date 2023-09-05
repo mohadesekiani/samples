@@ -17,13 +17,12 @@ describe('SUT: FakeDataService', () => {
     const searchValue = 'San';
     const expectedResults = ['San Antonio', 'San Diego', 'San Jose'];
     let actual: Array<string> = [];
-    
+
     sut.getFakeData(searchValue).subscribe((res) => {
       actual = res;
     });
     tick(3000);
     expect(actual).toEqual(expectedResults);
-    console.log(actual);
   }));
 
   it('should filter data based on search value by async', async () => {

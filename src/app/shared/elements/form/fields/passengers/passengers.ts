@@ -68,7 +68,6 @@ export class PassengersComponent implements ControlValueAccessor {
 
   increase(item) {
     item.value = item.value + 1;
-    console.log(item.value);
   }
 
   infantIncrease(item) {

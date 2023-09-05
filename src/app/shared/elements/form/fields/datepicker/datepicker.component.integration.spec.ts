@@ -124,7 +124,6 @@ describe('SUT(Integration): DatepickerComponent', () => {
   xit('should pass the correct "for" value to toggle', () => {
     // Arrange
     const toggle = TestUtil.directiveElement(fixture, '[matIconSuffix]');
-    console.log('toggle', toggle);
 
     // Act
     fixture.detectChanges();
