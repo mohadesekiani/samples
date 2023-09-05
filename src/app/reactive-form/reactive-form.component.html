@@ -5,10 +5,8 @@
   <hr style="margin: 10px" />
   <div>
     <div class="flex flex-wrap">
-      <app-flight formControlName="origin"
-                  label="origin"></app-flight>
-      <app-flight formControlName="destination"
-                  label="destination"></app-flight>
+      <app-flight formControlName="origin" label="origin"></app-flight>
+      <app-flight formControlName="destination" label="destination"></app-flight>
 
       <app-datepicker formControlName="departureDate" placeholder="your departure date"
         label="departure Date"></app-datepicker>
@@ -20,7 +18,6 @@
     <div class="flex flex-wrap">
       <div class="w-1/2">
         <span class="m-2">passengers</span>
-
         <app-passengers formControlName="passengers"></app-passengers>
       </div>
       <div class="w-1/2">

@@ -5,7 +5,7 @@ import { TravelTypesEnum } from "../models/travel-types.enum";
 import { Router } from "@angular/router";
 import { IPassengerTypes } from "../shared/elements/form/fields/passengers/passengers";
 
-describe('SUT: ReactiveFormComponent', () => {
+fdescribe('SUT: ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
@@ -97,6 +97,7 @@ describe('SUT: ReactiveFormComponent', () => {
   });
   // onSubmit
   it('should check form is valid then go to result page ', () => {
+    // arrange
     flightForm.setValue({
       passengers: { Adult: 1, Children: 1, Infant: 1 },
       travelType: "OneWay",
@@ -106,28 +107,54 @@ describe('SUT: ReactiveFormComponent', () => {
       destination: "San Antonio",
       classType: "FirstClass"
     })
+    // act
     sut.submit();
-
+    // assert
     expect(router.navigate).toHaveBeenCalledWith(['/Train']);
   });
 
-  xit('should check form is valid then go to result alert', () => {
+  it('should check form is valid then go to result alert', () => {
+    // arrange
     spyOn(window, 'alert');
     //TODO fixme should be not setValue
-    sut.flightForm.setValue({
-      passengers: null,
+    sut.flightForm.patchValue({
+      passengers: { Adult: 0, Child: 0, Infant: 0 },
     })
+    // act
     sut.submit();
+    // assert
     expect(window.alert).toHaveBeenCalledWith('فرم ثبت نشد');
   });
 
-  it(`should be set passengerCount error to flightForm when infant greater than adult`, () => {
-
+  it(`should be the number of infants is greater than the number of adults,
+  the passenger count error must be adjusted in the flight form`, () => {
     // arrange
-    sut.flightForm.get('passengers')?.setValue({ Adult: 1, Child: 1, Infant: 2 } as IPassengerTypes)
-
+    sut.flightForm.get('passengers')?.setValue({ Adult: 1, Child: 0, Infant: 2 } as IPassengerTypes)
+    // act
+    sut.flightForm.get('passengers')?.markAsTouched();
+    sut.submit()
     // assert
-    expect(sut.flightForm.getError('passengers')).toBeTrue();
+    // expect(sut.flightForm.getError('passengers')).toBeTrue();
+    // expect(sut.flightForm.get('passengers')?.errors).toBeTrue();
+    expect(sut.flightForm.hasError('InfantGreaterThanAdults')).toBeTrue();
+  });
+
+  it('should be necessary to fill in the passengers field', () => {
+    // arrange
+    const passengers = sut.flightForm.get('passengers');
+    // act
+    passengers?.setValue( { "Adult": 4, "Child": 0, "Infant": 0 });
+    // assert
+    expect(passengers?.hasError('required')).toBeFalse();
+  });
+
+  it('should be necessary to fill in the returnDate field', () => {
+    // arrange
+    const returnDate = sut.flightForm.get('returnDate');
+    // act
+    returnDate?.setValue("2023-09-05T08:21:42.506Z");
+    // assert
+    expect(returnDate?.hasError('required')).toBeFalse();
   });
 
 });

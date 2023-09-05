@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { ClassTypesEnum } from '../models/class-types.enum'
 import { TravelTypesEnum } from '../models/travel-types.enum';
 import { Router } from '@angular/router';
 import { distinctUntilChanged, skip, startWith } from 'rxjs';
+import { IPassengerTypes } from '../shared/elements/form/fields/passengers/passengers';
 @Component({
   selector: 'app-reactive-form',
   templateUrl: './reactive-form.component.html',
@@ -38,17 +42,19 @@ export class ReactiveFormComponent implements OnInit {
 
   private createForm() {
     this.flightForm = this.fb.group({
-      passengers: [null, [Validators.required]],
+      passengers: [{ Adult: 0, Child: 0, Infant: 0 }, [Validators.required]],
       travelType: [TravelTypesEnum.OneWay],
       departureDate: [this.today],
       returnDate: [{ value: null, disabled: true }, [Validators.required]],
       origin: [null, [Validators.required]],
       destination: [null, [Validators.required]],
       classType: [null],
-    });
+    },
+      {
+        validator: this.childrenCountValidator(),
+      });
 
     this.setTravelTypeListener();
-    // flig
 
   }
 
@@ -73,5 +79,14 @@ export class ReactiveFormComponent implements OnInit {
     } else {
       alert('فرم ثبت نشد')
     }
+  }
+  childrenCountValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      let passengers: IPassengerTypes = control.get("passengers")?.value;
+      if (passengers.Infant > passengers.Adult) {
+        return { InfantGreaterThanAdults: true };
+      }
+      return null;
+    };
   }
 }
