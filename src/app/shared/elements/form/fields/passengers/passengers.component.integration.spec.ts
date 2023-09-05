@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PassengersComponent as PassengersComponent } from './passengers';
+import { PassengersComponent as PassengersComponent } from './passengers.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';

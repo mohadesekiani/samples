@@ -11,7 +11,7 @@ import { ClassTypesEnum } from '../models/class-types.enum'
 import { TravelTypesEnum } from '../models/travel-types.enum';
 import { Router } from '@angular/router';
 import { distinctUntilChanged, skip, startWith } from 'rxjs';
-import { IPassengerTypes } from '../shared/elements/form/fields/passengers/passengers';
+import { IPassengerTypes } from '../shared/elements/form/fields/passengers/passengers.component';
 @Component({
   selector: 'app-reactive-form',
   templateUrl: './reactive-form.component.html',
@@ -41,21 +41,21 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   private createForm() {
-    this.flightForm = this.fb.group({
-      passengers: [{ Adult: 0, Child: 0, Infant: 0 }, [Validators.required]],
+    this.flightForm = this.fb.group<any>({
+      passengers: [null, [Validators.required]],
       travelType: [TravelTypesEnum.OneWay],
       departureDate: [this.today],
       returnDate: [{ value: null, disabled: true }, [Validators.required]],
       origin: [null, [Validators.required]],
       destination: [null, [Validators.required]],
       classType: [null],
-    },
-      {
-        validator: this.childrenCountValidator(),
-      });
+    }, {
+      /// { Adult: 0, Child: 0, Infant: 0 }
+      ///TODO move to passengers component (set max error to infant controller)
+      validators: this.childrenCountValidator(),
+    });
 
     this.setTravelTypeListener();
-
   }
 
   private setTravelTypeListener() {
@@ -80,11 +80,12 @@ export class ReactiveFormComponent implements OnInit {
       alert('فرم ثبت نشد')
     }
   }
+
   childrenCountValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       let passengers: IPassengerTypes = control.get("passengers")?.value;
-      if (passengers.Infant > passengers.Adult) {
-        return { InfantGreaterThanAdults: true };
+      if (passengers?.Infant > passengers?.Adult) {
+        return { max: { actual: passengers.Infant, max: passengers.Adult } };
       }
       return null;
     };

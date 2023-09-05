@@ -3,7 +3,7 @@ import { ReactiveFormComponent } from "./reactive-form.component";
 import { ClassTypesEnum } from "../models/class-types.enum";
 import { TravelTypesEnum } from "../models/travel-types.enum";
 import { Router } from "@angular/router";
-import { IPassengerTypes } from "../shared/elements/form/fields/passengers/passengers";
+import { IPassengerTypes } from "../shared/elements/form/fields/passengers/passengers.component";
 
 fdescribe('SUT: ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
@@ -126,24 +126,23 @@ fdescribe('SUT: ReactiveFormComponent', () => {
     expect(window.alert).toHaveBeenCalledWith('فرم ثبت نشد');
   });
 
-  it(`should be the number of infants is greater than the number of adults,
+  fit(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // arrange
     sut.flightForm.get('passengers')?.setValue({ Adult: 1, Child: 0, Infant: 2 } as IPassengerTypes)
     // act
     // sut.flightForm.get('passengers')?.markAsTouched();
-    // sut.submit()
-    // assert
     // expect(sut.flightForm.getError('passengers')).toBeTrue();
     // expect(sut.flightForm.get('passengers')?.errors).toBeTrue();
-    expect(sut.flightForm.hasError('InfantGreaterThanAdults')).toBeTrue();
+debugger;
+    expect(sut.flightForm.hasError('infantGreaterThanAdults')).toBeTrue();
   });
 
   it('should be necessary to fill in the passengers field', () => {
     // arrange
     const passengers = sut.flightForm.get('passengers');
     // act
-    passengers?.setValue( { "Adult": 4, "Child": 0, "Infant": 0 });
+    passengers?.setValue({ "Adult": 4, "Child": 0, "Infant": 0 });
     // assert
     expect(passengers?.hasError('required')).toBeFalse();
   });
