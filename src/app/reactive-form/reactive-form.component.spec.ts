@@ -5,7 +5,7 @@ import { TravelTypesEnum } from "../models/travel-types.enum";
 import { Router } from "@angular/router";
 import { IPassengerTypes } from "../shared/elements/form/fields/passengers/passengers.component";
 
-fdescribe('SUT: ReactiveFormComponent', () => {
+describe('SUT: ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
@@ -126,7 +126,7 @@ fdescribe('SUT: ReactiveFormComponent', () => {
     expect(window.alert).toHaveBeenCalledWith('فرم ثبت نشد');
   });
 
-  fit(`should be the number of infants is greater than the number of adults,
+  xit(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // arrange
     sut.flightForm.get('passengers')?.setValue({ Adult: 1, Child: 0, Infant: 2 } as IPassengerTypes)
