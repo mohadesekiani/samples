@@ -1,4 +1,4 @@
-<form [formGroup]="flightForm" (ngSubmit)="(submit)">
+<form [formGroup]="flightForm" (submit)="(submit)">
   <!-- form value ? {{ flightForm.value | json }} is form valid ?
   {{ flightForm.valid | json }} -->
   <h2 style="text-align: center">*** reactive form ***</h2>
@@ -22,9 +22,7 @@
         label="return Date"
       ></app-datepicker>
     </div>
-
     <hr style="margin: 10px" />
-
     <div class="flex flex-wrap">
       <span class="m-2">passengers</span>
       <div formGroupName="passengers" class="p-4 w-1/2">
@@ -58,7 +56,11 @@
                 item.name
               }}</span>
               <!-- <span class="font-bold py-2 px-4">{{ item.value }}</span> -->
-              <input type="number" [formControlName]="item.name" />
+              <input
+                type="number"
+                [formControlName]="item.name"
+                (change)="updateValidation()"
+              />
             </div>
           </div>
         </div>
@@ -81,6 +83,6 @@
       </div>
     </div>
   </div>
-  <button type="submit">Submit</button>
+  <button type="submit" (click)="submit()">Submit</button>
 </form>
 {{ flightForm.value | json }}

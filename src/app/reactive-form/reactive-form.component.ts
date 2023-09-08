@@ -43,6 +43,22 @@ export class ReactiveFormComponent implements OnInit {
 
   ngOnInit() {
     this.setTravelTypeListener();
+    this.updateValidation();
+  }
+  updateValidation() {
+    const infantControl = this.flightForm.controls['passengers'].get('infant');
+    const adultValue =
+      this.flightForm.controls['passengers'].get('adult')?.value;
+    const infantValue = infantControl?.value;
+    console.log(infantValue, adultValue);
+
+    if (infantValue > adultValue) {
+      infantControl?.setValidators(CustomValidations.childrenCountValidator);
+    } else {
+      infantControl?.setValidators(null);
+    }
+    this.flightForm.controls['passengers'].updateValueAndValidity();
+    infantControl?.updateValueAndValidity();
   }
 
   private formCreator() {
@@ -51,7 +67,7 @@ export class ReactiveFormComponent implements OnInit {
         passengers: this.fb.group<any>({
           adult: [null, [Validators.required]],
           child: [null],
-          infant: [null],
+          infant: [null, [CustomValidations.childrenCountValidator]],
         }),
         travelType: [TravelTypesEnum.OneWay],
         departureDate: [this.today],
@@ -92,15 +108,5 @@ export class ReactiveFormComponent implements OnInit {
     } else {
       alert('فرم ثبت نشد');
     }
-  }
-
-  childrenCountValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let passengers: IPassengerTypes = control.get('passengers')?.value;
-      if (passengers?.Infant > passengers?.Adult) {
-        return { max: { actual: passengers.Infant, max: passengers.Adult } };
-      }
-      return null;
-    };
   }
 }
