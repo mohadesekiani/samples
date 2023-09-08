@@ -1,55 +1,64 @@
-import { Component } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { GeneralTypesEnum, PassengerTypesEnum } from 'src/app/models/general-types.enum';
-
-type EnumKeys = keyof typeof PassengerTypesEnum;
-export interface IPassengerTypes {
-  // [key in keyof typeof  PassengerTypesEnum]: number;
-  // [ket: string]: number;
-  Adult: number;
-  Child: number;
-  Infant: number;
-};
+import { Component, Optional, Self } from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormBuilder,
+  FormGroup,
+  NgControl,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { CustomValidations } from 'src/app/core/validations/custom-validations';
+import {
+  GeneralTypesEnum,
+  PassengerTypesEnum,
+} from 'src/app/models/general-types.enum';
+import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
 
 @Component({
   selector: 'app-passengers',
   templateUrl: './passengers.component.html',
   styleUrls: ['./passengers.component.scss'],
   providers: [
-    { provide: NG_VALUE_ACCESSOR, multi: true, useExisting: PassengersComponent },
+    // {
+    //   provide: NG_VALUE_ACCESSOR,
+    //   multi: true,
+    //   useExisting: PassengersComponent,
+    // },
   ],
 })
 export class PassengersComponent implements ControlValueAccessor {
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder // @Optional() @Self() public ngControl: NgControl
+  ) {
+    // if (this.ngControl != null) {
+    //   // Setting the value accessor directly (instead of using
+    //   // the providers) to avoid running into a circular import.
+    //   this.ngControl.valueAccessor = this;
+    // }
+  }
   ngOnInit() {
-    this.createForm()
+    this.createForm();
   }
   createForm() {
-    this.passengerForm = this.fb.group<any>({
-      passengers: [null, [Validators.required]]
-    }, {
-      validators: [this.numberZero(),this.childrenCountValidator() ]
-    })
-  }
-  numberZero(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let passengers: IPassengerTypes = control.get("passengers")?.value;
-      if (passengers?.Infant === 0 && passengers?.Adult === 0 && passengers?.Child === 0) {
-        return { checkedNumberZero: true };
+    this.passengerForm = this.fb.group<any>(
+      {
+        adult: [
+          null,
+          [Validators.required, CustomValidations.childrenCountValidator],
+        ],
+        child: [null],
+        infant: [null],
+      },
+      {
+        validators: [CustomValidations.childrenCountValidator],
       }
-      return null;
-    };
+    );
   }
-  childrenCountValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let passengers: IPassengerTypes = control.get("passengers")?.value;
-      if (passengers?.Infant > passengers?.Adult) {
-        return { max: { actual: passengers.Infant, max: passengers.Adult } };
-      }
-      return null;
-    };
-  }
-  passengerForm!: FormGroup
+
+  passengerForm!: FormGroup;
   value: IPassengerTypes = {
     Adult: 0,
     Child: 0,
@@ -57,8 +66,10 @@ export class PassengersComponent implements ControlValueAccessor {
   };
   disabled = false;
   touched = false;
-  onChange = (value) => { };
-  onTouched = () => { };
+  onChange = (value) => {
+    value;
+  };
+  onTouched = () => {};
 
   writeValue(obj: any): void {
     this.value = { ...this.value, ...obj };
@@ -87,21 +98,19 @@ export class PassengersComponent implements ControlValueAccessor {
   passenger: Array<any> = [
     { value: 0, name: 'Adult' },
     { value: 0, name: 'Child' },
-    { value: 0, name: 'Infant', increase: this.infantIncrease },
+    { value: 0, name: 'Infant' },
   ];
 
   decrees(item) {
-    if (item.value <= 0) { return; }
+    if (item.value <= 0) {
+      return;
+    }
 
     item.value = item.value - 1;
   }
 
   increase(item) {
     item.value = item.value + 1;
-  }
-
-  infantIncrease(item) {
-    if (item.value === 0) item.value = 1;
   }
 
   refersValue() {

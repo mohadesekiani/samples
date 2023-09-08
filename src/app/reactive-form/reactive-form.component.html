@@ -1,4 +1,4 @@
-<form [formGroup]="flightForm" (submit)="submit">
+<form [formGroup]="flightForm" (ngSubmit)="(submit)">
   <!-- form value ? {{ flightForm.value | json }} is form valid ?
   {{ flightForm.valid | json }} -->
   <h2 style="text-align: center">*** reactive form ***</h2>
@@ -6,31 +6,81 @@
   <div>
     <div class="flex flex-wrap">
       <app-flight formControlName="origin" label="origin"></app-flight>
-      <app-flight formControlName="destination" label="destination"></app-flight>
+      <app-flight
+        formControlName="destination"
+        label="destination"
+      ></app-flight>
 
-      <app-datepicker formControlName="departureDate" placeholder="your departure date"
-        label="departure Date"></app-datepicker>
-      <app-datepicker formControlName="returnDate" placeholder="your return date" label="return Date"></app-datepicker>
+      <app-datepicker
+        formControlName="departureDate"
+        placeholder="your departure date"
+        label="departure Date"
+      ></app-datepicker>
+      <app-datepicker
+        formControlName="returnDate"
+        placeholder="your return date"
+        label="return Date"
+      ></app-datepicker>
     </div>
 
     <hr style="margin: 10px" />
 
     <div class="flex flex-wrap">
-      <div class="w-1/2">
-        <span class="m-2">passengers</span>
-        <app-passengers formControlName="passengers"></app-passengers>
+      <span class="m-2">passengers</span>
+      <div formGroupName="passengers" class="p-4 w-1/2">
+        <div class="m-2 flex flex-wrap" style="width: 95%">
+          <div class="m-auto" style="text-align: center">
+            <span>
+              {{ flightForm.controls["passengers"].value["adult"] }}
+              <i class="fa fa-user"></i>
+            </span>
+            <span>
+              {{ flightForm.controls["passengers"].value["child"] }}
+              <i class="fa fa-child"></i>
+            </span>
+            <span>
+              {{ flightForm.controls["passengers"].value["infant"] }}
+              <i class="fa fa-child"></i>
+            </span>
+          </div>
+          <div>
+            <button id="btnPassenger" (click)="showDrop = !showDrop">
+              <i class="fa fa-users"></i>
+            </button>
+          </div>
+          <div class="bg-white" *ngIf="showDrop" id="drop" style="width: 100%">
+            <div
+              id="dropItem"
+              class="flex flex-wrap my-4 mx-auto !text-center"
+              *ngFor="let item of passenger"
+            >
+              <span class="font-bold py-2 px-4 mx-4 w-1/2">{{
+                item.name
+              }}</span>
+              <!-- <span class="font-bold py-2 px-4">{{ item.value }}</span> -->
+              <input type="number" [formControlName]="item.name" />
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="w-1/2">
         <span class="m-2">general</span>
         <div class="m-3">
-          <mat-radio-group formControlName="classType" aria-label="Select an option">
-            <mat-radio-button *ngFor="let option of classTypes" [value]="option.value">{{ option.title }}
+          <mat-radio-group
+            formControlName="classType"
+            aria-label="Select an option"
+          >
+            <mat-radio-button
+              *ngFor="let option of classTypes"
+              [value]="option.value"
+              >{{ option.title }}
             </mat-radio-button>
           </mat-radio-group>
         </div>
       </div>
     </div>
   </div>
-  <button type="submit" (click)="submit()">Submit</button>
+  <button type="submit">Submit</button>
 </form>
 {{ flightForm.value | json }}

@@ -27,13 +27,17 @@
         style="text-align: center"
       >
         <span class="font-bold py-2 px-4 mx-4 w-1/2">{{ item.name }}</span>
-        <button id="btnIncr" (click)="item.increase ? item.increase(item) : increase(item); refersValue()"
+        <button
+          id="btnIncr"
+          (click)="increase(item); refersValue()"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           +
         </button>
         <span class="font-bold py-2 px-4">{{ item.value }}</span>
-        <button id="btnDecr" (click)="decrees(item); refersValue()"
+        <button
+          id="btnDecr"
+          (click)="decrees(item); refersValue()"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           -
@@ -42,3 +46,4 @@
     </div>
   </div>
 </div>
+<!-- <span *ngIf="ngControl.touched" class="">{{ ngControl.errors }}</span> -->

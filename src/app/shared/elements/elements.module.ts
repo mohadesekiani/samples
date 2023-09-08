@@ -8,7 +8,15 @@ import { MaterialModule } from '../material/material.module';
 import { DatepickerComponent } from './form/fields/datepicker/datepicker.component';
 import { FlightComponent } from './form/fields/flight/flight.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-const COMPONENTS = [DatepickerComponent, FlightComponent, PassengersComponent];
+import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from '../shared.module';
+import { PassengerGroupComponent } from './form/fields/passenger-group/passenger-group.component';
+const COMPONENTS = [
+  DatepickerComponent,
+  PassengerGroupComponent,
+  FlightComponent,
+  PassengersComponent,
+];
 
 @NgModule({
   declarations: [COMPONENTS],
@@ -16,6 +24,7 @@ const COMPONENTS = [DatepickerComponent, FlightComponent, PassengersComponent];
     CommonModule,
     ReactiveFormsModule,
     // SharedModule,
+    // BrowserModule,
     FormsModule,
     MaterialModule,
   ],
