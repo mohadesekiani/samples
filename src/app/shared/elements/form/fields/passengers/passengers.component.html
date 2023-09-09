@@ -2,15 +2,15 @@
   <div class="m-2 flex flex-wrap" style="width: 95%">
     <div class="m-auto" style="text-align: center">
       <span>
-        {{ value.adult }}
+        {{ passengers.value.adult }}
         <i class="fa fa-user"></i>
       </span>
       <span>
-        {{ value.child }}
+        {{ passengers.value.child }}
         <i class="fa fa-child"></i>
       </span>
       <span>
-        {{ value.infant }}
+        {{ passengers.value.infant }}
         <i class="fa fa-child"></i>
       </span>
     </div>
@@ -35,6 +35,7 @@
         <span class="font-bold py-2 px-4 mx-4 w-1/2">{{ item.name }}</span>
         <input
           type="number"
+          style="border: 1px solid gray;"
           [formControlName]="item.name"
         />
 

@@ -19,7 +19,8 @@ describe('ReactiveFormComponent', () => {
   let appDatepicker;
   let appPassengers;
   let matRadioGroup: MatRadioGroup
-  let matRadioButton: MatRadioButton
+  let matRadioButton: MatRadioButton;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -44,15 +45,17 @@ describe('ReactiveFormComponent', () => {
     sut = fixture.componentInstance;
     fixture.detectChanges();
     appFlight = TestUtil.queryComponent(fixture,'app-flight')
-    appDatepicker = TestUtil.queryComponent(fixture,'app-datepicker')
-    appPassengers = TestUtil.queryComponent(fixture,'app-passengers')
+    appDatepicker = TestUtil.queryComponent(fixture,'app-datepicker');
+    appPassengers = TestUtil.queryComponent(fixture,'app-passengers');
     matRadioGroup = TestUtil.directiveElement(fixture, MatRadioGroup);
     matRadioButton = TestUtil.directiveElement(fixture, MatRadioButton);
-
   });
 
 
   it('should create', () => {
     expect(sut).toBeTruthy();
   });
+
+  // TODO where is my tests
+
 });

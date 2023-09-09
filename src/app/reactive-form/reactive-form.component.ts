@@ -37,33 +37,31 @@ export class ReactiveFormComponent implements OnInit {
     { value: 0, name: 'infant' },
   ];
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.setTravelTypeListener();
-    }
+  }
 
   private formCreator() {
     // const passengerData = this.passengerForm.getRawValue().passengers;
-    return this.fb.group<any>(
-      {
-        passengers: [null,Validators.required],
-        travelType: [TravelTypesEnum.OneWay],
-        departureDate: [this.today],
-        returnDate: [{ value: null, disabled: true }, [Validators.required]],
-        origin: [null, [Validators.required]],
-        destination: [null, [Validators.required]],
-        classType: [null],
-      },
-    );
+    return this.fb.group<any>({
+      passengers: [null, Validators.required],
+      travelType: [TravelTypesEnum.OneWay],
+      departureDate: [this.today],
+      returnDate: [{ value: null, disabled: true }, [Validators.required]],
+      origin: [null, [Validators.required]],
+      destination: [null, [Validators.required]],
+      classType: [null],
+    });
   }
 
   childrenCountValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => { 
+    return (control: AbstractControl): ValidationErrors | null => {
       let infantValue = control.value;
-      let adultValue =this.flightForm?.controls["passengers"].value["adult"] 
+      let adultValue = this.flightForm?.controls["passengers"].value["adult"]
       if (infantValue > adultValue) {
-        return { max: { actual:infantValue, max: adultValue} };
+        return { max: { actual: infantValue, max: adultValue } };
       }
       return null;
     };

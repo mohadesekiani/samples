@@ -10,6 +10,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { distinctUntilChanged } from 'rxjs';
 // import { CustomValidations } from 'src/app/core/validations/custom-validations';
 import {
   GeneralTypesEnum,
@@ -22,11 +23,11 @@ import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
   templateUrl: './passengers.component.html',
   styleUrls: ['./passengers.component.scss'],
   providers: [
-    // {
-    //   provide: NG_VALUE_ACCESSOR,
-    //   multi: true,
-    //   useExisting: PassengersComponent,
-    // },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: PassengersComponent,
+    },
   ],
 })
 export class PassengersComponent implements ControlValueAccessor {
@@ -42,12 +43,16 @@ export class PassengersComponent implements ControlValueAccessor {
   ngOnInit() {
     this.createForm();
   }
+
   createForm() {
     this.passengers = this.fb.group<any>({
       adult: [null, [Validators.required]],
       child: [null],
       infant: [null, [this.childrenCountValidator()]],
     });
+    this.passengers.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{
+      this.refersValue();
+    })
   }
 
   childrenCountValidator(): ValidatorFn {
@@ -60,13 +65,10 @@ export class PassengersComponent implements ControlValueAccessor {
       return null;
     };
   }
+
   passengers!: FormGroup;
   
-  value: IPassengerTypes = {
-    adult: 0,
-    child: 0,
-    infant: 0,
-  };
+
   disabled = false;
   touched = false;
   onChange = (value) => {
@@ -75,7 +77,7 @@ export class PassengersComponent implements ControlValueAccessor {
   onTouched = () => {};
 
   writeValue(obj: any): void {
-    this.value = { ...this.value, ...obj };
+
   }
 
   registerOnChange(fn: any): void {
@@ -118,12 +120,8 @@ export class PassengersComponent implements ControlValueAccessor {
   }
 
   refersValue() {
-    let newValue = { adult: 0, child: 0, infant: 0 };
-    this.passenger.forEach((item) => {
-      newValue[item.name] = item.value;
-    });
-    this.value = newValue;
-    this.onChange(this.value);
+    //TODO if is empty or invalid return null
+    this.onChange(this.passengers.value);
     this.markAsTouched();
   }
 }
