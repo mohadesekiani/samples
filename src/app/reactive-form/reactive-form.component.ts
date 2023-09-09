@@ -11,8 +11,6 @@ import { ClassTypesEnum } from '../models/class-types.enum';
 import { TravelTypesEnum } from '../models/travel-types.enum';
 import { Router } from '@angular/router';
 import { distinctUntilChanged, skip, startWith } from 'rxjs';
-import { IPassengerTypes } from '../models/passenger-types.interface';
-import { CustomValidations } from '../core/validations/custom-validations';
 
 @Component({
   selector: 'app-reactive-form',
@@ -43,23 +41,7 @@ export class ReactiveFormComponent implements OnInit {
 
   ngOnInit() {
     this.setTravelTypeListener();
-    this.updateValidation();
-  }
-  updateValidation() {
-    const infantControl = this.flightForm.controls['passengers'].get('infant');
-    const adultValue =
-      this.flightForm.controls['passengers'].get('adult')?.value;
-    const infantValue = infantControl?.value;
-    console.log(infantValue, adultValue);
-
-    if (infantValue > adultValue) {
-      infantControl?.setValidators(CustomValidations.childrenCountValidator);
-    } else {
-      infantControl?.setValidators(null);
     }
-    this.flightForm.controls['passengers'].updateValueAndValidity();
-    infantControl?.updateValueAndValidity();
-  }
 
   private formCreator() {
     return this.fb.group<any>(
@@ -67,7 +49,7 @@ export class ReactiveFormComponent implements OnInit {
         passengers: this.fb.group<any>({
           adult: [null, [Validators.required]],
           child: [null],
-          infant: [null, [CustomValidations.childrenCountValidator]],
+          infant: [null, [this.childrenCountValidator()]],
         }),
         travelType: [TravelTypesEnum.OneWay],
         departureDate: [this.today],
@@ -76,12 +58,18 @@ export class ReactiveFormComponent implements OnInit {
         destination: [null, [Validators.required]],
         classType: [null],
       },
-      {
-        /// { Adult: 0, Child: 0, Infant: 0 }
-        ///TODO move to passengers component (set max error to infant controller)
-        // validators: this.childrenCountValidator(),
-      }
     );
+  }
+
+  childrenCountValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => { 
+      let infantValue = control.value;          
+      let adultValue =this.flightForm?.value.passengers.adult
+      if (infantValue > adultValue) {
+        return { max: { actual: control.value, max: adultValue} };
+      }      
+      return null;
+    };
   }
 
   private setTravelTypeListener() {

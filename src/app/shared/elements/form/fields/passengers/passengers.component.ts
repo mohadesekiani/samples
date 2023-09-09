@@ -123,3 +123,5 @@ export class PassengersComponent implements ControlValueAccessor {
     this.markAsTouched();
   }
 }
+export { IPassengerTypes };
+

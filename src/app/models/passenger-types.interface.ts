@@ -4,7 +4,7 @@
 export interface IPassengerTypes {
   // [key in keyof typeof  PassengerTypesEnum]: number;
   // [ket: string]: number;
-  Adult: number;
-  Child: number;
-  Infant: number;
+  adult: number;
+  child: number;
+  infant: number;
 }
