@@ -64,9 +64,9 @@ export class ReactiveFormComponent implements OnInit {
   childrenCountValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => { 
       let infantValue = control.value;          
-      let adultValue =this.flightForm?.value.passengers.adult
+      let adultValue =this.flightForm?.controls["passengers"].value["adult"] 
       if (infantValue > adultValue) {
-        return { max: { actual: control.value, max: adultValue} };
+        return { max: { actual:infantValue, max: adultValue} };
       }      
       return null;
     };

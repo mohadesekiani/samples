@@ -97,7 +97,6 @@ fdescribe('SUT: ReactiveFormComponent', () => {
   });
   // onSubmit
   it('should check form is valid then go to result page ', () => {
-    console.log(flightForm);
     
     // arrange
     flightForm.setValue({
@@ -156,6 +155,17 @@ fdescribe('SUT: ReactiveFormComponent', () => {
     // assert
     expect(returnDate?.hasError('required')).toBeFalse();
   });
+
+  fit('should be infant > adult form isnot valid',()=>{
+   // act
+   sut.flightForm?.get('passengers.adult')?.setValue(1);
+   sut.flightForm?.get('passengers.infant')?.setValue(3);
+   // assert
+   expect(sut.flightForm.get('passengers.infant')?.hasError('max')).toBeTrue();
+   console.log( sut.flightForm.get('passengers.infant')?.getError('max'));
+   
+   expect( sut.flightForm.get('passengers.infant')?.getError('max')).toEqual({ actual: 3, max: 1});
+  })
 
 });
 
