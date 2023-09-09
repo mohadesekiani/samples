@@ -10,7 +10,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { CustomValidations } from 'src/app/core/validations/custom-validations';
+// import { CustomValidations } from 'src/app/core/validations/custom-validations';
 import {
   GeneralTypesEnum,
   PassengerTypesEnum,
@@ -47,13 +47,13 @@ export class PassengersComponent implements ControlValueAccessor {
       {
         adult: [
           null,
-          [Validators.required, CustomValidations.childrenCountValidator],
+          // [Validators.required, this.childrenCountValidator],
         ],
         child: [null],
         infant: [null],
       },
       {
-        validators: [CustomValidations.childrenCountValidator],
+        // validators: [this.childrenCountValidator],
       }
     );
   }
