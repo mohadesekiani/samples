@@ -1,4 +1,4 @@
-import { Component, Optional, Self } from '@angular/core';
+import { Component, Input, Optional, Self } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -43,22 +43,25 @@ export class PassengersComponent implements ControlValueAccessor {
     this.createForm();
   }
   createForm() {
-    this.passengerForm = this.fb.group<any>(
-      {
-        adult: [
-          null,
-          // [Validators.required, this.childrenCountValidator],
-        ],
-        child: [null],
-        infant: [null],
-      },
-      {
-        // validators: [this.childrenCountValidator],
-      }
-    );
+    this.passengers = this.fb.group<any>({
+      adult: [null, [Validators.required]],
+      child: [null],
+      infant: [null, [this.childrenCountValidator()]],
+    });
   }
 
-  passengerForm!: FormGroup;
+  childrenCountValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      let infantValue = control.value;
+      let adultValue = this.passengers?.value['adult'];
+      if (infantValue > adultValue) {
+        return { max: { actual: infantValue, max: adultValue } };
+      }
+      return null;
+    };
+  }
+  passengers!: FormGroup;
+  
   value: IPassengerTypes = {
     adult: 0,
     child: 0,
@@ -97,8 +100,8 @@ export class PassengersComponent implements ControlValueAccessor {
   //rename
   passenger: Array<any> = [
     { value: 0, name: 'adult' },
-    { value: 0, name: 'Child' },
-    { value: 0, name: 'Infant' },
+    { value: 0, name: 'child' },
+    { value: 0, name: 'infant' },
   ];
 
   decrees(item) {

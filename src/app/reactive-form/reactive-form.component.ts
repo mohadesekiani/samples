@@ -44,6 +44,7 @@ export class ReactiveFormComponent implements OnInit {
     }
 
   private formCreator() {
+    // const passengerData = this.passengerForm.getRawValue().passengers;
     return this.fb.group<any>(
       {
         passengers: [null,Validators.required],

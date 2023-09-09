@@ -25,7 +25,8 @@
     <hr style="margin: 10px" />
     <div class="flex flex-wrap">
       <span class="m-2">passengers</span>
-      <div formGroupName="passengers" class="p-4 w-1/2">
+      <app-passengers formGroupName="passengers"></app-passengers>
+      <!-- <div formGroupName="passengers" class="p-4 w-1/2">
         <div class="m-2 flex flex-wrap" style="width: 95%">
           <div class="m-auto" style="text-align: center">
             <span>
@@ -56,14 +57,14 @@
                 item.name
               }}</span>
               <!-- <span class="font-bold py-2 px-4">{{ item.value }}</span> -->
-              <input
+      <!-- <input
                 type="number"
                 [formControlName]="item.name"
               />
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="w-1/2">
         <span class="m-2">general</span>

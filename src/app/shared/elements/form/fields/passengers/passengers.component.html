@@ -19,7 +19,13 @@
         <i class="fa fa-users"></i>
       </button>
     </div>
-    <div class="bg-white" *ngIf="showDrop" id="drop" style="width: 100%" [formGroup]="passengerForm">
+    <div
+      class="bg-white"
+      *ngIf="showDrop"
+      id="drop"
+      style="width: 100%"
+      [formGroup]="passengers"
+    >
       <div
         id="dropItem"
         *ngFor="let item of passenger"
@@ -27,7 +33,12 @@
         style="text-align: center"
       >
         <span class="font-bold py-2 px-4 mx-4 w-1/2">{{ item.name }}</span>
-        <input type="number" #inputEl [formControlName]="item.adult">
+        <input
+          type="number"
+          [formControlName]="item.name"
+        />
+
+        <!-- <input type="number" #inputEl [formControlName]="item.name" /> -->
         <button
           id="btnIncr"
           (click)="increase(item)"
@@ -47,4 +58,9 @@
     </div>
   </div>
 </div>
+<div *ngIf="passengers.get('infant')?.hasError('max')">
+  maxInfant:{{ passengers.get("infant")?.getError("max").max }}
+  The number entered for Infant :{{ passengers.get("infant")?.getError("max").actual }}
+</div>
+
 <!-- <span *ngIf="ngControl.touched" class="">{{ ngControl.errors }}</span> -->
