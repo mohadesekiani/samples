@@ -96,7 +96,7 @@ export class PassengersComponent implements ControlValueAccessor {
   showDrop = false;
   //rename
   passenger: Array<any> = [
-    { value: 0, name: 'Adult' },
+    { value: 0, name: 'adult' },
     { value: 0, name: 'Child' },
     { value: 0, name: 'Infant' },
   ];
@@ -110,7 +110,8 @@ export class PassengersComponent implements ControlValueAccessor {
   }
 
   increase(item) {
-    item.value = item.value + 1;
+    // item.value = item.value + 1;
+    // todo
   }
 
   refersValue() {
@@ -123,5 +124,4 @@ export class PassengersComponent implements ControlValueAccessor {
     this.markAsTouched();
   }
 }
-export { IPassengerTypes };
 

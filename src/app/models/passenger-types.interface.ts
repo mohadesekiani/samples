@@ -1,10 +1,11 @@
-// import { PassengerTypesEnum } from "./general-types.enum";
+import { PassengerTypesEnum } from "./general-types.enum";
 
-// type EnumKeys = keyof typeof PassengerTypesEnum;
-export interface IPassengerTypes {
-  // [key in keyof typeof  PassengerTypesEnum]: number;
-  // [ket: string]: number;
-  adult: number;
-  child: number;
-  infant: number;
+export type PassengerTypesType = Partial<{
+  // use from keys
+  [key in keyof typeof PassengerTypesEnum]: number;
+  // use from values
+  // [key in  PassengerTypesEnum]: number;
+}>;
+
+export interface IPassengerTypes extends PassengerTypesType {
 }

@@ -4,6 +4,7 @@ export enum GeneralTypesEnum {
     WomenOnly = "WomenOnly"
 }
 export enum PassengerTypesEnum {
+    // TODO uppercase
     adult = 'Adult',
     child = 'Child',
     infant = 'Infant'

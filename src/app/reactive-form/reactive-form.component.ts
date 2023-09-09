@@ -46,11 +46,7 @@ export class ReactiveFormComponent implements OnInit {
   private formCreator() {
     return this.fb.group<any>(
       {
-        passengers: this.fb.group<any>({
-          adult: [null, [Validators.required]],
-          child: [null],
-          infant: [null, [this.childrenCountValidator()]],
-        }),
+        passengers: [null,Validators.required],
         travelType: [TravelTypesEnum.OneWay],
         departureDate: [this.today],
         returnDate: [{ value: null, disabled: true }, [Validators.required]],
@@ -63,11 +59,11 @@ export class ReactiveFormComponent implements OnInit {
 
   childrenCountValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => { 
-      let infantValue = control.value;          
+      let infantValue = control.value;
       let adultValue =this.flightForm?.controls["passengers"].value["adult"] 
       if (infantValue > adultValue) {
         return { max: { actual:infantValue, max: adultValue} };
-      }      
+      }
       return null;
     };
   }
