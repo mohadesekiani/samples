@@ -97,6 +97,8 @@ fdescribe('SUT: ReactiveFormComponent', () => {
   });
   // onSubmit
   it('should check form is valid then go to result page ', () => {
+    console.log(flightForm);
+    
     // arrange
     flightForm.setValue({
       passengers: { adult: 1, child: 1, infant: 1 },

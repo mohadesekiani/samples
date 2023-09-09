@@ -60,9 +60,9 @@ export class PassengersComponent implements ControlValueAccessor {
 
   passengerForm!: FormGroup;
   value: IPassengerTypes = {
-    Adult: 0,
-    Child: 0,
-    Infant: 0,
+    adult: 0,
+    child: 0,
+    infant: 0,
   };
   disabled = false;
   touched = false;
@@ -114,7 +114,7 @@ export class PassengersComponent implements ControlValueAccessor {
   }
 
   refersValue() {
-    let newValue = { Adult: 0, Child: 0, Infant: 0 };
+    let newValue = { adult: 0, child: 0, infant: 0 };
     this.passenger.forEach((item) => {
       newValue[item.name] = item.value;
     });

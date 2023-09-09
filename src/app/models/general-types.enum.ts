@@ -4,7 +4,7 @@ export enum GeneralTypesEnum {
     WomenOnly = "WomenOnly"
 }
 export enum PassengerTypesEnum {
-    Adult = 'Adult',
-    Child = 'Child',
-    Infant = 'Infant'
+    adult = 'Adult',
+    child = 'Child',
+    infant = 'Infant'
 }

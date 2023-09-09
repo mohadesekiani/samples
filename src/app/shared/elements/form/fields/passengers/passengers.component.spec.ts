@@ -52,14 +52,14 @@ fdescribe('SUT: PassengersComponent', () => {
 
   xit('should be not set required error to passengers controller when passengers has proper value ', () => {
     // act
-    passengers?.setValue({ Adult: 1, Child: 1, Infant: 1 });
+    passengers?.setValue({ adult: 1, child: 1, infant: 1 });
     // assert
     expect(passengers?.hasError('required')).toBeFalse();
   });
 
   xit('should be items passenger 0 not valid', () => {
     // act
-    passengers?.setValue({ Adult: 0, Child: 0, Infant: 0 });
+    passengers?.setValue({ adult: 0, child: 0, infant: 0 });
     sut.passengerForm.markAsTouched();
     // assert
     expect(sut.passengerForm.hasError('checkedNumberZero')).toBeTrue();
@@ -67,7 +67,7 @@ fdescribe('SUT: PassengersComponent', () => {
   xit(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // act
-    passengers?.setValue({ Adult: 1, Child: 0, Infant: 2 });
+    passengers?.setValue({ adult: 1, child: 0, infant: 2 });
     // assert
     expect(sut.passengerForm.hasError('max')).toBeTrue();
     expect(sut.passengerForm.getError('max')).toEqual({ actual: 2, max: 1 });
@@ -113,9 +113,9 @@ fdescribe('SUT: PassengersComponent', () => {
     expect(sut.markAsTouched).toHaveBeenCalled();
 
     expect(sut.value).toEqual({
-      Adult: 2,
-      Child: 1,
-      Infant: 0,
+      adult: 2,
+      child: 1,
+      infant: 0,
     } as IPassengerTypes);
   });
 });
