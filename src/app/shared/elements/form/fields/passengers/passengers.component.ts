@@ -38,13 +38,13 @@ export class PassengersComponent implements ControlValueAccessor {
     { value: 0, name: 'infant' },
   ];
 
-  onChildValueChange(newValue: number, item) {
-    // ref.value = newValue;
-    // this.passengers.value[item.name] = newValue;
-    let ctrl = this.passengers.get(item.name);
-    ctrl?.setValue(newValue);
-    this.refersValue();
-  }
+  // onChildValueChange(newValue: number, item) {
+  //   // ref.value = newValue;
+  //   // this.passengers.value[item.name] = newValue;
+  //   let ctrl = this.passengers.get(item.name);
+  //   ctrl?.setValue(newValue);
+  //   this.refersValue();
+  // }
 
   decrees(item) {
     let ctrl = this.passengers.get(item.name);
@@ -55,16 +55,11 @@ export class PassengersComponent implements ControlValueAccessor {
     this.refersValue();
   }
 
-  // incresed( item) {
-  //   // kkk
-  //   // ref.value = +ref.value + 1;
-  //   // علی اسم فرمه s داره
-  //   //yeki omad khonamoon ki?
-  //   let ctrl = this.passengers.get(item.name);
-  //   ctrl?.setValue(ctrl.value + 1);
-  //   //this.passengers.value[item.name] = ref.value;
-  //   this.refersValue();
-  // }
+  incresed(item) {
+    let ctrl = this.passengers.get(item.name);
+    ctrl?.setValue(ctrl.value + 1);
+    this.refersValue();
+  }
   constructor(private fb: FormBuilder) {}
   ngOnInit() {
     this.createForm();
@@ -79,7 +74,6 @@ export class PassengersComponent implements ControlValueAccessor {
     this.passengers.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.refersValue();
       this.errorMasseage = this.passengers.get('infant')?.getError('max');
-      console.log(this.passengers.value);
     });
   }
 

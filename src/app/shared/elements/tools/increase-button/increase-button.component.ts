@@ -11,7 +11,6 @@ export class IncreaseButtonComponent {
   @Output() valueChange = new EventEmitter<number>();
 
   addToValue() {
-    console.log(this.item);
     this.item = +this.item + 1;
     this.valueChange.emit(this.item);
   }

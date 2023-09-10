@@ -1,9 +1,9 @@
-import { FormBuilder } from "@angular/forms";
-import { ReactiveFormComponent } from "./reactive-form.component";
-import { ClassTypesEnum } from "../models/class-types.enum";
-import { TravelTypesEnum } from "../models/travel-types.enum";
-import { Router } from "@angular/router";
-import { IPassengerTypes } from "../models/passenger-types.interface";
+import { FormBuilder } from '@angular/forms';
+import { ReactiveFormComponent } from './reactive-form.component';
+import { ClassTypesEnum } from '../models/class-types.enum';
+import { TravelTypesEnum } from '../models/travel-types.enum';
+import { Router } from '@angular/router';
+import { IPassengerTypes } from '../models/passenger-types.interface';
 
 describe('SUT: ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
@@ -26,7 +26,7 @@ describe('SUT: ReactiveFormComponent', () => {
       { title: 'First Class', value: ClassTypesEnum.FirstClass },
       { title: 'Business', value: ClassTypesEnum.Business },
       { title: 'Economy', value: ClassTypesEnum.Economy },
-      { title: 'Premium Class', value: ClassTypesEnum.PremiumClass }
+      { title: 'Premium Class', value: ClassTypesEnum.PremiumClass },
     ]);
   });
 
@@ -38,19 +38,21 @@ describe('SUT: ReactiveFormComponent', () => {
       departureDate: sut.today,
       origin: null,
       destination: null,
-      classType: null
+      classType: null,
     };
     const expectedRawFormValue1 = {
-      returnDate: null
+      returnDate: null,
     };
     const expectedRawFormValue = {
       ...expectedFormValue,
-      returnDate: null
+      returnDate: null,
     };
 
     // assert
     //NOTICE
-    expect(sut.flightForm.getRawValue()).toEqual(jasmine.objectContaining(expectedRawFormValue1));
+    expect(sut.flightForm.getRawValue()).toEqual(
+      jasmine.objectContaining(expectedRawFormValue1)
+    );
     //  expect(sut.flightForm.getRawValue()).toEqual(expectedRawFormValue);
     // expect(sut.flightForm.value).toEqual(expectedFormValue);
   });
@@ -97,17 +99,16 @@ describe('SUT: ReactiveFormComponent', () => {
   });
   // onSubmit
   it('should check form is valid then go to result page ', () => {
-    
     // arrange
     flightForm.setValue({
       passengers: { adult: 1, child: 1, infant: 1 },
-      travelType: "OneWay",
-      departureDate: "2023-09-04T11:53:30.877Z",
-      origin: "San Antonio",
-      returnDate: "2023-09-04T11:53:30.877Z",
-      destination: "San Antonio",
-      classType: "FirstClass"
-    })
+      travelType: 'OneWay',
+      departureDate: '2023-09-04T11:53:30.877Z',
+      origin: 'San Antonio',
+      returnDate: '2023-09-04T11:53:30.877Z',
+      destination: 'San Antonio',
+      classType: 'FirstClass',
+    });
     // act
     sut.submit();
     // assert
@@ -120,7 +121,7 @@ describe('SUT: ReactiveFormComponent', () => {
     //TODO fixme should be not setValue
     sut.flightForm.patchValue({
       passengers: null,
-    })
+    });
     // act
     sut.submit();
     // assert
@@ -130,7 +131,9 @@ describe('SUT: ReactiveFormComponent', () => {
   xit(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // arrange
-    sut.flightForm.get('passengers')?.setValue({ adult: 1, child: 0, infant: 2 } as IPassengerTypes)
+    sut.flightForm
+      .get('passengers')
+      ?.setValue({ adult: 1, child: 0, infant: 2 } as IPassengerTypes);
     // act
     // sut.flightForm.get('infantGreaterThanAdults')?.markAsTouched();
     // expect(sut.flightForm.getError('infantGreaterThanAdults')).toBeTrue();
@@ -142,7 +145,7 @@ describe('SUT: ReactiveFormComponent', () => {
     // arrange
     const passengers = sut.flightForm.get('passengers.adult');
     // act
-    passengers?.setValue({ "adult": 4, "child": 0, "infant": 0 });
+    passengers?.setValue({ adult: 4, child: 0, infant: 0 });
     // assert
     expect(passengers?.hasError('required')).toBeFalse();
   });
@@ -151,26 +154,26 @@ describe('SUT: ReactiveFormComponent', () => {
     // arrange
     const returnDate = sut.flightForm.get('returnDate');
     // act
-    returnDate?.setValue("2023-09-05T08:21:42.506Z");
+    returnDate?.setValue('2023-09-05T08:21:42.506Z');
     // assert
     expect(returnDate?.hasError('required')).toBeFalse();
   });
 
-  it('should be infant > adult form isnot valid',()=>{
-   // act
-   sut.flightForm?.get('passengers.adult')?.setValue(1);
-   sut.flightForm?.get('passengers.infant')?.setValue(3);
-   // assert
-   expect(sut.flightForm.get('passengers.infant')?.hasError('max')).toBeTrue();
-   console.log( sut.flightForm.get('passengers.infant')?.getError('max'));
-   
-   expect( sut.flightForm.get('passengers.infant')?.getError('max')).toEqual({ actual: 3, max: 1});
-  })
+  it('should be infant > adult form isnot valid', () => {
+    // act
+    sut.flightForm?.get('passengers.adult')?.setValue(1);
+    sut.flightForm?.get('passengers.infant')?.setValue(3);
+    // assert
+    expect(sut.flightForm.get('passengers.infant')?.hasError('max')).toBeTrue();
 
+    expect(sut.flightForm.get('passengers.infant')?.getError('max')).toEqual({
+      actual: 3,
+      max: 1,
+    });
+  });
 });
 
 // 9-4-20223
 //@failure comment prettify
 //@failure format
 //@failure hardcode
-

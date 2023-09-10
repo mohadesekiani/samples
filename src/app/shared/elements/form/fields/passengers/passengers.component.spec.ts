@@ -1,10 +1,12 @@
-import { FormBuilder } from '@angular/forms';
+import { ComponentFixture } from '@angular/core/testing';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
 import { PassengersComponent } from './passengers.component';
 
 fdescribe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   let fb: FormBuilder;
+
   let passengers;
   const valueAccessor = jasmine.createSpyObj<{
     onChange: (e) => {};
@@ -110,19 +112,13 @@ fdescribe('SUT: PassengersComponent', () => {
     //   infant: 0,
     // } as IPassengerTypes);
   });
-  fit('should be when click incriment button updated value passengers form', () => {
-    sut.onChildValueChange(11, 10, { value: 10, name: 'adult' });
-    
-    let valuePassengers = {
-      passengers: { adult: 11, child: null, infant: null },
-      travelType: 'OneWay',
-      departureDate: null,
-      origin: null,
-      destination: null,
-      classType: null,
-    };
-    console.log(sut.passengers.value);
-    
-    expect(sut.passengers.value).toEqual(valuePassengers);
+  fit('should be when click incresed button updated value passengers form', () => {
+    // this.refersValue();
+    let item = { value: 5, name: 'adult' };
+    let ctrl = sut.passengers.get(item.name);
+    ctrl?.setValue(item.value);
+    sut.incresed(item.name);
+
+    expect(sut.passengers?.get(item.name)?.value).toBe(ctrl?.value + 1);
   });
 });
