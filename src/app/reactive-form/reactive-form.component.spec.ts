@@ -5,7 +5,7 @@ import { TravelTypesEnum } from "../models/travel-types.enum";
 import { Router } from "@angular/router";
 import { IPassengerTypes } from "../models/passenger-types.interface";
 
-fdescribe('SUT: ReactiveFormComponent', () => {
+describe('SUT: ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
@@ -156,7 +156,7 @@ fdescribe('SUT: ReactiveFormComponent', () => {
     expect(returnDate?.hasError('required')).toBeFalse();
   });
 
-  fit('should be infant > adult form isnot valid',()=>{
+  it('should be infant > adult form isnot valid',()=>{
    // act
    sut.flightForm?.get('passengers.adult')?.setValue(1);
    sut.flightForm?.get('passengers.infant')?.setValue(3);

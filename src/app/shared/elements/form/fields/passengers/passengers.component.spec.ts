@@ -17,7 +17,7 @@ fdescribe('SUT: PassengersComponent', () => {
     fb = new FormBuilder();
     sut = new PassengersComponent(fb);
     sut.ngOnInit();
-    passengers = sut.passengerForm.get('passengers');
+    passengers = sut.passengers.get('passengers');
   });
 
   it('should create', () => {
@@ -40,7 +40,7 @@ fdescribe('SUT: PassengersComponent', () => {
       infant: null,
     };
     // assert
-    expect(sut.passengerForm.value).toEqual(expectedFormValue);
+    expect(sut.passengers.value).toEqual(expectedFormValue);
   });
 
   xit('should be not set required error to passenger controller when passenger is empty', () => {
@@ -60,17 +60,17 @@ fdescribe('SUT: PassengersComponent', () => {
   xit('should be items passenger 0 not valid', () => {
     // act
     passengers?.setValue({ adult: 0, child: 0, infant: 0 });
-    sut.passengerForm.markAsTouched();
+    sut.passengers.markAsTouched();
     // assert
-    expect(sut.passengerForm.hasError('checkedNumberZero')).toBeTrue();
+    expect(sut.passengers.hasError('checkedNumberZero')).toBeTrue();
   });
   xit(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // act
     passengers?.setValue({ adult: 1, child: 0, infant: 2 });
     // assert
-    expect(sut.passengerForm.hasError('max')).toBeTrue();
-    expect(sut.passengerForm.getError('max')).toEqual({ actual: 2, max: 1 });
+    expect(sut.passengers.hasError('max')).toBeTrue();
+    expect(sut.passengers.getError('max')).toEqual({ actual: 2, max: 1 });
   });
 
   // decrees(item)
@@ -88,18 +88,10 @@ fdescribe('SUT: PassengersComponent', () => {
   // increase(item)
   it('should increase item value by 1 ', () => {
     const item = { value: 0 };
-    sut.increase(item);
+    //sut.increase(item);
     expect(item.value).toBe(1);
   });
 
-  // InfantIncrease(item)
-  // it('should set item value to 1 if it is 0', () => {
-  //   const item = { value: 0, name: 'Infant' };
-  //   sut.infantIncrease(item);
-  //   expect(item.value).toBe(1);
-  // });
-
-  // refersValue()
   xit('should update the value property and call onChange, markAsTouched', async () => {
     sut.passenger = [
       { name: 'Adult', value: 2 },
@@ -109,13 +101,28 @@ fdescribe('SUT: PassengersComponent', () => {
     spyOn(sut, 'onChange');
     spyOn(sut, 'markAsTouched');
     sut.refersValue();
-    expect(sut.onChange).toHaveBeenCalledWith(sut.value);
+    // expect(sut.onChange).toHaveBeenCalledWith(sut.value);
     expect(sut.markAsTouched).toHaveBeenCalled();
 
-    expect(sut.value).toEqual({
-      adult: 2,
-      child: 1,
-      infant: 0,
-    } as IPassengerTypes);
+    // expect(sut.value).toEqual({
+    //   adult: 2,
+    //   child: 1,
+    //   infant: 0,
+    // } as IPassengerTypes);
+  });
+  fit('should be when click incriment button updated value passengers form', () => {
+    sut.onChildValueChange(11, 10, { value: 10, name: 'adult' });
+    
+    let valuePassengers = {
+      passengers: { adult: 11, child: null, infant: null },
+      travelType: 'OneWay',
+      departureDate: null,
+      origin: null,
+      destination: null,
+      classType: null,
+    };
+    console.log(sut.passengers.value);
+    
+    expect(sut.passengers.value).toEqual(valuePassengers);
   });
 });

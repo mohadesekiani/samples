@@ -33,21 +33,19 @@
         style="text-align: center"
       >
         <span class="font-bold py-2 px-4 mx-4 w-1/2">{{ item.name }}</span>
+
+        <app-increase-button
+        [buttonText]="buttonText"
+          [item]="passengers.value[item.name]"
+          (valueChange)="onChildValueChange($event,input,item)"
+        ></app-increase-button>
         <input
           type="number"
-          style="border: 1px solid gray;"
+          style="border: 1px solid gray"
           [formControlName]="item.name"
+          #input
         />
 
-        <!-- <input type="number" #inputEl [formControlName]="item.name" /> -->
-        <button
-          id="btnIncr"
-          (click)="increase(item)"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          +
-        </button>
-        <span class="font-bold py-2 px-4">{{ item.value }}</span>
         <button
           id="btnDecr"
           (click)="decrees(item); refersValue()"
@@ -59,9 +57,9 @@
     </div>
   </div>
 </div>
-<div *ngIf="passengers.get('infant')?.hasError('max')">
-  maxInfant:{{ passengers.get("infant")?.getError("max").max }}
-  The number entered for Infant :{{ passengers.get("infant")?.getError("max").actual }}
+<div *ngIf="passengers.get('infant')?.hasError('max')" style="color: red">
+  maxInfant:{{ errorMasseage.max }} The number entered for Infant :{{
+    errorMasseage.actual
+  }}
 </div>
-
-<!-- <span *ngIf="ngControl.touched" class="">{{ ngControl.errors }}</span> -->
+{{ passengers.value | json }}

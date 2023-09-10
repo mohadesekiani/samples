@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from '../shared.module';
 import { PassengerGroupComponent } from './form/fields/passenger-group/passenger-group.component';
+import { IncreaseButtonComponent } from './tools/increase-button/increase-button.component';
 const COMPONENTS = [
   DatepickerComponent,
   PassengerGroupComponent,
@@ -19,7 +20,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [COMPONENTS],
+  declarations: [COMPONENTS, IncreaseButtonComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

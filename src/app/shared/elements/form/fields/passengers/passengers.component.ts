@@ -1,22 +1,15 @@
-import { Component, Input, Optional, Self } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
   FormBuilder,
   FormGroup,
-  NgControl,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
-// import { CustomValidations } from 'src/app/core/validations/custom-validations';
-import {
-  GeneralTypesEnum,
-  PassengerTypesEnum,
-} from 'src/app/models/general-types.enum';
-import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
 
 @Component({
   selector: 'app-passengers',
@@ -31,8 +24,30 @@ import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
   ],
 })
 export class PassengersComponent implements ControlValueAccessor {
+ 
+  
+  onChildValueChange(newValue: number,input, item) {
+    console.log(newValue);
+    input.value = newValue;
+    this.passengers.value[item.name] = newValue;
+    console.log('be',this.passengers);
+    
+    this.passengers.valueChanges.subscribe((x) => {
+      console.log('af',this.passengers);
+
+      console.log(newValue);
+      console.log(x);
+      
+      input.value = newValue;
+      x.value[item.name] = newValue;
+
+    })
+    // console.log(this.passengers.value);
+    
+  }
+
   constructor(
-    private fb: FormBuilder // @Optional() @Self() public ngControl: NgControl
+    private fb: FormBuilder
   ) {
     // if (this.ngControl != null) {
     //   // Setting the value accessor directly (instead of using
@@ -42,6 +57,7 @@ export class PassengersComponent implements ControlValueAccessor {
   }
   ngOnInit() {
     this.createForm();
+
   }
 
   createForm() {
@@ -50,9 +66,12 @@ export class PassengersComponent implements ControlValueAccessor {
       child: [null],
       infant: [null, [this.childrenCountValidator()]],
     });
-    this.passengers.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{
+    this.passengers.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.refersValue();
-    })
+      this.errorMasseage = this.passengers.get('infant')?.getError('max');
+      console.log(this.passengers.value);
+      
+    });
   }
 
   childrenCountValidator(): ValidatorFn {
@@ -66,9 +85,10 @@ export class PassengersComponent implements ControlValueAccessor {
     };
   }
 
+  errorMasseage!: { actual: number; max: number };
+  hasError: boolean = false;
   passengers!: FormGroup;
-  
-
+  buttonText :string ="+";
   disabled = false;
   touched = false;
   onChange = (value) => {
@@ -76,9 +96,7 @@ export class PassengersComponent implements ControlValueAccessor {
   };
   onTouched = () => {};
 
-  writeValue(obj: any): void {
-
-  }
+  writeValue(obj: any): void {}
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -114,15 +132,9 @@ export class PassengersComponent implements ControlValueAccessor {
     item.value = item.value - 1;
   }
 
-  increase(item) {
-    // item.value = item.value + 1;
-    // todo
-  }
-
   refersValue() {
     //TODO if is empty or invalid return null
     this.onChange(this.passengers.value);
     this.markAsTouched();
   }
 }
-
