@@ -12,7 +12,7 @@ export class IncreaseButtonComponent {
 
   addToValue() {
     console.log(this.item);
-    this.item = this.item +1
+    this.item = +this.item + 1;
     this.valueChange.emit(this.item);
   }
 }

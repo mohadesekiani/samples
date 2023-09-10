@@ -24,40 +24,50 @@ import { distinctUntilChanged } from 'rxjs';
   ],
 })
 export class PassengersComponent implements ControlValueAccessor {
- 
-  
-  onChildValueChange(newValue: number,input, item) {
-    console.log(newValue);
-    input.value = newValue;
-    this.passengers.value[item.name] = newValue;
-    console.log('be',this.passengers);
-    
-    this.passengers.valueChanges.subscribe((x) => {
-      console.log('af',this.passengers);
+  errorMasseage!: { actual: number; max: number };
+  hasError: boolean = false;
+  passengers!: FormGroup;
+  buttonText: string = '+';
+  disabled = false;
+  touched = false;
+  showDrop = false;
+  //rename
+  passenger: Array<any> = [
+    { value: 0, name: 'adult' },
+    { value: 0, name: 'child' },
+    { value: 0, name: 'infant' },
+  ];
 
-      console.log(newValue);
-      console.log(x);
-      
-      input.value = newValue;
-      x.value[item.name] = newValue;
-
-    })
-    // console.log(this.passengers.value);
-    
+  onChildValueChange(newValue: number, item) {
+    // ref.value = newValue;
+    // this.passengers.value[item.name] = newValue;
+    let ctrl = this.passengers.get(item.name);
+    ctrl?.setValue(newValue);
+    this.refersValue();
   }
 
-  constructor(
-    private fb: FormBuilder
-  ) {
-    // if (this.ngControl != null) {
-    //   // Setting the value accessor directly (instead of using
-    //   // the providers) to avoid running into a circular import.
-    //   this.ngControl.valueAccessor = this;
-    // }
+  decrees(item) {
+    let ctrl = this.passengers.get(item.name);
+    if (ctrl?.value <= 0) {
+      return;
+    }
+    ctrl?.setValue(ctrl.value - 1);
+    this.refersValue();
   }
+
+  // incresed( item) {
+  //   // kkk
+  //   // ref.value = +ref.value + 1;
+  //   // علی اسم فرمه s داره
+  //   //yeki omad khonamoon ki?
+  //   let ctrl = this.passengers.get(item.name);
+  //   ctrl?.setValue(ctrl.value + 1);
+  //   //this.passengers.value[item.name] = ref.value;
+  //   this.refersValue();
+  // }
+  constructor(private fb: FormBuilder) {}
   ngOnInit() {
     this.createForm();
-
   }
 
   createForm() {
@@ -70,7 +80,6 @@ export class PassengersComponent implements ControlValueAccessor {
       this.refersValue();
       this.errorMasseage = this.passengers.get('infant')?.getError('max');
       console.log(this.passengers.value);
-      
     });
   }
 
@@ -85,15 +94,10 @@ export class PassengersComponent implements ControlValueAccessor {
     };
   }
 
-  errorMasseage!: { actual: number; max: number };
-  hasError: boolean = false;
-  passengers!: FormGroup;
-  buttonText :string ="+";
-  disabled = false;
-  touched = false;
   onChange = (value) => {
     value;
   };
+
   onTouched = () => {};
 
   writeValue(obj: any): void {}
@@ -115,21 +119,6 @@ export class PassengersComponent implements ControlValueAccessor {
       this.onTouched();
       this.touched = true;
     }
-  }
-  showDrop = false;
-  //rename
-  passenger: Array<any> = [
-    { value: 0, name: 'adult' },
-    { value: 0, name: 'child' },
-    { value: 0, name: 'infant' },
-  ];
-
-  decrees(item) {
-    if (item.value <= 0) {
-      return;
-    }
-
-    item.value = item.value - 1;
   }
 
   refersValue() {
