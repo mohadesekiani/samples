@@ -64,8 +64,12 @@ describe('SUT: PassengersComponent', () => {
     sut.refersValue();
     // assert
     expect(sut.passengers.get('Infant')?.hasError('max')).toBeTrue();
-    // expect(sut.errorMasseage.max).toEqual(1);
-    expect(sut.errorMasseage.actual).toEqual(2);
+    sut.passengers.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
+      sut.refersValue();
+      sut.errorMasseage = sut.passengers.get('infant')?.getError('max');
+      expect(sut.errorMasseage).toEqual({actual:2 , max:1});
+
+    });
   });
 
   // decrees(item)
