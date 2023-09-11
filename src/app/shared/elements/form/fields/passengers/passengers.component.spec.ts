@@ -67,8 +67,8 @@ describe('SUT: PassengersComponent', () => {
 
     // assert
     expect(sut.form.get('Infant')?.hasError('max')).toBeTrue();
-    sut.errorMasseage = sut.form.get('Infant')?.getError('max');
-    expect(sut.errorMasseage).toEqual({ actual: 3, max: 2 });
+    sut.errorMessage = sut.form.get('Infant')?.getError('max');
+    expect(sut.errorMessage).toEqual({ actual: 3, max: 2 });
   });
 
   // decrees(item)

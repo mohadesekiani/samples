@@ -57,8 +57,8 @@
 <div id="messeage"
      *ngIf="form.get('infant')?.hasError('max')"
      style="color: red">
-  maxInfant:{{ errorMasseage.max }} The number entered for Infant :{{
-  errorMasseage.actual
+  maxInfant:{{ errorMessage.max }} The number entered for Infant :{{
+    errorMessage.actual
   }}
 </div>
 {{ form.value | json }}
