@@ -15,8 +15,8 @@ export class TestUtil {
     return debugElement.componentInstance;
   }
 
-  static nativeElement(fixture: ComponentFixture<any>, element) {
-    const query = fixture.debugElement.query(By.css(element)).nativeElement;
+  static nativeElement<T = any>(fixture: ComponentFixture<any>, element: string) {
+    const query = fixture.debugElement.query(By.css(element)).nativeElement as T;
     return query;
   }
 

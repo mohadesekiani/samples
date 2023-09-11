@@ -1,6 +1,6 @@
 import { LayoutComponent } from "./layout.component";
 
-fdescribe('SUT: LayoutComponent', () => {
+describe('SUT: LayoutComponent', () => {
   let sut: LayoutComponent;
 
   beforeEach(() => {
@@ -11,7 +11,7 @@ fdescribe('SUT: LayoutComponent', () => {
     expect(sut).toBeTruthy();
   })
 
-  fit('should be when you click on the tab, the tab becomes active', () => {
+  it('should be when you click on the tab, the tab becomes active', () => {
    let tabs = [
       { title: 'Flight', active: true ,route:'/'},
       { title: 'Train', active: false ,route:'Train'},

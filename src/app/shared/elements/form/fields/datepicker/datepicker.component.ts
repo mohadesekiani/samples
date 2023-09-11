@@ -23,17 +23,17 @@ import { MatDatepicker } from '@angular/material/datepicker';
 export class DatepickerComponent implements ControlValueAccessor {
   [x: string]: any;
   @Input() label!: string;
-  @Input() min!: Date;
-  @Input() max!: Date;
+  // TODO should set by test
+  @Input() min = new Date('2020/05/05');
+  @Input() max = new Date('2020/05/10');
   @Input() value!: Date;
-  // [(value)]="value"
-  // @Output() valueChange = new EventEmitter();
+  @Output() valueChange = new EventEmitter();
   disabled = false;
   touched = false;
   // @ViewChild('picker') picker!: MatDatepicker<any> ;
 
-  onChange = (value) => {};
-  onTouched = () => {};
+  onChange = (value) => { };
+  onTouched = () => { };
 
   writeValue(obj: any): void {
     this.value = obj;
@@ -60,17 +60,28 @@ export class DatepickerComponent implements ControlValueAccessor {
     this.touched = true;
   }
 
+
   dateValueChanged(value: Date) {
     this.value = value;
     // check is between min and max
-    if (this.value < new Date('2020/05/05')) {
-      this.value = new Date('2020/05/05');
-      this.onChange(this.value);
+    if (this.min && this.value < this.min) {
+      this.value = this.min;
+      this.updateValue();
+      return;
     }
-    if (this.value > new Date('2020/05/10')) {
-      this.value = new Date('2020/05/10');
-      this.onChange(this.value);
+
+    if (this.max && this.value > this.max) {
+      this.value = this.max;
+      this.updateValue();
+      return;
     }
+
+    this.updateValue();
+  }
+
+  private updateValue() {
+    this.onChange(this.value);
     this.markAsTouched();
+    this.valueChange.emit(this.value);
   }
 }

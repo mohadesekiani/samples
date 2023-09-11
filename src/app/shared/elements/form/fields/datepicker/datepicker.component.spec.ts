@@ -33,9 +33,7 @@ describe('SUT: DatepickerComponent', () => {
     sut.dateValueChanged(new Date('2020/05/11'));
 
     // assert
-    expect(sut.value.toDateString()).not.toBe(
-      new Date('2020/05/11').toDateString()
-    );
+    expect(sut.value.toDateString()).not.toBe(new Date('2020/05/11').toDateString());
     expect(sut.value.toDateString()).toBe(sut.max.toDateString());
   });
   // disable

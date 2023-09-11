@@ -1,73 +1,64 @@
 <div class="p-4">
-  <div class="m-2 flex flex-wrap" style="width: 95%">
-    <div class="m-auto" style="text-align: center">
+  <div class="m-2 flex flex-wrap"
+       style="width: 95%">
+    <div class="m-auto"
+         style="text-align: center">
       <span>
-        {{ passengers.value.Adult }}
+        {{ form.value.Adult }}
         <i class="fa fa-user"></i>
       </span>
       <span>
-        {{ passengers.value.Child }}
+        {{ form.value.Child }}
         <i class="fa fa-child"></i>
       </span>
       <span>
-        {{ passengers.value.Infant }}
+        {{ form.value.Infant }}
         <i class="fa fa-child"></i>
       </span>
     </div>
     <div>
-      <button id="btnPassenger" (click)="showDrop = !showDrop">
+      <button id="btnPassenger"
+              (click)="toggleDropDown()">
         <i class="fa fa-users"></i>
       </button>
     </div>
-    <div
-      class="bg-white"
-      *ngIf="showDrop"
-      id="drop"
-      style="width: 100%"
-      [formGroup]="passengers"
-    >
-      <div
-        id="dropItem"
-        *ngFor="let item of passenger"
-        class="flex flex-wrap my-4 mx-auto"
-        style="text-align: center"
-      >
+    <div class="bg-white"
+         *ngIf="showDrop"
+         id="drop"
+         style="width: 100%"
+         [formGroup]="form">
+      <div id="dropItem"
+           *ngFor="let item of passenger"
+           class="flex flex-wrap my-4 mx-auto"
+           style="text-align: center">
         <span class="font-bold py-2 px-4 mx-4 w-1/2">{{ item.name }}</span>
 
         <!-- <app-increase-button
-          [buttonText]="buttonText"
-          [item]="passengers.value[item.name]"
-          (valueChange)="onChildValueChange($event, item)"
-        ></app-increase-button> -->
-        <button
-          id="btnIncr"
-          (click)="incresed(item)"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          +
-        </button>
+                  [buttonText]="buttonText"
+                  [item]="form.value[item.name]"
+                  (valueChange)="onChildValueChange($event, item)"></app-increase-button> -->
 
-        <input
-          type="number"
-          style="border: 1px solid gray"
-          [formControlName]="item.name"
-          [id]="item.name"
-        />
+        <button id="btnIncr"
+                (click)="incresed(item)"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+</button>
 
-        <button
-          id="btnDecr"
-          (click)="decrees(item)"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          -
-        </button>
+        <input type="number"
+               style="border: 1px solid gray"
+               [formControlName]="item.name"
+               [id]="item.name" />
+
+        <button id="btnDecr"
+                (click)="decrees(item)"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">-</button>
       </div>
     </div>
   </div>
 </div>
-<div id="messeage" *ngIf="passengers.get('infant')?.hasError('max')" style="color: red">
+<div id="messeage"
+     *ngIf="form.get('infant')?.hasError('max')"
+     style="color: red">
   maxInfant:{{ errorMasseage.max }} The number entered for Infant :{{
-    errorMasseage.actual
+  errorMasseage.actual
   }}
 </div>
-{{ passengers.value | json }}
+{{ form.value | json }}
