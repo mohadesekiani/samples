@@ -59,7 +59,9 @@ export class PassengersComponent implements ControlValueAccessor {
     let ctrl = this.passengers.get(item.name);
     ctrl?.setValue(ctrl.value + 1);
     this.refersValue();
+
   }
+
   constructor(private fb: FormBuilder) {}
   ngOnInit() {
     this.createForm();
@@ -73,7 +75,7 @@ export class PassengersComponent implements ControlValueAccessor {
     });
     this.passengers.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.refersValue();
-      this.errorMasseage = this.passengers.get('infant')?.getError('max');
+      this.errorMasseage = this.passengers.get('infant')?.getError('max');            
     });
   }
 

@@ -51,6 +51,7 @@
           type="number"
           style="border: 1px solid gray"
           [formControlName]="item.name"
+          [id]="item.name"
         />
 
         <button
@@ -64,7 +65,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="passengers.get('infant')?.hasError('max')" style="color: red">
+<div id="messeage" *ngIf="passengers.get('infant')?.hasError('max')" style="color: red">
   maxInfant:{{ errorMasseage.max }} The number entered for Infant :{{
     errorMasseage.actual
   }}
