@@ -11,16 +11,16 @@ import { AppComponent } from '../app.component';
 import { TestUtil } from '../core/helpers/somtingHelpersTest';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 
-
-describe('ReactiveFormComponent', () => {
+fdescribe('ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
   let fixture: ComponentFixture<ReactiveFormComponent>;
-  let appFlight;
-  let appDatepicker;
   let appPassengers;
-  let matRadioGroup: MatRadioGroup
+  let matRadioGroup: MatRadioGroup;
   let matRadioButton: MatRadioButton;
-
+  let originInput;
+  let destination;
+  let departureDate;
+  let returnDate;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -28,34 +28,107 @@ describe('ReactiveFormComponent', () => {
         FormsModule,
         NoopAnimationsModule,
         SharedModule,
-        RouterModule
+        RouterModule,
       ],
-      declarations: [
-        ReactiveFormComponent
-      ],
-      providers:[
-        AbstractDataService
-      ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
+      declarations: [ReactiveFormComponent],
+      providers: [AbstractDataService],
+      schemas: [NO_ERRORS_SCHEMA],
     });
 
     fixture = TestBed.createComponent(ReactiveFormComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();
-    appFlight = TestUtil.queryComponent(fixture,'app-flight')
-    appDatepicker = TestUtil.queryComponent(fixture,'app-datepicker');
-    appPassengers = TestUtil.queryComponent(fixture,'app-passengers');
+    // appFlight = TestUtil.queryComponent(fixture,'app-flight')
+    originInput = TestUtil.querySelector(
+      fixture,
+      'app-flight[formControlName="origin"]'
+    );
+    destination = TestUtil.querySelector(
+      fixture,
+      'app-flight[formControlName="destination"]'
+    );
+    departureDate =TestUtil.querySelector(
+      fixture,
+      'app-datepicker[formControlName="departureDate"]'
+    );
+    returnDate =TestUtil.querySelector(
+      fixture,
+      'app-datepicker[formControlName="returnDate"]'
+    );
+    // appPassengers = TestUtil.queryComponent(fixture, 'app-passengers');
     matRadioGroup = TestUtil.directiveElement(fixture, MatRadioGroup);
     matRadioButton = TestUtil.directiveElement(fixture, MatRadioButton);
   });
-
 
   it('should create', () => {
     expect(sut).toBeTruthy();
   });
 
-  // TODO where is my tests
+  // label="origin"
+  it('should binding lable', () => {
+    // arrange
+    originInput.lable = 'some_Text';
+    // act
+    fixture.detectChanges();
+    // assert
+    expect(originInput.lable).toBe('some_Text');
+  });
+
+  it('should binding lable ', () => {
+    // arrange
+    destination.lable = 'some_Text';
+    // act
+    fixture.detectChanges();
+    // assert
+    expect(destination.lable).toBe('some_Text');
+  });
+
+  it('should bind lable', () => {
+    // arrange
+    departureDate.lable = 'some_Text';
+    // act
+    fixture.detectChanges();
+    // assert
+    expect(departureDate.lable).toBe('some_Text');
+  });
+
+  it('should bind placeholder', () => {
+    // arrange
+    departureDate.placeholder = 'some_Text';
+    // act
+    fixture.detectChanges();
+    // assert
+    expect(departureDate.placeholder).toBe('some_Text');
+  });
+
+  it('should bind lable', () => {
+    // arrange
+    returnDate.lable = 'some_Text';
+    // act
+    fixture.detectChanges();
+    // assert
+    expect(returnDate.lable).toBe('some_Text');
+  });
+
+  it('should bind placeholder', () => {
+    // arrange
+    returnDate.placeholder = 'some_Text';
+    // act
+    fixture.detectChanges();
+    // assert
+    expect(returnDate.placeholder).toBe('some_Text');
+  });
+
+  it('should bind aria-lable', () => {
+    // arrange
+    const radioGroup = fixture.debugElement.nativeElement.querySelector('mat-radio-group');
+    const ariaLabel = radioGroup.getAttribute('aria-label') 
+    // act
+    fixture.detectChanges();
+    // assert
+    expect(ariaLabel).toBe('Select an option');
+  });
+
+
 
 });

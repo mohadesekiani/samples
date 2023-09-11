@@ -32,9 +32,9 @@ export class ReactiveFormComponent implements OnInit {
   showDrop = false;
 
   passenger: Array<any> = [
-    { value: 0, name: 'adult' },
-    { value: 0, name: 'child' },
-    { value: 0, name: 'infant' },
+    { value: 0, name: 'Adult' },
+    { value: 0, name: 'Child' },
+    { value: 0, name: 'Infant' },
   ];
 
   constructor(private fb: FormBuilder, private router: Router) { }
@@ -46,7 +46,7 @@ export class ReactiveFormComponent implements OnInit {
   private formCreator() {
     // const passengerData = this.passengerForm.getRawValue().passengers;
     return this.fb.group<any>({
-      passengers: [null, Validators.required],
+      passengers: [null],
       travelType: [TravelTypesEnum.OneWay],
       departureDate: [this.today],
       returnDate: [{ value: null, disabled: true }, [Validators.required]],
@@ -59,7 +59,7 @@ export class ReactiveFormComponent implements OnInit {
   childrenCountValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       let infantValue = control.value;
-      let adultValue = this.flightForm?.controls["passengers"].value["adult"]
+      let adultValue = this.flightForm?.controls["passengers"].value["Adult"]
       if (infantValue > adultValue) {
         return { max: { actual: infantValue, max: adultValue } };
       }

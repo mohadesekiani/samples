@@ -33,9 +33,9 @@ export class PassengersComponent implements ControlValueAccessor {
   showDrop = false;
   //rename
   passenger: Array<any> = [
-    { value: 0, name: 'adult' },
-    { value: 0, name: 'child' },
-    { value: 0, name: 'infant' },
+    { value: 0, name: 'Adult' },
+    { value: 0, name: 'Child' },
+    { value: 0, name: 'Infant' },
   ];
 
   // onChildValueChange(newValue: number, item) {
@@ -69,9 +69,9 @@ export class PassengersComponent implements ControlValueAccessor {
 
   createForm() {
     this.passengers = this.fb.group<any>({
-      adult: [null, [Validators.required]],
-      child: [null],
-      infant: [null, [this.childrenCountValidator()]],
+      Adult: [null, [Validators.required]],
+      Child: [null],
+      Infant: [null, [this.childrenCountValidator()]],
     });
     this.passengers.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.refersValue();
@@ -82,7 +82,7 @@ export class PassengersComponent implements ControlValueAccessor {
   childrenCountValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       let infantValue = control.value;
-      let adultValue = this.passengers?.value['adult'];
+      let adultValue = this.passengers?.value['Adult'];
       if (infantValue > adultValue) {
         return { max: { actual: infantValue, max: adultValue } };
       }

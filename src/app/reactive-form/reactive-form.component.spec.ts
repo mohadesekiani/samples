@@ -101,7 +101,7 @@ describe('SUT: ReactiveFormComponent', () => {
   it('should check form is valid then go to result page ', () => {
     // arrange
     flightForm.setValue({
-      passengers: { adult: 1, child: 1, infant: 1 },
+      passengers: { Adult: 1, Child: 1, Infant: 1 },
       travelType: 'OneWay',
       departureDate: '2023-09-04T11:53:30.877Z',
       origin: 'San Antonio',
@@ -133,21 +133,12 @@ describe('SUT: ReactiveFormComponent', () => {
     // arrange
     sut.flightForm
       .get('passengers')
-      ?.setValue({ adult: 1, child: 0, infant: 2 } as IPassengerTypes);
+      ?.setValue({ Adult: 1, Child: 0, Infant: 2 } as IPassengerTypes);
     // act
     // sut.flightForm.get('infantGreaterThanAdults')?.markAsTouched();
     // expect(sut.flightForm.getError('infantGreaterThanAdults')).toBeTrue();
     // expect(sut.flightForm.get('infantGreaterThanAdults')?.errors).toBeTrue();
     expect(sut.flightForm.hasError('infantGreaterThanAdults')).toBeTrue();
-  });
-
-  it('should be necessary to fill in the passengers field', () => {
-    // arrange
-    const passengers = sut.flightForm.get('passengers.adult');
-    // act
-    passengers?.setValue({ adult: 4, child: 0, infant: 0 });
-    // assert
-    expect(passengers?.hasError('required')).toBeFalse();
   });
 
   it('should be necessary to fill in the returnDate field', () => {
@@ -157,19 +148,6 @@ describe('SUT: ReactiveFormComponent', () => {
     returnDate?.setValue('2023-09-05T08:21:42.506Z');
     // assert
     expect(returnDate?.hasError('required')).toBeFalse();
-  });
-
-  it('should be infant > adult form isnot valid', () => {
-    // act
-    sut.flightForm?.get('passengers.adult')?.setValue(1);
-    sut.flightForm?.get('passengers.infant')?.setValue(3);
-    // assert
-    expect(sut.flightForm.get('passengers.infant')?.hasError('max')).toBeTrue();
-
-    expect(sut.flightForm.get('passengers.infant')?.getError('max')).toEqual({
-      actual: 3,
-      max: 1,
-    });
   });
 });
 

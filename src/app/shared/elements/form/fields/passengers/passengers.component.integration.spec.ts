@@ -75,7 +75,7 @@ describe('SUT(Integration): PassengersComponent', () => {
   it('should be test for binding [formControlName]="item.name"', () => {
     sut.showDrop = true;
     fixture.detectChanges();
-    const item = { value: 0, name: 'adult' };
+    const item = { value: 0, name: 'Adult' };
     let input = TestUtil.nativeElement(fixture, `#${item.name}`);
     sut.passenger[0] = item;
     input.formControlName = item.name;
@@ -89,7 +89,7 @@ describe('SUT(Integration): PassengersComponent', () => {
   it('should be test for binding [id]="item.name"', () => {
     sut.showDrop = true;
     fixture.detectChanges();
-    const item = { value: 0, name: 'adult' };
+    const item = { value: 0, name: 'Adult' };
     let input = TestUtil.nativeElement(fixture, `#${item.name}`);
     //act
     fixture.detectChanges();
@@ -101,7 +101,7 @@ describe('SUT(Integration): PassengersComponent', () => {
   it('should be test for binding type input', () => {
     sut.showDrop = true;
     fixture.detectChanges();
-    const item = { value: 0, name: 'adult' };
+    const item = { value: 0, name: 'Adult' };
     let input = TestUtil.nativeElement(fixture, `#${item.name}`);
     //act
     fixture.detectChanges();
