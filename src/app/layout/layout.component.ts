@@ -16,10 +16,7 @@ export class LayoutComponent {
   ngOnInit(): void {}
 
   activateTab(selectedTab) {
-    // Deactivate all tabs
     this.tabs.forEach((tab) => (tab.active = false));
-
-    // Activate the selected tab
     selectedTab.active = true;
   }
 }
