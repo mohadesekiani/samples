@@ -11,6 +11,18 @@ import { ClassTypesEnum } from '../models/class-types.enum';
 import { TravelTypesEnum } from '../models/travel-types.enum';
 import { Router } from '@angular/router';
 import { distinctUntilChanged, skip, startWith } from 'rxjs';
+export type IForm<T> = {
+  [K in keyof T]?: any;
+}
+export interface ISearchFlight {
+  passengers: any;
+  travelType: any;
+  departureDate: any;
+  returnDate: any;
+  origin: any;
+  destination: any;
+  classType: any;
+}
 
 @Component({
   selector: 'app-reactive-form',
@@ -22,7 +34,7 @@ export class ReactiveFormComponent implements OnInit {
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
     value,
   }));
-  flightForm: FormGroup = this.formCreator();
+  flightForm = this.formCreator();
   today = new Date();
   // travelTypes
   travelTypes = Object.values(TravelTypesEnum).map((value) => ({
@@ -45,7 +57,7 @@ export class ReactiveFormComponent implements OnInit {
 
   private formCreator() {
     // const passengerData = this.passengerForm.getRawValue().passengers;
-    return this.fb.group<any>({
+    return this.fb.group<IForm<ISearchFlight>>({
       passengers: [null],
       travelType: [TravelTypesEnum.OneWay],
       departureDate: [this.today],
@@ -56,19 +68,19 @@ export class ReactiveFormComponent implements OnInit {
     });
   }
 
-  childrenCountValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let infantValue = control.value;
-      let adultValue = this.flightForm?.controls["passengers"].value["Adult"]
-      if (infantValue > adultValue) {
-        return { max: { actual: infantValue, max: adultValue } };
-      }
-      return null;
-    };
-  }
+  // childrenCountValidator(): ValidatorFn {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+  //     let infantValue = control.value;
+  //     let adultValue = this.flightForm?.controls["passengers"].value["Adult"]
+  //     if (infantValue > adultValue) {
+  //       return { max: { actual: infantValue, max: adultValue } };
+  //     }
+  //     return null;
+  //   };
+  // }
 
   private setTravelTypeListener() {
-    const returnDateCtrl = this.flightForm.get('returnDate');
+    const returnDateCtrl = this.flightForm.controls.returnDate;
     this.flightForm
       .get('travelType')
       ?.valueChanges.pipe(
