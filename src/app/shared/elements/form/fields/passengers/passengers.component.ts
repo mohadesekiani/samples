@@ -24,7 +24,7 @@ import { distinctUntilChanged } from 'rxjs';
   ],
 })
 export class PassengersComponent implements ControlValueAccessor {
-  errorMasseage!: { actual: number; max: number };
+  errorMessage!: { actual: number; max: number };
   hasError: boolean = false;
   form!: FormGroup;
   buttonText: string = '+';
@@ -80,7 +80,7 @@ export class PassengersComponent implements ControlValueAccessor {
 
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.refersValue();
-      this.errorMasseage = this.form.get('Infant')?.getError('max');
+      this.errorMessage = this.form.get('Infant')?.getError('max');
     });
   }
 
