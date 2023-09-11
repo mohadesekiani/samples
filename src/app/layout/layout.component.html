@@ -1,19 +1,14 @@
-<div class="content scrollable-content">
+<div class="content scrollable-content m-2">
   <div>
     <ul class="flex border-b">
-      <li class="-mb-px mr-1">
-        <a
-          class="bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold"
-          routerLink="/"
-          >Flight</a
-        >
-      </li>
-      <li class="mr-1">
-        <a
-          class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
-          routerLink="Train"
-          >Train</a
-        >
+      <li
+        class="bg-white py-2 px-4 text-blue-300 font-semibold"
+        *ngFor="let tab of tabs"
+        [ngClass]="{ active: tab.active }"
+        (click)="activateTab(tab)"
+        [routerLink]="tab.route"
+      >
+        {{ tab.title }}
       </li>
     </ul>
   </div>

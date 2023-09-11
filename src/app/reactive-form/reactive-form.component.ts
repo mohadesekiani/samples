@@ -24,7 +24,7 @@ export class ReactiveFormComponent implements OnInit {
   }));
   flightForm: FormGroup = this.formCreator();
   today = new Date();
-  // TODO* travelTypes
+  // travelTypes
   travelTypes = Object.values(TravelTypesEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
     value,

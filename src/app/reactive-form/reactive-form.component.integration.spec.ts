@@ -11,10 +11,9 @@ import { AppComponent } from '../app.component';
 import { TestUtil } from '../core/helpers/somtingHelpersTest';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 
-fdescribe('ReactiveFormComponent', () => {
+describe('ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
   let fixture: ComponentFixture<ReactiveFormComponent>;
-  let appPassengers;
   let matRadioGroup: MatRadioGroup;
   let matRadioButton: MatRadioButton;
   let originInput;

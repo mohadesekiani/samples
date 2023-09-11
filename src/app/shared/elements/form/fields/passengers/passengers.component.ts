@@ -59,7 +59,6 @@ export class PassengersComponent implements ControlValueAccessor {
     let ctrl = this.passengers.get(item.name);
     ctrl?.setValue(ctrl.value + 1);
     this.refersValue();
-
   }
 
   constructor(private fb: FormBuilder) {}
@@ -75,7 +74,7 @@ export class PassengersComponent implements ControlValueAccessor {
     });
     this.passengers.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.refersValue();
-      this.errorMasseage = this.passengers.get('infant')?.getError('max');            
+      this.errorMasseage = this.passengers.get('infant')?.getError('max');
     });
   }
 
@@ -118,8 +117,11 @@ export class PassengersComponent implements ControlValueAccessor {
   }
 
   refersValue() {
-    //TODO if is empty or invalid return null
+    if (this.passengers.value === null) {
+      return null;
+    }
     this.onChange(this.passengers.value);
     this.markAsTouched();
+    return;
   }
 }

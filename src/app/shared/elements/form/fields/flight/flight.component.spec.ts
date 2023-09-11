@@ -104,5 +104,4 @@ describe('SUT: FlightComponent', () => {
     expect(sut.loading).toBe(false);
   });
 
-  //TODO Coverage 100%
 });

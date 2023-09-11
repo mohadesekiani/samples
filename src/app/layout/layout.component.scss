@@ -1,41 +1,26 @@
-.menu-item-description {
-  font-size: 14px;
-  color: #888;
-}
 .header {
-  height: 70px;
-}
-
-.content {
-  width: 90%;
-  margin: 40px auto;
   padding: 10px;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-
-  overflow-y: auto; /* اعمال اسکرول عمودی در صورت نیاز */
-}
-.scrollable-content {
-  overflow-y: auto;
 }
 
-/* استایل اسکرول‌بار */
-.scrollable-content::-webkit-scrollbar {
-  width: 10px;
+ul {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
 }
 
-/* استایل قسمت قابل جابجایی اسکرول‌بار */
-.scrollable-content::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 5px;
+li {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #fff;
+  transition: background-color 0.3s ease;
 }
 
-/* استایل قسمت پیگیری شونده اسکرول‌بار */
-.scrollable-content::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
-}
-
-/* استایل قسمت‌های قطعه‌بندی شده پیگیری شونده اسکرول‌بار */
-.scrollable-content::-webkit-scrollbar-track-piece {
-  background-color: #f1f1f1;
-  border-radius: 5px;
+li.active {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-bottom: none;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  color: #007bff;
 }

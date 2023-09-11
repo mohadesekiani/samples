@@ -26,7 +26,7 @@ export class DatepickerComponent implements ControlValueAccessor {
   @Input() min!: Date;
   @Input() max!: Date;
   @Input() value!: Date;
-  // TODO  [(value)]="value"
+  // [(value)]="value"
   // @Output() valueChange = new EventEmitter();
   disabled = false;
   touched = false;
