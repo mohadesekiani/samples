@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { distinctUntilChanged, skip, startWith } from 'rxjs';
 export type IForm<T> = {
   [K in keyof T]?: any;
-}
+};
 export interface ISearchFlight {
   passengers: any;
   travelType: any;
@@ -42,7 +42,7 @@ export class ReactiveFormComponent implements OnInit {
     { value: 0, name: 'Infant' },
   ];
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.setTravelTypeListener();

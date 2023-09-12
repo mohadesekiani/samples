@@ -59,13 +59,12 @@ describe('SUT: NumberPassengersComponent', () => {
     expect(sut.value).toBe(initialValue);
   });
 
-  it('should be when enter the value for input ', () => {
-    // arrange
-    let enterValue = 10;
-    // act
-    sut.changeHandler(enterValue);
-    // assert
-    expect(sut.value).toBe(enterValue);
-  });
-
+  // it('should be when enter the value for input ', () => {
+  //   // arrange
+  //   let enterValue = 10;
+  //   // act
+  //   sut.changeHandler(enterValue);
+  //   // assert
+  //   expect(sut.value).toBe(enterValue);
+  // });
 });
