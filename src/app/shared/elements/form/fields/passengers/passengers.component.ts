@@ -10,9 +10,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
-export type IForm<T> = {
-  [K in keyof T]?: any;
-};
+import { IForm } from 'src/app/reactive-form/reactive-form.component';
+
 export interface ISearchPassenger {
   Adult: number;
   Child: number;
@@ -68,23 +67,21 @@ export class PassengersComponent implements ControlValueAccessor {
   //   this.refersValue();
   // }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createForm();
   }
 
   createForm() {
-    this.form = this.fb.group<IForm<ISearchPassenger>>(
-      {
-        Adult: [null, [Validators.required]],
-        Child: [null],
-        Infant: [null, [this.childrenCountValidator()]],
-      },
-      {
-        validators: [this.childrenCountValidator()],
-      }
-    );
+    this.form = this.fb.group<IForm<ISearchPassenger>>({
+      Adult: [null, [Validators.required]],
+      Child: [null],
+      Infant: [null, [this.childrenCountValidator()]],
+    }, {
+      // validators: [this.childrenCountValidator()],
+    });
+    // TODO set max error
 
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.refersValue();
@@ -95,12 +92,14 @@ export class PassengersComponent implements ControlValueAccessor {
 
   childrenCountValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      var fg = control as FormGroup;
+      var fg = control?.parent as FormGroup;
       if (!fg) {
         return null;
       }
-      let infantValue = fg.value?.Infant;
+      // let infantValue = fg.value?.Infant;
+      let infantValue = control.value;
       let adultValue = fg.value?.Adult;
+
       if (infantValue > adultValue) {
         return { max: { actual: infantValue, max: adultValue } };
       }
@@ -113,9 +112,9 @@ export class PassengersComponent implements ControlValueAccessor {
     value;
   };
 
-  onTouched = () => {};
+  onTouched = () => { };
 
-  writeValue(obj: any): void {}
+  writeValue(obj: any): void { }
 
   registerOnChange(fn: any): void {
     this.onChange = fn;

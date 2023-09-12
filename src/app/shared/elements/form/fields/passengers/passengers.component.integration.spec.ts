@@ -4,7 +4,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
 
-fdescribe('SUT(Integration): PassengersComponent', () => {
+describe('SUT(Integration): PassengersComponent', () => {
   let sut: PassengersComponent;
   let fixture: ComponentFixture<PassengersComponent>;
   let btnPassenger: HTMLButtonElement;
@@ -46,6 +46,7 @@ fdescribe('SUT(Integration): PassengersComponent', () => {
     // assert
     expect(formElement).toBeTruthy();
   });
+
   xit('should set showDrop when click', () => {
     sut.showDrop = false;
     btnPassenger.click();

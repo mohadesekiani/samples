@@ -10,15 +10,18 @@ describe('SUT: NumberPassengersComponent', () => {
     onChange: (e) => {},
     onTouched: () => {},
   });
+
   beforeEach(() => {
     sut = new NumberPassengersComponent();
     sut.registerOnChange(valueAccessor.onChange);
     sut.registerOnTouched(valueAccessor.onTouched);
   });
+
   it('should create', () => {
     // assert
     expect(sut).toBeTruthy();
   });
+
   it('should set onChange with proper value when registerOnChange called', () => {
     // act
     sut.onChange(1);
@@ -59,9 +62,8 @@ describe('SUT: NumberPassengersComponent', () => {
   it('should be when enter the value for input ', () => {
     // arrange
     let enterValue = 10;
-    const event = { target: { value: enterValue } };
     // act
-    sut.changeHandler(event);
+    sut.changeHandler(enterValue);
     // assert
     expect(sut.value).toBe(enterValue);
   });

@@ -8,10 +8,11 @@
   </button>
 
   <input
+    matInput
     style="border: 1px solid gray"
     [value]="value"
     type="number"
-    (input)="changeHandler($event)"
+    (input)="changeHandler($event.target?.['value'])"
     id="input"
   />
 

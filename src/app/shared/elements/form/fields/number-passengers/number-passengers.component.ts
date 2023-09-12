@@ -43,9 +43,9 @@ export class NumberPassengersComponent implements ControlValueAccessor {
     this.onChange(this.value);
     this.onTouch(this.value);
   }
-  changeHandler(e: any) {
-    let newValue = e.target.value;
-    this.value = +newValue;
+
+  changeHandler(value: string) {
+    this.value = +value;
     this.onChange(this.value);
     this.onTouch(this.value);
   }
