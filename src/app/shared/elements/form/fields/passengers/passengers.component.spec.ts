@@ -60,15 +60,16 @@ describe('SUT: PassengersComponent', () => {
   it(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // act
-    debugger
+    
     sut.form?.get('Adult')?.setValue(1);
     sut.form?.get('Infant')?.setValue(3);
-    sut.form?.get('Adult')?.setValue(2);
 
     // assert
-    expect(sut.form.get('Infant')?.hasError('max')).toBeTrue();
-    sut.errorMessage = sut.form.get('Infant')?.getError('max');
-    expect(sut.errorMessage).toEqual({ actual: 3, max: 2 });
+    expect(sut.childrenCountValidator()(sut.form)).toEqual({ max: { actual: 3, max: 1 } })
+    expect(sut.form?.hasError('max')).toBeTrue()    
+    expect(sut.form?.getError('max')).toEqual({actual: 3, max: 1})
+
+ 
   });
 
   // decrees(item)

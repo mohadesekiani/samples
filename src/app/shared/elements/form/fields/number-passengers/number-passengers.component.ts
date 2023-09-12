@@ -13,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class NumberPassengersComponent implements ControlValueAccessor  {
+export class NumberPassengersComponent implements ControlValueAccessor {
   value: number = 0;
   onChange!: (value: number) => void;
   onTouch!: (value: number) => void;
@@ -36,6 +36,9 @@ export class NumberPassengersComponent implements ControlValueAccessor  {
     this.onTouch(this.value);
   }
   decrees() {
+    if (this.value <= 0) {
+      return;
+    }
     this.value = this.value - 1;
     this.onChange(this.value);
     this.onTouch(this.value);

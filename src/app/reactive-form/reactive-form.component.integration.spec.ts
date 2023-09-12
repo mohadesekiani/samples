@@ -65,6 +65,8 @@ describe('ReactiveFormComponent', () => {
 
   // label="origin"
   it('should binding lable', () => {
+    console.log(originInput);
+    
     // arrange
     originInput.lable = 'some_Text';
     // act

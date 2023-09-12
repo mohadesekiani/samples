@@ -10,7 +10,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
-
+export type IForm<T> = {
+  [K in keyof T]?: any;
+};
+export interface ISearchPassenger {
+  Adult: number;
+  Child: number;
+  Infant: number;
+}
 @Component({
   selector: 'app-passengers',
   templateUrl: './passengers.component.html',
@@ -68,7 +75,7 @@ export class PassengersComponent implements ControlValueAccessor {
   }
 
   createForm() {
-    this.form = this.fb.group<{ Infant: any; Child: any; Adult: any }>(
+    this.form = this.fb.group<IForm<ISearchPassenger>>(
       {
         Adult: [null, [Validators.required]],
         Child: [null],
@@ -94,8 +101,6 @@ export class PassengersComponent implements ControlValueAccessor {
       }
       let infantValue = fg.value?.Infant;
       let adultValue = fg.value?.Adult;
-      // fg.get('Adult')?.value;
-
       if (infantValue > adultValue) {
         return { max: { actual: infantValue, max: adultValue } };
       }
