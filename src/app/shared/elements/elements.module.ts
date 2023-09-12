@@ -10,15 +10,16 @@ import { FlightComponent } from './form/fields/flight/flight.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from '../shared.module';
-import { IncreaseButtonComponent } from './tools/increase-button/increase-button.component';
+import { NumberPassengersComponent } from './form/fields/number-passengers/number-passengers.component';
 const COMPONENTS = [
   DatepickerComponent,
   FlightComponent,
   PassengersComponent,
+  NumberPassengersComponent,
 ];
 
 @NgModule({
-  declarations: [COMPONENTS, IncreaseButtonComponent],
+  declarations: [COMPONENTS],
   imports: [
     CommonModule,
     ReactiveFormsModule,

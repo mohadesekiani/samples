@@ -46,55 +46,58 @@ export class PassengersComponent implements ControlValueAccessor {
   //   this.refersValue();
   // }
 
-  decrees(item) {
-    let ctrl = this.form.get(item.name);
-    if (ctrl?.value <= 0) {
-      return;
-    }
-    ctrl?.setValue(ctrl.value - 1);
-    this.refersValue();
-  }
+  // decrees(item) {
+  //   let ctrl = this.form.get(item.name);
+  //   if (ctrl?.value <= 0) {
+  //     return;
+  //   }
+  //   ctrl?.setValue(ctrl.value - 1);
+  //   this.refersValue();
+  // }
 
-  incresed(item) {
-    let ctrl = this.form.get(item.name);
-    ctrl?.setValue(ctrl.value + 1);
-    this.refersValue();
-  }
+  // increased(item) {
+  //   let ctrl = this.form.get(item.name);
+  //   ctrl?.setValue(ctrl.value + 1);
+  //   this.refersValue();
+  // }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.createForm();
   }
 
   createForm() {
-
-    this.form = this.fb.group<{ Infant: any, Child: any, Adult: any }>({
-      Infant: [null, [this.childrenCountValidator()]],
-      Child: [null],
-      Adult: [null, [Validators.required]],
-    }, {
-      // validators: [this.childrenCountValidator()]
-    });
-
+    this.form = this.fb.group<{ Infant: any; Child: any; Adult: any }>(
+      {
+        Adult: [null, [Validators.required]],
+        Child: [null],
+        Infant: [null, [this.childrenCountValidator()]],
+      },
+      {
+        validators: [this.childrenCountValidator()],
+      }
+    );
 
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.refersValue();
-      this.errorMessage = this.form.get('Infant')?.getError('max');
+      // this.errorMessage = this.form.get('Infant')?.getError('max');
+      // console.log(this.form.get('Infant')?.hasError('max'));
     });
   }
 
   childrenCountValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       var fg = control as FormGroup;
-
-      if (!fg) { return null; }
-
-      let infantValue = fg.get('Infant')?.value;
-      let adultValue = control?.get('Adult')?.value;
+      if (!fg) {
+        return null;
+      }
+      let infantValue = fg.value?.Infant;
+      let adultValue = fg.value?.Adult;
+      // fg.get('Adult')?.value;
 
       if (infantValue > adultValue) {
-        // return { max: { actual: infantValue, max: adultValue } };
+        return { max: { actual: infantValue, max: adultValue } };
       }
 
       return null;
@@ -105,9 +108,9 @@ export class PassengersComponent implements ControlValueAccessor {
     value;
   };
 
-  onTouched = () => { };
+  onTouched = () => {};
 
-  writeValue(obj: any): void { }
+  writeValue(obj: any): void {}
 
   registerOnChange(fn: any): void {
     this.onChange = fn;

@@ -26,7 +26,7 @@ describe('SUT(Integration): PassengersComponent', () => {
     //dropItem = TestUtil.nativeElement(fixture,'#dropItem');
     //btnDecr = TestUtil.nativeElement(fixture,'#btnDecr');
     fixture.detectChanges();
-    spyOn(sut, 'incresed');
+    spyOn(sut, 'increased');
   });
 
   it('should create', () => {
@@ -43,7 +43,7 @@ describe('SUT(Integration): PassengersComponent', () => {
     // expect(sut.showDrop).toBe(true);
   });
 
-  it('should be incresed called when click button', () => {
+  it('should be increased called when click button', () => {
     // assert
     sut.showDrop = true;
     fixture.detectChanges();
@@ -53,7 +53,7 @@ describe('SUT(Integration): PassengersComponent', () => {
     btnIncr.click();
 
     // assert
-    expect(sut.incresed).toHaveBeenCalled();
+    expect(sut.increased).toHaveBeenCalled();
   });
 
   it('should be decrees called when click button', () => {
@@ -71,7 +71,7 @@ describe('SUT(Integration): PassengersComponent', () => {
     sut.showDrop = true;
     fixture.detectChanges();
     const input = TestUtil.nativeElement(fixture, '#' + sut.passenger[0].name);
-    debugger
+    debugger;
 
     //act
     fixture.detectChanges();
