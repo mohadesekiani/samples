@@ -53,30 +53,6 @@ fdescribe('SUT(Integration): PassengersComponent', () => {
     // expect(sut.showDrop).toBe(true);
   });
 
-  // it('should be increased called when click button', () => {
-  //   // assert
-  //   sut.showDrop = true;
-  //   fixture.detectChanges();
-  //   let btnIncr = TestUtil.nativeElement<HTMLButtonElement>(fixture, '#btnIncr');
-
-  //   // act
-  //   btnIncr.click();
-
-  //   // assert
-  //   // expect(sut.increased).toHaveBeenCalled();
-  // });
-
-  // it('should be decrees called when click button', () => {
-  //   sut.showDrop = true;
-  //   fixture.detectChanges();
-  //   let btnDecr = TestUtil.nativeElement<HTMLButtonElement>(fixture, '#btnDecr');
-  //   // spyOn(sut, 'decrees');
-  //   btnDecr.click();
-
-  //   // assert
-  //   // expect(sut.decrees).toHaveBeenCalled();
-  // });
-
   it('should be test for binding form controls', () => {
     sut.showDrop = true;
     fixture.detectChanges();
