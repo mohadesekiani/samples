@@ -25,6 +25,7 @@
     <div class="flex flex-wrap w-1/2">
       <span class="m-2">passengers</span>
       <app-passengers formControlName="passengers"></app-passengers>
+      <span *ngIf="flightForm.get('passengers')?.invalid">passengers is invalid</span>
       <div class="w-1/2">
         <span class="m-2">general</span>
         <div class="m-3">

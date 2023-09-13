@@ -51,7 +51,7 @@ export class ReactiveFormComponent implements OnInit {
   private formCreator() {
     // const passengerData = this.passengerForm.getRawValue().passengers;
     return this.fb.group<IForm<ISearchFlight>>({
-      passengers: [null],
+      passengers: [null, [Validators.required]],
       travelType: [TravelTypesEnum.OneWay],
       departureDate: [this.today],
       returnDate: [{ value: null, disabled: true }, [Validators.required]],

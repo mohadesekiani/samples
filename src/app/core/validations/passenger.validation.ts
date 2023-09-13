@@ -5,19 +5,25 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 
-export class PassengerValidations {
-  static maxFrom(fromField: string, maxField: string): ValidatorFn {
+export class CustomValidators {
+  static maxFrom(fromField: string, toField: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const fg = control?.parent as FormGroup;
-      if (!fg) {
+      const formGroup = control as FormGroup;
+
+      if (!formGroup) { return null; }
+
+      const fromFieldCtrl = formGroup.get(fromField);
+      const toFieldCtrl = formGroup.get(toField);
+
+      if (fromFieldCtrl?.value > toFieldCtrl?.value) {
+        fromFieldCtrl?.setErrors({ max: { actual: fromFieldCtrl.value, max: toFieldCtrl?.value } });
+
         return null;
       }
-      let fromFieldValue = control.value;
-      let maxFieldValue = fg.value[maxField];
-      console.log('infantValue', fromFieldValue);
-      console.log('adultValue', maxFieldValue);
-      if (+fromFieldValue > +maxFieldValue) {
-        return { max: { actual: fromFieldValue, max: maxFieldValue } };
+
+      if (fromFieldCtrl?.hasError('max')) {
+        // fromFieldCtrl?.setErrors({ max: null });
+        fromFieldCtrl?.updateValueAndValidity({ onlySelf: true });
       }
 
       return null;

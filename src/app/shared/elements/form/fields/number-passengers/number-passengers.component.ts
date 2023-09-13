@@ -33,7 +33,7 @@ export class NumberPassengersComponent implements ControlValueAccessor {
   increased() {
     this.value = this.value + 1;
     this.onChange(this.value);
-    this.onTouch(this.value);
+    // this.onTouch(this.value);
   }
   decrees() {
     if (this.value <= 0) {

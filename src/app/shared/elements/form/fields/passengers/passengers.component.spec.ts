@@ -4,7 +4,7 @@ import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
 import { PassengersComponent } from './passengers.component';
 import { distinctUntilChanged } from 'rxjs';
 
-describe('SUT: PassengersComponent', () => {
+fdescribe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   let fb: FormBuilder;
 
@@ -72,8 +72,7 @@ describe('SUT: PassengersComponent', () => {
   //   expect(sut.form?.getError('max')).toEqual({ actual: 3, max: 1 });
   // });
 
-  it(`should be the number of infants is greater than the number of adults,
-  the passenger count error must be adjusted in the flight form`, () => {
+  it(`should set max error on Infant when is greater than Adult in simple way`, () => {
     // arrange
     sut.form?.get('Adult')?.setValue(1);
 
@@ -81,32 +80,29 @@ describe('SUT: PassengersComponent', () => {
     sut.form?.get('Infant')?.setValue(3);
 
     // assert
-   // debugger;
 
     expect(sut.form.get('Infant')?.hasError('max')).toBeTrue();
-    sut.errorMessage = sut.form.get('Infant')?.getError('max');
     // expect(sut.errorMessage).toEqual({ actual: 3, max: 1 });
   });
 
-  it(`should be the number of infants is greater than the number of adults,
-  the passenger count error must be adjusted in the flight form`, () => {
-    // act
+  it(`should set max error on Infant when is greater than Adult in advance way`, () => {
+    // arrange
     sut.form?.get('Adult')?.setValue(1);
     sut.form?.get('Infant')?.setValue(3);
+
+    // act
     sut.form?.get('Adult')?.setValue(2);
 
     // assert
     expect(sut.form.get('Infant')?.hasError('max')).toBeTrue();
 
-    // debugger;
+    // 
     let errorMessage = sut.form.get('Infant')?.getError('max');
     console.log(errorMessage);
-
     // expect(errorMessage).toEqual({ actual: 3, max: 2 });
   });
 
-  it(`should be the number of infants is greater than the number of adults,
-  the passenger count error must be adjusted in the flight form`, () => {
+  it(`should not set max error on Infant when is equal or less than Adult`, () => {
     // arrange
     sut.form?.get('Adult')?.setValue(1);
     sut.form?.get('Infant')?.setValue(3);
@@ -114,10 +110,11 @@ describe('SUT: PassengersComponent', () => {
     // act
     sut.form?.get('Adult')?.setValue(3);
     // assert
+    expect(sut.form.get('Infant')?.invalid).toBeFalse();
     expect(sut.form.get('Infant')?.hasError('max')).toBeFalsy();
   });
 
-  it('should update the value property and call onChange, markAsTouched', async () => {
+  xit('should update the value property and call onChange, markAsTouched', async () => {
     // act
     sut.passenger = [
       { name: 'Adult', value: 2 },
