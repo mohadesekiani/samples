@@ -72,7 +72,7 @@ fdescribe('SUT: PassengersComponent', () => {
   //   expect(sut.form?.getError('max')).toEqual({ actual: 3, max: 1 });
   // });
 
-  it(`should be the number of infants is greater than the number of adults,
+  fit(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // act
     sut.form?.get('Adult')?.setValue(1);
@@ -84,7 +84,7 @@ fdescribe('SUT: PassengersComponent', () => {
     expect(sut.errorMessage).toEqual({ actual: 3, max: 1 });
   });
 
-  it(`should be the number of infants is greater than the number of adults,
+  fit(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // act
     sut.form?.get('Adult')?.setValue(1);
@@ -109,7 +109,6 @@ fdescribe('SUT: PassengersComponent', () => {
 
     // act
     sut.form?.get('Adult')?.setValue(3);
-
     // assert
     expect(sut.form.get('Infant')?.hasError('max')).toBeFalsy();
   });

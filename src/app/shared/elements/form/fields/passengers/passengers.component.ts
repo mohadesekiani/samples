@@ -45,6 +45,7 @@ export class PassengersComponent implements ControlValueAccessor {
     { value: 0, name: 'Infant' },
   ];
 
+  //ontic without controlValueAccessor
   // onChildValueChange(newValue: number, item) {
   //   // ref.value = newValue;
   //   // this.passengers.value[item.name] = newValue;
@@ -61,7 +62,6 @@ export class PassengersComponent implements ControlValueAccessor {
   //   ctrl?.setValue(ctrl.value - 1);
   //   this.refersValue();
   // }
-
   // increased(item) {
   //   let ctrl = this.form.get(item.name);
   //   ctrl?.setValue(ctrl.value + 1);
@@ -79,7 +79,7 @@ export class PassengersComponent implements ControlValueAccessor {
       {
         Adult: [null, [Validators.required]],
         Child: [null],
-        Infant: [null, PassengerValidations.childrenCountValidator()],
+        Infant: [null],
       },
       {
         // validators: [this.childrenCountValidator()],
@@ -96,7 +96,12 @@ export class PassengersComponent implements ControlValueAccessor {
       )
       .subscribe((x) => {
         this.form.get('Infant')?.updateValueAndValidity();
-        this.refersValue();
+        if (x.Infant > x.Adult) {
+          this.form
+          .get('Infant')
+          ?.setErrors({ max: { actual: x.Infant, max: x.Adult } });
+
+        }
       });
   }
 
