@@ -24,8 +24,10 @@ export class DatepickerComponent implements ControlValueAccessor {
   [x: string]: any;
   @Input() label!: string;
   // TODO should set by test
-  @Input() min = new Date('2020/05/05');
-  @Input() max = new Date('2020/05/10');
+  @Input() min = new Date();
+  @Input() max = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
+
+  // new Date('2020/05/10');
   @Input() value!: Date;
   @Output() valueChange = new EventEmitter();
   disabled = false;

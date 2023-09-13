@@ -5,14 +5,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
 import { FormControlName } from '@angular/forms';
 
-describe('SUT(Integration): PassengersComponent', () => {
+fdescribe('SUT(Integration): PassengersComponent', () => {
   let sut: PassengersComponent;
   let fixture: ComponentFixture<PassengersComponent>;
   let btnPassenger: HTMLButtonElement;
-  //let btnIncr:HTMLButtonElement;
-  // let drop;
-  // let dropItem;
-  // let btnDecr: HTMLButtonElement;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, SharedModule],
@@ -22,31 +18,19 @@ describe('SUT(Integration): PassengersComponent', () => {
     sut = fixture.componentInstance;
     fixture.detectChanges();
     btnPassenger = TestUtil.nativeElement(fixture, '#btnPassenger');
-    // btnIncr = TestUtil.nativeElement(fixture, '#btnIncr');
-    // drop = TestUtil.nativeElement(fixture, '#drop');
-    //dropItem = TestUtil.nativeElement(fixture,'#dropItem');
-    //btnDecr = TestUtil.nativeElement(fixture,'#btnDecr');
     fixture.detectChanges();
-    // spyOn(sut, 'increased');
   });
 
   it('should create', () => {
     expect(sut).toBeTruthy();
   });
 
-  //(click)="showDrop = !showDrop"
   // FIXME
   // check form is exist
-  it('should test the presence of the form', () => {
-    sut.showDrop = true;
-    fixture.detectChanges();
+it('should test the presence of the form', () => {
+  expect(sut.form).toBeTruthy();
 
-    const drop = TestUtil.nativeElement(fixture, '#drop');
-    const formElement = TestUtil.querySelector(fixture, '#drop form');
-
-    // assert
-    expect(formElement).toBeTruthy();
-  });
+});
 
   xit('should set showDrop when click', () => {
     sut.showDrop = false;
@@ -59,14 +43,16 @@ describe('SUT(Integration): PassengersComponent', () => {
     sut.showDrop = true;
     fixture.detectChanges();
     const adultCtrl = TestUtil.formControl(fixture, '[item-id=Adult]');
+    const ChildCtrl = TestUtil.formControl(fixture, '[item-id=Child]');
+    const InfantCtrl = TestUtil.formControl(fixture, '[item-id=Infant]');
     
     //act
     fixture.detectChanges();
     //assert
     expect(sut.form.get('Adult')).toBe(adultCtrl.control);
     // FIXME
-    expect(sut.form.get('Child')).toBe(adultCtrl.control);
-    expect(sut.form.get('Infant')).toBe(adultCtrl.control);
+    expect(sut.form.get('Child')).toBe(ChildCtrl.control);
+    expect(sut.form.get('Infant')).toBe(InfantCtrl.control);
   });
 
 

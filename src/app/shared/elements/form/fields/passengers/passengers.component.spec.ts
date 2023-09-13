@@ -4,7 +4,7 @@ import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
 import { PassengersComponent } from './passengers.component';
 import { distinctUntilChanged } from 'rxjs';
 
-fdescribe('SUT: PassengersComponent', () => {
+describe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   let fb: FormBuilder;
 
@@ -72,7 +72,7 @@ fdescribe('SUT: PassengersComponent', () => {
   //   expect(sut.form?.getError('max')).toEqual({ actual: 3, max: 1 });
   // });
 
-  fit(`should be the number of infants is greater than the number of adults,
+  it(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // arrange
     sut.form?.get('Adult')?.setValue(1);
@@ -88,7 +88,7 @@ fdescribe('SUT: PassengersComponent', () => {
     // expect(sut.errorMessage).toEqual({ actual: 3, max: 1 });
   });
 
-  fit(`should be the number of infants is greater than the number of adults,
+  it(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // act
     sut.form?.get('Adult')?.setValue(1);
@@ -105,7 +105,7 @@ fdescribe('SUT: PassengersComponent', () => {
     // expect(errorMessage).toEqual({ actual: 3, max: 2 });
   });
 
-  fit(`should be the number of infants is greater than the number of adults,
+  it(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // arrange
     sut.form?.get('Adult')?.setValue(1);

@@ -1,6 +1,6 @@
 import { DatepickerComponent } from './datepicker.component';
 
-describe('SUT: DatepickerComponent', () => {
+fdescribe('SUT: DatepickerComponent', () => {
   let sut: DatepickerComponent;
 
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('SUT: DatepickerComponent', () => {
     expect(sut).toBeTruthy();
   });
 
-  it('should not set value when payload value is less than min', () => {
+  fit('should not set value when payload value is less than min', () => {
     // arrange
     sut.min = new Date('2020/05/05');
     // act
@@ -25,15 +25,15 @@ describe('SUT: DatepickerComponent', () => {
   });
 
   // max scenario
-  it('should not set value when payload value is more then max', () => {
+  fit('should not set value when payload value is more then max', () => {
     // arrange
-    sut.max = new Date('2020/05/10');
+    sut.max = new Date('9/13/2023');
 
     // act
-    sut.dateValueChanged(new Date('2020/05/11'));
+    sut.dateValueChanged(new Date('10/14/2023'));
 
     // assert
-    expect(sut.value.toDateString()).not.toBe(new Date('2020/05/11').toDateString());
+    expect(sut.value.toDateString()).not.toBe(new Date('10/14/2023').toDateString());
     expect(sut.value.toDateString()).toBe(sut.max.toDateString());
   });
   // disable
