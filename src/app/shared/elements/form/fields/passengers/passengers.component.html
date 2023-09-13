@@ -35,9 +35,9 @@
         <span class="font-bold py-2 px-4 mx-4 w-1/2">{{ item.name }}</span>
         <app-number-passengers
           [formControlName]="item.name"
-          [id]="item.name"
+          [attr.item-id]="item.name"
         ></app-number-passengers>
-        <span *ngIf="item.name == 'Infant' && form.controls['Infant'].hasError('max')" class="error-message">
+        <span *ngIf="getInfantError(item.name)" class="error-message">
           actual:{{form.controls['Infant'].getError('max').actual}}
           max:{{form.controls['Infant'].getError('max').max}}
         </span>

@@ -7,6 +7,15 @@ import {
 import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
 
 export class PassengerValidations {
+
+  static maxFrom(fromField: string, maxField: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const fg = control as FormGroup;
+      
+      return null;
+    }
+  }
+
   static childrenCountValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       var fg = control?.parent as FormGroup;
@@ -20,7 +29,6 @@ export class PassengerValidations {
       console.log('adultValue', adultValue);
       if (+infantValue > +adultValue) {
         return { max: { actual: infantValue, max: adultValue } };
-        return { max: true };
       }
 
       return null;

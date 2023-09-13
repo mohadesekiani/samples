@@ -3,8 +3,9 @@ import { PassengersComponent as PassengersComponent } from './passengers.compone
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
+import { FormControlName } from '@angular/forms';
 
-describe('SUT(Integration): PassengersComponent', () => {
+fdescribe('SUT(Integration): PassengersComponent', () => {
   let sut: PassengersComponent;
   let fixture: ComponentFixture<PassengersComponent>;
   let btnPassenger: HTMLButtonElement;
@@ -54,22 +55,18 @@ describe('SUT(Integration): PassengersComponent', () => {
     // expect(sut.showDrop).toBe(true);
   });
 
-  it('should be test for binding form controls', () => {
+  fit('should be test for binding form controls', () => {
     sut.showDrop = true;
     fixture.detectChanges();
-    const input = TestUtil.nativeElement(fixture, '#' + sut.passenger[0].name);
-    const appNumberPassengers = TestUtil.queryComponent(
-      fixture,
-      'app-number-passengers'
-    );
-
-    // debugger;
-
+    const adultCtrl = TestUtil.formControl(fixture, '[item-id=Adult]');
+    
     //act
     fixture.detectChanges();
     //assert
+    expect(sut.form.get('Adult')).toBe(adultCtrl.control);
     // FIXME
-    expect(input.id).toBe(sut.passenger[0].name);
+    expect(sut.form.get('Child')).toBe(adultCtrl.control);
+    expect(sut.form.get('Infant')).toBe(adultCtrl.control);
   });
 
 
