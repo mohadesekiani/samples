@@ -4,16 +4,24 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
-import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
 
 export class PassengerValidations {
-
   static maxFrom(fromField: string, maxField: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const fg = control as FormGroup;
-      
+      const fg = control?.parent as FormGroup;
+      if (!fg) {
+        return null;
+      }
+      let fromFieldValue = control.value;
+      let maxFieldValue = fg.value[maxField];
+      console.log('infantValue', fromFieldValue);
+      console.log('adultValue', maxFieldValue);
+      if (+fromFieldValue > +maxFieldValue) {
+        return { max: { actual: fromFieldValue, max: maxFieldValue } };
+      }
+
       return null;
-    }
+    };
   }
 
   static childrenCountValidator(): ValidatorFn {

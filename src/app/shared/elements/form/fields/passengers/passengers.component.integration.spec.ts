@@ -5,7 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
 import { FormControlName } from '@angular/forms';
 
-fdescribe('SUT(Integration): PassengersComponent', () => {
+describe('SUT(Integration): PassengersComponent', () => {
   let sut: PassengersComponent;
   let fixture: ComponentFixture<PassengersComponent>;
   let btnPassenger: HTMLButtonElement;
@@ -55,7 +55,7 @@ fdescribe('SUT(Integration): PassengersComponent', () => {
     // expect(sut.showDrop).toBe(true);
   });
 
-  fit('should be test for binding form controls', () => {
+  it('should be test for binding form controls', () => {
     sut.showDrop = true;
     fixture.detectChanges();
     const adultCtrl = TestUtil.formControl(fixture, '[item-id=Adult]');

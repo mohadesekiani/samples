@@ -67,11 +67,11 @@ export class PassengersComponent implements ControlValueAccessor {
   //   ctrl?.setValue(ctrl.value + 1);
   //   this.refersValue();
   // }
-  getInfantError(item: string) { 
+  getInfantError(item: string) {
     return item == 'Infant' && this.form.controls['Infant'].hasError('max');
-   }
+  }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.createForm();
@@ -82,14 +82,14 @@ export class PassengersComponent implements ControlValueAccessor {
       {
         Adult: [null, [Validators.required]],
         Child: [null],
-        Infant: [null, []],
+        Infant: [null],
       },
       {
         validators: [PassengerValidations.maxFrom('Infant', 'Adult')],
       }
     );
 
-    // merge(this.form.get('Infant')?.valueChanges,this.form.get('Adult')?.valueChanges).subscrib
+    // merge(this.form.get('Infant')?.valueChanges,this.form.get('Adult')?.valueChanges).subscribe
 
     // this.form.valueChanges.pipe(
     //   distinctUntilChanged((p, c) => {
@@ -107,13 +107,33 @@ export class PassengersComponent implements ControlValueAccessor {
     //     // this.form.get('Infant')?.updateValueAndValidity();
     //     this.form.get('Infant')?.setErrors({ max: null });
     //   });
+
+    this.form.valueChanges
+      .pipe(
+        distinctUntilChanged((p, c) => {
+          if (p.Adult == c.Adult && p.Child == c.Child && p.Infant == c.Infant)
+            return true;
+          else return false;
+        })
+      )
+      .subscribe((x) => {
+        const infantControl = this.form.get('Infant');
+        if (infantControl) {
+          infantControl.setValidators(
+            PassengerValidations.maxFrom('Infant', 'Adult')
+          );
+          infantControl.updateValueAndValidity();
+        }
+
+        this.refersValue();
+      });
   }
 
   onChange = (value) => {
     value;
   };
 
-  onTouched = () => { };
+  onTouched = () => {};
 
   writeValue(obj: any): void {
     this.form.patchValue(obj);
