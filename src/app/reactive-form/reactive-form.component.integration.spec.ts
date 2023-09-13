@@ -64,33 +64,33 @@ describe('ReactiveFormComponent', () => {
   });
 
   // label="origin"
-  it('should binding lable', () => {
+  it('should binding label', () => {
     console.log(originInput);
     
     // arrange
-    originInput.lable = 'some_Text';
+    originInput.label = 'some_Text';
     // act
     fixture.detectChanges();
     // assert
-    expect(originInput.lable).toBe('some_Text');
+    expect(originInput.label).toBe('some_Text');
   });
 
-  it('should binding lable ', () => {
+  it('should binding label ', () => {
     // arrange
-    destination.lable = 'some_Text';
+    destination.label = 'some_Text';
     // act
     fixture.detectChanges();
     // assert
-    expect(destination.lable).toBe('some_Text');
+    expect(destination.label).toBe('some_Text');
   });
 
-  it('should bind lable', () => {
+  it('should bind label', () => {
     // arrange
-    departureDate.lable = 'some_Text';
+    departureDate.label = 'some_Text';
     // act
     fixture.detectChanges();
     // assert
-    expect(departureDate.lable).toBe('some_Text');
+    expect(departureDate.label).toBe('some_Text');
   });
 
   it('should bind placeholder', () => {
@@ -102,13 +102,13 @@ describe('ReactiveFormComponent', () => {
     expect(departureDate.placeholder).toBe('some_Text');
   });
 
-  it('should bind lable', () => {
+  it('should bind label', () => {
     // arrange
-    returnDate.lable = 'some_Text';
+    returnDate.label = 'some_Text';
     // act
     fixture.detectChanges();
     // assert
-    expect(returnDate.lable).toBe('some_Text');
+    expect(returnDate.label).toBe('some_Text');
   });
 
   it('should bind placeholder', () => {
@@ -120,7 +120,7 @@ describe('ReactiveFormComponent', () => {
     expect(returnDate.placeholder).toBe('some_Text');
   });
 
-  it('should bind aria-lable', () => {
+  it('should bind aria-label', () => {
     // arrange
     const radioGroup = fixture.debugElement.nativeElement.querySelector('mat-radio-group');
     const ariaLabel = radioGroup.getAttribute('aria-label') 

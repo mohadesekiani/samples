@@ -37,6 +37,10 @@
           [formControlName]="item.name"
           [id]="item.name"
         ></app-number-passengers>
+        <span *ngIf="item.name == 'Infant' && form.controls['Infant'].hasError('max')" class="error-message">
+          actual:{{form.controls['Infant'].getError('max').actual}}
+          max:{{form.controls['Infant'].getError('max').max}}
+        </span>
         <!-- 
         <button id="btnIncr"
                 (click)="increased(item)"
@@ -54,13 +58,7 @@
     </div>
   </div>
 </div>
-<!-- <div id="messeage"
-     *ngIf="form.get('infant')?.hasError('max')"
-     style="color: red">
-  maxInfant:{{ errorMessage.max }} The number entered for Infant :{{
-    errorMessage.actual
-  }}
-</div> -->
+
 <div *ngIf="form.hasError('max')" class="error-message">
   Maximum Infant count should not exceed Adult count. Actual Infant count:
   {{ form.getError("max")?.actual }}

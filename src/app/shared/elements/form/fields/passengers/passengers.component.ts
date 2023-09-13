@@ -85,8 +85,6 @@ export class PassengersComponent implements ControlValueAccessor {
         // validators: [this.childrenCountValidator()],
       }
     );
-    // this.form.get('Adult')?.valueChanges.subscribe((value) => {
-    // });
 
     this.form.valueChanges
       .pipe(
@@ -98,10 +96,7 @@ export class PassengersComponent implements ControlValueAccessor {
       )
       .subscribe((x) => {
         this.form.get('Infant')?.updateValueAndValidity();
-
         this.refersValue();
-        // this.errorMessage = this.form.get('Infant')?.getError('max');
-        // console.log(this.form.get('Infant')?.hasError('max'));
       });
   }
 
@@ -138,7 +133,7 @@ export class PassengersComponent implements ControlValueAccessor {
     if (this.form.valid) {
       this.onChange(this.form.value);
       this.markAsTouched();
-    } else alert('eror darim');
+    }
   }
 
   toggleDropDown() {

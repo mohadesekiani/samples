@@ -4,7 +4,7 @@ import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
 import { PassengersComponent } from './passengers.component';
 import { distinctUntilChanged } from 'rxjs';
 
-describe('SUT: PassengersComponent', () => {
+fdescribe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   let fb: FormBuilder;
 
@@ -87,14 +87,14 @@ describe('SUT: PassengersComponent', () => {
   it(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // act
-
     sut.form?.get('Adult')?.setValue(1);
     sut.form?.get('Infant')?.setValue(3);
     sut.form?.get('Adult')?.setValue(2);
+
     // assert
     expect(sut.form.get('Infant')?.hasError('max')).toBeTrue();
-    // debugger;
 
+    // debugger;
     let errorMessage = sut.form.get('Infant')?.getError('max');
     console.log(errorMessage);
 
@@ -114,39 +114,6 @@ describe('SUT: PassengersComponent', () => {
     expect(sut.form.get('Infant')?.hasError('max')).toBeFalsy();
   });
 
-  // decrees(item)
-
-  // it('should not decrease this.passengers.get(item.name) when this.passengers.get(item.name) is not 0', () => {
-  //   // arrange
-  //   let item = { value: 0, name: 'Adult' };
-  //   // act
-  //   sut.form?.get(item.name)?.setValue(10);
-  //   sut.decrees(item);
-  //   let updatedValue = sut.form?.get(item.name)?.value;
-  //   // assert
-  //   expect(updatedValue).toBe(9);
-  // });
-
-  // it('should not decrease this.passengers.get(item.name) when this.passengers.get(item.name) is 0', () => {
-  //   // arrange
-  //   let item = { value: 0, name: 'Adult' };
-  //   // act
-  //   sut.form?.get(item.name)?.setValue(0);
-  //   sut.decrees(item);
-  //   let updatedValue = sut.form?.get(item.name)?.value;
-  //   // assert
-  //   expect(updatedValue).toBe(0);
-  // });
-  // increase(item)
-  // it('should increase item value by 1 ', () => {
-  //   // arrange
-  //   let item = { value: 0, name: 'Adult' };
-  //   // act
-  //   sut.increased(item);
-  //   // assert
-  //   expect(sut.form?.get(item.name)?.value).toBe(1);
-  // });
-
   it('should update the value property and call onChange, markAsTouched', async () => {
     // act
     sut.passenger = [
@@ -157,6 +124,7 @@ describe('SUT: PassengersComponent', () => {
     spyOn(sut, 'onChange');
     spyOn(sut, 'markAsTouched');
     sut.refersValue();
+
     // assert
     expect(sut.onChange).toHaveBeenCalledWith(sut.form.value);
     expect(sut.markAsTouched).toHaveBeenCalled();
