@@ -10,13 +10,17 @@ export class CustomValidators {
     return (control: AbstractControl): ValidationErrors | null => {
       const formGroup = control as FormGroup;
 
-      if (!formGroup) { return null; }
+      if (!formGroup) {
+        return null;
+      }
 
       const fromFieldCtrl = formGroup.get(fromField);
       const toFieldCtrl = formGroup.get(toField);
 
       if (fromFieldCtrl?.value > toFieldCtrl?.value) {
-        fromFieldCtrl?.setErrors({ max: { actual: fromFieldCtrl.value, max: toFieldCtrl?.value } });
+        fromFieldCtrl?.setErrors({
+          max: { actual: fromFieldCtrl.value, max: toFieldCtrl?.value },
+        });
 
         return null;
       }

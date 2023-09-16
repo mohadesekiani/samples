@@ -1,16 +1,14 @@
-import { Component } from '@angular/core';
-import { isEqual } from 'lodash-es';
+import { Component, Host, Optional } from '@angular/core';
 import {
-  AbstractControl,
+  ControlContainer,
   ControlValueAccessor,
   FormBuilder,
   FormGroup,
   NG_VALUE_ACCESSOR,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { distinctUntilChanged, merge } from 'rxjs';
+import { isEqual } from 'lodash-es';
+import { distinctUntilChanged } from 'rxjs';
 import { CustomValidators } from 'src/app/core/validations/passenger.validation';
 import { IForm } from 'src/app/reactive-form/reactive-form.component';
 
@@ -72,7 +70,13 @@ export class PassengersComponent implements ControlValueAccessor {
     return item == 'Infant' && this.form.controls['Infant'].hasError('max');
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    // @Self()
+    // @Optional()
+    // private ngControl: NgControl,
+    private fb: FormBuilder,
+    @Optional() @Host() public parent: ControlContainer
+  ) {}
 
   ngOnInit() {
     this.createForm();
@@ -90,16 +94,16 @@ export class PassengersComponent implements ControlValueAccessor {
       }
     );
 
-    this.form.valueChanges.pipe(distinctUntilChanged((p, c) => isEqual(p, c))).subscribe((x) => {
-      this.refersValue();
-    });
+    this.form.valueChanges
+      .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))
+      .subscribe((x) => {
+        this.refersValue();
+      });
   }
 
-  onChange = (value) => {
-    value;
-  };
+  onChange = (value) => {};
 
-  onTouched = () => { };
+  onTouched = () => {};
 
   writeValue(obj: any): void {
     this.form.patchValue(obj);
@@ -125,12 +129,21 @@ export class PassengersComponent implements ControlValueAccessor {
   }
 
   refersValue() {
-    debugger
-    this.onChange(this.form.invalid ? null : this.form.value);
+    if (this.form.valid) this.onChange(this.form.value);
     this.markAsTouched();
   }
 
   toggleDropDown() {
+    if (this.showDrop) this.syncInnerFormAndControl();
+
     this.showDrop = !this.showDrop;
+  }
+
+  syncInnerFormAndControl() {
+    debugger;
+    let oldValue = this.parent?.['form']?.get('passengers')?.value;
+
+    // form.get('passengers').value;
+    this.form.patchValue(oldValue);
   }
 }
