@@ -1,2 +1,3 @@
 //#1 remove focuses
 //#2 check and remove duplicate codes ( try to be dry )
+//#3 use interface, enum or any types for entities
