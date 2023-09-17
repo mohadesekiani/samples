@@ -50,16 +50,6 @@ export class ReactiveFormComponent implements OnInit {
     });
   }
 
-  // childrenCountValidator(): ValidatorFn {
-  //   return (control: AbstractControl): ValidationErrors | null => {
-  //     let infantValue = control.value;
-  //     let adultValue = this.flightForm?.controls["passengers"].value["Adult"]
-  //     if (infantValue > adultValue) {
-  //       return { max: { actual: infantValue, max: adultValue } };
-  //     }
-  //     return null;
-  //   };
-  // }
 
   private setTravelTypeListener() {
     const returnDateCtrl = this.flightForm.controls.returnDate;

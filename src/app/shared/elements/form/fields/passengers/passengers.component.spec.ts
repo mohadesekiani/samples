@@ -3,12 +3,12 @@ import { ControlContainer, FormBuilder, FormControl } from '@angular/forms';
 import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
 import { PassengersComponent } from './passengers.component';
 import { distinctUntilChanged } from 'rxjs';
+import { IForm, ISearchPassenger } from 'src/app/models/search-types.interface';
 
 describe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   let fb: FormBuilder;
-  let parent;
-  let passengers;
+
   const valueAccessor = jasmine.createSpyObj<{
     onChange: (e) => {};
     onTouched: () => {};
@@ -18,10 +18,8 @@ describe('SUT: PassengersComponent', () => {
   });
   beforeEach(() => {
     fb = new FormBuilder();
-    parent = ControlContainer
-    sut = new PassengersComponent(fb,parent);
+    sut = new PassengersComponent(fb);
     sut.ngOnInit();
-    passengers = sut.form.get('passengers');
   });
 
   it('should create', () => {

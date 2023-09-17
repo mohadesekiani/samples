@@ -55,5 +55,4 @@ it('should test the presence of the form', () => {
     expect(sut.form.get('Infant')).toBe(InfantCtrl.control);
   });
 
-
 });

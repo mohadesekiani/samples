@@ -38,6 +38,7 @@ export class PassengersComponent implements ControlValueAccessor {
     { value: 0, name: 'Child' },
     { value: 0, name: 'Infant' },
   ];
+  oldValue: any;
 
   //ontic without controlValueAccessor
   // onChildValueChange(newValue: number, item) {
@@ -65,40 +66,35 @@ export class PassengersComponent implements ControlValueAccessor {
     return item == 'Infant' && this.form.controls['Infant'].hasError('max');
   }
 
-  constructor(
-    // @Self()
-    // @Optional()
-    // private ngControl: NgControl,
-    private fb: FormBuilder,
-    @Optional() @Host() public parent: ControlContainer
-  ) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createForm();
   }
 
   createForm() {
-    this.form = this.fb.group<IForm<ISearchPassenger>>(
-      {
-        Adult: [null, [Validators.required]],
-        Child: [null],
-        Infant: [null],
-      },
-      {
-        validators: [CustomValidators.maxFrom('Infant', 'Adult')],
-      }
-    );
+    this.form = this.fb.group<IForm<ISearchPassenger>>({
+      Adult: [null, [Validators.required]],
+      Child: [null],
+      Infant: [null],
+    }, {
+      validators: [CustomValidators.maxFrom('Infant', 'Adult')],
+    });
 
     this.form.valueChanges
       .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))
       .subscribe((x) => {
         this.refersValue();
+        setTimeout(() => {
+          if (this.form.valid)
+            this.oldValue = x;
+        });
       });
   }
 
-  onChange = (value) => {};
+  onChange = (value) => { };
 
-  onTouched = () => {};
+  onTouched = () => { };
 
   writeValue(obj: any): void {
     this.form.patchValue(obj);
@@ -124,7 +120,11 @@ export class PassengersComponent implements ControlValueAccessor {
   }
 
   refersValue() {
-    if (this.form.valid) this.onChange(this.form.value);
+    if (this.form.valid) {
+      this.onChange(this.form.value);
+    } else {
+      this.onChange(null);
+    }
     this.markAsTouched();
   }
 
@@ -135,10 +135,6 @@ export class PassengersComponent implements ControlValueAccessor {
   }
 
   syncInnerFormAndControl() {
-    debugger;
-    let oldValue = this.parent?.['form']?.get('passengers')?.value;
-
-    // form.get('passengers').value;
-    this.form.patchValue(oldValue);
+    this.form.patchValue(this.oldValue);
   }
 }
