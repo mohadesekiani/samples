@@ -43,8 +43,8 @@ export class CustomValidators {
       // let infantValue = fg.value?.Infant;
       let infantValue = control.value;
       let adultValue = fg.value?.Adult;
-      console.log('infantValue', infantValue);
-      console.log('adultValue', adultValue);
+      // console.log('infantValue', infantValue);
+      // console.log('adultValue', adultValue);
       if (+infantValue > +adultValue) {
         return { max: { actual: infantValue, max: adultValue } };
       }

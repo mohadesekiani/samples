@@ -10,13 +10,8 @@ import {
 import { isEqual } from 'lodash-es';
 import { distinctUntilChanged } from 'rxjs';
 import { CustomValidators } from 'src/app/core/validations/passenger.validation';
-import { IForm } from 'src/app/reactive-form/reactive-form.component';
+import { IForm, ISearchPassenger } from 'src/app/models/search-types.interface';
 
-export interface ISearchPassenger {
-  Adult: number;
-  Child: number;
-  Infant: number;
-}
 @Component({
   selector: 'app-passengers',
   templateUrl: './passengers.component.html',

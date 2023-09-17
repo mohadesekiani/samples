@@ -4,18 +4,7 @@ import { ClassTypesEnum } from '../models/class-types.enum';
 import { TravelTypesEnum } from '../models/travel-types.enum';
 import { Router } from '@angular/router';
 import { distinctUntilChanged, skip, startWith } from 'rxjs';
-export type IForm<T> = {
-  [K in keyof T]?: any;
-};
-export interface ISearchFlight {
-  passengers: any;
-  travelType: any;
-  departureDate: any;
-  returnDate: any;
-  origin: any;
-  destination: any;
-  classType: any;
-}
+import { IForm, ISearchFlight } from '../models/search-types.interface';
 
 @Component({
   selector: 'app-reactive-form',

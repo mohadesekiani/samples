@@ -1,13 +1,13 @@
 import { ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { ControlContainer, FormBuilder, FormControl } from '@angular/forms';
 import { IPassengerTypes } from 'src/app/models/passenger-types.interface';
 import { PassengersComponent } from './passengers.component';
 import { distinctUntilChanged } from 'rxjs';
 
-fdescribe('SUT: PassengersComponent', () => {
+describe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   let fb: FormBuilder;
-
+  let parent;
   let passengers;
   const valueAccessor = jasmine.createSpyObj<{
     onChange: (e) => {};
@@ -18,7 +18,8 @@ fdescribe('SUT: PassengersComponent', () => {
   });
   beforeEach(() => {
     fb = new FormBuilder();
-    sut = new PassengersComponent(fb);
+    parent = ControlContainer
+    sut = new PassengersComponent(fb,parent);
     sut.ngOnInit();
     passengers = sut.form.get('passengers');
   });
