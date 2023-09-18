@@ -1,19 +1,27 @@
-import { FormGroup, FormControl, AbstractControl, FormBuilder } from '@angular/forms';
-import { CustomValidators } from './passenger.validation'; // Import your custom validators
+import {
+  FormGroup,
+  FormControl,
+  AbstractControl,
+  FormBuilder,
+} from '@angular/forms';
+import { CustomValidators } from './Custom.validators'; // Import your custom validators
 
-describe('CustomValidators', () => {
+fdescribe('CustomValidators', () => {
   let formGroup: FormGroup;
 
   let fromFieldCtrl!: AbstractControl;
   let toFieldCtrl!: AbstractControl;
 
   beforeEach(() => {
-    formGroup = new FormBuilder().group({
-      fromField: [],
-      toField: []
-    }, {
-      validators: [CustomValidators.maxFrom('fromField', 'toField')]
-    });
+    formGroup = new FormBuilder().group(
+      {
+        fromField: [],
+        toField: [],
+      },
+      {
+        validators: [CustomValidators.maxFrom('fromField', 'toField')],
+      }
+    );
 
     fromFieldCtrl = formGroup.get('fromField') as AbstractControl;
     toFieldCtrl = formGroup.get('toField') as AbstractControl;
@@ -60,4 +68,18 @@ describe('CustomValidators', () => {
     expect(fromFieldCtrl?.invalid).toBeFalse();
     expect(fromFieldCtrl?.hasError('max')).toBeFalsy();
   });
+
+  it(`should call updateValueAndValidity with onlySelf set to true`, () => {
+    // arrange
+    spyOn(fromFieldCtrl, 'updateValueAndValidity');
+    fromFieldCtrl.setValue(10);//infant
+    toFieldCtrl.setValue(5);
+    toFieldCtrl.setValue(10);
+
+    // assert
+    expect(fromFieldCtrl.updateValueAndValidity).toHaveBeenCalledWith({
+      onlySelf: true,
+    });
+  });
+
 });

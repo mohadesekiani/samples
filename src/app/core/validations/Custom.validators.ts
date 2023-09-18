@@ -26,6 +26,7 @@ export class CustomValidators {
       }
 
       if (fromFieldCtrl?.hasError('max')) {
+        
         // fromFieldCtrl?.setErrors({ max: null });
         fromFieldCtrl?.updateValueAndValidity({ onlySelf: true });
       }

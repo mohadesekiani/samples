@@ -23,7 +23,6 @@ import { MatDatepicker } from '@angular/material/datepicker';
 export class DatepickerComponent implements ControlValueAccessor {
   [x: string]: any;
   @Input() label!: string;
-  // TODO should set by test
   @Input() min = new Date();
   @Input() max = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
 

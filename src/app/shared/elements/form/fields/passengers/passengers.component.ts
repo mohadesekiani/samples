@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { isEqual } from 'lodash-es';
 import { distinctUntilChanged } from 'rxjs';
-import { CustomValidators } from 'src/app/core/validations/passenger.validation';
+import { CustomValidators } from 'src/app/core/validations/Custom.validators';
 import { IForm, ISearchPassenger } from 'src/app/models/search-types.interface';
 
 @Component({
