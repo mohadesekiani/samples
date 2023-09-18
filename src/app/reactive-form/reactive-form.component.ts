@@ -47,9 +47,9 @@ export class ReactiveFormComponent implements OnInit {
       origin: [null, [Validators.required]],
       destination: [null, [Validators.required]],
       classType: [null],
+      multiPath: [null],
     });
   }
-
 
   private setTravelTypeListener() {
     const returnDateCtrl = this.flightForm.controls.returnDate;

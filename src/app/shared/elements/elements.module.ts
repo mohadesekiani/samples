@@ -11,11 +11,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from '../shared.module';
 import { NumberPassengersComponent } from './form/fields/number-passengers/number-passengers.component';
+import { MultiPathComponent } from './form/fields/multi-path/multi-path.component';
 const COMPONENTS = [
   DatepickerComponent,
   FlightComponent,
   PassengersComponent,
   NumberPassengersComponent,
+  MultiPathComponent,
 ];
 
 @NgModule({

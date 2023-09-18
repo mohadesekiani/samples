@@ -1,0 +1,13 @@
+<form [formGroup]="reactiveForm">
+  <div formArrayName="delAddress">
+    <div *ngFor="let item of delAddress.controls; let i = index">
+      <div [formGroupName]="i">
+        <h2>{{ i }}</h2>
+        <input type="text" formArrayName="name" />
+      </div>
+    </div>
+  </div>
+  <div>
+    <a (click)="addNewRow()">add new</a>
+  </div>
+</form>

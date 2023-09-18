@@ -19,13 +19,14 @@
         placeholder="your return date"
         label="return Date"
       ></app-datepicker>
-      
     </div>
     <hr style="margin: 10px" />
     <div class="flex flex-wrap w-1/2">
       <span class="m-2">passengers</span>
       <app-passengers formControlName="passengers"></app-passengers>
-      <span *ngIf="flightForm.get('passengers')?.invalid">passengers is invalid</span>
+      <span *ngIf="flightForm.get('passengers')?.invalid"
+        >passengers is invalid</span
+      >
       <div class="w-1/2">
         <span class="m-2">general</span>
         <div class="m-3">
@@ -44,5 +45,8 @@
     </div>
   </div>
   <button type="submit" (click)="submit()">Submit</button>
+
+  <hr />
+  <app-multi-path></app-multi-path>
 </form>
 {{ flightForm.value | json }}
