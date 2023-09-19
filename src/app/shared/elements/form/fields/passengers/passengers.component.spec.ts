@@ -97,7 +97,6 @@ describe('SUT: PassengersComponent', () => {
 
     // 
     let errorMessage = sut.form.get('Infant')?.getError('max');
-    console.log(errorMessage);
     // expect(errorMessage).toEqual({ actual: 3, max: 2 });
   });
 

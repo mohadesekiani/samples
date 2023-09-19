@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { CustomValidators } from './Custom.validators'; // Import your custom validators
 
-fdescribe('CustomValidators', () => {
+describe('CustomValidators', () => {
   let formGroup: FormGroup;
 
   let fromFieldCtrl!: AbstractControl;

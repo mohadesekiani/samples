@@ -64,9 +64,7 @@ describe('ReactiveFormComponent', () => {
   });
 
   // label="origin"
-  it('should binding label', () => {
-    console.log(originInput);
-    
+  it('should binding label', () => {    
     // arrange
     originInput.label = 'some_Text';
     // act
