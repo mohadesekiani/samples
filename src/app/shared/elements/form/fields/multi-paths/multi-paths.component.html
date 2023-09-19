@@ -1,4 +1,5 @@
 <div [formGroup]="form">
+  <div>{{ item }}</div>
   <div formArrayName="multiPaths">
     <div *ngFor="let item of multiPaths.controls; let i = index">
       <div [formGroupName]="i">
@@ -23,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div>
+  <div *ngIf="item == 'RoundTrip'">
     <button
       (click)="addNewRow()"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"

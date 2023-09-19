@@ -1,4 +1,11 @@
-import { Component, INJECTOR, Inject, Injector, OnInit } from '@angular/core';
+import {
+  Component,
+  INJECTOR,
+  Inject,
+  Injector,
+  Input,
+  OnInit,
+} from '@angular/core';
 import {
   ControlValueAccessor,
   FormArray,
@@ -25,18 +32,18 @@ import {
     },
   ],
 })
-
 export class MultiPathsComponent implements ControlValueAccessor {
   form!: FormGroup;
   touched = false;
   disabled = false;
-
+  @Input() item!: any;
   value!: [];
-  onChange = (value) => { };
 
-  onTouched = () => { };
+  onChange = (value) => {};
 
-  constructor(private fb: FormBuilder  ) {}
+  onTouched = () => {};
+
+  constructor(private fb: FormBuilder) {}
 
   writeValue(obj: any): void {
     this.form.patchValue(obj);
@@ -62,9 +69,8 @@ export class MultiPathsComponent implements ControlValueAccessor {
     this.form = this.fb.group<IForm<ISearchMultiPaths>>({
       multiPaths: this.fb.array([]),
     });
+
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
-      console.log(x);
-      
       this.onChange(this.form.value);
     });
   }
@@ -82,9 +88,4 @@ export class MultiPathsComponent implements ControlValueAccessor {
     });
     this.multiPaths.push(newRow);
   }
-
 }
-function isEqual(p: any, c: any): boolean {
-  throw new Error('Function not implemented.');
-}
-

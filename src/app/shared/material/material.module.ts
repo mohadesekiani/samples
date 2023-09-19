@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 @NgModule({
   declarations: [],
   exports: [
@@ -19,6 +19,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatButtonToggleModule
   ],
 })
 export class MaterialModule {}
