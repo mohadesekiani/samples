@@ -2,24 +2,7 @@
   <h2 style="text-align: center">*** reactive form ***</h2>
   <hr style="margin: 10px" />
   <div>
-    <div class="flex flex-wrap">
-      <app-flight formControlName="origin" label="origin"></app-flight>
-      <app-flight
-        formControlName="destination"
-        label="destination"
-      ></app-flight>
-
-      <app-datepicker
-        formControlName="departureDate"
-        placeholder="your departure date"
-        label="departure Date"
-      ></app-datepicker>
-      <app-datepicker
-        formControlName="returnDate"
-        placeholder="your return date"
-        label="return Date"
-      ></app-datepicker>
-    </div>
+    <app-multi-paths formControlName="multiPaths"></app-multi-paths>
     <hr style="margin: 10px" />
     <div class="flex flex-wrap w-1/2">
       <span class="m-2">passengers</span>
@@ -45,8 +28,5 @@
     </div>
   </div>
   <button type="submit" (click)="submit()">Submit</button>
-
-  <hr />
-  <app-multi-path></app-multi-path>
 </form>
 {{ flightForm.value | json }}

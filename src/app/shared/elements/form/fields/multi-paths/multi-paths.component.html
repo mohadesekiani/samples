@@ -1,0 +1,35 @@
+<div [formGroup]="form">
+  <div formArrayName="multiPaths">
+    <div *ngFor="let item of multiPaths.controls; let i = index">
+      <div [formGroupName]="i">
+        <h2>{{ i }}</h2>
+        <div class="flex flex-wrap">
+          <app-flight formControlName="origin" label="origin"></app-flight>
+          <app-flight
+            formControlName="destination"
+            label="destination"
+          ></app-flight>
+          <app-datepicker
+            formControlName="departureDate"
+            placeholder="your departure date"
+            label="departure Date"
+          ></app-datepicker>
+          <app-datepicker
+            formControlName="returnDate"
+            placeholder="your return date"
+            label="return Date"
+          ></app-datepicker>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button
+      (click)="addNewRow()"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+    >
+      add new
+    </button>
+  </div>
+  {{ form.value | json }}
+</div>

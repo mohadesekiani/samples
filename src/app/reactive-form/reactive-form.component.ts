@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ClassTypesEnum } from '../models/class-types.enum';
 import { TravelTypesEnum } from '../models/travel-types.enum';
 import { Router } from '@angular/router';
@@ -24,7 +30,7 @@ export class ReactiveFormComponent implements OnInit {
     value,
   }));
   showDrop = false;
-
+  items!: FormArray;
   passenger: Array<any> = [
     { value: 0, name: 'Adult' },
     { value: 0, name: 'Child' },
@@ -35,6 +41,7 @@ export class ReactiveFormComponent implements OnInit {
 
   ngOnInit() {
     this.setTravelTypeListener();
+    // this.addNewRow();
   }
 
   private formCreator() {
@@ -42,14 +49,29 @@ export class ReactiveFormComponent implements OnInit {
     return this.fb.group<IForm<ISearchFlight>>({
       passengers: [null, [Validators.required]],
       travelType: [TravelTypesEnum.OneWay],
-      departureDate: [this.today],
-      returnDate: [{ value: null, disabled: true }, [Validators.required]],
-      origin: [null, [Validators.required]],
-      destination: [null, [Validators.required]],
+      // departureDate: [this.today],
+      // returnDate: [{ value: null, disabled: true }, [Validators.required]],
+      // origin: [null, [Validators.required]],
+      // destination: [null, [Validators.required]],
       classType: [null],
-      multiPath: [null],
+      // multiPath: this.fb.array([]),
+      multiPaths: [null, [Validators.required]],
+
     });
   }
+  // addNewRow() {
+  //   const newRow = this.fb.group({
+  //     origin: [null, [Validators.required]],
+  //     destination: [null, [Validators.required]],
+  //     departureDate: [null],
+  //     returnDate: [null],
+  //   });
+  //   this.nn.push(newRow);
+  // }
+
+  // get nn() {
+  //   return this.flightForm.get('multiPath') as FormArray;
+  // }
 
   private setTravelTypeListener() {
     const returnDateCtrl = this.flightForm.controls.returnDate;
