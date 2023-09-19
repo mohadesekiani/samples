@@ -17,22 +17,22 @@ import {
 import { distinctUntilChanged } from 'rxjs';
 import {
   IForm,
-  ISearchMultiPaths,
+  ISearchMultiPath,
 } from 'src/app/models/search-types.interface';
 
 @Component({
-  selector: 'app-multi-paths',
-  templateUrl: './multi-paths.component.html',
-  styleUrls: ['./multi-paths.component.scss'],
+  selector: 'app-multi-path',
+  templateUrl: './multi-path.component.html',
+  styleUrls: ['./multi-path.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: MultiPathsComponent,
+      useExisting: MultiPathComponent,
       multi: true,
     },
   ],
 })
-export class MultiPathsComponent implements ControlValueAccessor {
+export class MultiPathComponent implements ControlValueAccessor {
   form!: FormGroup;
   touched = false;
   disabled = false;
@@ -66,8 +66,8 @@ export class MultiPathsComponent implements ControlValueAccessor {
   }
 
   formCreator() {
-    this.form = this.fb.group<IForm<ISearchMultiPaths>>({
-      multiPaths: this.fb.array([]),
+    this.form = this.fb.group<IForm<ISearchMultiPath>>({
+      multiPath: this.fb.array([]),
     });
 
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
@@ -75,8 +75,8 @@ export class MultiPathsComponent implements ControlValueAccessor {
     });
   }
 
-  get multiPaths() {
-    return this.form.get('multiPaths') as FormArray;
+  get multiPath() {
+    return this.form.get('multiPath') as FormArray;
   }
 
   addNewRow() {
@@ -86,6 +86,6 @@ export class MultiPathsComponent implements ControlValueAccessor {
       departureDate: [null],
       returnDate: [null],
     });
-    this.multiPaths.push(newRow);
+    this.multiPath.push(newRow);
   }
 }

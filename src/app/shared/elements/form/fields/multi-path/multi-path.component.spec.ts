@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MultiPathsComponent } from './multi-paths.component';
+import { MultiPathComponent } from './multi-path.component';
 import { FormBuilder } from '@angular/forms';
 
 
 describe('SUT: MultiPathComponent', () => {
-  let sut: MultiPathsComponent;
+  let sut: MultiPathComponent;
   let fb: FormBuilder;
   const valueAccessor = jasmine.createSpyObj<{
     onChange: (e) => {};
@@ -15,7 +15,7 @@ describe('SUT: MultiPathComponent', () => {
   });
   beforeEach(() => {
     fb = new FormBuilder();
-    sut = new MultiPathsComponent(fb);
+    sut = new MultiPathComponent(fb);
     sut.ngOnInit();
   });
 

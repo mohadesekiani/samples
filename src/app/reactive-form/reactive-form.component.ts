@@ -49,7 +49,11 @@ export class ReactiveFormComponent implements OnInit {
       passengers: [null, [Validators.required]],
       travelType: [TravelTypesEnum.OneWay],
       classType: [null],
-      multiPaths: [null, [Validators.required]],
+      departureDate: [this.today],
+      returnDate: [{ value: null, disabled: true }, [Validators.required]],
+      origin: [null, [Validators.required]],
+      destination: [null, [Validators.required]],
+      multiPath: [null, [Validators.required]],
     });
   }
 

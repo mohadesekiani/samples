@@ -9,13 +9,13 @@ export interface ISearchFlight {
   origin: any;
   destination: any;
   classType: any;
-  multiPaths: any;
+  multiPath: any;
 }
 export interface ISearchPassenger {
   Adult: number;
   Child: number;
   Infant: number;
 }
-export interface ISearchMultiPaths {
-  multiPaths:any;
+export interface ISearchMultiPath {
+  multiPath:any;
 }

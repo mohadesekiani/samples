@@ -1,7 +1,7 @@
 <div [formGroup]="form">
   <div>{{ item }}</div>
-  <div formArrayName="multiPaths">
-    <div *ngFor="let item of multiPaths.controls; let i = index">
+  <div formArrayName="multiPath">
+    <div *ngFor="let item of multiPath.controls; let i = index">
       <div [formGroupName]="i">
         <h2>{{ i }}</h2>
         <div class="flex flex-wrap">
@@ -24,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="item == 'RoundTrip'">
+  <div *ngIf="item == 'MultiPath'">
     <button
       (click)="addNewRow()"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
