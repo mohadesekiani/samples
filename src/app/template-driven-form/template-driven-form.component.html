@@ -26,34 +26,33 @@
         [(ngModel)]="formData.passengers"
       ></app-passengers>
     </div>
-    <div class="w-1/2">
+
+    <div class="w-1/2 p-4">
       <span class="m-2">General</span>
-      <div class="w-1/2 p-4">
-        <!-- <span>my input value: {{ value | json }}</span> -->
-        <div class="m-2 flex flex-wrap">
-          <div class="m-auto" style="text-align: center">
-            {{ formData.option }}
-          </div>
-          <div>
-            <button (click)="showDrop = !showDrop">
-              <i class="fa fa-users"></i>
-            </button>
-          </div>
+      <!-- <span>my input value: {{ value | json }}</span> -->
+      <div class="m-2 flex flex-wrap">
+        <div class="m-auto" style="text-align: center">
+          {{ formData.option }}
         </div>
-        <div class="bg-white" *ngIf="showDrop">
-          <div class="form-group">
-            <div class="form-control m-2 flex flex-col">
-              <label class="radio-inline" *ngFor="let general of generalTypes">
-                <input
-                  type="radio"
-                  id="WomenOnly"
-                  name="option"
-                  [value]="general.value"
-                  [(ngModel)]="formData.option"
-                />
-                {{ general.title }}
-              </label>
-            </div>
+        <div>
+          <button (click)="showDrop = !showDrop">
+            <i class="fa fa-users"></i>
+          </button>
+        </div>
+      </div>
+      <div class="bg-white" *ngIf="showDrop">
+        <div class="form-group">
+          <div class="form-control m-2 flex flex-col">
+            <label class="radio-inline" *ngFor="let general of generalTypes">
+              <input
+                type="radio"
+                id="WomenOnly"
+                name="option"
+                [value]="general.value"
+                [(ngModel)]="formData.option"
+              />
+              {{ general.title }}
+            </label>
           </div>
         </div>
       </div>
