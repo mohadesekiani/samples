@@ -24,10 +24,16 @@ import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
   ],
 })
 export class MultiPathComponent implements ControlValueAccessor {
-  form!: FormGroup;
+  private _travelType = TravelTypesEnum.OneWay;
+  @Input() get travelType(): TravelTypesEnum {
+    return this._travelType;
+  }
+  set travelType(value: TravelTypesEnum) {
+    this._travelType = value;
+  }
+  form!: FormGroup<IForm<ISearchMultiPath>>;
   touched = false;
   disabled = false;
-  @Input() item!: any;
   value!: [];
 
   travelTypes = Object.values(TravelTypesEnum).map((value) => ({
@@ -35,11 +41,15 @@ export class MultiPathComponent implements ControlValueAccessor {
     value,
   }));
 
-  onChange = (value) => {};
+  get routes() {
+    return this.form.controls.routes as FormArray;
+  }
 
-  onTouched = () => {};
+  constructor(private fb: FormBuilder) { }
 
-  constructor(private fb: FormBuilder) {}
+  onChange = (value) => { };
+
+  onTouched = () => { };
 
   writeValue(obj: any): void {
     this.form.patchValue(obj);
@@ -57,24 +67,25 @@ export class MultiPathComponent implements ControlValueAccessor {
   }
 
   ngOnInit(): void {
-    this.formCreator();
+    this.createForm();
     this.addNewRow();
   }
 
-  formCreator() {
+  createForm() {
     this.form = this.fb.group<IForm<ISearchMultiPath>>({
       travelType: [TravelTypesEnum.OneWay],
-      multiPath: this.fb.array([]),
+      routes: this.fb.array([]),
     });
 
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.onChange(this.form.value);
       this.onTouched();
     });
-  }
 
-  get multiPath() {
-    return this.form.get('multiPath') as FormArray;
+    this.form.controls.travelType?.valueChanges.subscribe(travelType => {
+      this._travelType = travelType;
+      this.onTravelTypeChange();
+    });
   }
 
   addNewRow() {
@@ -84,18 +95,24 @@ export class MultiPathComponent implements ControlValueAccessor {
       departureDate: [null],
       returnDate: [null],
     });
-    this.multiPath.push(newRow);
+    this.routes.push(newRow);
   }
 
-  travelTypesClick(selectedTravelType: string) {
-    this.form.patchValue({
-      travelType: selectedTravelType,
-    });
-    if (selectedTravelType === 'OneWay') {
-      const multiPathArray = this.form.get('multiPath') as FormArray;
-      while (multiPathArray.length > 1) {
-        multiPathArray.removeAt(1);
-      }
+  private onTravelTypeChange() {
+    if (this._travelType !== TravelTypesEnum.MultiPath) {
+      this.routes.controls.slice(1).forEach(x => {
+        x.disable();
+      });
+
+      return;
     }
+
+    this.routes.controls.slice(1).forEach(x => {
+      x.enable();
+    });
+  }
+
+  routeIsActive(index: number) {
+    return this.routes.at(index).enabled;
   }
 }

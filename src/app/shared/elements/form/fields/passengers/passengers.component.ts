@@ -27,7 +27,7 @@ import { IForm, ISearchPassenger } from 'src/app/models/search-types.interface';
 export class PassengersComponent implements ControlValueAccessor {
   errorMessage!: { actual: number; max: number };
   hasError: boolean = false;
-  form!: FormGroup;
+  form!: FormGroup<IForm<ISearchPassenger>>;
   buttonText: string = '+';
   disabled = false;
   touched = false;

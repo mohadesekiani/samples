@@ -51,10 +51,10 @@ describe('SUT: ReactiveFormComponent', () => {
     // assert
     //NOTICE
     expect(sut.flightForm.getRawValue()).toEqual(
-      jasmine.objectContaining(expectedRawFormValue1)
+      jasmine.objectContaining(expectedRawFormValue)
     );
-    //  expect(sut.flightForm.getRawValue()).toEqual(expectedRawFormValue);
-    // expect(sut.flightForm.value).toEqual(expectedFormValue);
+     expect(sut.flightForm.getRawValue()).toEqual(expectedRawFormValue);
+    expect(sut.flightForm.value).toEqual(expectedFormValue);
   });
 
   it('should be set required error to origin controller when origin is empty', () => {

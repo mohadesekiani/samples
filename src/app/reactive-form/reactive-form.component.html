@@ -1,8 +1,8 @@
 <form [formGroup]="flightForm" (submit)="(submit)">
   <div>
     <app-multi-path
-      formControlName="multiPath"
-      [item]="flightForm.get('travelType')?.value"
+      formControlName="routes"
+      [travelType]="travelType"
       class="app-multi-path"
     ></app-multi-path>
     <hr />

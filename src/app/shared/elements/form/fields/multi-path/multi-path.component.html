@@ -1,43 +1,34 @@
 <div [formGroup]="form">
   <div>
-    <mat-button-toggle-group formControlName="travelTypes">
-      <mat-button-toggle
-        *ngFor="let item of travelTypes"
-        (click)="travelTypesClick(item.value)"
-        [value]="item.value"
-        >{{ item.title }}</mat-button-toggle
-      >
+    <mat-button-toggle-group formControlName="travelType">
+      <mat-button-toggle *ngFor="let item of travelTypes"
+                         [value]="item.value">{{ item.title }}</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
-  <div formArrayName="multiPath">
-    <div *ngFor="let item of multiPath.controls; let i = index">
-      <div [formGroupName]="i">
-        <div class="flex flex-wrap">
-          <app-flight formControlName="origin" label="origin"></app-flight>
-          <app-flight
-            formControlName="destination"
-            label="destination"
-          ></app-flight>
-          <app-datepicker
-            formControlName="departureDate"
-            placeholder="your departure date"
-            label="departure Date"
-          ></app-datepicker>
-          <app-datepicker
-            formControlName="returnDate"
-            placeholder="your return date"
-            label="return Date"
-          ></app-datepicker>
+  <div formArrayName="routes">
+    <ng-container *ngFor="let item of routes.controls; let i = index">
+      <div *ngIf="routeIsActive(i)">
+        <div [formGroupName]="i">
+          <div class="flex flex-wrap">
+            <app-flight formControlName="origin"
+                        label="origin"></app-flight>
+            <app-flight formControlName="destination"
+                        label="destination"></app-flight>
+            <app-datepicker formControlName="departureDate"
+                            placeholder="your departure date"
+                            label="departure Date" />
+            <app-datepicker formControlName="returnDate"
+                            placeholder="your return date"
+                            label="return Date" />
+          </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
   <div>
-    <button
-      *ngIf="form.value.travelType == 'MultiPath'"
-      (click)="addNewRow()"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-    >
+    <button *ngIf="form.value.travelType == 'MultiPath'"
+            (click)="addNewRow()"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
       add
     </button>
   </div>

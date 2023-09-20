@@ -9,7 +9,7 @@ export interface ISearchFlight {
   origin: any;
   destination: any;
   classType: any;
-  multiPath: any;
+  routes: any;
 }
 export interface ISearchPassenger {
   Adult: number;
@@ -18,5 +18,5 @@ export interface ISearchPassenger {
 }
 export interface ISearchMultiPath {
   travelType:string;
-  multiPath:any;
+  routes:any;
 }

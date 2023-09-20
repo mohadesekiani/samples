@@ -32,7 +32,11 @@ export class ReactiveFormComponent implements OnInit {
     value,
   }));
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  get travelType(): TravelTypesEnum {
+    return this.flightForm.get('travelType')?.value as any;
+  }
+
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.setTravelTypeListener();
@@ -47,7 +51,7 @@ export class ReactiveFormComponent implements OnInit {
       // returnDate: [{ value: null, disabled: true }, [Validators.required]],
       // origin: [null, [Validators.required]],
       // destination: [null, [Validators.required]],
-      multiPath: [null, [Validators.required]],
+      routes: [null, [Validators.required]],
     });
   }
 
