@@ -112,7 +112,7 @@ describe('SUT: ReactiveFormComponent', () => {
     // act
     sut.submit();
     // assert
-    expect(router.navigate).toHaveBeenCalledWith(['/Train']);
+    expect(router.navigate).toHaveBeenCalledWith(['/results']);
   });
 
   it('should check form is valid then go to result alert', () => {

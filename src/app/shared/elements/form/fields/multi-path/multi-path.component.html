@@ -9,11 +9,9 @@
       >
     </mat-button-toggle-group>
   </div>
-  <div>{{ item }}</div>
   <div formArrayName="multiPath">
     <div *ngFor="let item of multiPath.controls; let i = index">
       <div [formGroupName]="i">
-        <h2>{{ i }}</h2>
         <div class="flex flex-wrap">
           <app-flight formControlName="origin" label="origin"></app-flight>
           <app-flight

@@ -1,0 +1,65 @@
+/* styles.css */
+
+/* استایل کلی فرم */
+form {
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+hr {
+  margin: 10px;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+.app-multi-path {
+  margin-bottom: 20px;
+}
+
+.app-passengers {
+  margin: 10px 0;
+  display: block;
+}
+
+.passengers-error {
+  color: red;
+}
+
+.mat-radio-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.horizontal-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-element {
+  flex: 1;
+}
+
+.passengers-error {
+  color: red;
+}

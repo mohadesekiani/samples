@@ -43,10 +43,10 @@ export class ReactiveFormComponent implements OnInit {
       passengers: [null, [Validators.required]],
       travelType: [TravelTypesEnum.OneWay],
       classType: [null],
-      departureDate: [this.today],
-      returnDate: [{ value: null, disabled: true }, [Validators.required]],
-      origin: [null, [Validators.required]],
-      destination: [null, [Validators.required]],
+      // departureDate: [this.today],
+      // returnDate: [{ value: null, disabled: true }, [Validators.required]],
+      // origin: [null, [Validators.required]],
+      // destination: [null, [Validators.required]],
       multiPath: [null, [Validators.required]],
     });
   }
@@ -71,7 +71,7 @@ export class ReactiveFormComponent implements OnInit {
 
   submit() {
     if (this.flightForm.valid) {
-      this.router.navigate(['/Train']);
+      this.router.navigate(['/results']);
     } else {
       alert('فرم ثبت نشد');
     }
