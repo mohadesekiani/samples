@@ -2,14 +2,10 @@
   <h2 style="text-align: center">*** reactive form ***</h2>
   <hr style="margin: 10px" />
   <div>
-    <!-- <app-button-toggle></app-button-toggle> -->
-    <!-- <mat-button-toggle-group formControlName="travelTypes">
-      <mat-button-toggle
-      (click)="travelTypesClick(item.value);" [value]="item.value" *ngFor="let item of travelTypes">{{
-        item.title
-      }}</mat-button-toggle>
-    </mat-button-toggle-group> -->
-    <app-multi-path formControlName="multiPath" [item]="flightForm.get('travelType')?.value"></app-multi-path>
+    <app-multi-path
+      formControlName="multiPath"
+      [item]="flightForm.get('travelType')?.value"
+    ></app-multi-path>
     <hr style="margin: 10px" />
     <div class="flex flex-wrap w-1/2">
       <span class="m-2">passengers</span>

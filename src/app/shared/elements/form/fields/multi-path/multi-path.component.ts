@@ -1,12 +1,4 @@
-import { JsonPipe } from '@angular/common';
-import {
-  Component,
-  INJECTOR,
-  Inject,
-  Injector,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   ControlValueAccessor,
   FormArray,
@@ -35,7 +27,6 @@ export class MultiPathComponent implements ControlValueAccessor {
   form!: FormGroup;
   touched = false;
   disabled = false;
-  multiArray: any;
   @Input() item!: any;
   value!: [];
 
@@ -79,7 +70,6 @@ export class MultiPathComponent implements ControlValueAccessor {
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.onChange(this.form.value);
       this.onTouched();
-      // this.multiArray = x;
     });
   }
 
@@ -96,6 +86,7 @@ export class MultiPathComponent implements ControlValueAccessor {
     });
     this.multiPath.push(newRow);
   }
+
   travelTypesClick(selectedTravelType: string) {
     this.form.patchValue({
       travelType: selectedTravelType,

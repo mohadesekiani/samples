@@ -1,11 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ClassTypesEnum } from '../models/class-types.enum';
 import { TravelTypesEnum } from '../models/travel-types.enum';
 import { Router } from '@angular/router';
@@ -56,24 +50,6 @@ export class ReactiveFormComponent implements OnInit {
       multiPath: [null, [Validators.required]],
     });
   }
-
-  // travelTypesClick(selectedTravelType: string) {
-  //   this.flightForm.patchValue({
-  //     travelType: selectedTravelType,
-  //   });
-  //   console.log(selectedTravelType,this.flightForm.get("multiPath"));
-  //   // if (selectedTravelType == 'OneWay') {
-  //   //   this.flightForm.get("multiPath")?.setValue([])
-      
-  //   // }
-  //   // if (selectedTravelType === 'OneWay') {
-  //   //   const multiPathArray = this.flightForm.get('multiPath') as FormArray;
-  //   //   while (multiPathArray.value['multiPath'].length > 1) {
-  //   //     multiPathArray.value['multiPath'].length = 1 
-  //   //     console.log("kkkkkk",multiPathArray.value['multiPath']);
-  //   //   }
-  //   // }
-  // }
 
   private setTravelTypeListener() {
     const returnDateCtrl = this.flightForm.controls.returnDate;
