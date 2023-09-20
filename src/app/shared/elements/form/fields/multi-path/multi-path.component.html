@@ -1,4 +1,14 @@
 <div [formGroup]="form">
+  <div>
+    <mat-button-toggle-group formControlName="travelTypes">
+      <mat-button-toggle
+        *ngFor="let item of travelTypes"
+        (click)="travelTypesClick(item.value)"
+        [value]="item.value"
+        >{{ item.title }}</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </div>
   <div>{{ item }}</div>
   <div formArrayName="multiPath">
     <div *ngFor="let item of multiPath.controls; let i = index">
@@ -24,12 +34,13 @@
       </div>
     </div>
   </div>
-  <div *ngIf="item == 'MultiPath'">
+  <div>
     <button
+      *ngIf="form.value.travelType == 'MultiPath'"
       (click)="addNewRow()"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
     >
-      add new
+      add
     </button>
   </div>
   {{ form.value | json }}

@@ -17,5 +17,6 @@ export interface ISearchPassenger {
   Infant: number;
 }
 export interface ISearchMultiPath {
+  travelType:string;
   multiPath:any;
 }

@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import {
   Component,
   INJECTOR,
@@ -15,10 +16,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
-import {
-  IForm,
-  ISearchMultiPath,
-} from 'src/app/models/search-types.interface';
+import { IForm, ISearchMultiPath } from 'src/app/models/search-types.interface';
+import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
 
 @Component({
   selector: 'app-multi-path',
@@ -36,8 +35,14 @@ export class MultiPathComponent implements ControlValueAccessor {
   form!: FormGroup;
   touched = false;
   disabled = false;
+  multiArray: any;
   @Input() item!: any;
   value!: [];
+
+  travelTypes = Object.values(TravelTypesEnum).map((value) => ({
+    title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
+    value,
+  }));
 
   onChange = (value) => {};
 
@@ -67,11 +72,14 @@ export class MultiPathComponent implements ControlValueAccessor {
 
   formCreator() {
     this.form = this.fb.group<IForm<ISearchMultiPath>>({
+      travelType: [TravelTypesEnum.OneWay],
       multiPath: this.fb.array([]),
     });
 
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.onChange(this.form.value);
+      this.onTouched();
+      // this.multiArray = x;
     });
   }
 
@@ -87,5 +95,16 @@ export class MultiPathComponent implements ControlValueAccessor {
       returnDate: [null],
     });
     this.multiPath.push(newRow);
+  }
+  travelTypesClick(selectedTravelType: string) {
+    this.form.patchValue({
+      travelType: selectedTravelType,
+    });
+    if (selectedTravelType === 'OneWay') {
+      const multiPathArray = this.form.get('multiPath') as FormArray;
+      while (multiPathArray.length > 1) {
+        multiPathArray.removeAt(1);
+      }
+    }
   }
 }

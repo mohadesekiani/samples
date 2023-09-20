@@ -57,11 +57,23 @@ export class ReactiveFormComponent implements OnInit {
     });
   }
 
-  travelTypesClick(selectedTravelType: string) {
-    this.flightForm.patchValue({
-      travelType: selectedTravelType,
-    });
-  }
+  // travelTypesClick(selectedTravelType: string) {
+  //   this.flightForm.patchValue({
+  //     travelType: selectedTravelType,
+  //   });
+  //   console.log(selectedTravelType,this.flightForm.get("multiPath"));
+  //   // if (selectedTravelType == 'OneWay') {
+  //   //   this.flightForm.get("multiPath")?.setValue([])
+      
+  //   // }
+  //   // if (selectedTravelType === 'OneWay') {
+  //   //   const multiPathArray = this.flightForm.get('multiPath') as FormArray;
+  //   //   while (multiPathArray.value['multiPath'].length > 1) {
+  //   //     multiPathArray.value['multiPath'].length = 1 
+  //   //     console.log("kkkkkk",multiPathArray.value['multiPath']);
+  //   //   }
+  //   // }
+  // }
 
   private setTravelTypeListener() {
     const returnDateCtrl = this.flightForm.controls.returnDate;
