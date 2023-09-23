@@ -33,7 +33,7 @@ export class ReactiveFormComponent implements OnInit {
   }));
 
   get travelType(): TravelTypesEnum {
-    return this.flightForm.get('travelType')?.value as any;
+    return this.flightForm.controls.travelType?.value as any;
   }
 
   constructor(private fb: FormBuilder, private router: Router) { }
@@ -57,9 +57,7 @@ export class ReactiveFormComponent implements OnInit {
 
   private setTravelTypeListener() {
     const returnDateCtrl = this.flightForm.controls.returnDate;
-    this.flightForm
-      .get('travelType')
-      ?.valueChanges.pipe(
+    this.flightForm.controls.travelType?.valueChanges.pipe(
         startWith(TravelTypesEnum.OneWay),
         distinctUntilChanged(),
         skip(1)

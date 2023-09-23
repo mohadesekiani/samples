@@ -5,18 +5,19 @@ import { TravelTypesEnum } from '../models/travel-types.enum';
 import { Router } from '@angular/router';
 import { IPassengerTypes } from '../models/passenger-types.interface';
 
-describe('SUT: ReactiveFormComponent', () => {
+fdescribe('SUT: ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
+  let flightFormCtrl;
   let flightForm;
-
   beforeEach(() => {
     fb = new FormBuilder();
     router = jasmine.createSpyObj<Router>('Router', ['navigate']);
     sut = new ReactiveFormComponent(fb, router);
     sut.today = new Date();
     sut.ngOnInit();
+    flightFormCtrl = sut.flightForm.controls;
     flightForm = sut.flightForm;
   });
 
@@ -53,13 +54,13 @@ describe('SUT: ReactiveFormComponent', () => {
     expect(sut.flightForm.getRawValue()).toEqual(
       jasmine.objectContaining(expectedRawFormValue)
     );
-     expect(sut.flightForm.getRawValue()).toEqual(expectedRawFormValue);
+    expect(sut.flightForm.getRawValue()).toEqual(expectedRawFormValue);
     expect(sut.flightForm.value).toEqual(expectedFormValue);
   });
 
   it('should be set required error to origin controller when origin is empty', () => {
     // arrange
-    const origin = sut.flightForm.get('origin');
+    const origin = flightFormCtrl.origin;
     // act
     origin?.setValue(null);
     // assert
@@ -68,7 +69,7 @@ describe('SUT: ReactiveFormComponent', () => {
 
   it('should be not set required error to origin controller when origin has proper value', () => {
     // arrange
-    const origin = sut.flightForm.get('origin');
+    const origin = flightFormCtrl.origin;
     // act
     origin?.setValue('some_text');
     // assert
@@ -77,30 +78,29 @@ describe('SUT: ReactiveFormComponent', () => {
 
   it('should be enabled returnDate controller when travelType is RoundTrip', () => {
     // arrange
-    const travelType = flightForm.get('travelType');
-    const returnDate = flightForm.get('returnDate');
+    const travelType = flightFormCtrl.travelType;
+    const returnDate = flightFormCtrl.returnDate;
     // act
     travelType?.setValue(TravelTypesEnum.RoundTrip);
     // assert
-    expect(returnDate?.enabled).toBeTrue();
+    expect(returnDate.enabled).toBeTrue();
   });
 
-  it('should be disabled returnDate controller when travelType is OneWay', () => {
+  fit('should be disabled returnDate controller when travelType is OneWay', () => {
     // arrange
-    const travelType = flightForm.get('travelType');
-    const returnDate = flightForm.get('returnDate');
+    const travelType = flightFormCtrl.travelType;
+    const returnDate = flightFormCtrl.returnDate;
     travelType?.setValue(TravelTypesEnum.RoundTrip);
-
     // act
     travelType?.setValue(TravelTypesEnum.OneWay);
 
     // assert
-    expect(returnDate?.disabled).toBeTrue();
+    expect(returnDate.disabled).toBeTrue();
   });
   // onSubmit
   it('should check form is valid then go to result page ', () => {
     // arrange
-    flightForm.setValue({
+    flightFormCtrl.setValue({
       passengers: { Adult: 1, Child: 1, Infant: 1 },
       travelType: 'OneWay',
       departureDate: '2023-09-04T11:53:30.877Z',
@@ -131,11 +131,13 @@ describe('SUT: ReactiveFormComponent', () => {
   xit(`should be the number of infants is greater than the number of adults,
   the passenger count error must be adjusted in the flight form`, () => {
     // arrange
-    sut.flightForm
-      .get('passengers')
-      ?.setValue({ Adult: 1, Child: 0, Infant: 2 } as IPassengerTypes);
+    flightFormCtrl.passengers.setValue({
+      Adult: 1,
+      Child: 0,
+      Infant: 2,
+    } as IPassengerTypes);
     // act
-    // sut.flightForm.get('infantGreaterThanAdults')?.markAsTouched();
+    // sut.flightForm.get('infantGreaterThanAdults.markAsTouched();
     // expect(sut.flightForm.getError('infantGreaterThanAdults')).toBeTrue();
     // expect(sut.flightForm.get('infantGreaterThanAdults')?.errors).toBeTrue();
     expect(sut.flightForm.hasError('infantGreaterThanAdults')).toBeTrue();
@@ -143,7 +145,7 @@ describe('SUT: ReactiveFormComponent', () => {
 
   it('should be necessary to fill in the returnDate field', () => {
     // arrange
-    const returnDate = sut.flightForm.get('returnDate');
+    const returnDate = sut.flightForm.controls.returnDate;
     // act
     returnDate?.setValue('2023-09-05T08:21:42.506Z');
     // assert

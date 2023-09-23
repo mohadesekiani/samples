@@ -49,10 +49,10 @@ it('should test the presence of the form', () => {
     //act
     fixture.detectChanges();
     //assert
-    expect(sut.form.get('Adult')).toBe(adultCtrl.control);
+    expect(sut.form.controls.Adult).toBe(adultCtrl.control);
     // FIXME
-    expect(sut.form.get('Child')).toBe(ChildCtrl.control);
-    expect(sut.form.get('Infant')).toBe(InfantCtrl.control);
+    expect(sut.form.controls.Child).toBe(ChildCtrl.control);
+    expect(sut.form.controls.Infant).toBe(InfantCtrl.control);
   });
 
 });

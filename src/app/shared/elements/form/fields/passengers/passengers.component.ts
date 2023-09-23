@@ -10,6 +10,7 @@ import {
 import { isEqual } from 'lodash-es';
 import { distinctUntilChanged } from 'rxjs';
 import { CustomValidators } from 'src/app/core/validations/Custom.validators';
+import { PassengerTypesEnum } from 'src/app/models/general-types.enum';
 import { IForm, ISearchPassenger } from 'src/app/models/search-types.interface';
 
 @Component({
@@ -62,8 +63,8 @@ export class PassengersComponent implements ControlValueAccessor {
   //   ctrl?.setValue(ctrl.value + 1);
   //   this.refersValue();
   // }
-  getInfantError(item: string) {
-    return item == 'Infant' && this.form.controls['Infant'].hasError('max');
+  getInfantError(item: string) {    
+    return item == PassengerTypesEnum.Infant && this.form.controls.Infant.hasError('max');
   }
 
   constructor(private fb: FormBuilder) { }

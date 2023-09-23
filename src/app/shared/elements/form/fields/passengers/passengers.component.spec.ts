@@ -46,7 +46,7 @@ describe('SUT: PassengersComponent', () => {
       Infant: null,
     });
     // assert
-    expect(sut.form.get('Adult')?.hasError('required')).toBeTrue();
+    expect(sut.form.controls.Adult?.hasError('required')).toBeTrue();
   });
 
   it('should be not set required error to passengers controller when passengers has proper value ', () => {
@@ -73,43 +73,43 @@ describe('SUT: PassengersComponent', () => {
 
   it(`should set max error on Infant when is greater than Adult in simple way`, () => {
     // arrange
-    sut.form?.get('Adult')?.setValue(1);
+    sut.form.controls.Infant.setValue(1);
 
     // action
-    sut.form?.get('Infant')?.setValue(3);
+    sut.form.controls.Infant.setValue(3);
 
     // assert
 
-    expect(sut.form.get('Infant')?.hasError('max')).toBeTrue();
+    expect(sut.form.controls.Infant?.hasError('max')).toBeTrue();
     // expect(sut.errorMessage).toEqual({ actual: 3, max: 1 });
   });
 
   it(`should set max error on Infant when is greater than Adult in advance way`, () => {
     // arrange
-    sut.form?.get('Adult')?.setValue(1);
-    sut.form?.get('Infant')?.setValue(3);
+    sut.form.controls.Adult.setValue(1);
+    sut.form.controls.Infant.setValue(3);
 
     // act
-    sut.form?.get('Adult')?.setValue(2);
+    sut.form.controls.Adult.setValue(2);
 
     // assert
-    expect(sut.form.get('Infant')?.hasError('max')).toBeTrue();
+    expect(sut.form.controls.Infant?.hasError('max')).toBeTrue();
 
     // 
-    let errorMessage = sut.form.get('Infant')?.getError('max');
+    let errorMessage = sut.form.controls.Infant?.errors.max;
     // expect(errorMessage).toEqual({ actual: 3, max: 2 });
   });
 
   it(`should not set max error on Infant when is equal or less than Adult`, () => {
     // arrange
-    sut.form?.get('Adult')?.setValue(1);
-    sut.form?.get('Infant')?.setValue(3);
+    sut.form.controls.Adult.setValue(1);
+    sut.form.controls.Infant.setValue(3);
 
     // act
-    sut.form?.get('Adult')?.setValue(3);
+    sut.form.controls.Adult.setValue(3);
     // assert
-    expect(sut.form.get('Infant')?.invalid).toBeFalse();
-    expect(sut.form.get('Infant')?.hasError('max')).toBeFalsy();
+    expect(sut.form.controls.Infant.invalid).toBeFalse();
+    expect(sut.form.controls.Infant.hasError('max')).toBeFalsy();
   });
 
   xit('should update the value property and call onChange, markAsTouched', async () => {

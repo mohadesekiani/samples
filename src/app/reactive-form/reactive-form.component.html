@@ -15,7 +15,7 @@
         ></app-passengers>
         <span
           class="passengers-error"
-          *ngIf="flightForm.get('passengers')?.invalid"
+          *ngIf="flightForm.controls.passengers?.invalid"
           >passengers is invalid</span
         >
       </div>
