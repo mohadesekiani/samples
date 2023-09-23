@@ -2,5 +2,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.mat-mdc-menu-panel {
+  position: absolute;
+  left: -500px;
+  padding: 5px;
+  width: 500px !important;
+  min-width: 300px !important;
+  max-width: 500px !important;
+  align-items: center;
+}

@@ -15,50 +15,39 @@
       </span>
     </div>
     <div>
-      <button id="btnPassenger" (click)="toggleDropDown()">
+      <button
+        mat-button
+        [matMenuTriggerFor]="menu"
+        id="btnPassenger"
+        (click)="toggleDropDown()"
+      >
         <i class="fa fa-users"></i>
       </button>
-    </div>
-    <div
-      class="bg-white"
-      *ngIf="showDrop"
-      id="drop"
-      style="width: 100%"
-      [formGroup]="form"
-    >
-      <div
-        id="dropItem"
-        *ngFor="let item of passenger"
-        class="flex flex-wrap my-4 mx-auto"
-        style="text-align: center"
-      >
-        <span class="font-bold py-2 px-4 mx-4 w-1/2">{{ item.name }}</span>
-        <app-number-passengers
-          [formControlName]="item.name"
-          [attr.item-id]="item.name"
-        ></app-number-passengers>
-        <span *ngIf="getInfantError(item.name)" class="error-message">
-          actual:{{form.controls['Infant'].getError('max').actual}}
-          max:{{form.controls['Infant'].getError('max').max}}
-        </span>
-        <!-- 
-        <button id="btnIncr"
-                (click)="increased(item)"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+</button>
-
-        <input type="number"
-               style="border: 1px solid gray"
-               [formControlName]="item.name"
-               [id]="item.name" />
-
-        <button id="btnDecr"
-                (click)="decrees(item)"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">-</button> -->
-      </div>
+      <mat-menu #menu="matMenu">
+        <ng-container
+          id="drop"
+          [formGroup]="form"
+          *ngFor="let item of passenger"
+        >
+          <div class="flex-container">
+            <span class="font-bold py-2 px-4 mx-4 w-1/2 flex-item-left" >{{ item.name }}</span>
+            <app-number-passengers
+            class="flex-item-right"
+              [formControlName]="item.name"
+              [attr.item-id]="item.name"
+              (click)="stopPropagation($event)"
+            ></app-number-passengers>
+          </div>
+          <span *ngIf="getInfantError(item.name)" class="error-message">
+            actual:{{ form.controls["Infant"].getError("max").actual }} max:{{
+              form.controls["Infant"].getError("max").max
+            }}
+          </span>
+        </ng-container>
+      </mat-menu>
     </div>
   </div>
 </div>
-
 <div *ngIf="form.hasError('max')" class="error-message">
   Maximum Infant count should not exceed Adult count. Actual Infant count:
   {{ form.getError("max")?.actual }}

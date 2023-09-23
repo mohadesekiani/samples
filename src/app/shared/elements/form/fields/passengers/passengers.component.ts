@@ -137,4 +137,7 @@ export class PassengersComponent implements ControlValueAccessor {
   syncInnerFormAndControl() {
     this.form.patchValue(this.oldValue);
   }
+  stopPropagation(event: Event) {
+    event.stopPropagation();
+  }
 }
