@@ -94,12 +94,15 @@ export class MultiPathComponent implements ControlValueAccessor {
     this.form.controls.travelType?.valueChanges.subscribe((travelType) => {
       this._travelType = travelType;
       this.onTravelTypeChange();
-      //TODO
-      if (travelType === TravelTypesEnum.MultiPath && this.counter < 1){
-        this.addNewRow();
-      }
-
+      this.conditionFirstAddedRow(travelType);
     });
+  }
+
+  private conditionFirstAddedRow(travelType) {
+    if (travelType === TravelTypesEnum.MultiPath && this.counter < 1) {
+      this.addNewRow();
+    }
+    return;
   }
 
   addNewRow() {
