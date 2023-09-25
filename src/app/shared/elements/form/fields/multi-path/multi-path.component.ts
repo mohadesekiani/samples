@@ -25,6 +25,9 @@ import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
 })
 export class MultiPathComponent implements ControlValueAccessor {
   private _travelType = TravelTypesEnum.OneWay;
+  private counter: number = 0;
+  RoundTripTravel = TravelTypesEnum.RoundTrip;
+  MultiPathTravel = TravelTypesEnum.MultiPath;
   @Input() get travelType(): TravelTypesEnum {
     return this._travelType;
   }
@@ -45,11 +48,11 @@ export class MultiPathComponent implements ControlValueAccessor {
     return this.form.controls.routes as FormArray;
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  onChange = (value) => { };
+  onChange = (value) => {};
 
-  onTouched = () => { };
+  onTouched = () => {};
 
   writeValue(obj: any): void {
     this.form.patchValue(obj);
@@ -68,13 +71,19 @@ export class MultiPathComponent implements ControlValueAccessor {
 
   ngOnInit(): void {
     this.createForm();
-    this.addNewRow();
   }
 
   createForm() {
     this.form = this.fb.group<IForm<ISearchMultiPath>>({
       travelType: [TravelTypesEnum.OneWay],
-      routes: this.fb.array([]),
+      routes: this.fb.array([
+        this.fb.group({
+          origin: [null, [Validators.required]],
+          destination: [null, [Validators.required]],
+          departureDate: [null],
+          returnDate: [null],
+        }),
+      ]),
     });
 
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
@@ -82,32 +91,38 @@ export class MultiPathComponent implements ControlValueAccessor {
       this.onTouched();
     });
 
-    this.form.controls.travelType?.valueChanges.subscribe(travelType => {
+    this.form.controls.travelType?.valueChanges.subscribe((travelType) => {
       this._travelType = travelType;
       this.onTravelTypeChange();
+      //TODO
+      if (travelType === TravelTypesEnum.MultiPath && this.counter < 1){
+        this.addNewRow();
+      }
+
     });
   }
 
   addNewRow() {
+    this.counter++;
     const newRow = this.fb.group({
       origin: [null, [Validators.required]],
       destination: [null, [Validators.required]],
       departureDate: [null],
       returnDate: [null],
     });
+
     this.routes.push(newRow);
   }
 
   private onTravelTypeChange() {
     if (this._travelType !== TravelTypesEnum.MultiPath) {
-      this.routes.controls.slice(1).forEach(x => {
+      this.routes.controls.slice(1).forEach((x) => {
         x.disable();
       });
 
       return;
     }
-
-    this.routes.controls.slice(1).forEach(x => {
+    this.routes.controls.slice(1).forEach((x) => {
       x.enable();
     });
   }

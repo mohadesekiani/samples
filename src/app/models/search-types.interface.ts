@@ -1,3 +1,5 @@
+import { TravelTypesEnum } from "./travel-types.enum";
+
 export type IForm<T> = {
   [K in keyof T]?: any;
 };
@@ -17,6 +19,6 @@ export interface ISearchPassenger {
   Infant: number;
 }
 export interface ISearchMultiPath {
-  travelType:string;
+  travelType:TravelTypesEnum;
   routes:any;
 }

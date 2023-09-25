@@ -17,7 +17,7 @@ export class ReactiveFormComponent implements OnInit {
     value,
   }));
 
-  flightForm = this.formCreator();
+  flightForm = this.createForm();
   today = new Date();
   showDrop = false;
   passenger: Array<any> = [
@@ -42,7 +42,7 @@ export class ReactiveFormComponent implements OnInit {
     this.setTravelTypeListener();
   }
 
-  private formCreator() {
+  private createForm() {
     return this.fb.group<IForm<ISearchFlight>>({
       passengers: [null, [Validators.required]],
       travelType: [TravelTypesEnum.OneWay],

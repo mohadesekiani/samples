@@ -17,7 +17,7 @@
             <app-datepicker formControlName="departureDate"
                             placeholder="your departure date"
                             label="departure Date" />
-            <app-datepicker formControlName="returnDate"
+            <app-datepicker *ngIf="form.value.travelType === RoundTripTravel" formControlName="returnDate"
                             placeholder="your return date"
                             label="return Date" />
           </div>
@@ -26,7 +26,7 @@
     </ng-container>
   </div>
   <div>
-    <button *ngIf="form.value.travelType == 'MultiPath'"
+    <button *ngIf="form.value.travelType == MultiPathTravel"
             (click)="addNewRow()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
       add

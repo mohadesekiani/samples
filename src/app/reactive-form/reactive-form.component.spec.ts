@@ -5,7 +5,7 @@ import { TravelTypesEnum } from '../models/travel-types.enum';
 import { Router } from '@angular/router';
 import { IPassengerTypes } from '../models/passenger-types.interface';
 
-fdescribe('SUT: ReactiveFormComponent', () => {
+describe('SUT: ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
@@ -86,7 +86,7 @@ fdescribe('SUT: ReactiveFormComponent', () => {
     expect(returnDate.enabled).toBeTrue();
   });
 
-  fit('should be disabled returnDate controller when travelType is OneWay', () => {
+  it('should be disabled returnDate controller when travelType is OneWay', () => {
     // arrange
     const travelType = flightFormCtrl.travelType;
     const returnDate = flightFormCtrl.returnDate;
