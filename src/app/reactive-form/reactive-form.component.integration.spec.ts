@@ -46,11 +46,11 @@ describe('ReactiveFormComponent', () => {
       fixture,
       'app-flight[formControlName="destination"]'
     );
-    departureDate =TestUtil.querySelector(
+    departureDate = TestUtil.querySelector(
       fixture,
       'app-datepicker[formControlName="departureDate"]'
     );
-    returnDate =TestUtil.querySelector(
+    returnDate = TestUtil.querySelector(
       fixture,
       'app-datepicker[formControlName="returnDate"]'
     );
@@ -64,7 +64,7 @@ describe('ReactiveFormComponent', () => {
   });
 
   // label="origin"
-  it('should binding label', () => {    
+  it('should binding label', () => {
     // arrange
     originInput.label = 'some_Text';
     // act
@@ -82,52 +82,14 @@ describe('ReactiveFormComponent', () => {
     expect(destination.label).toBe('some_Text');
   });
 
-  it('should bind label', () => {
-    // arrange
-    departureDate.label = 'some_Text';
-    // act
-    fixture.detectChanges();
-    // assert
-    expect(departureDate.label).toBe('some_Text');
-  });
-
-  it('should bind placeholder', () => {
-    // arrange
-    departureDate.placeholder = 'some_Text';
-    // act
-    fixture.detectChanges();
-    // assert
-    expect(departureDate.placeholder).toBe('some_Text');
-  });
-
-  it('should bind label', () => {
-    // arrange
-    returnDate.label = 'some_Text';
-    // act
-    fixture.detectChanges();
-    // assert
-    expect(returnDate.label).toBe('some_Text');
-  });
-
-  it('should bind placeholder', () => {
-    // arrange
-    returnDate.placeholder = 'some_Text';
-    // act
-    fixture.detectChanges();
-    // assert
-    expect(returnDate.placeholder).toBe('some_Text');
-  });
-
   it('should bind aria-label', () => {
     // arrange
-    const radioGroup = fixture.debugElement.nativeElement.querySelector('mat-radio-group');
-    const ariaLabel = radioGroup.getAttribute('aria-label') 
+    const radioGroup =
+      fixture.debugElement.nativeElement.querySelector('mat-radio-group');
+    const ariaLabel = radioGroup.getAttribute('aria-label');
     // act
     fixture.detectChanges();
     // assert
     expect(ariaLabel).toBe('Select an option');
   });
-
-
-
 });

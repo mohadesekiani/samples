@@ -40,4 +40,50 @@ describe('SUT: MultiPathComponent', () => {
     // assert
     expect(sut.form.value).toEqual(expectedFormValue);
   });
+
+  it('should be when selected MultiPath length formArray to be two', () => {
+    //arrange
+    sut.form.controls.travelType.setValue(TravelTypesEnum.OneWay);
+
+    // act
+    sut.form.controls.travelType.setValue(TravelTypesEnum.MultiPath);
+
+    // assert
+    expect(sut.form.controls.routes.length).toBe(2);
+  });
+
+  it('should be when called addNewRow pushed to formArray ', () => {
+    //arrange
+    sut.form.controls.travelType.setValue(TravelTypesEnum.OneWay);
+
+    // act
+    sut.form.controls.travelType.setValue(TravelTypesEnum.MultiPath);
+    sut.addNewRow();
+
+    // assert
+    expect(sut.form.controls.routes.length).toBe(3);
+  });
+
+  it('should enable routes when _travelType is MultiPath', () => {
+    //arrange
+    sut.form.controls.travelType.setValue(TravelTypesEnum.OneWay);
+
+    // act
+    sut.form.controls.travelType.setValue(TravelTypesEnum.MultiPath);
+    sut.addNewRow();
+
+    // assert
+    for (let i = 0; i < sut.routes.length; i++) {
+      expect(sut.routeIsActive(i)).toBe(true);
+    }
+  });
+
+  it('should disable routes when _travelType is not MultiPath', () => {
+    //arrange
+    sut.form.controls.travelType.setValue(TravelTypesEnum.OneWay);
+
+    // assert
+    expect(sut.routeIsActive(0)).toBe(true);
+    expect(sut.routeIsActive(1)).toBe(false);
+  });
 });

@@ -1,5 +1,5 @@
 import { ComponentFixture } from "@angular/core/testing";
-import { FormControlDirective, FormControlName } from "@angular/forms";
+import { FormArrayName, FormControlDirective, FormControlName } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 
 export class TestUtil {
@@ -10,7 +10,9 @@ export class TestUtil {
   static formControl(fixture: ComponentFixture<any>, selector: string) {
     return this.debugElement(fixture, selector).injector.get<any>(FormControlName);
   }
-
+  static formArray(fixture: ComponentFixture<any>, selector: string) {
+    return this.debugElement(fixture, selector).injector.get<any>(FormArrayName);
+  }
   static queryElement(fixture: ComponentFixture<any>, cssSelector: string, directiveElement: any) {
     return fixture.debugElement.query(By.css(cssSelector)).injector.get<any>(directiveElement);
   }

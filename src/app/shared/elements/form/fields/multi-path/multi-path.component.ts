@@ -25,7 +25,6 @@ import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
 })
 export class MultiPathComponent implements ControlValueAccessor {
   private _travelType = TravelTypesEnum.OneWay;
-  private counter: number = 0;
   RoundTripTravel = TravelTypesEnum.RoundTrip;
   MultiPathTravel = TravelTypesEnum.MultiPath;
   @Input() get travelType(): TravelTypesEnum {
@@ -76,14 +75,17 @@ export class MultiPathComponent implements ControlValueAccessor {
   createForm() {
     this.form = this.fb.group<IForm<ISearchMultiPath>>({
       travelType: [TravelTypesEnum.OneWay],
-      routes: this.fb.array([
-        this.fb.group({
-          origin: [null, [Validators.required]],
-          destination: [null, [Validators.required]],
-          departureDate: [null],
-          returnDate: [null],
-        }),
-      ]),
+      routes: this.fb.array(
+        [
+          this.fb.group({
+            origin: [null, [Validators.required]],
+            destination: [null, [Validators.required]],
+            departureDate: [null, [Validators.required]],
+            returnDate: [null, [Validators.required]],
+          }),
+        ],
+        [Validators.required]
+      ),
     });
 
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
@@ -94,19 +96,13 @@ export class MultiPathComponent implements ControlValueAccessor {
     this.form.controls.travelType?.valueChanges.subscribe((travelType) => {
       this._travelType = travelType;
       this.onTravelTypeChange();
-      this.conditionFirstAddedRow(travelType);
     });
-  }
 
-  private conditionFirstAddedRow(travelType) {
-    if (travelType === TravelTypesEnum.MultiPath && this.counter < 1) {
-      this.addNewRow();
-    }
-    return;
+    this.addNewRow();
+    this.onTravelTypeChange();
   }
 
   addNewRow() {
-    this.counter++;
     const newRow = this.fb.group({
       origin: [null, [Validators.required]],
       destination: [null, [Validators.required]],
@@ -117,9 +113,9 @@ export class MultiPathComponent implements ControlValueAccessor {
     this.routes.push(newRow);
   }
 
-  private onTravelTypeChange() {
+  private onTravelTypeChange() {    
     if (this._travelType !== TravelTypesEnum.MultiPath) {
-      this.routes.controls.slice(1).forEach((x) => {
+      this.routes.controls.slice(1).forEach((x) => {        
         x.disable();
       });
 

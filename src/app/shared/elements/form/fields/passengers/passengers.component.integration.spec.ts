@@ -27,10 +27,9 @@ describe('SUT(Integration): PassengersComponent', () => {
 
   // FIXME
   // check form is exist
-it('should test the presence of the form', () => {
-  expect(sut.form).toBeTruthy();
-
-});
+  it('should test the presence of the form', () => {
+    expect(sut.form).toBeTruthy();
+  });
 
   xit('should set showDrop when click', () => {
     sut.showDrop = false;
@@ -39,13 +38,14 @@ it('should test the presence of the form', () => {
     // expect(sut.showDrop).toBe(true);
   });
 
-  it('should be test for binding form controls', () => {
-    sut.showDrop = true;
-    fixture.detectChanges();
+  it('should be test for binding form controls 68y', () => {
+    // sut.showDrop = true;
+    // fixture.detectChanges();
     const adultCtrl = TestUtil.formControl(fixture, '[item-id=Adult]');
     const ChildCtrl = TestUtil.formControl(fixture, '[item-id=Child]');
     const InfantCtrl = TestUtil.formControl(fixture, '[item-id=Infant]');
-    
+    console.log(adultCtrl);
+
     //act
     fixture.detectChanges();
     //assert
@@ -54,5 +54,4 @@ it('should test the presence of the form', () => {
     expect(sut.form.controls.Child).toBe(ChildCtrl.control);
     expect(sut.form.controls.Infant).toBe(InfantCtrl.control);
   });
-
 });

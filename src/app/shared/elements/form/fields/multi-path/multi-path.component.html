@@ -1,23 +1,26 @@
 <div [formGroup]="form">
   <div>
-    <mat-button-toggle-group formControlName="travelType">
+    <mat-button-toggle-group formControlName="travelType" id="travelType">
       <mat-button-toggle *ngFor="let item of travelTypes"
                          [value]="item.value">{{ item.title }}</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
-  <div formArrayName="routes">
+  <div formArrayName="routes" id="routes">
     <ng-container *ngFor="let item of routes.controls; let i = index">
       <div *ngIf="routeIsActive(i)">
         <div [formGroupName]="i">
           <div class="flex flex-wrap">
-            <app-flight formControlName="origin"
+            <app-flight formControlName="origin" id="origin"
                         label="origin"></app-flight>
-            <app-flight formControlName="destination"
+            <app-flight formControlName="destination" id="destination"
                         label="destination"></app-flight>
             <app-datepicker formControlName="departureDate"
+                            id="departureDate"
                             placeholder="your departure date"
                             label="departure Date" />
-            <app-datepicker *ngIf="form.value.travelType === RoundTripTravel" formControlName="returnDate"
+            <app-datepicker *ngIf="form.value.travelType === RoundTripTravel"
+                            formControlName="returnDate"
+                            id="returnDate"
                             placeholder="your return date"
                             label="return Date" />
           </div>
