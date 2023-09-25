@@ -25,8 +25,7 @@ import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
 })
 export class MultiPathComponent implements ControlValueAccessor {
   private _travelType = TravelTypesEnum.OneWay;
-  RoundTripTravel = TravelTypesEnum.RoundTrip;
-  MultiPathTravel = TravelTypesEnum.MultiPath;
+  travelTypesEnum = TravelTypesEnum;
   @Input() get travelType(): TravelTypesEnum {
     return this._travelType;
   }
@@ -44,14 +43,15 @@ export class MultiPathComponent implements ControlValueAccessor {
   }));
 
   get routes() {
+    // TODO add my interface
     return this.form.controls.routes as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  onChange = (value) => {};
+  onChange = (value) => { };
 
-  onTouched = () => {};
+  onTouched = () => { };
 
   writeValue(obj: any): void {
     this.form.patchValue(obj);
@@ -74,14 +74,17 @@ export class MultiPathComponent implements ControlValueAccessor {
 
   createForm() {
     this.form = this.fb.group<IForm<ISearchMultiPath>>({
+      // TODO remove me
       travelType: [TravelTypesEnum.OneWay],
       routes: this.fb.array(
         [
           this.fb.group({
             origin: [null, [Validators.required]],
             destination: [null, [Validators.required]],
+            //TODO  add custom validator greater than today value
             departureDate: [null, [Validators.required]],
-            returnDate: [null, [Validators.required]],
+            //TODO  add custom validator greater than departureDate value
+            returnDate: [{ value: null, disabled: true }, [Validators.required]],
           }),
         ],
         [Validators.required]
@@ -106,27 +109,52 @@ export class MultiPathComponent implements ControlValueAccessor {
     const newRow = this.fb.group({
       origin: [null, [Validators.required]],
       destination: [null, [Validators.required]],
-      departureDate: [null],
-      returnDate: [null],
+      //TODO  add custom validator greater than prev departureDate value
+      departureDate: [null, [Validators.required]]
     });
 
     this.routes.push(newRow);
   }
 
-  private onTravelTypeChange() {    
+  private onTravelTypeChange() {
+    this.prepareReturnDateState();
+
+    this.prepareMultiPathControlsState();
+  }
+
+  private prepareMultiPathControlsState() {
     if (this._travelType !== TravelTypesEnum.MultiPath) {
-      this.routes.controls.slice(1).forEach((x) => {        
+      this.routes.controls.slice(1).forEach((x) => {
         x.disable();
       });
 
       return;
     }
+
     this.routes.controls.slice(1).forEach((x) => {
       x.enable();
     });
   }
 
+  private prepareReturnDateState() {
+    if (!this.isRoundTrip()) {
+      this.routes.at(0).get('returnDate')?.disable();
+      return;
+    }
+
+    this.routes.at(0).get('returnDate')?.enable();
+  }
+
   routeIsActive(index: number) {
     return this.routes.at(index).enabled;
+  }
+
+  isMultiPath() {
+    return this._travelType === TravelTypesEnum.MultiPath;
+  }
+
+  isRoundTrip() {
+    console.log('isRoundTrip')
+    return this._travelType === TravelTypesEnum.RoundTrip;
   }
 }

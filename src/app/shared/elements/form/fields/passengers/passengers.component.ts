@@ -34,7 +34,7 @@ export class PassengersComponent implements ControlValueAccessor {
   touched = false;
   showDrop = false;
   //rename
-  passenger: Array<any> = [
+  passengers: Array<any> = [
     { value: 0, name: 'Adult' },
     { value: 0, name: 'Child' },
     { value: 0, name: 'Infant' },

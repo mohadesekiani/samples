@@ -114,7 +114,7 @@ describe('SUT: PassengersComponent', () => {
 
   xit('should update the value property and call onChange, markAsTouched', async () => {
     // act
-    sut.passenger = [
+    sut.passengers = [
       { name: 'Adult', value: 2 },
       { name: 'Child', value: 1 },
       { name: 'Infant', value: 0 },
