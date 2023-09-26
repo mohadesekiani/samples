@@ -17,7 +17,7 @@ export class ButtonToggleComponent implements ControlValueAccessor{
 
   constructor() {}
 
-  onChange = (value) => { };
+  onChange = (value:any) => { };
 
   onTouched = () => { };
 

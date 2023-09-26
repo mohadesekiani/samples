@@ -3,12 +3,17 @@ import {
   ControlValueAccessor,
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
-import { IForm, ISearchMultiPath } from 'src/app/models/search-types.interface';
+import {
+  IForm,
+  ISearchMultiPath,
+  ISearchRoute,
+} from 'src/app/models/search-types.interface';
 import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
 
 @Component({
@@ -24,7 +29,7 @@ import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
   ],
 })
 export class MultiPathComponent implements ControlValueAccessor {
-  private _travelType = TravelTypesEnum.OneWay;
+  private _travelType: TravelTypesEnum = TravelTypesEnum.OneWay;
   travelTypesEnum = TravelTypesEnum;
   @Input() get travelType(): TravelTypesEnum {
     return this._travelType;
@@ -47,11 +52,15 @@ export class MultiPathComponent implements ControlValueAccessor {
     return this.form.controls.routes as FormArray;
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  onChange = (value) => { };
+  ngOnChanges(changes: any): void {
+    this.travelTypeChangesUpdate(changes);
+  }
 
-  onTouched = () => { };
+  onChange = (value: any) => {};
+
+  onTouched = () => {};
 
   writeValue(obj: any): void {
     this.form.patchValue(obj);
@@ -75,16 +84,18 @@ export class MultiPathComponent implements ControlValueAccessor {
   createForm() {
     this.form = this.fb.group<IForm<ISearchMultiPath>>({
       // TODO remove me
-      travelType: [TravelTypesEnum.OneWay],
       routes: this.fb.array(
         [
-          this.fb.group({
+          this.fb.group<IForm<ISearchRoute>>({
             origin: [null, [Validators.required]],
             destination: [null, [Validators.required]],
             //TODO  add custom validator greater than today value
             departureDate: [null, [Validators.required]],
             //TODO  add custom validator greater than departureDate value
-            returnDate: [{ value: null, disabled: true }, [Validators.required]],
+            returnDate: [
+              { value: null, disabled: true },
+              [Validators.required],
+            ],
           }),
         ],
         [Validators.required]
@@ -95,25 +106,27 @@ export class MultiPathComponent implements ControlValueAccessor {
       this.onChange(this.form.value);
       this.onTouched();
     });
-
-    this.form.controls.travelType?.valueChanges.subscribe((travelType) => {
-      this._travelType = travelType;
-      this.onTravelTypeChange();
-    });
-
     this.addNewRow();
     this.onTravelTypeChange();
   }
 
   addNewRow() {
-    const newRow = this.fb.group({
+    const newRow = this.fb.group<IForm<ISearchRoute>>({
       origin: [null, [Validators.required]],
       destination: [null, [Validators.required]],
       //TODO  add custom validator greater than prev departureDate value
-      departureDate: [null, [Validators.required]]
+      departureDate: [null, [Validators.required]],
     });
 
     this.routes.push(newRow);
+  }
+
+  routeIsActive(index: number) {
+    return this.routes.at(index).enabled;
+  }
+
+  isMultiPath() {
+    return this._travelType === TravelTypesEnum.MultiPath;
   }
 
   private onTravelTypeChange() {
@@ -141,20 +154,17 @@ export class MultiPathComponent implements ControlValueAccessor {
       this.routes.at(0).get('returnDate')?.disable();
       return;
     }
-
     this.routes.at(0).get('returnDate')?.enable();
   }
 
-  routeIsActive(index: number) {
-    return this.routes.at(index).enabled;
-  }
-
-  isMultiPath() {
-    return this._travelType === TravelTypesEnum.MultiPath;
-  }
-
-  isRoundTrip() {
-    console.log('isRoundTrip')
+  private isRoundTrip() {
     return this._travelType === TravelTypesEnum.RoundTrip;
+  }
+
+  private travelTypeChangesUpdate(changes: any) {
+    if (changes.travelType) {
+      this._travelType = this.travelType;
+      this.onTravelTypeChange();
+    }
   }
 }

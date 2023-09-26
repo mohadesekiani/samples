@@ -27,8 +27,10 @@
       "./node_modules/@types"
     ],
     "types": [
-      "lodash-es"
+      "lodash-es",
+      "jest"
     ]
+
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

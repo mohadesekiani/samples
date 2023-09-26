@@ -25,9 +25,7 @@ export class FlightComponent implements ControlValueAccessor {
   showCityNotFound = true;
   loading = false;
 
-  constructor(
-    private dataService: AbstractDataService
-  ) {
+  constructor(private dataService: AbstractDataService) {
     if (!dataService) {
       throw new Error('dataService is empty');
     }
@@ -38,8 +36,8 @@ export class FlightComponent implements ControlValueAccessor {
     this.markAsTouched();
   }
 
-  onChange = (value) => { };
-  onTouched = () => { };
+  onChange = (value: any) => {};
+  onTouched = () => {};
 
   writeValue(obj: any): void {
     this.value = obj;
@@ -58,7 +56,9 @@ export class FlightComponent implements ControlValueAccessor {
   }
 
   markAsTouched() {
-    if (this.touched) { return; }
+    if (this.touched) {
+      return;
+    }
 
     this.onTouched();
     this.touched = true;
@@ -84,22 +84,21 @@ export class FlightComponent implements ControlValueAccessor {
   private loadData() {
     // todo finalize pipe to this.loading = false;
     this.loading = true;
-    this.dataService.getFakeData(this.filterText)
-      .subscribe({
-        next: (res) => {
-          this.loading = false;
-          this.filteredCities = res;
-        },
-        error: (err) => {
-          this.loading = false;
-        },
-        complete: () => {
-          this.loading = false;
-        },
-      });
+    this.dataService.getFakeData(this.filterText).subscribe({
+      next: (res) => {
+        this.loading = false;
+        this.filteredCities = res;
+      },
+      error: (err) => {
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
   }
 
-  optionSelected(city: any) {
+  optionSelected(city: string) {
     let newValue = city;
     this.value = newValue;
     this.filteredCities = [];

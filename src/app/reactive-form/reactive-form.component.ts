@@ -32,14 +32,16 @@ export class ReactiveFormComponent implements OnInit {
     value,
   }));
 
-  get travelType(): TravelTypesEnum {
+  get travelType(): TravelTypesEnum {    
     return this.flightForm.controls.travelType?.value as any;
   }
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
-    this.setTravelTypeListener();
+    // this.flightForm.controls.travelType?.valueChanges.subscribe((x) => {
+    //   this.flightForm.controls.travelType?.patchValue(x)
+    // });
   }
 
   private createForm() {
@@ -47,28 +49,8 @@ export class ReactiveFormComponent implements OnInit {
       passengers: [null, [Validators.required]],
       travelType: [TravelTypesEnum.OneWay],
       classType: [null],
-      // departureDate: [this.today],
-      // returnDate: [{ value: null, disabled: true }, [Validators.required]],
-      // origin: [null, [Validators.required]],
-      // destination: [null, [Validators.required]],
       routes: [null, [Validators.required]],
     });
-  }
-
-  private setTravelTypeListener() {
-    const returnDateCtrl = this.flightForm.controls.returnDate;
-    this.flightForm.controls.travelType?.valueChanges.pipe(
-        startWith(TravelTypesEnum.OneWay),
-        distinctUntilChanged(),
-        skip(1)
-      )
-      .subscribe((travelType) => {
-        if (travelType == TravelTypesEnum.RoundTrip) {
-          returnDateCtrl?.enable();
-          return;
-        }
-        returnDateCtrl?.disable();
-      });
   }
 
   submit() {

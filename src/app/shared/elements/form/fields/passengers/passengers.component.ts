@@ -39,7 +39,7 @@ export class PassengersComponent implements ControlValueAccessor {
     { value: 0, name: 'Child' },
     { value: 0, name: 'Infant' },
   ];
-  oldValue: any;
+  oldValue!: ISearchPassenger;
 
   //ontic without controlValueAccessor
   // onChildValueChange(newValue: number, item) {
@@ -84,16 +84,19 @@ export class PassengersComponent implements ControlValueAccessor {
 
     this.form.valueChanges
       .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))
-      .subscribe((x) => {
+      .subscribe((x:any) => {        
         this.refersValue();
         setTimeout(() => {
-          if (this.form.valid)
-            this.oldValue = x;
+          this.oldValueValid(x);
         });
+
       });
   }
 
-  onChange = (value) => { };
+  onChange = (value:any) => {
+    console.log(value);
+    
+   };
 
   onTouched = () => { };
 
@@ -138,7 +141,13 @@ export class PassengersComponent implements ControlValueAccessor {
   syncInnerFormAndControl() {
     this.form.patchValue(this.oldValue);
   }
+
   stopPropagation(event: Event) {
     event.stopPropagation();
+  }
+
+  private oldValueValid(x:ISearchPassenger) {    
+    if (this.form.valid)
+      this.oldValue = x;
   }
 }

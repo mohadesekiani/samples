@@ -31,7 +31,7 @@ export class TestUtil {
     return fixture.debugElement.query(By.css(element));
   }
 
-  static querySelector(fixture: ComponentFixture<any>, element) {
+  static querySelector(fixture: ComponentFixture<any>, element:string) {
     const query = fixture.debugElement.nativeElement.querySelector(element)
     return query;
   }

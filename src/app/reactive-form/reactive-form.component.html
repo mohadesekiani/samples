@@ -1,5 +1,14 @@
 <form [formGroup]="flightForm" (submit)="(submit)">
   <div>
+    <mat-button-toggle-group formControlName="travelType" id="travelType">
+      <mat-button-toggle
+        *ngFor="let item of travelTypes"
+        [value]="item.value"
+        >{{ item.title }}</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </div>
+  <div>
     <app-multi-path
       formControlName="routes"
       [travelType]="travelType"
@@ -39,4 +48,3 @@
   <button type="submit" (click)="submit()">Submit</button>
 </form>
 {{ flightForm.value | json }}
-

@@ -10,14 +10,15 @@ import { AbstractDataService } from '../core/services/data/abstract-data.service
 import { AppComponent } from '../app.component';
 import { TestUtil } from '../core/helpers/somtingHelpersTest';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { FlightComponent } from '../shared/elements/form/fields/flight/flight.component';
 
 describe('ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
   let fixture: ComponentFixture<ReactiveFormComponent>;
   let matRadioGroup: MatRadioGroup;
   let matRadioButton: MatRadioButton;
-  let originInput;
-  let destination;
+  let originInput:FlightComponent;
+  let destination:FlightComponent;
   let departureDate;
   let returnDate;
   beforeEach(() => {

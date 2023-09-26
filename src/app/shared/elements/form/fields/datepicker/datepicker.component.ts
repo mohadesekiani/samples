@@ -21,7 +21,6 @@ import { MatDatepicker } from '@angular/material/datepicker';
   ],
 })
 export class DatepickerComponent implements ControlValueAccessor {
-  [x: string]: any;
   @Input() label!: string;
   @Input() min = new Date();
   @Input() max = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
@@ -33,7 +32,7 @@ export class DatepickerComponent implements ControlValueAccessor {
   touched = false;
   // @ViewChild('picker') picker!: MatDatepicker<any> ;
 
-  onChange = (value) => { };
+  onChange = (value:any) => { };
   onTouched = () => { };
 
   writeValue(obj: any): void {
