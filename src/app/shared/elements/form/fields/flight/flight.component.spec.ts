@@ -11,10 +11,10 @@ describe('SUT: FlightComponent', () => {
     getFakeData: of(fakeCities),
   });
   const valueAccessor = jasmine.createSpyObj<{
-    onChange: (e) => {};
+    onChange: (e:any) => {};
     onTouched: () => {};
   }>({
-    onChange: (e) => {},
+    onChange: (e:any) => {},
     onTouched: () => {},
   });
 

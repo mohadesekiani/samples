@@ -10,10 +10,10 @@ describe('SUT: PassengersComponent', () => {
   let fb: FormBuilder;
 
   const valueAccessor = jasmine.createSpyObj<{
-    onChange: (e) => {};
+    onChange: (e:any) => {};
     onTouched: () => {};
   }>({
-    onChange: (e) => { },
+    onChange: (e:any) => { },
     onTouched: () => { },
   });
   beforeEach(() => {

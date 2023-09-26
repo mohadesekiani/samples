@@ -8,12 +8,13 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TestUtil } from '../core/helpers/somtingHelpersTest';
+import { FlightComponent } from '../shared/elements/form/fields/flight/flight.component';
 
 
 describe('TemplateDrivenFormComponent', () => {
   let sut: TemplateDrivenFormComponent;
   let fixture: ComponentFixture<TemplateDrivenFormComponent>;
-  let appFlight;
+  let appFlight:FlightComponent;
   let appDatepicker;
   let appPassengers;
   beforeEach(() => {

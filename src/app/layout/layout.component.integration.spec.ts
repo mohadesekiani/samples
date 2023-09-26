@@ -15,21 +15,34 @@ describe('LayoutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, SharedModule,FormsModule,BrowserModule,RouterTestingModule],
+      imports: [
+        NoopAnimationsModule,
+        SharedModule,
+        FormsModule,
+        BrowserModule,
+        RouterTestingModule,
+      ],
       declarations: [LayoutComponent],
       providers: [AbstractDataService],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
+      schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(LayoutComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();
-
   });
-
 
   it('should create', () => {
     expect(sut).toBeTruthy();
+  });
+
+  it('should be test binding ', () => {
+    // arrange
+    const tab = { title: 'Flight', active: true, route: '/' };
+
+    // act
+    sut.activateTab(tab);
+
+    // assert
+    expect(sut.activateTab).toBeCalled();
   });
 });

@@ -4,10 +4,10 @@ import { NumberPassengersComponent } from './number-passengers.component';
 describe('SUT: NumberPassengersComponent', () => {
   let sut: NumberPassengersComponent;
   const valueAccessor = jasmine.createSpyObj<{
-    onChange: (e) => {};
+    onChange: (e:any) => {};
     onTouched: () => {};
   }>({
-    onChange: (e) => {},
+    onChange: (e:any) => {},
     onTouched: () => {},
   });
 
