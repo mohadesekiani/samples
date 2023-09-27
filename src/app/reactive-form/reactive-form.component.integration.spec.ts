@@ -8,9 +8,9 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AbstractDataService } from '../core/services/data/abstract-data.service';
 import { AppComponent } from '../app.component';
-import { TestUtil } from '../core/helpers/somtingHelpersTest';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { FlightComponent } from '../shared/elements/form/fields/flight/flight.component';
+import { TestUtil } from '../core/helpers/something-helpers-test';
 
 describe('ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;

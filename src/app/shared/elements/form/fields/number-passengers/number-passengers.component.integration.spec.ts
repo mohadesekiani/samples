@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NumberPassengersComponent } from './number-passengers.component';
-import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
+import { TestUtil } from 'src/app/core/helpers/something-helpers-test';
 
 describe('NumberPassengersComponent', () => {
   let sut: NumberPassengersComponent;

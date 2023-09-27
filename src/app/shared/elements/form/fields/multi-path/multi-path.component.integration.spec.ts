@@ -2,7 +2,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MultiPathComponent } from './multi-path.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
 import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { FlightComponent } from '../flight/flight.component';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
+import { TestUtil } from 'src/app/core/helpers/something-helpers-test';
 
 describe('SUT(Integration): MultiPathComponent', () => {
   let sut: MultiPathComponent;

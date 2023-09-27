@@ -15,6 +15,7 @@ import {
   ISearchRoute,
 } from 'src/app/models/search-types.interface';
 import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
+import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-control-value-accessor';
 
 @Component({
   selector: 'app-multi-path',
@@ -28,7 +29,7 @@ import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
     },
   ],
 })
-export class MultiPathComponent implements ControlValueAccessor {
+export class MultiPathComponent extends BaseControlValueAccessor {
   private _travelType: TravelTypesEnum = TravelTypesEnum.OneWay;
   travelTypesEnum = TravelTypesEnum;
   @Input() get travelType(): TravelTypesEnum {
@@ -52,28 +53,19 @@ export class MultiPathComponent implements ControlValueAccessor {
     return this.form.controls.routes as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super()
+  }
 
   ngOnChanges(changes: any): void {
     this.travelTypeChangesUpdate(changes);
   }
 
-  onChange = (value: any) => {};
-
-  onTouched = () => {};
-
-  writeValue(obj: ISearchMultiPath): void {
+  override writeValue(obj: ISearchMultiPath): void {
     this.form.patchValue(obj);
   }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
+  override setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
@@ -104,7 +96,7 @@ export class MultiPathComponent implements ControlValueAccessor {
 
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.onChange(this.form.value);
-      this.onTouched();
+      this.onTouched(null);
     });
     this.addNewRow();
     this.onTravelTypeChange();

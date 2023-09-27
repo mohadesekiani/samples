@@ -12,14 +12,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from '../shared.module';
 import { NumberPassengersComponent } from './form/fields/number-passengers/number-passengers.component';
 import { MultiPathComponent } from './form/fields/multi-path/multi-path.component';
-import { ButtonToggleComponent } from './form/fields/button-toggle/button-toggle.component';
 const COMPONENTS = [
   DatepickerComponent,
   FlightComponent,
   PassengersComponent,
   NumberPassengersComponent,
   MultiPathComponent,
-  ButtonToggleComponent
 ];
 
 @NgModule({

@@ -1,4 +1,3 @@
-import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
 import { NumberPassengersComponent } from './number-passengers.component';
 
 describe('SUT: NumberPassengersComponent', () => {

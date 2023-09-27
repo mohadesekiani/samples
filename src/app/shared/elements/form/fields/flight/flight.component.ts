@@ -1,6 +1,7 @@
 import { Component, HostBinding, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
+import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-control-value-accessor';
 
 @Component({
   selector: 'app-flight',
@@ -14,7 +15,7 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
     },
   ],
 })
-export class FlightComponent implements ControlValueAccessor {
+export class FlightComponent extends BaseControlValueAccessor {
   @Input() label = '';
   value: any = '';
   filterText = '';
@@ -26,6 +27,7 @@ export class FlightComponent implements ControlValueAccessor {
   loading = false;
 
   constructor(private dataService: AbstractDataService) {
+    super();
     if (!dataService) {
       throw new Error('dataService is empty');
     }
@@ -36,22 +38,11 @@ export class FlightComponent implements ControlValueAccessor {
     this.markAsTouched();
   }
 
-  onChange = (value: any) => {};
-  onTouched = () => {};
-
-  writeValue(obj: any): void {
+  override writeValue(obj: any): void {
     this.value = obj;
   }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledStates(isDisabled: boolean): void {
+  override setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
@@ -60,7 +51,7 @@ export class FlightComponent implements ControlValueAccessor {
       return;
     }
 
-    this.onTouched();
+    this.onTouched(null);
     this.touched = true;
   }
 
@@ -73,12 +64,7 @@ export class FlightComponent implements ControlValueAccessor {
       return;
     }
 
-    // const searchValue = this.value.toLowerCase();
     this.loadData();
-
-    // this.showCityNotFound = this.filteredCities.length === 0;
-    // this.showCityNotFound = false;
-    // this.onChange(this.value);
   }
 
   private loadData() {

@@ -2,10 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PassengersComponent } from './passengers.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
 import { FormControlName } from '@angular/forms';
 import { NumberPassengersComponent } from '../number-passengers/number-passengers.component';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { TestUtil } from 'src/app/core/helpers/something-helpers-test';
 
 describe('SUT(Integration): PassengersComponent', () => {
   let sut: PassengersComponent;

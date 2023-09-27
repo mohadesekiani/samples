@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-control-value-accessor';
 
 @Component({
   selector: 'app-datepicker',
@@ -20,7 +21,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
     },
   ],
 })
-export class DatepickerComponent implements ControlValueAccessor {
+export class DatepickerComponent extends BaseControlValueAccessor {
   @Input() label!: string;
   @Input() min = new Date();
   @Input() max = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
@@ -32,22 +33,12 @@ export class DatepickerComponent implements ControlValueAccessor {
   touched = false;
   // @ViewChild('picker') picker!: MatDatepicker<any> ;
 
-  onChange = (value:any) => { };
-  onTouched = () => { };
 
-  writeValue(obj: any): void {
+  override writeValue(obj: any): void {
     this.value = obj;
   }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
+  override setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
@@ -56,7 +47,7 @@ export class DatepickerComponent implements ControlValueAccessor {
       return;
     }
 
-    this.onTouched();
+    this.onTouched(null);
     this.touched = true;
   }
 

@@ -9,7 +9,7 @@ import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent, MatDatepick
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { MatIconButton } from '@angular/material/button';
-import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
+import { TestUtil } from 'src/app/core/helpers/something-helpers-test';
 
 describe('SUT(Integration): DatepickerComponent', () => {
   let sut: DatepickerComponent;

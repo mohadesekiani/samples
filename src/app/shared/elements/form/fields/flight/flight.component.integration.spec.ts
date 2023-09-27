@@ -3,8 +3,8 @@ import { FlightComponent } from './flight.component';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { TestUtil } from 'src/app/core/helpers/somtingHelpersTest';
 import { MatAutocomplete } from '@angular/material/autocomplete';
+import { TestUtil } from 'src/app/core/helpers/something-helpers-test';
 // #1 should be all component have unit test and integration test file
 // #2 prepare selectors and ...
 

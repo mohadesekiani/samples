@@ -23,7 +23,7 @@
       >
         <i class="fa fa-users"></i>
       </button>
-      <mat-menu #menu="matMenu" >
+      <mat-menu #menu="matMenu">
         <ng-container
           id="drop"
           [formGroup]="form"
@@ -41,22 +41,11 @@
             ></app-number-passengers>
           </div>
           <span *ngIf="getInfantError(item.name)" class="error-message">
-            actual:<span >{{ form.controls.Infant.errors.max.actual }}</span> 
-            max:<span>{{form.controls.Infant.errors.max.max}}</span>
+            actual:<span>{{ form.controls.Infant.errors.max.actual }}</span>
+            max:<span>{{ form.controls.Infant.errors.max.max }}</span>
           </span>
         </ng-container>
       </mat-menu>
     </div>
   </div>
 </div>
-<!-- <div *ngIf="form.hasError('max')" class="error-message">
-  Maximum Infant count should not exceed Adult count. Actual Infant count:
-  {{ form.getError("max")?.actual }}
-  <br />
-  Maximum Infant count:
-  {{
-    form.value["Adult"] === null
-      ? "--Please consider some for adult--"
-      : form.getError("max")?.max
-  }}
-</div> -->

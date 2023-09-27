@@ -12,6 +12,7 @@ import { distinctUntilChanged } from 'rxjs';
 import { CustomValidators } from 'src/app/core/validations/Custom.validators';
 import { PassengerTypesEnum } from 'src/app/models/general-types.enum';
 import { IForm, ISearchPassenger } from 'src/app/models/search-types.interface';
+import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-control-value-accessor';
 
 @Component({
   selector: 'app-passengers',
@@ -25,7 +26,7 @@ import { IForm, ISearchPassenger } from 'src/app/models/search-types.interface';
     },
   ],
 })
-export class PassengersComponent implements ControlValueAccessor {
+export class PassengersComponent extends BaseControlValueAccessor {
   errorMessage!: { actual: number; max: number };
   hasError: boolean = false;
   form!: FormGroup<IForm<ISearchPassenger>>;
@@ -63,64 +64,54 @@ export class PassengersComponent implements ControlValueAccessor {
   //   ctrl?.setValue(ctrl.value + 1);
   //   this.refersValue();
   // }
-  getInfantError(item: string) {    
-    return item == PassengerTypesEnum.Infant && this.form.controls.Infant.hasError('max');
+  getInfantError(item: string) {
+    return (
+      item == PassengerTypesEnum.Infant &&
+      this.form.controls.Infant.hasError('max')
+    );
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+    super();
+  }
 
   ngOnInit() {
     this.createForm();
   }
 
   createForm() {
-    this.form = this.fb.group<IForm<ISearchPassenger>>({
-      Adult: [null, [Validators.required]],
-      Child: [null],
-      Infant: [null],
-    }, {
-      validators: [CustomValidators.maxFrom('Infant', 'Adult')],
-    });
+    this.form = this.fb.group<IForm<ISearchPassenger>>(
+      {
+        Adult: [null, [Validators.required]],
+        Child: [null],
+        Infant: [null],
+      },
+      {
+        validators: [CustomValidators.maxFrom('Infant', 'Adult')],
+      }
+    );
 
     this.form.valueChanges
       .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))
-      .subscribe((x:any) => {        
+      .subscribe((x: any) => {
         this.refersValue();
         setTimeout(() => {
           this.oldValueValid(x);
         });
-
       });
   }
 
-  onChange = (value:any) => {
-    console.log(value);
-    
-   };
-
-  onTouched = () => { };
-
-  writeValue(obj: any): void {
+  override writeValue(obj: any): void {
     this.form.patchValue(obj);
   }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-//  override 
- setDisabledState?(isDisabled: boolean): void {
-    // super.setDisabledState(isDisabled);
+  override setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
   markAsTouched() {
     if (!this.touched) {
-      this.onTouched();
+      this.onTouched(null);
       this.touched = true;
     }
   }
@@ -148,8 +139,7 @@ export class PassengersComponent implements ControlValueAccessor {
     event.stopPropagation();
   }
 
-  private oldValueValid(x:ISearchPassenger) {    
-    if (this.form.valid)
-      this.oldValue = x;
+  private oldValueValid(x: ISearchPassenger) {
+    if (this.form.valid) this.oldValue = x;
   }
 }

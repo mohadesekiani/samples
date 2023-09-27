@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-control-value-accessor';
 
 @Component({
   selector: 'app-number-passengers',
@@ -13,22 +14,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class NumberPassengersComponent implements ControlValueAccessor {
+export class NumberPassengersComponent extends BaseControlValueAccessor {
   value: number = 0;
-  onChange!: (value: number) => void;
-  onTouch!: (value: number) => void;
-
-  writeValue(obj: number): void {
+  override writeValue(obj: number): void {
     this.value = obj;
-  }
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: any): void {
-    this.onTouch = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    // throw new Error('Method not implemented.');
   }
   increased() {
     this.value = this.value + 1;
@@ -41,7 +30,7 @@ export class NumberPassengersComponent implements ControlValueAccessor {
     }
     this.value = this.value - 1;
     this.onChange(this.value);
-    this.onTouch(this.value);
+    this.onTouched(this.value);
   }
 
   changeHandler(event: Event) {
@@ -49,6 +38,6 @@ export class NumberPassengersComponent implements ControlValueAccessor {
     const value = target.value;
     this.value = +value;
     this.onChange(this.value);
-    this.onTouch(this.value);
+    this.onTouched(this.value);
   }
 }

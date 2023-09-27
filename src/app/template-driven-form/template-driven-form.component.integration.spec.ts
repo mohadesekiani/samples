@@ -7,8 +7,8 @@ import { SharedModule } from '../shared/shared.module';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TestUtil } from '../core/helpers/somtingHelpersTest';
 import { FlightComponent } from '../shared/elements/form/fields/flight/flight.component';
+import { TestUtil } from '../core/helpers/something-helpers-test';
 
 
 describe('TemplateDrivenFormComponent', () => {
