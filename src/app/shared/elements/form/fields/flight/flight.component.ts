@@ -89,8 +89,6 @@ export class FlightComponent extends BaseControlValueAccessor {
   }
 
   optionSelected(city: any) {
-    console.log(city);
-
     let newValue = city.id;
     let nameValue = city.name;
     this.value = nameValue;
