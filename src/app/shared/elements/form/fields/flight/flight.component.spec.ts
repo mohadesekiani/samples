@@ -22,7 +22,7 @@ describe('SUT: FlightComponent', () => {
     sut = new FlightComponent(dataService);
     sut.registerOnChange(valueAccessor.onChange);
     sut.registerOnTouched(valueAccessor.onTouched);
-    sut.setDisabledStates(false);
+    sut.setDisabledState(false);
   });
 
   it('should create', () => {

@@ -1,6 +1,7 @@
 import { Component, HostBinding, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
+import { ICity } from 'src/app/models/city-type.interface';
 import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-control-value-accessor';
 
 @Component({
@@ -72,8 +73,11 @@ export class FlightComponent extends BaseControlValueAccessor {
     this.loading = true;
     this.dataService.getFakeData(this.filterText).subscribe({
       next: (res) => {
+        this.filteredCities = res.map((city: ICity) => ({
+          id: city.id,
+          name: city.alternateTitle,
+        }));
         this.loading = false;
-        this.filteredCities = res;
       },
       error: (err) => {
         this.loading = false;
@@ -84,12 +88,15 @@ export class FlightComponent extends BaseControlValueAccessor {
     });
   }
 
-  optionSelected(city: string) {
-    let newValue = city;
-    this.value = newValue;
+  optionSelected(city: any) {
+    console.log(city);
+
+    let newValue = city.id;
+    let nameValue = city.name;
+    this.value = nameValue;
     this.filteredCities = [];
     this.showCityNotFound = false;
-    this.onChange(this.value);
+    this.onChange(newValue);
     this.markAsTouched();
   }
 

@@ -18,7 +18,7 @@ export class FakeDataService extends AbstractDataService {
 
   public getFakeData(searchValue: string): Observable<any> {
     return of(
-      fakeData.cities.filter((city) => city.toLowerCase().includes(searchValue.toLowerCase()))
+      fakeData.cities.filter((city) => city.alternateTitle.toLowerCase().includes(searchValue))
     ).pipe(delay(0));
   }
 }
