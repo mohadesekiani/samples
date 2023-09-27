@@ -12,7 +12,7 @@ describe('SUT: ReactiveFormComponent', () => {
   let router: jasmine.SpyObj<Router>;
   beforeEach(() => {
     fb = new FormBuilder();
-    router = jasmine.createSpyObj<Router>('Router', ['navigate']);
+    router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
     sut = new ReactiveFormComponent(fb, router);
     sut.today = new Date();
     sut.ngOnInit();

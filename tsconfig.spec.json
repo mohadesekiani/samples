@@ -2,13 +2,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./out-tsc/spec",
-    "types": [
-      "jasmine",
-      "jest",
-      "@testing-library/jest-dom",
-      "@types/testing-library__jest-dom"
-    ]
+    "outDir": "./out-tsc/spec"
   },
   "include": [
     "src/**/*.spec.ts",

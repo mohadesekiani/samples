@@ -43,6 +43,6 @@ describe('LayoutComponent', () => {
     sut.activateTab(tab);
 
     // assert
-    expect(sut.activateTab).toBeCalled();
+    expect(sut.activateTab).toHaveBeenCalled();
   });
 });

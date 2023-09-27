@@ -62,7 +62,7 @@ export class MultiPathComponent implements ControlValueAccessor {
 
   onTouched = () => {};
 
-  writeValue(obj: any): void {
+  writeValue(obj: ISearchMultiPath): void {
     this.form.patchValue(obj);
   }
 

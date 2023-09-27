@@ -20,12 +20,7 @@
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
     "typeRoots": ["./node_modules/@types"],
-    "types": [
-      "lodash-es",
-      "jasmine",
-      "jest",
-
-    ]
+    "types": ["lodash-es", "jasmine"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
