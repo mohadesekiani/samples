@@ -111,7 +111,7 @@ export class PassengersComponent extends BaseControlValueAccessor {
 
   markAsTouched() {
     if (!this.touched) {
-      this.onTouched(null);
+      this.onTouched();
       this.touched = true;
     }
   }

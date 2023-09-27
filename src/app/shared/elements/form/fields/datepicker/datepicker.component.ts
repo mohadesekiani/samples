@@ -47,7 +47,7 @@ export class DatepickerComponent extends BaseControlValueAccessor {
       return;
     }
 
-    this.onTouched(null);
+    this.onTouched();
     this.touched = true;
   }
 

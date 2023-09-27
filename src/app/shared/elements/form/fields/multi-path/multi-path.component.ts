@@ -54,7 +54,7 @@ export class MultiPathComponent extends BaseControlValueAccessor {
   }
 
   constructor(private fb: FormBuilder) {
-    super()
+    super();
   }
 
   ngOnChanges(changes: any): void {
@@ -72,31 +72,45 @@ export class MultiPathComponent extends BaseControlValueAccessor {
   ngOnInit(): void {
     this.createForm();
   }
+  private createInitialRoutes(): FormArray {
+    const initialRoute = this.fb.group<IForm<ISearchRoute>>({
+      origin: [null, [Validators.required]],
+      destination: [null, [Validators.required]],
+      //TODO  add custom validator greater than today value
+      departureDate: [null, [Validators.required]],
+      //TODO  add custom validator greater than departureDate value
+      returnDate: [{ value: null, disabled: true }, [Validators.required]],
+    });
 
+    const routesArray = this.fb.array([initialRoute]);
+
+    return routesArray;
+  }
   createForm() {
     this.form = this.fb.group<IForm<ISearchMultiPath>>({
-      // TODO remove me
-      routes: this.fb.array(
-        [
-          this.fb.group<IForm<ISearchRoute>>({
-            origin: [null, [Validators.required]],
-            destination: [null, [Validators.required]],
-            //TODO  add custom validator greater than today value
-            departureDate: [null, [Validators.required]],
-            //TODO  add custom validator greater than departureDate value
-            returnDate: [
-              { value: null, disabled: true },
-              [Validators.required],
-            ],
-          }),
-        ],
-        [Validators.required]
-      ),
+      routes: this.createInitialRoutes(),
+
+      // this.fb.array<IForm<ISearchRoute>>(
+      //   [
+      //     // this.fb.group<IForm<ISearchRoute>>({
+      //     //   origin: [null, [Validators.required]],
+      //     //   destination: [null, [Validators.required]],
+      //     //   //TODO  add custom validator greater than today value
+      //     //   departureDate: [null, [Validators.required]],
+      //     //   //TODO  add custom validator greater than departureDate value
+      //     //   returnDate: [
+      //     //     { value: null, disabled: true },
+      //     //     [Validators.required],
+      //     //   ],
+      //     // }),
+      //   ],
+      //   [Validators.required]
+      // ),
     });
 
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
       this.onChange(this.form.value);
-      this.onTouched(null);
+      this.onTouched();
     });
     this.addNewRow();
     this.onTravelTypeChange();

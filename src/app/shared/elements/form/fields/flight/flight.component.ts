@@ -52,7 +52,7 @@ export class FlightComponent extends BaseControlValueAccessor {
       return;
     }
 
-    this.onTouched(null);
+    this.onTouched();
     this.touched = true;
   }
 

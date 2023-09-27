@@ -87,13 +87,11 @@ describe('SUT(Integration): MultiPathComponent', () => {
     expect(departureDateInput['placeholder']).toBe(someText);
   });
 
-  it('should be test for binding form controls', () => {
+  it('should be test for binding form controls =====', () => {
     // arrange
     const index: number = 0;
     sut.routeIsActive(index);
-    // sut.form.controls.travelType.setValue(TravelTypesEnum.RoundTrip);
     fixture.detectChanges();
-    const travelTypeCtrl = TestUtil.formControl(fixture, '[id = travelType]');
     const routesCtrl = TestUtil.formArray(fixture, '[id = routes]');
     const originCtrl = TestUtil.formControl(fixture, '[id = origin]');
     const destinationCtrl = TestUtil.formControl(fixture, '[id = destination]');
@@ -104,7 +102,6 @@ describe('SUT(Integration): MultiPathComponent', () => {
     const returnDateCtrl = TestUtil.formControl(fixture, '[id = returnDate]');
 
     //assert
-    // expect(sut.form.controls.travelType).toBe(travelTypeCtrl.control);
     expect(sut.routes.value).toBe(routesCtrl.value);
     expect(sut.routes.controls).toEqual(routesCtrl.control.controls);
     expect(sut.form.controls.routes.at(index).controls.origin).toBe(
@@ -116,7 +113,7 @@ describe('SUT(Integration): MultiPathComponent', () => {
     expect(sut.form.controls.routes.at(index).controls.departureDate).toBe(
       departureDateCtrl.control
     );
-    expect(sut.form.controls.routes.at(0).controls.returnDate).toBe(
+    expect(sut.form.controls.routes.at(index).controls.returnDate).toBe(
       returnDateCtrl.control
     );
   });

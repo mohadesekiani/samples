@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { ClassTypesEnum } from './class-types.enum';
 import { TravelTypesEnum } from './travel-types.enum';
 
@@ -16,10 +17,10 @@ export interface ISearchPassenger {
   Infant: number;
 }
 export interface ISearchRoute {
-  origin: string | null;
-  destination: string;
-  departureDate: Date;
-  returnDate: Date | null;
+  origin: FormControl<string | null>;
+  destination: FormControl<string | null>;
+  departureDate: FormControl<Date | null>;
+  returnDate:  FormControl<Date | null>;
 }
 export interface ISearchMultiPath {
   routes: any;
