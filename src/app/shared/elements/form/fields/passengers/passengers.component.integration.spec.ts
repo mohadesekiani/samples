@@ -21,7 +21,7 @@ describe('SUT(Integration): PassengersComponent', () => {
     sut = fixture.componentInstance;
     fixture.detectChanges();
     btnPassenger = TestUtil.nativeElement(fixture, '#btnPassenger');
-    btnPassengerTrigger=TestUtil.directiveElement(fixture, MatMenuTrigger);
+    btnPassengerTrigger = TestUtil.directiveElement(fixture, MatMenuTrigger);
     fixture.detectChanges();
   });
 
@@ -33,13 +33,6 @@ describe('SUT(Integration): PassengersComponent', () => {
   // check form is exist
   it('should test the presence of the form', () => {
     expect(sut.form).toBeTruthy();
-  });
-
-  xit('should set showDrop when click', () => {
-    sut.showDrop = false;
-    btnPassenger.click();
-    fixture.detectChanges();
-    // expect(sut.showDrop).toBe(true);
   });
 
   it('should be test for binding form controls', () => {

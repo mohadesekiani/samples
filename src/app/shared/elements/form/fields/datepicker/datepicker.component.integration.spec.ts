@@ -1,11 +1,21 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TestBed, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
+import {
+  TestBed,
+  ComponentFixture,
+  tick,
+  fakeAsync,
+} from '@angular/core/testing';
 
 import { MatHint, MatLabel } from '@angular/material/form-field';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { DatepickerComponent } from './datepicker.component';
-import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent, MatDatepickerToggle } from '@angular/material/datepicker';
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerInputEvent,
+  MatDatepickerToggle,
+} from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { MatIconButton } from '@angular/material/button';
@@ -19,24 +29,21 @@ describe('SUT(Integration): DatepickerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserModule,
-        FormsModule,
-        NoopAnimationsModule,
-        SharedModule,
-      ],
-      declarations: [
-        DatepickerComponent
-      ],
+      imports: [BrowserModule, FormsModule, NoopAnimationsModule, SharedModule],
+      declarations: [DatepickerComponent],
       schemas: [
         // NO_ERRORS_SCHEMA
-      ]
+      ],
     });
 
     fixture = TestBed.createComponent(DatepickerComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();
-    datePicker = TestUtil.queryElement(fixture, 'input[matInput]', MatDatepickerInput)
+    datePicker = TestUtil.queryElement(
+      fixture,
+      'input[matInput]',
+      MatDatepickerInput
+    );
     matDatepicker = TestUtil.queryComponent(fixture, 'mat-datepicker');
     ///
     spyOn(sut, 'dateValueChanged');
@@ -67,11 +74,12 @@ describe('SUT(Integration): DatepickerComponent', () => {
     sut.label = 'some_label';
     fixture.detectChanges();
     await fixture.whenStable();
-    const hint: MatHint = TestUtil.directiveElement(fixture, MatHint)
+    const hint: MatHint = TestUtil.directiveElement(fixture, MatHint);
     const input: HTMLInputElement = TestUtil.nativeElement(fixture, '#input');
     // act
-    datePicker.dateChange.emit(
-      { value: payload_value } as MatDatepickerInputEvent<any, any>);
+    datePicker.dateChange.emit({
+      value: payload_value,
+    } as MatDatepickerInputEvent<any, any>);
     fixture.detectChanges();
 
     // assert
@@ -81,21 +89,23 @@ describe('SUT(Integration): DatepickerComponent', () => {
     expect(sut.dateValueChanged).toHaveBeenCalledWith(payload_value);
 
     // expect(sut.value).toBe(payload_value); !!! #1
-  })
+  });
   // disabled
   it('should disabled property input', () => {
     // Arrange
-    const disabledInput: HTMLInputElement = TestUtil.nativeElement(fixture, '#input');
+    const disabledInput: HTMLInputElement = TestUtil.nativeElement(
+      fixture,
+      '#input'
+    );
 
     // Assert
-    expect(disabledInput.disabled).toBe(false)
-
+    expect(disabledInput.disabled).toBe(false);
   });
 
   // (click)="picker.open()"
   it('should open datepicker when clicking the input', () => {
     // Arrange
-    const inputElement = TestUtil.nativeElement(fixture, '#input')
+    const inputElement = TestUtil.nativeElement(fixture, '#input');
 
     // Act
     spyOn(matDatepicker, 'open');
@@ -110,8 +120,10 @@ describe('SUT(Integration): DatepickerComponent', () => {
   // [matDatepicker]="picker"
   it('should bind matDatepicker to picker', () => {
     // Arrange
-    const matDatepickerDirective =
-    TestUtil.directiveElement(fixture, MatDatepicker)
+    const matDatepickerDirective = TestUtil.directiveElement(
+      fixture,
+      MatDatepicker
+    );
 
     // Act
     fixture.detectChanges();
@@ -119,16 +131,5 @@ describe('SUT(Integration): DatepickerComponent', () => {
     // Assert
     expect(matDatepicker).toBeTruthy();
     expect(matDatepickerDirective).toBe(matDatepicker);
-  });
-  // matIconSuffix?
-  xit('should pass the correct "for" value to toggle', () => {
-    // Arrange
-    const toggle = TestUtil.directiveElement(fixture, '[matIconSuffix]');
-
-    // Act
-    fixture.detectChanges();
-
-    // Assert
-    expect(toggle.for).toBe(matDatepicker);
   });
 });

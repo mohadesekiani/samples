@@ -77,17 +77,6 @@ describe('SUT: ReactiveFormComponent', () => {
     expect(window.alert).toHaveBeenCalledWith('فرم ثبت نشد');
   });
 
-  xit(`should be the number of infants is greater than the number of adults,
-  the passenger count error must be adjusted in the flight form`, () => {
-    // arrange
-    sut.flightForm.controls.passengers?.setValue({
-      Adult: 1,
-      Child: 0,
-      Infant: 2,
-    } as IPassengerTypes);
-    // assert
-    expect(sut.flightForm.hasError('infantGreaterThanAdults')).toBeTrue();
-  });
 });
 
 // 9-4-20223

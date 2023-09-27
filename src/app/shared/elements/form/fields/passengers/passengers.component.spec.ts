@@ -10,11 +10,11 @@ describe('SUT: PassengersComponent', () => {
   let fb: FormBuilder;
 
   const valueAccessor = jasmine.createSpyObj<{
-    onChange: (e:any) => {};
+    onChange: (e: any) => {};
     onTouched: () => {};
   }>({
-    onChange: (e:any) => { },
-    onTouched: () => { },
+    onChange: (e: any) => {},
+    onTouched: () => {},
   });
   beforeEach(() => {
     fb = new FormBuilder();
@@ -56,21 +56,6 @@ describe('SUT: PassengersComponent', () => {
     expect(sut.form?.hasError('required')).toBeFalse();
   });
 
-  // xit(`should be the number of infants is greater than the number of adults,
-  // the passenger count error must be adjusted in the flight form`, () => {
-  //   // act
-
-  //   sut.form?.get('Adult')?.setValue(1);
-  //   sut.form?.get('Infant')?.setValue(3);
-
-  //   // assert
-  //   expect(sut.childrenCountValidator()(sut.form)).toEqual({
-  //     max: { actual: 3, max: 1 },
-  //   });
-  //   expect(sut.form?.hasError('max')).toBeTrue();
-  //   expect(sut.form?.getError('max')).toEqual({ actual: 3, max: 1 });
-  // });
-
   it(`should set max error on Infant when is greater than Adult in simple way`, () => {
     // arrange
     sut.form.controls.Infant.setValue(1);
@@ -95,7 +80,7 @@ describe('SUT: PassengersComponent', () => {
     // assert
     expect(sut.form.controls.Infant?.hasError('max')).toBeTrue();
 
-    // 
+    //
     let errorMessage = sut.form.controls.Infant?.errors.max;
     // expect(errorMessage).toEqual({ actual: 3, max: 2 });
   });
@@ -110,21 +95,5 @@ describe('SUT: PassengersComponent', () => {
     // assert
     expect(sut.form.controls.Infant.invalid).toBeFalse();
     expect(sut.form.controls.Infant.hasError('max')).toBeFalsy();
-  });
-
-  xit('should update the value property and call onChange, markAsTouched', async () => {
-    // act
-    sut.passengers = [
-      { name: 'Adult', value: 2 },
-      { name: 'Child', value: 1 },
-      { name: 'Infant', value: 0 },
-    ];
-    spyOn(sut, 'onChange');
-    spyOn(sut, 'markAsTouched');
-    sut.refersValue();
-
-    // assert
-    expect(sut.onChange).toHaveBeenCalledWith(sut.form.value);
-    expect(sut.markAsTouched).toHaveBeenCalled();
   });
 });
