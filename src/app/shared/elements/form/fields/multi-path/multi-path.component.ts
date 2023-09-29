@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
 import {
-  ControlValueAccessor,
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
   Validators,
@@ -49,8 +47,9 @@ export class MultiPathComponent extends BaseControlValueAccessor {
   }));
 
   get routes() {
-    // TODO add my interface
-    return this.form.controls.routes as FormArray;
+    return this.form.controls.routes as FormArray<
+      FormGroup<IForm<ISearchRoute>>
+    >;
   }
 
   constructor(private fb: FormBuilder) {
@@ -72,40 +71,24 @@ export class MultiPathComponent extends BaseControlValueAccessor {
   ngOnInit(): void {
     this.createForm();
   }
-  private createInitialRoutes(): FormArray {
-    const initialRoute = this.fb.group<IForm<ISearchRoute>>({
-      origin: [null, [Validators.required]],
-      destination: [null, [Validators.required]],
-      //TODO  add custom validator greater than today value
-      departureDate: [null, [Validators.required]],
-      //TODO  add custom validator greater than departureDate value
-      returnDate: [{ value: null, disabled: true }, [Validators.required]],
-    });
-
-    const routesArray = this.fb.array([initialRoute]);
-
-    return routesArray;
-  }
   createForm() {
     this.form = this.fb.group<IForm<ISearchMultiPath>>({
-      routes: this.createInitialRoutes(),
-
-      // this.fb.array<IForm<ISearchRoute>>(
-      //   [
-      //     // this.fb.group<IForm<ISearchRoute>>({
-      //     //   origin: [null, [Validators.required]],
-      //     //   destination: [null, [Validators.required]],
-      //     //   //TODO  add custom validator greater than today value
-      //     //   departureDate: [null, [Validators.required]],
-      //     //   //TODO  add custom validator greater than departureDate value
-      //     //   returnDate: [
-      //     //     { value: null, disabled: true },
-      //     //     [Validators.required],
-      //     //   ],
-      //     // }),
-      //   ],
-      //   [Validators.required]
-      // ),
+      routes: this.fb.array<FormGroup<IForm<ISearchRoute>>>(
+        [
+          this.fb.group<IForm<ISearchRoute>>({
+            origin: [null, [Validators.required]],
+            destination: [null, [Validators.required]],
+            //TODO  add custom validator greater than today value
+            departureDate: [null, [Validators.required]],
+            //TODO  add custom validator greater than departureDate value
+            returnDate: [
+              { value: null, disabled: true },
+              [Validators.required],
+            ],
+          }),
+        ],
+        [Validators.required]
+      ),
     });
 
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
@@ -137,7 +120,6 @@ export class MultiPathComponent extends BaseControlValueAccessor {
 
   private onTravelTypeChange() {
     this.prepareReturnDateState();
-
     this.prepareMultiPathControlsState();
   }
 
@@ -149,7 +131,6 @@ export class MultiPathComponent extends BaseControlValueAccessor {
 
       return;
     }
-
     this.routes.controls.slice(1).forEach((x) => {
       x.enable();
     });
@@ -157,10 +138,11 @@ export class MultiPathComponent extends BaseControlValueAccessor {
 
   private prepareReturnDateState() {
     if (!this.isRoundTrip()) {
-      this.routes.at(0).get('returnDate')?.disable();
+      this.form.controls.routes.at(0).controls.returnDate.disable();
+      this.routes.at(0).controls.returnDate.disable();
       return;
     }
-    this.routes.at(0).get('returnDate')?.enable();
+    this.routes.at(0).controls.returnDate.enable();
   }
 
   private isRoundTrip() {
