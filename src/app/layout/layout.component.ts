@@ -9,7 +9,7 @@ import { ITab } from '../models/search-types.interface';
 export class LayoutComponent {
   tabs: ITab[] = [
     { title: 'Flight', active: true, route: '/' },
-    { title: 'Train', active: false, route: 'Train' },
+    { title: 'Train', active: false, route: '/Train' },
   ];
 
   constructor() {}

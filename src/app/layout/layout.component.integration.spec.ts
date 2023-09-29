@@ -1,18 +1,27 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { LayoutComponent } from './layout.component';
 import { AbstractDataService } from '../core/services/data/abstract-data.service';
 import { SharedModule } from '../shared/shared.module';
+import { TestUtil } from '../core/helpers/something-helpers-test';
+import { Router } from '@angular/router';
 
 describe('LayoutComponent', () => {
   let sut: LayoutComponent;
   let fixture: ComponentFixture<LayoutComponent>;
-
+  let router: Router;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -27,22 +36,27 @@ describe('LayoutComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(LayoutComponent);
+    router = TestBed.inject(Router);
+
     sut = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
+    // assert
     expect(sut).toBeTruthy();
   });
 
-  it('should be test binding ', () => {
+  it('should activate tab on click', () => {
     // arrange
-    const tab = { title: 'Flight', active: true, route: '/' };
+    let tabActiveElement = TestUtil.nativeElement(fixture, '#Train');
 
     // act
-    sut.activateTab(tab);
+    tabActiveElement.click();
+    fixture.detectChanges();
 
     // assert
-    expect(sut.activateTab).toHaveBeenCalled();
+    expect(sut.tabs[0].active).toBe(false);
+    expect(sut.tabs[1].active).toBe(true);
   });
 });

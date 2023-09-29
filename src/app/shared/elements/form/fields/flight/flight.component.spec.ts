@@ -6,15 +6,24 @@ import { FlightComponent } from './flight.component';
 
 describe('SUT: FlightComponent', () => {
   let sut: FlightComponent;
-  const fakeCities = ['city1', 'city2'];
+  const fakeCities = [
+    {
+      id: '315768d5-57d9-47da-a6c3-bed05ec8a890',
+      // name: 'اصفهان',
+    },
+    {
+      id: 'a096aae1-f219-420c-af48-3e7cf137355c',
+      // name: 'فرودگاه بین‌المللی شهید بهشتی اصفهان',
+    },
+  ];
   const dataService = jasmine.createSpyObj<AbstractDataService>({
     getFakeData: of(fakeCities),
   });
   const valueAccessor = jasmine.createSpyObj<{
-    onChange: (e:any) => {};
+    onChange: (e: any) => {};
     onTouched: () => {};
   }>({
-    onChange: (e:any) => {},
+    onChange: (e: any) => {},
     onTouched: () => {},
   });
 
@@ -96,12 +105,13 @@ describe('SUT: FlightComponent', () => {
     sut.filteredCities = [];
 
     // act
-    sut.onCityInputChange('cit');
+    sut.onCityInputChange('اص');
 
     // assert
-    expect(dataService.getFakeData).toHaveBeenCalledWith('cit');
+    expect(dataService.getFakeData).toHaveBeenCalledWith('اص');
+    console.log(sut.filteredCities);
     expect(sut.filteredCities).toEqual(fakeCities);
+
     expect(sut.loading).toBe(false);
   });
-
 });

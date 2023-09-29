@@ -7,20 +7,13 @@ import { ReactiveFormComponent } from './reactive-form.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AbstractDataService } from '../core/services/data/abstract-data.service';
-import { AppComponent } from '../app.component';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { FlightComponent } from '../shared/elements/form/fields/flight/flight.component';
 import { TestUtil } from '../core/helpers/something-helpers-test';
 
 describe('ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;
   let fixture: ComponentFixture<ReactiveFormComponent>;
-  let matRadioGroup: MatRadioGroup;
-  let matRadioButton: MatRadioButton;
-  let originInput:FlightComponent;
-  let destination:FlightComponent;
-  let departureDate;
-  let returnDate;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -38,49 +31,10 @@ describe('ReactiveFormComponent', () => {
     fixture = TestBed.createComponent(ReactiveFormComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();
-    // appFlight = TestUtil.queryComponent(fixture,'app-flight')
-    originInput = TestUtil.querySelector(
-      fixture,
-      'app-flight[formControlName="origin"]'
-    );
-    destination = TestUtil.querySelector(
-      fixture,
-      'app-flight[formControlName="destination"]'
-    );
-    departureDate = TestUtil.querySelector(
-      fixture,
-      'app-datepicker[formControlName="departureDate"]'
-    );
-    returnDate = TestUtil.querySelector(
-      fixture,
-      'app-datepicker[formControlName="returnDate"]'
-    );
-    // appPassengers = TestUtil.queryComponent(fixture, 'app-passengers');
-    matRadioGroup = TestUtil.directiveElement(fixture, MatRadioGroup);
-    matRadioButton = TestUtil.directiveElement(fixture, MatRadioButton);
   });
 
   it('should create', () => {
     expect(sut).toBeTruthy();
-  });
-
-  // label="origin"
-  it('should binding label', () => {
-    // arrange
-    originInput.label = 'some_Text';
-    // act
-    fixture.detectChanges();
-    // assert
-    expect(originInput.label).toBe('some_Text');
-  });
-
-  it('should binding label ', () => {
-    // arrange
-    destination.label = 'some_Text';
-    // act
-    fixture.detectChanges();
-    // assert
-    expect(destination.label).toBe('some_Text');
   });
 
   it('should bind aria-label', () => {

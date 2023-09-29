@@ -87,9 +87,10 @@ describe('SUT(Integration): MultiPathComponent', () => {
     expect(departureDateInput['placeholder']).toBe(someText);
   });
 
-  it('should be test for binding form controls =====', () => {
+  it('should be test for binding form controls', () => {
     // arrange
     const index: number = 0;
+    sut.routes.at(index).controls.returnDate.enable();
     sut.routeIsActive(index);
     fixture.detectChanges();
     const routesCtrl = TestUtil.formArray(fixture, '[id = routes]');

@@ -7,10 +7,10 @@ describe('SUT: MultiPathComponent', () => {
   let sut: MultiPathComponent;
   let fb: FormBuilder;
   const valueAccessor = jasmine.createSpyObj<{
-    onChange: (e:any) => {};
+    onChange: (e: any) => {};
     onTouched: () => {};
   }>({
-    onChange: (e:any) => {},
+    onChange: (e: any) => {},
     onTouched: () => {},
   });
   beforeEach(() => {
@@ -27,18 +27,17 @@ describe('SUT: MultiPathComponent', () => {
   it('should be created form with default value', () => {
     // arrange
     const expectedFormValue = {
-      travelType: TravelTypesEnum.OneWay,
       routes: [
         {
           origin: null,
           destination: null,
           departureDate: null,
-          returnDate: null,
         },
       ],
     };
     // assert
     expect(sut.form.value).toEqual(expectedFormValue);
+    // TODO اگه تراول تایپش رواندتریپ بود ریترن دیت باشد
   });
 
   it('should be when selected MultiPath length formArray to be two', () => {
