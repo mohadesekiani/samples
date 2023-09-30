@@ -67,7 +67,6 @@ describe('SUT: ReactiveFormComponent', () => {
   it('should check form is valid then go to result alert', () => {
     // arrange
     spyOn(window, 'alert');
-    //TODO fixme should be not setValue
     sut.flightForm.patchValue({
       passengers: null,
     });

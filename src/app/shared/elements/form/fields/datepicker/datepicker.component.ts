@@ -24,8 +24,8 @@ import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-con
 })
 export class DatepickerComponent extends BaseControlValueAccessor {
   @Input() label!: string;
-  // @Input() min = new Date();
-  // @Input() max = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
+  @Input() min = new Date();
+  @Input() max = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
   @Input() value!: Date;
   @Output() valueChange = new EventEmitter();
   disabled = false;
