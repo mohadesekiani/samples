@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -25,13 +26,18 @@ import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-con
 export class DatepickerComponent extends BaseControlValueAccessor {
   @Input() label!: string;
   @Input() min = new Date();
-  @Input() max = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
+  @Input() max = new Date(
+    new Date().getFullYear(),
+    new Date().getMonth() + 1,
+    new Date().getDate()
+  );
+
   @Input() value!: Date;
   @Output() valueChange = new EventEmitter();
   disabled = false;
   touched = false;
   // @ViewChild('picker') picker!: MatDatepicker<any> ;
-
+  
   override writeValue(obj: any): void {
     this.value = obj;
   }
@@ -50,20 +56,14 @@ export class DatepickerComponent extends BaseControlValueAccessor {
   }
 
   dateValueChanged(value: Date) {
-    this.value = value;
-    // check is between min and max
-    // if (this.min && this.value < this.min) {
-    //   this.value = this.min;
-    //   this.updateValue();
-    //   return;
-    // }
+    var d = new Date(value);
+    let numericDate  = d.setMinutes(d.getMinutes() + 210);
+    const date = new Date(numericDate);
+    this.value = date;
+    console.log(date);
 
-    // if (this.max && this.value > this.max) {
-    //   this.value = this.max;
-    //   this.updateValue();
-    //   return;
-    // }
     this.updateValue();
+
   }
 
   private updateValue() {

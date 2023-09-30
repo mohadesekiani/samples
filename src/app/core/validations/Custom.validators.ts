@@ -55,7 +55,6 @@ export class CustomValidators {
       const formArray = control.root.get(nameArray) as FormArray<FormGroup<IForm<ISearchRoute>>>;
       const departureDate = formArray.at(0).controls.departureDate.value;
       const returnDate = control.value;
-      const currentDate = new Date();
 
       if (departureDate && returnDate && returnDate < departureDate ) {        
         return { returnDateInvalid: true };
