@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
+import { CustomValidators } from 'src/app/core/validations/Custom.validators';
 import {
   IForm,
   ISearchMultiPath,
@@ -79,11 +80,18 @@ export class MultiPathComponent extends BaseControlValueAccessor {
             origin: [null, [Validators.required]],
             destination: [null, [Validators.required]],
             //TODO  add custom validator greater than today value
-            departureDate: [null, [Validators.required]],
+            departureDate: [
+              null,
+              [Validators.required, CustomValidators.dateValidator()],
+            ],
             //TODO  add custom validator greater than departureDate value
             returnDate: [
               { value: null, disabled: true },
-              [Validators.required],
+              [
+                Validators.required,
+                CustomValidators.returnDateValidator('routes'),
+                CustomValidators.dateValidator(),
+              ],
             ],
           }),
         ],
@@ -104,7 +112,10 @@ export class MultiPathComponent extends BaseControlValueAccessor {
       origin: [null, [Validators.required]],
       destination: [null, [Validators.required]],
       //TODO  add custom validator greater than prev departureDate value
-      departureDate: [null, [Validators.required]],
+      departureDate: [
+        null,
+        [Validators.required, CustomValidators.dateValidator()],
+      ],
     });
 
     this.routes.push(newRow);

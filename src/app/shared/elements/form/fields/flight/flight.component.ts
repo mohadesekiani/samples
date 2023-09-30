@@ -69,7 +69,6 @@ export class FlightComponent extends BaseControlValueAccessor {
   }
 
   private loadData() {
-    // todo finalize pipe to this.loading = false;
     this.loading = true;
     this.dataService.getFakeData(this.filterText).subscribe({
       next: (res) => {
@@ -86,6 +85,7 @@ export class FlightComponent extends BaseControlValueAccessor {
         this.loading = false;
       },
     });
+    this.loading = false
   }
 
   optionSelected(city: any) {
