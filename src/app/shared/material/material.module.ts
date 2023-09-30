@@ -8,10 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, NativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 @NgModule({
   declarations: [],
   exports: [
@@ -25,8 +24,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatButtonToggleModule,
     MatIconModule,
     MatMenuModule,
-    MatMomentDateModule,
-    NativeDateModule ,
+    NativeDateModule,
   ],
 })
 export class MaterialModule {}
