@@ -100,7 +100,7 @@ describe('SUT(Integration): FlightComponent', () => {
   it('should call optionSelected when a city option is clicked', async () => {
     // arrange
     spyOn(sut, 'optionSelected');
-    sut.filteredCities = ['New York'];
+    sut.filteredCities = ['اصفهان'];
     input.click();
     fixture.detectChanges();
 
@@ -119,7 +119,7 @@ describe('SUT(Integration): FlightComponent', () => {
     cityOption.click();
     fixture.detectChanges();
     //assert
-    expect(sut.optionSelected).toHaveBeenCalledWith('New York');
+    expect(sut.optionSelected).toHaveBeenCalledWith('اصفهان');
     expect(sut.filteredCities).toEqual(actualValues);
   });
 });

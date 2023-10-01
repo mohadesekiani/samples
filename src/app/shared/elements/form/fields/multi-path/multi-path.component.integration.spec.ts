@@ -23,7 +23,6 @@ describe('SUT(Integration): MultiPathComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
-        SharedModule,
         BrowserModule,
         FormsModule,
         NoopAnimationsModule,
@@ -34,6 +33,7 @@ describe('SUT(Integration): MultiPathComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       providers: [AbstractDataService],
     });
+
     fixture = TestBed.createComponent(MultiPathComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();

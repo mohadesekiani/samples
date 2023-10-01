@@ -90,7 +90,6 @@ export class MultiPathComponent extends BaseControlValueAccessor {
               [
                 Validators.required,
                 CustomValidators.returnDateValidator('routes'),
-                CustomValidators.dateValidator(),
               ],
             ],
           }),
@@ -105,6 +104,7 @@ export class MultiPathComponent extends BaseControlValueAccessor {
     });
     this.addNewRow();
     this.onTravelTypeChange();
+    
   }
 
   addNewRow() {
@@ -121,7 +121,7 @@ export class MultiPathComponent extends BaseControlValueAccessor {
     this.routes.push(newRow);
   }
 
-  routeIsActive(index: number) {
+  routeIsActive(index: number) {    
     return this.routes.at(index).enabled;
   }
 
@@ -134,7 +134,7 @@ export class MultiPathComponent extends BaseControlValueAccessor {
     this.prepareMultiPathControlsState();
   }
 
-  private prepareMultiPathControlsState() {
+ prepareMultiPathControlsState() {
     if (this._travelType !== TravelTypesEnum.MultiPath) {
       this.routes.controls.slice(1).forEach((x) => {
         x.disable();
@@ -143,6 +143,7 @@ export class MultiPathComponent extends BaseControlValueAccessor {
       return;
     }
     this.routes.controls.slice(1).forEach((x) => {
+      
       x.enable();
     });
   }
@@ -160,7 +161,7 @@ export class MultiPathComponent extends BaseControlValueAccessor {
     return this._travelType === TravelTypesEnum.RoundTrip;
   }
 
-  private travelTypeChangesUpdate(changes: any) {
+  private travelTypeChangesUpdate(changes: any) {    
     if (changes.travelType) {
       this._travelType = this.travelType;
       this.onTravelTypeChange();

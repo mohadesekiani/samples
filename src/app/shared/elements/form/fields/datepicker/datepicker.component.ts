@@ -33,15 +33,15 @@ const MY_DATE_FORMAT = {
   },
 };
 
-export const PICK_FORMATS = {
-  parse: { dateInput: { month: 'short', year: 'numeric', day: 'numeric' } },
-  display: {
-    dateInput: 'input',
-    monthYearLabel: { year: 'numeric', month: 'short' },
-    dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
-    monthYearA11yLabel: { year: 'numeric', month: 'long' },
-  },
-};
+// export const PICK_FORMATS = {
+//   parse: { dateInput: { month: 'short', year: 'numeric', day: 'numeric' } },
+//   display: {
+//     dateInput: 'input',
+//     monthYearLabel: { year: 'numeric', month: 'short' },
+//     dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
+//     monthYearA11yLabel: { year: 'numeric', month: 'long' },
+//   },
+// };
 
 @Component({
   selector: 'app-datepicker',
@@ -53,8 +53,6 @@ export const PICK_FORMATS = {
       multi: true,
       useExisting: DatepickerComponent,
     },
-
-    // { provide: MAT_DATE_LOCALE, useValue: 'fa' }, //my change from the original documentation example
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
@@ -100,7 +98,6 @@ export class DatepickerComponent extends BaseControlValueAccessor {
     // let numericDate = d.setMinutes(d.getMinutes() + 210);
     // const date = new Date(numericDate);
     // this.value = date;
-    // console.log(date);
     this.value = value;
     this.updateValue();
   }

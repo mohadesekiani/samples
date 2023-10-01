@@ -41,24 +41,6 @@ export class CustomValidators {
     return (control: AbstractControl): ValidationErrors | null => {
       const currentDate = new Date();
       const selectedDate = control.value;
-      console.log(currentDate, selectedDate);
-      //just date needs to compare not all date time.
-      //use moment lib to compare just date
-      //or get date only ok?
-      //الان تو سناریوی واقعی من الان نمیتپنم بلیط بگیرم؟
-      // on dg bussinese man nemidonam bussiness che joriye faqat midonam bayad to moqayese ha deqat koni
-      //chizi ke mikhano daqiq piyade koni. ok?
-      // alan moshkele date picker hal shod ? are
-      // vali entezar mano kharab kard
-      // entezar chiye dg date picker kharaaab bood alan doros shod!
-      //validationa ro chejori handel konam?
-      //just date needs to compare not all date time.
-      //use moment lib to compare just date
-      //or get date only ok?
-      //moment bayad komaket kone man qat shodam k 3 min zade tamdid kon.
-      // moment baladi?
-      // khob boro to google dg montazere chi i? emam zaman biyad yadet bede?:)
-
       if (selectedDate) {
         var time1 = moment(selectedDate).format('YYYY-MM-DD');
         var time2 = moment(currentDate).format('YYYY-MM-DD');
@@ -76,11 +58,11 @@ export class CustomValidators {
       >;
       const departureDate = formArray.at(0).controls.departureDate.value;
       const returnDate = control.value;
-
-      if (departureDate && returnDate && returnDate < departureDate) {
-        return { returnDateInvalid: true };
+      if (departureDate && returnDate) {
+        var time1 = moment(departureDate).format('YYYY-MM-DD');
+        var time2 = moment(returnDate).format('YYYY-MM-DD');
+        if (time2 < time1) return { returnDateInvalid: true };
       }
-
       return null;
     };
   }

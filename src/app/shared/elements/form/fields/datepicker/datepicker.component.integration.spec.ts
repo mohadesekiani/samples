@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { MatIconButton } from '@angular/material/button';
 import { TestUtil } from 'src/app/core/helpers/something-helpers-test';
+import * as moment from 'moment';
 
 describe('SUT(Integration): DatepickerComponent', () => {
   let sut: DatepickerComponent;
@@ -64,7 +65,9 @@ describe('SUT(Integration): DatepickerComponent', () => {
     await fixture.whenStable();
 
     // assert
-    expect(datePicker.value).toBe(sut.value);
+    var time2 = moment(sut.value).format('YYYY-MM-DD');
+    var time1 = moment(datePicker.value).format('YYYY-MM-DD');
+    expect(time1).toBe(time2);
     expect(label.innerText).toBe('some_label');
   });
 

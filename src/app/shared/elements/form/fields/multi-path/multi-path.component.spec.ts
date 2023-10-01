@@ -64,15 +64,18 @@ describe('SUT: MultiPathComponent', () => {
   });
 
   it('should enable routes when _travelType is MultiPath', () => {
-    //arrange
-    // sut.form.controls.travelType.setValue(TravelTypesEnum.OneWay);
+    // arrange
+    sut.travelType = TravelTypesEnum.MultiPath;
 
     // act
-    // sut.form.controls.travelType.setValue(TravelTypesEnum.MultiPath);
     sut.addNewRow();
+    sut.ngOnChanges(TravelTypesEnum.MultiPath);
+    sut.prepareMultiPathControlsState();
+    sut.isMultiPath();
 
     // assert
-    for (let i = 0; i < sut.routes.length; i++) {
+    expect(sut.isMultiPath()).toBe(true);
+    for (let i = 0; i < sut.routes.controls.length; i++) {
       expect(sut.routeIsActive(i)).toBe(true);
     }
   });

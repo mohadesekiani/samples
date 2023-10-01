@@ -74,7 +74,7 @@ export class FlightComponent extends BaseControlValueAccessor {
       next: (res) => {
         this.filteredCities = res.map((city: ICity) => ({
           id: city.id,
-          name: city.alternateTitle,
+          alternateTitle: city.alternateTitle,
         }));
         this.loading = false;
       },
@@ -85,12 +85,12 @@ export class FlightComponent extends BaseControlValueAccessor {
         this.loading = false;
       },
     });
-    this.loading = false
+    this.loading = false;
   }
 
   optionSelected(city: any) {
     let newValue = city.id;
-    let nameValue = city.name;
+    let nameValue = city.alternateTitle;
     this.value = nameValue;
     this.filteredCities = [];
     this.showCityNotFound = false;
