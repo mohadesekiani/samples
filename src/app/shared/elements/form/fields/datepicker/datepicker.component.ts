@@ -53,11 +53,11 @@ const MY_DATE_FORMAT = {
       multi: true,
       useExisting: DatepickerComponent,
     },
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE],
-    },
+    // {
+    //   provide: DateAdapter,
+    //   useClass: MomentDateAdapter,
+    //   deps: [MAT_DATE_LOCALE],
+    // },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
   ],
 })
@@ -94,10 +94,11 @@ export class DatepickerComponent extends BaseControlValueAccessor {
   }
 
   dateValueChanged(value: Date) {
-    // var d = new Date(value);
-    // let numericDate = d.setMinutes(d.getMinutes() + 210);
-    // const date = new Date(numericDate);
-    // this.value = date;
+    // iran time zone offset is  210
+    var d = new Date(value);
+    let numericDate = d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
+    const date = new Date(numericDate);
+    this.value = date;
 
     this.value = value;
     this.updateValue();
@@ -109,3 +110,4 @@ export class DatepickerComponent extends BaseControlValueAccessor {
     this.valueChange.emit(this.value);
   }
 }
+//ok?
