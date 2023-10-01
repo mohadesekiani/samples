@@ -44,7 +44,8 @@ export class CustomValidators {
       if (selectedDate) {
         var time1 = moment(selectedDate).format('YYYY-MM-DD');
         var time2 = moment(currentDate).format('YYYY-MM-DD');
-        if (time1 > time2) return { dateInvalid: true };
+        console.log(time1,time2);
+        if ( time1 < time2) return { dateInvalid: true };
       }
 
       return null;
