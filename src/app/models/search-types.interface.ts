@@ -24,10 +24,10 @@ export interface ISearchPassenger {
 }
 
 export interface ISearchRoute {
-  origin: string | null;
-  destination: string | null;
-  departureDate: Date | null;
-  returnDate: Date | null;
+  origin: string;
+  destination: string;
+  departureDate: Date;
+  returnDate: Date;
 }
 
 export interface ISearchMultiPath {

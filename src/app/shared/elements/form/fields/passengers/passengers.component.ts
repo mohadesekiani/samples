@@ -28,9 +28,9 @@ import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-con
 })
 export class PassengersComponent extends BaseControlValueAccessor {
   errorMessage!: { actual: number; max: number };
-  hasError: boolean = false;
+  hasError = false;
   form!: FormGroup<IForm<ISearchPassenger>>;
-  buttonText: string = '+';
+  buttonText = '+';
   disabled = false;
   touched = false;
   showDrop = false;

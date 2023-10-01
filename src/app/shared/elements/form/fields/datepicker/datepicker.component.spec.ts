@@ -37,4 +37,17 @@ describe('SUT: DatepickerComponent', () => {
   //   expect(sut.value.toDateString()).toBe(sut.max.toDateString());
   // });
   // disable
+
+  // scenario 01
+  // before  Mon Oct 02 2023 00:00:00 GMT+0330 (Iran Standard Time)
+  // after   Mon Oct 02 2023 23:59:59 GMT+0330 (Iran Standard Time)
+  
+  
+  // scenario 02
+  // before  Mon Oct 02 2023 {NOW TIME} GMT+0330 (Iran Standard Time) \\=> new Date()
+  // after   Mon Oct 02 2023 00:00:00 GMT+0330 (Iran Standard Time)
+
+  // scenario 03
+  // before  Mon Oct 02 2023 {NOW TIME} GMT+0330 (Iran Standard Time) \\=> new Date()
+  // after   Mon Oct 02 2023 23:59:59 GMT+0330 (Iran Standard Time)
 });

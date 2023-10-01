@@ -31,11 +31,14 @@ import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-con
 export class MultiPathComponent extends BaseControlValueAccessor {
   private _travelType: TravelTypesEnum = TravelTypesEnum.OneWay;
   travelTypesEnum = TravelTypesEnum;
+  //TODO read about getter setter @Input and about pass value between component
   @Input() get travelType(): TravelTypesEnum {
     return this._travelType;
   }
   set travelType(value: TravelTypesEnum) {
     this._travelType = value;
+    if(this.form)
+    this.onTravelTypeChange();
   }
   form!: FormGroup<IForm<ISearchMultiPath>>;
   touched = false;
@@ -58,7 +61,7 @@ export class MultiPathComponent extends BaseControlValueAccessor {
   }
 
   ngOnChanges(changes: any): void {
-    this.travelTypeChangesUpdate(changes);
+    // this.travelTypeChangesUpdate(changes);
   }
 
   override writeValue(obj: ISearchMultiPath): void {
@@ -72,6 +75,7 @@ export class MultiPathComponent extends BaseControlValueAccessor {
   ngOnInit(): void {
     this.createForm();
   }
+
   createForm() {
     this.form = this.fb.group<IForm<ISearchMultiPath>>({
       routes: this.fb.array<FormGroup<IForm<ISearchRoute>>>(
@@ -104,7 +108,6 @@ export class MultiPathComponent extends BaseControlValueAccessor {
     });
     this.addNewRow();
     this.onTravelTypeChange();
-    
   }
 
   addNewRow() {
@@ -143,7 +146,6 @@ export class MultiPathComponent extends BaseControlValueAccessor {
       return;
     }
     this.routes.controls.slice(1).forEach((x) => {
-      
       x.enable();
     });
   }

@@ -27,11 +27,12 @@ export class FlightComponent extends BaseControlValueAccessor {
   showCityNotFound = true;
   loading = false;
 
-  constructor(private dataService: AbstractDataService) {
+  constructor(
+    private dataService: AbstractDataService
+  ) {
     super();
-    if (!dataService) {
-      throw new Error('dataService is empty');
-    }
+
+    if (!dataService) { throw new Error('dataService is empty'); }
   }
 
   @HostListener('focusin')
@@ -80,12 +81,8 @@ export class FlightComponent extends BaseControlValueAccessor {
       },
       error: (err) => {
         this.loading = false;
-      },
-      complete: () => {
-        this.loading = false;
-      },
+      }
     });
-    this.loading = false;
   }
 
   optionSelected(city: any) {

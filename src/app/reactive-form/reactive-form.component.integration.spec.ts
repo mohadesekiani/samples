@@ -36,20 +36,26 @@ describe('SUT(Integration): ReactiveFormComponent', () => {
     sut = fixture.componentInstance;
     form = sut.flightForm;
     fixture.detectChanges();
+    try {
+      
+    } catch (error) {
+      
+    }
   });
 
   it('should create', () => {
     expect(sut).toBeTruthy();
   });
 
-  // it('should bind aria-label', () => {
-  //   // arrange
-  //   const radioGroup =TestUtil.querySelector(fixture,'mat-radio-group');
-  //     const ariaLabel = radioGroup.getAttribute('aria-label');
-  //   // act
-  //   fixture.detectChanges();
+  //FIXME with mr mirzaei
+  it('should bind aria-label', () => {
+    // arrange
+    const radioGroup =TestUtil.querySelector(fixture,'mat-radio-group');
+      const ariaLabel = radioGroup.getAttribute('aria-label');
+    // act
+    fixture.detectChanges();
 
-  //   // assert
-  //   expect(ariaLabel).toBe('Select an option');
-  // });
+    // assert
+    expect(ariaLabel).toBe('Select an option');
+  });
 });
