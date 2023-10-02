@@ -4,12 +4,9 @@ import { noop } from 'lodash-es';
 export abstract class BaseControlValueAccessor implements ControlValueAccessor {
   onChange = noop;
   onTouched = noop;
-  abstract value: any;
   abstract disabled: boolean;
 
-  writeValue(obj: any): void {
-    this.value = obj;
-  }
+  writeValue(obj: any): void { }
 
   registerOnChange(fn: any): void {
     this.onChange = fn;

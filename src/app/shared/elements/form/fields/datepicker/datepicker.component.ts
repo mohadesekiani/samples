@@ -18,8 +18,7 @@ import {
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
-
-import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-control-value-accessor';
+import { BaseInputControlValueAccessor } from 'src/app/shared/base-component/base-input-control-value-accessor';
 
 const MY_DATE_FORMAT = {
   parse: {
@@ -53,15 +52,10 @@ const MY_DATE_FORMAT = {
       multi: true,
       useExisting: DatepickerComponent,
     },
-    // {
-    //   provide: DateAdapter,
-    //   useClass: MomentDateAdapter,
-    //   deps: [MAT_DATE_LOCALE],
-    // },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
   ],
 })
-export class DatepickerComponent extends BaseControlValueAccessor {
+export class DatepickerComponent extends BaseInputControlValueAccessor {
   @Input() label!: string;
   @Input() min = new Date();
   @Input() max = new Date(
@@ -76,38 +70,18 @@ export class DatepickerComponent extends BaseControlValueAccessor {
   touched = false;
   // @ViewChild('picker') picker!: MatDatepicker<any> ;
 
-  // override writeValue(obj: any): void {
-  //   this.value = obj;
-  // }
-
-  override setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
-  markAsTouched() {
-    if (this.touched) {
-      return;
-    }
-
-    this.onTouched();
-    this.touched = true;
-  }
-
   dateValueChanged(value: Date) {
     // iran time zone offset is  210
     var d = new Date(value);
     let numericDate = d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
     const date = new Date(numericDate);
     this.value = date;
-
     this.value = value;
     this.updateValue();
   }
 
   private updateValue() {
-    this.onChange(this.value);
-    this.markAsTouched();
+    this.updateValueAndTouch(this.value)
     this.valueChange.emit(this.value);
   }
 }
-//ok?

@@ -2,7 +2,7 @@ import { Component, HostBinding, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { ICity } from 'src/app/models/city-type.interface';
-import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-control-value-accessor';
+import { BaseInputControlValueAccessor } from 'src/app/shared/base-component/base-input-control-value-accessor';
 
 @Component({
   selector: 'app-flight',
@@ -16,7 +16,7 @@ import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-con
     },
   ],
 })
-export class FlightComponent extends BaseControlValueAccessor {
+export class FlightComponent extends BaseInputControlValueAccessor {
   @Input() label = '';
   value: any = '';
   filterText = '';
@@ -40,23 +40,6 @@ export class FlightComponent extends BaseControlValueAccessor {
     this.markAsTouched();
   }
 
-  override writeValue(obj: any): void {
-    this.value = obj;
-  }
-
-  override setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
-  markAsTouched() {
-    if (this.touched) {
-      return;
-    }
-
-    this.onTouched();
-    this.touched = true;
-  }
-
   onCityInputChange(value: string) {
     this.filterText = value;
 
@@ -68,6 +51,16 @@ export class FlightComponent extends BaseControlValueAccessor {
 
     this.loadData();
   }
+
+  optionSelected(city: any) {
+    let newValue = city.id;
+    let nameValue = city.title;
+    this.value = nameValue;
+    this.filteredCities = [];
+    this.showCityNotFound = false;
+    this.updateValueAndTouch(newValue)
+  }
+
 
   private loadData() {
     this.loading = true;
@@ -85,22 +78,12 @@ export class FlightComponent extends BaseControlValueAccessor {
     });
   }
 
-  optionSelected(city: any) {
-    let newValue = city.id;
-    let nameValue = city.title;
-    this.value = nameValue;
-    this.filteredCities = [];
-    this.showCityNotFound = false;
-    this.onChange(newValue);
-    this.markAsTouched();
-  }
-
   private clean() {
     this.filteredCities = [];
     this.value = null;
     this.showCityNotFound = false;
-    this.onChange(this.value);
-    this.markAsTouched();
+    this.updateValueAndTouch(this.value)
+
   }
 
   private isLessThanValidValue(value: string) {

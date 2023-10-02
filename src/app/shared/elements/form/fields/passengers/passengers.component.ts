@@ -1,7 +1,5 @@
 import { Component, Host, Optional } from '@angular/core';
 import {
-  ControlContainer,
-  ControlValueAccessor,
   FormBuilder,
   FormGroup,
   NG_VALUE_ACCESSOR,
@@ -12,7 +10,7 @@ import { distinctUntilChanged } from 'rxjs';
 import { CustomValidators } from 'src/app/core/validations/custom.validators';
 import { PassengerTypesEnum } from 'src/app/models/general-types.enum';
 import { IForm, ISearchPassenger } from 'src/app/models/search-types.interface';
-import { BaseControlValueAccessorForm } from 'src/app/shared/base-component/base-control-value-accessor-form';
+import { BaseFormControlValueAccessor } from 'src/app/shared/base-component/base-form-control-value-accessor';
 
 @Component({
   selector: 'app-passengers',
@@ -26,12 +24,11 @@ import { BaseControlValueAccessorForm } from 'src/app/shared/base-component/base
     },
   ],
 })
-export class PassengersComponent extends BaseControlValueAccessorForm {
+export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPassenger> {
   errorMessage!: { actual: number; max: number };
   hasError = false;
-  form!: FormGroup<IForm<ISearchPassenger>>;
+  // form!: FormGroup<IForm<ISearchPassenger>>;
   disabled = false;
-  value: any
   buttonText = '+';
   touched = false;
   showDrop = false;
@@ -42,29 +39,6 @@ export class PassengersComponent extends BaseControlValueAccessorForm {
     { value: 0, name: 'Infant' },
   ];
   oldValue!: ISearchPassenger;
-
-  //ontic without controlValueAccessor
-  // onChildValueChange(newValue: number, item) {
-  //   // ref.value = newValue;
-  //   // this.passengers.value[item.name] = newValue;
-  //   let ctrl = this.passengers.get(item.name);
-  //   ctrl?.setValue(newValue);
-  //   this.refersValue();
-  // }
-
-  // decrees(item) {
-  //   let ctrl = this.form.get(item.name);
-  //   if (ctrl?.value <= 0) {
-  //     return;
-  //   }
-  //   ctrl?.setValue(ctrl.value - 1);
-  //   this.refersValue();
-  // }
-  // increased(item) {
-  //   let ctrl = this.form.get(item.name);
-  //   ctrl?.setValue(ctrl.value + 1);
-  //   this.refersValue();
-  // }
   getInfantError(item: string) {
     return (
       item == PassengerTypesEnum.Infant &&
@@ -72,8 +46,8 @@ export class PassengersComponent extends BaseControlValueAccessorForm {
     );
   }
 
-  constructor(private fb: FormBuilder) {
-    super();
+  constructor(fb: FormBuilder) {
+    super(fb);
   }
 
   ngOnInit() {
@@ -81,46 +55,26 @@ export class PassengersComponent extends BaseControlValueAccessorForm {
   }
 
   createForm() {
-    this.form = this.fb.group<IForm<ISearchPassenger>>(
-      {
-        Adult: [null, [Validators.required]],
-        Child: [null],
-        Infant: [null],
-      },
-      {
-        validators: [CustomValidators.maxFrom('Infant', 'Adult')],
-      }
-    );
+    const baseFormConfig: IForm<ISearchPassenger> = {
+      Adult: [null, [Validators.required]],
+      Child: [null],
+      Infant: [null],
+    };
 
-    this.form.valueChanges
-      .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))
-      .subscribe((x: any) => {
-        this.refersValue();
-        setTimeout(() => {
-          this.oldValueValid(x);
-        });
-      });
-  }
-
-  markAsTouched() {
-    if (!this.touched) {
-      this.onTouched();
-      this.touched = true;
-    }
-  }
-
-  refersValue() {
-    if (this.form.valid) {
-      this.onChange(this.form.value);
-    } else {
-      this.onChange(null);
-    }
-    this.markAsTouched();
+    this.createBaseForm(baseFormConfig);
+    this.form.setValidators(CustomValidators.maxFrom('Infant', 'Adult'));
+    // this.form.valueChanges
+    //   .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))
+    //   .subscribe((x: any) => {
+    //     this.refersValue();
+    //     setTimeout(() => {
+    //       this.oldValueValid(x);
+    //     });
+    //   });
   }
 
   toggleDropDown() {
     if (this.showDrop) this.syncInnerFormAndControl();
-
     this.showDrop = !this.showDrop;
   }
 

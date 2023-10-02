@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-control-value-accessor';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BaseInputControlValueAccessor } from 'src/app/shared/base-component/base-input-control-value-accessor';
 
 @Component({
   selector: 'app-number-passengers',
@@ -14,12 +14,11 @@ import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-con
     },
   ],
 })
-export class NumberPassengersComponent extends BaseControlValueAccessor {
+export class NumberPassengersComponent extends BaseInputControlValueAccessor {
   value: number = 0;
   disabled: boolean = false;
-  override writeValue(obj: number): void {
-    this.value = obj;
-  }
+  touched = false;
+
   increased() {
     this.value = this.value + 1;
     this.onChange(this.value);
@@ -31,14 +30,13 @@ export class NumberPassengersComponent extends BaseControlValueAccessor {
     }
     this.value = this.value - 1;
     this.onChange(this.value);
-    this.onTouched(this.value);
+    this.markAsTouched();
   }
 
   changeHandler(event: Event) {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     this.value = +value;
-    this.onChange(this.value);
-    this.onTouched(this.value);
+    this.updateValueAndTouch(this.value);
   }
 }

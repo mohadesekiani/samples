@@ -14,7 +14,7 @@ import {
   ISearchRoute,
 } from 'src/app/models/search-types.interface';
 import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
-import { BaseControlValueAccessorForm } from 'src/app/shared/base-component/base-control-value-accessor-form';
+import { BaseFormControlValueAccessor } from 'src/app/shared/base-component/base-form-control-value-accessor';
 
 @Component({
   selector: 'app-multi-path',
@@ -28,7 +28,8 @@ import { BaseControlValueAccessorForm } from 'src/app/shared/base-component/base
     },
   ],
 })
-export class MultiPathComponent extends BaseControlValueAccessorForm {
+export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMultiPath> {
+  baseFormConfig!: FormGroup<IForm<ISearchMultiPath>>;
   private _travelType: TravelTypesEnum = TravelTypesEnum.OneWay;
   travelTypesEnum = TravelTypesEnum;
   //TODO read about getter setter @Input and about pass value between component
@@ -37,10 +38,9 @@ export class MultiPathComponent extends BaseControlValueAccessorForm {
   }
   set travelType(value: TravelTypesEnum) {
     this._travelType = value;
-    if(this.form)
-    this.onTravelTypeChange();
+    if (this.form) this.onTravelTypeChange();
   }
-  form!: FormGroup<IForm<ISearchMultiPath>>;
+  // form!: FormGroup<IForm<ISearchMultiPath>>;
   touched = false;
   disabled = false;
   value!: [];
@@ -54,33 +54,27 @@ export class MultiPathComponent extends BaseControlValueAccessorForm {
     return this.form.controls.routes as FormArray<
       FormGroup<IForm<ISearchRoute>>
     >;
+
   }
 
-  constructor(private fb: FormBuilder) {
-    super();
+  constructor(fb: FormBuilder) {
+    super(fb);
   }
-
-  ngOnChanges(changes: any): void {
-    // this.travelTypeChangesUpdate(changes);
-  }
-
   ngOnInit(): void {
     this.createForm();
   }
 
   createForm() {
-    this.form = this.fb.group<IForm<ISearchMultiPath>>({
+    const baseFormConfig:IForm<ISearchMultiPath>= {
       routes: this.fb.array<FormGroup<IForm<ISearchRoute>>>(
         [
           this.fb.group<IForm<ISearchRoute>>({
             origin: [null, [Validators.required]],
             destination: [null, [Validators.required]],
-            //TODO  add custom validator greater than today value
             departureDate: [
               null,
               [Validators.required, CustomValidators.dateValidator()],
             ],
-            //TODO  add custom validator greater than departureDate value
             returnDate: [
               { value: null, disabled: true },
               [
@@ -92,12 +86,8 @@ export class MultiPathComponent extends BaseControlValueAccessorForm {
         ],
         [Validators.required]
       ),
-    });
-
-    this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x) => {
-      this.onChange(this.form.value);
-      this.onTouched();
-    });
+    };
+    this.createBaseForm(baseFormConfig);
     this.addNewRow();
     this.onTravelTypeChange();
   }
@@ -116,7 +106,7 @@ export class MultiPathComponent extends BaseControlValueAccessorForm {
     this.routes.push(newRow);
   }
 
-  routeIsActive(index: number) {    
+  routeIsActive(index: number) {
     return this.routes.at(index).enabled;
   }
 
@@ -124,12 +114,14 @@ export class MultiPathComponent extends BaseControlValueAccessorForm {
     return this._travelType === TravelTypesEnum.MultiPath;
   }
 
-  private onTravelTypeChange() {
-    this.prepareReturnDateState();
-    this.prepareMultiPathControlsState();
+  markAsTouched() {
+    if (!this.touched) {
+      this.onTouched();
+      this.touched = true;
+    }
   }
 
- prepareMultiPathControlsState() {
+  prepareMultiPathControlsState() {
     if (this._travelType !== TravelTypesEnum.MultiPath) {
       this.routes.controls.slice(1).forEach((x) => {
         x.disable();
@@ -140,6 +132,11 @@ export class MultiPathComponent extends BaseControlValueAccessorForm {
     this.routes.controls.slice(1).forEach((x) => {
       x.enable();
     });
+  }
+
+  private onTravelTypeChange() {
+    this.prepareReturnDateState();
+    this.prepareMultiPathControlsState();
   }
 
   private prepareReturnDateState() {
@@ -155,10 +152,10 @@ export class MultiPathComponent extends BaseControlValueAccessorForm {
     return this._travelType === TravelTypesEnum.RoundTrip;
   }
 
-  private travelTypeChangesUpdate(changes: any) {    
-    if (changes.travelType) {
-      this._travelType = this.travelType;
-      this.onTravelTypeChange();
-    }
-  }
+  // private travelTypeChangesUpdate(changes: any) {
+  //   if (changes.travelType) {
+  //     this._travelType = this.travelType;
+  //     this.onTravelTypeChange();
+  //   }
+  // }
 }

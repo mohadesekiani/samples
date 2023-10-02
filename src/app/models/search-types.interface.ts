@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ClassTypesEnum } from './class-types.enum';
 import { TravelTypesEnum } from './travel-types.enum';
 
@@ -31,7 +31,8 @@ export interface ISearchRoute {
 }
 
 export interface ISearchMultiPath {
-  routes: any;
+  routes:any
+  //  FormArray<FormGroup<IForm<ISearchRoute>>>;
 }
 
 export interface ITab {
