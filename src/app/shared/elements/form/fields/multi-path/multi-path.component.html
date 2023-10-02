@@ -21,10 +21,10 @@
               label="departure Date"
             />
             <span
-            class="passengers-error"
-            *ngIf="item.controls.departureDate.invalid"
-            >date is invalid</span
-          >
+              class="passengers-error"
+              *ngIf="item.controls.departureDate.invalid"
+              >date is invalid</span
+            >
             <app-datepicker
               *ngIf="item.get('returnDate')?.enabled"
               formControlName="returnDate"
@@ -33,10 +33,10 @@
               label="return Date"
             />
             <span
-            class="passengers-error"
-            *ngIf="item.get('returnDate')?.invalid"
-            >date is invalid</span>
-          
+              class="passengers-error"
+              *ngIf="item.get('returnDate')?.invalid"
+              >date is invalid</span
+            >
           </div>
         </div>
       </div>
@@ -52,5 +52,4 @@
     </button>
   </div>
   {{ form.value | json }}
-  
 </div>

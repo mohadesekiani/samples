@@ -19,3 +19,6 @@ body {
   max-width: 500px !important;
   align-items: center;
 }
+.mdc-notched-outline__notch {
+  border-right: none;
+}
