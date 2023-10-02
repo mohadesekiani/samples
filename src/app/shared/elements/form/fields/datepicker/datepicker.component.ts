@@ -76,9 +76,9 @@ export class DatepickerComponent extends BaseControlValueAccessor {
   touched = false;
   // @ViewChild('picker') picker!: MatDatepicker<any> ;
 
-  override writeValue(obj: any): void {
-    this.value = obj;
-  }
+  // override writeValue(obj: any): void {
+  //   this.value = obj;
+  // }
 
   override setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;

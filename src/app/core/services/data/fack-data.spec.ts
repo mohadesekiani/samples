@@ -13,7 +13,7 @@ describe('SUT: FakeDataService', () => {
   });
 
   it('should filter data based on search value', fakeAsync(() => {
-    const searchValue = 'اص';
+    const searchValue = 'Isf';
     const expectedResults = [
       {
         id: '315768d5-57d9-47da-a6c3-bed05ec8a890',
@@ -27,18 +27,7 @@ describe('SUT: FakeDataService', () => {
         countryTitle: 'Iran (Islamic Republic of)',
         countryAlternateTitle: 'ايران',
       },
-      {
-        id: 'a096aae1-f219-420c-af48-3e7cf137355c',
-        title: 'Shahid Beheshti Intl Airport',
-        alternateTitle: 'فرودگاه بین‌المللی شهید بهشتی اصفهان',
-        code: 'IFN',
-        type: 'Facility',
-        subType: 'Airport',
-        cityId: '315768d5-57d9-47da-a6c3-bed05ec8a890',
-        countryCode: 'IR',
-        countryTitle: 'Iran (Islamic Republic of)',
-        countryAlternateTitle: 'ايران',
-      },
+      
     ];
     let actual: any = [];
 
@@ -47,6 +36,8 @@ describe('SUT: FakeDataService', () => {
     });
 
     tick(3000);
+    console.log(actual);
+    
     expect(actual).toEqual(expectedResults);
   }));
 
@@ -65,21 +56,9 @@ describe('SUT: FakeDataService', () => {
         countryTitle: 'Iran (Islamic Republic of)',
         countryAlternateTitle: 'ايران',
       },
-      {
-        id: 'a096aae1-f219-420c-af48-3e7cf137355c',
-        title: 'Shahid Beheshti Intl Airport',
-        alternateTitle: 'فرودگاه بین‌المللی شهید بهشتی اصفهان',
-        code: 'IFN',
-        type: 'Facility',
-        subType: 'Airport',
-        cityId: '315768d5-57d9-47da-a6c3-bed05ec8a890',
-        countryCode: 'IR',
-        countryTitle: 'Iran (Islamic Republic of)',
-        countryAlternateTitle: 'ايران',
-      },
     ];
     // act
-    const actual = await lastValueFrom(sut.getFakeData('اص'));
+    const actual = await lastValueFrom(sut.getFakeData('Isf'));
 
     // assert
     expect(actual).toEqual(expectedResults);

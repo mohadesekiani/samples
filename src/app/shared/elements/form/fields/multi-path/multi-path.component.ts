@@ -7,14 +7,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
-import { CustomValidators } from 'src/app/core/validations/Custom.validators';
+import { CustomValidators } from 'src/app/core/validations/custom.validators';
 import {
   IForm,
   ISearchMultiPath,
   ISearchRoute,
 } from 'src/app/models/search-types.interface';
 import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
-import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-control-value-accessor';
+import { BaseControlValueAccessorForm } from 'src/app/shared/base-component/base-control-value-accessor-form';
 
 @Component({
   selector: 'app-multi-path',
@@ -28,7 +28,7 @@ import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-con
     },
   ],
 })
-export class MultiPathComponent extends BaseControlValueAccessor {
+export class MultiPathComponent extends BaseControlValueAccessorForm {
   private _travelType: TravelTypesEnum = TravelTypesEnum.OneWay;
   travelTypesEnum = TravelTypesEnum;
   //TODO read about getter setter @Input and about pass value between component
@@ -62,14 +62,6 @@ export class MultiPathComponent extends BaseControlValueAccessor {
 
   ngOnChanges(changes: any): void {
     // this.travelTypeChangesUpdate(changes);
-  }
-
-  override writeValue(obj: ISearchMultiPath): void {
-    this.form.patchValue(obj);
-  }
-
-  override setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
   }
 
   ngOnInit(): void {

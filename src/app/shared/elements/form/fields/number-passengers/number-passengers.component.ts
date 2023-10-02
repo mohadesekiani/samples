@@ -16,6 +16,7 @@ import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-con
 })
 export class NumberPassengersComponent extends BaseControlValueAccessor {
   value: number = 0;
+  disabled: boolean = false;
   override writeValue(obj: number): void {
     this.value = obj;
   }

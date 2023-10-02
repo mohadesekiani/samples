@@ -9,10 +9,10 @@ import {
 } from '@angular/forms';
 import { isEqual } from 'lodash-es';
 import { distinctUntilChanged } from 'rxjs';
-import { CustomValidators } from 'src/app/core/validations/Custom.validators';
+import { CustomValidators } from 'src/app/core/validations/custom.validators';
 import { PassengerTypesEnum } from 'src/app/models/general-types.enum';
 import { IForm, ISearchPassenger } from 'src/app/models/search-types.interface';
-import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-control-value-accessor';
+import { BaseControlValueAccessorForm } from 'src/app/shared/base-component/base-control-value-accessor-form';
 
 @Component({
   selector: 'app-passengers',
@@ -26,12 +26,13 @@ import { BaseControlValueAccessor } from 'src/app/shared/base-component/base-con
     },
   ],
 })
-export class PassengersComponent extends BaseControlValueAccessor {
+export class PassengersComponent extends BaseControlValueAccessorForm {
   errorMessage!: { actual: number; max: number };
   hasError = false;
   form!: FormGroup<IForm<ISearchPassenger>>;
-  buttonText = '+';
   disabled = false;
+  value: any
+  buttonText = '+';
   touched = false;
   showDrop = false;
   //rename
@@ -99,14 +100,6 @@ export class PassengersComponent extends BaseControlValueAccessor {
           this.oldValueValid(x);
         });
       });
-  }
-
-  override writeValue(obj: any): void {
-    this.form.patchValue(obj);
-  }
-
-  override setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
   }
 
   markAsTouched() {
