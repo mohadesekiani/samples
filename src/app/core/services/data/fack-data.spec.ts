@@ -35,9 +35,7 @@ describe('SUT: FakeDataService', () => {
       actual = res;
     });
 
-    tick(3000);
-    console.log(actual);
-    
+    tick(3000);    
     expect(actual).toEqual(expectedResults);
   }));
 
