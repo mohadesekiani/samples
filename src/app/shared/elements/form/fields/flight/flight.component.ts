@@ -61,7 +61,6 @@ export class FlightComponent extends BaseInputControlValueAccessor {
     this.updateValueAndTouch(newValue)
   }
 
-
   private loadData() {
     this.loading = true;
     this.dataService.getFakeData(this.filterText).subscribe({

@@ -24,6 +24,7 @@ export class NumberPassengersComponent extends BaseInputControlValueAccessor {
     this.onChange(this.value);
     // this.onTouch(this.value);
   }
+
   decrees() {
     if (this.value <= 0) {
       return;
