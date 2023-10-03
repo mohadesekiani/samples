@@ -19,24 +19,27 @@
               id="departureDate"
               placeholder="your departure date"
               label="departure Date"
+              [formCtrl]="passingCtrl(routes.at(i).controls.departureDate)"
             />
-            <span
+            <!-- <mat-error *ngIf="isDateInvalid(i)">invalid </mat-error> -->
+            <!-- <span
               class="passengers-error"
               *ngIf="item.controls.departureDate.invalid"
               >date is invalid</span
-            >
+            > -->
             <app-datepicker
               *ngIf="item.get('returnDate')?.enabled"
               formControlName="returnDate"
               id="returnDate"
               placeholder="your return date"
               label="return Date"
+              [formCtrl]="passingCtrl(routes.at(i).controls.returnDate)"
             />
-            <span
+            <!-- <span
               class="passengers-error"
               *ngIf="item.get('returnDate')?.invalid"
               >date is invalid</span
-            >
+            > -->
           </div>
         </div>
       </div>
@@ -51,5 +54,4 @@
       add
     </button>
   </div>
-  {{ form.value | json }}
 </div>

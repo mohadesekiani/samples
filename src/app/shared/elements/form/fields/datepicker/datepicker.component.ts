@@ -2,8 +2,12 @@ import { DatePipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
+  Host,
+  Injector,
   Input,
+  Optional,
   Output,
+  Self,
   ViewChild,
 } from '@angular/core';
 
@@ -12,11 +16,18 @@ import {
   MomentDateAdapter,
 } from '@angular/material-moment-adapter';
 
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlContainer,
+  FormControl,
+  NgControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
+  _getOptionScrollPosition,
 } from '@angular/material/core';
 import { BaseInputControlValueAccessor } from 'src/app/shared/base-component/base-input-control-value-accessor';
 
@@ -56,6 +67,7 @@ const MY_DATE_FORMAT = {
   ],
 })
 export class DatepickerComponent extends BaseInputControlValueAccessor {
+  @Input() formCtrl!: any;
   @Input() label!: string;
   @Input() min = new Date();
   @Input() max = new Date(
@@ -63,6 +75,12 @@ export class DatepickerComponent extends BaseInputControlValueAccessor {
     new Date().getMonth() + 1,
     new Date().getDate()
   );
+  ngAfterViewChecked(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+    //dd 'implements OnInit' to the class.
+    // this.markAsTouched();
+  }
 
   @Input() value!: Date;
   @Output() valueChange = new EventEmitter();
@@ -81,7 +99,7 @@ export class DatepickerComponent extends BaseInputControlValueAccessor {
   }
 
   private updateValue() {
-    this.updateValueAndTouch(this.value)
+    this.updateValueAndTouch(this.value);
     this.valueChange.emit(this.value);
   }
 }

@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { ElementsModule } from './elements/elements.module';
 import { MaterialModule } from './material/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const SHARED_MODULES = [
   CommonModule,
+  NgIf,
   ElementsModule,
   MaterialModule,
   ReactiveFormsModule,
+  FormsModule,
 ];
 
 @NgModule({

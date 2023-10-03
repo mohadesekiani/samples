@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
   Validators,
@@ -54,7 +55,6 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
     return this.form.controls.routes as FormArray<
       FormGroup<IForm<ISearchRoute>>
     >;
-
   }
 
   constructor(fb: FormBuilder) {
@@ -65,7 +65,7 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
   }
 
   createForm() {
-    const baseFormConfig:IForm<ISearchMultiPath>= {
+    const baseFormConfig: IForm<ISearchMultiPath> = {
       routes: this.fb.array<FormGroup<IForm<ISearchRoute>>>(
         [
           this.fb.group<IForm<ISearchRoute>>({
@@ -132,6 +132,9 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
     this.routes.controls.slice(1).forEach((x) => {
       x.enable();
     });
+  }
+  passingCtrl(controller: any): any {
+    return controller;
   }
 
   private onTravelTypeChange() {

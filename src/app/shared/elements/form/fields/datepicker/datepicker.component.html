@@ -6,15 +6,22 @@
       [matDatepicker]="picker"
       placeholder="PlaceHolder"
       [disabled]="disabled"
+      (focus)="this.markAsTouched()"
       (click)="picker.open()"
       (dateChange)="dateValueChanged($event.value)"
       [value]="value"
       id="input"
+      class="mat-input-invalid"
+      required
     />
     <!-- dateValueChanged(value) -->
-    <mat-hint [align]="'start'">MM/DD/YYYY</mat-hint>
+    <!-- <mat-hint [align]="'start'">MM/DD/YYYY</mat-hint> -->
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+    <mat-error> reee{{ errorMessage | json }}</mat-error>
+    <!-- <span>{{ errorMessage | json }}</span> -->
+    <!-- <span *ngIf="formCtrl.invalid">{{ getErrorMessage() }}</span> -->
   </mat-form-field>
-  <span>my input value: {{ value | json }}</span>
 </div>
+{{ ngControl?.touched | json }}
+{{ errorMessage | json }}

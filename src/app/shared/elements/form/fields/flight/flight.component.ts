@@ -1,4 +1,10 @@
-import { Component, HostBinding, HostListener, Input } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  HostListener,
+  Injector,
+  Input,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { ICity } from 'src/app/models/city-type.interface';
@@ -17,7 +23,7 @@ import { BaseInputControlValueAccessor } from 'src/app/shared/base-component/bas
   ],
 })
 export class FlightComponent extends BaseInputControlValueAccessor {
-  @Input() label = '';
+  @Input() label = ''; //doroste in? bid yani chi doroste
   value: any = '';
   filterText = '';
   disabled!: boolean;
@@ -26,14 +32,6 @@ export class FlightComponent extends BaseInputControlValueAccessor {
   citySelect = '';
   showCityNotFound = true;
   loading = false;
-
-  constructor(
-    private dataService: AbstractDataService
-  ) {
-    super();
-
-    if (!dataService) { throw new Error('dataService is empty'); }
-  }
 
   @HostListener('focusin')
   onFocus() {
@@ -58,7 +56,7 @@ export class FlightComponent extends BaseInputControlValueAccessor {
     this.value = nameValue;
     this.filteredCities = [];
     this.showCityNotFound = false;
-    this.updateValueAndTouch(newValue)
+    this.updateValueAndTouch(newValue);
   }
 
   private loadData() {
@@ -73,7 +71,7 @@ export class FlightComponent extends BaseInputControlValueAccessor {
       },
       error: (err) => {
         this.loading = false;
-      }
+      },
     });
   }
 
@@ -81,8 +79,7 @@ export class FlightComponent extends BaseInputControlValueAccessor {
     this.filteredCities = [];
     this.value = null;
     this.showCityNotFound = false;
-    this.updateValueAndTouch(this.value)
-
+    this.updateValueAndTouch(this.value);
   }
 
   private isLessThanValidValue(value: string) {
