@@ -1,0 +1,51 @@
+<form [formGroup]="flightForm" (submit)="(submit)">
+    <div>
+      <mat-button-toggle-group formControlName="travelType" id="travelType">
+        <mat-button-toggle
+          *ngFor="let item of travelTypes"
+          [value]="item.value"
+          >{{ item.title }}</mat-button-toggle
+        >
+      </mat-button-toggle-group>
+    </div>
+    <div>
+      <app-multi-path
+        formControlName="routes"
+        [travelType]="travelType"
+        class="app-multi-path"
+      ></app-multi-path>
+      <hr />
+      <div class="flex flex-wrap">
+        <div class="w-1/2">
+          <span class="m-2">passengers</span>
+          <app-passengers
+            formControlName="passengers"
+            class="app-passengers"
+          ></app-passengers>
+          <span
+            class="passengers-error"
+            *ngIf="flightForm.controls.passengers?.invalid"
+            >passengers is invalid</span
+          >
+        </div>
+        <div class="w-1/2">
+          <span class="m-2">general</span>
+          <div class="m-3">
+            <mat-radio-group
+              formControlName="classType"
+              aria-label="Select an option"
+            >
+              <mat-radio-button
+                *ngFor="let option of classTypes"
+                [value]="option.value"
+                >{{ option.title }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" (click)="submit()">Submit</button>
+  </form>
+  {{ flightForm.value | json }}
+  
