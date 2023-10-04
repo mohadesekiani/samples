@@ -1,9 +1,9 @@
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ReactiveFormComponent } from './reactive-form.component';
-import { ClassTypesEnum } from '../models/class-types.enum';
-import { TravelTypesEnum } from '../models/travel-types.enum';
+import { ClassTypesEnum } from '../module/enum/class-types.enum';
+import { TravelTypesEnum } from '../module/travel-types.enum';
 import { Router } from '@angular/router';
-import { IPassengerTypes } from '../models/passenger-types.interface';
+import { IPassengerTypes } from '../module/passenger-types.interface';
 
 describe('SUT: ReactiveFormComponent', () => {
   type FlightFormGroup = FormGroup;

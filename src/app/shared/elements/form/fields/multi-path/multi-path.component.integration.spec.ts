@@ -2,7 +2,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MultiPathComponent } from './multi-path.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
+import { TravelTypesEnum } from 'src/app/module/travel-types.enum';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';

@@ -1,7 +1,7 @@
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { BaseControlValueAccessor } from './base-control-value-accessor';
 import { distinctUntilChanged } from 'rxjs';
-import { IForm } from 'src/app/models/search-types.interface';
+import { IForm } from 'src/app/module/interface/search-types.interface';
 import { Directive } from '@angular/core';
 
 @Directive()

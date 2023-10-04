@@ -8,8 +8,8 @@ import {
 import { isEqual } from 'lodash-es';
 import { distinctUntilChanged } from 'rxjs';
 import { CustomValidators } from 'src/app/core/validations/custom.validators';
-import { PassengerTypesEnum } from 'src/app/models/general-types.enum';
-import { IForm, ISearchPassenger } from 'src/app/models/search-types.interface';
+import { PassengerTypesEnum } from 'src/app/module/enum/general-types.enum';
+import { IForm, ISearchPassenger } from 'src/app/module/interface/search-types.interface';
 import { BaseFormControlValueAccessor } from 'src/app/shared/base-component/base-form-control-value-accessor';
 
 @Component({
@@ -27,7 +27,6 @@ import { BaseFormControlValueAccessor } from 'src/app/shared/base-component/base
 export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPassenger> {
   errorMessage!: { actual: number; max: number };
   hasError = false;
-  // form!: FormGroup<IForm<ISearchPassenger>>;
   buttonText = '+';
   showDrop = false;
   //rename

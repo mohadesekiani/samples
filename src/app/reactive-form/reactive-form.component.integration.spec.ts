@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { AbstractDataService } from '../core/services/data/abstract-data.service';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { TestUtil } from '../core/helpers/something-helpers-test';
-import { IForm, ISearchFlight } from '../models/search-types.interface';
+import { IForm, ISearchFlight } from '../module/search-types.interface';
 import { ReactiveFormComponent } from './reactive-form.component';
 
 describe('SUT(Integration): ReactiveFormComponent', () => {

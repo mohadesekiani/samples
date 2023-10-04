@@ -5,7 +5,7 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
-import { IForm, ISearchRoute } from 'src/app/models/search-types.interface';
+import { IForm, ISearchRoute } from 'src/app/module/search-types.interface';
 import * as moment from 'moment';
 
 export class CustomValidators {

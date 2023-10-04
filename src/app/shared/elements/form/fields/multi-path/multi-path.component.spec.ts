@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MultiPathComponent } from './multi-path.component';
 import { FormBuilder } from '@angular/forms';
-import { TravelTypesEnum } from 'src/app/models/travel-types.enum';
+import { TravelTypesEnum } from 'src/app/module/travel-types.enum';
 
 describe('SUT: MultiPathComponent', () => {
   let sut: MultiPathComponent;

@@ -10,7 +10,7 @@ import {
   IForm,
   ISearchMultiPath,
   ISearchRoute,
-} from 'src/app/models/search-types.interface';
+} from 'src/app/module/search-types.interface';
 
 describe('CustomValidators', () => {
   let formGroup: FormGroup;
