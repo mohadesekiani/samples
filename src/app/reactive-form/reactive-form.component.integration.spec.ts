@@ -8,9 +8,9 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AbstractDataService } from '../core/services/data/abstract-data.service';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { TestUtil } from '../core/helpers/something-helpers-test';
-import { IForm, ISearchFlight } from '../module/search-types.interface';
+import { TestUtil } from '../core/utils/test/test-util';
 import { ReactiveFormComponent } from './reactive-form.component';
+import { IForm, ISearchFlight } from '../module/interface/search-types.interface';
 
 describe('SUT(Integration): ReactiveFormComponent', () => {
   let sut: ReactiveFormComponent;

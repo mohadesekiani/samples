@@ -8,7 +8,7 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FlightComponent } from '../shared/elements/form/fields/flight/flight.component';
-import { TestUtil } from '../core/helpers/something-helpers-test';
+import { TestUtil } from '../core/utils/test/test-util';
 
 
 describe('TemplateDrivenFormComponent', () => {

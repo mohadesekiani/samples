@@ -15,7 +15,7 @@ import {
   ISearchRoute,
 } from 'src/app/module/interface/search-types.interface';
 import { TravelTypesEnum } from 'src/app/module/enum/travel-types.enum';
-import { BaseFormControlValueAccessor } from 'src/app/shared/base-component/base-form-control-value-accessor';
+import { BaseFormControlValueAccessor } from 'src/app/core/constance/base-component/base-form-control-value-accessor';
 
 @Component({
   selector: 'app-multi-path',

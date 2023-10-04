@@ -4,7 +4,7 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatAutocomplete } from '@angular/material/autocomplete';
-import { TestUtil } from 'src/app/core/helpers/something-helpers-test';
+import { TestUtil } from 'src/app/core/utils/test/test-util';
 // #1 should be all component have unit test and integration test file
 // #2 prepare selectors and ...
 
