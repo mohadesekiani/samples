@@ -1,8 +1,6 @@
 import {
   Component,
-  HostBinding,
   HostListener,
-  Injector,
   Input,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -23,7 +21,7 @@ import { BaseInputControlValueAccessor } from 'src/app/shared/base-component/bas
   ],
 })
 export class FlightComponent extends BaseInputControlValueAccessor {
-  @Input() label = ''; //doroste in? bid yani chi doroste
+  @Input() label = '';
   value: any = '';
   filterText = '';
   disabled!: boolean;

@@ -96,7 +96,6 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
     const newRow = this.fb.group<IForm<ISearchRoute>>({
       origin: [null, [Validators.required]],
       destination: [null, [Validators.required]],
-      //TODO  add custom validator greater than prev departureDate value
       departureDate: [
         null,
         [Validators.required, CustomValidators.dateValidator()],
@@ -133,9 +132,6 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
       x.enable();
     });
   }
-  passingCtrl(controller: any): any {
-    return controller;
-  }
 
   private onTravelTypeChange() {
     this.prepareReturnDateState();
@@ -154,11 +150,4 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
   private isRoundTrip() {
     return this._travelType === TravelTypesEnum.RoundTrip;
   }
-
-  // private travelTypeChangesUpdate(changes: any) {
-  //   if (changes.travelType) {
-  //     this._travelType = this.travelType;
-  //     this.onTravelTypeChange();
-  //   }
-  // }
 }

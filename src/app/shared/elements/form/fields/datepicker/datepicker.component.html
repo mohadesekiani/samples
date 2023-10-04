@@ -15,12 +15,10 @@
       required
     />
     <!-- dateValueChanged(value) -->
-    <!-- <mat-hint [align]="'start'">MM/DD/YYYY</mat-hint> -->
+    <mat-hint [align]="'start'">MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-    <mat-error> reee{{ errorMessage | json }}</mat-error>
-    <!-- <span>{{ errorMessage | json }}</span> -->
-    <!-- <span *ngIf="formCtrl.invalid">{{ getErrorMessage() }}</span> -->
+    <mat-error> error: {{ errorMessage | json }}</mat-error>
   </mat-form-field>
 </div>
 {{ ngControl?.touched | json }}

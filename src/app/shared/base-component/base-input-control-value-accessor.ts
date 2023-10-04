@@ -27,7 +27,10 @@ export abstract class BaseInputControlValueAccessor extends BaseControlValueAcce
       Object.keys(errors).forEach((key) => {
         switch (key) {
           case 'required':
-            errorMessages.push(`فیلد ejbari.`);
+            errorMessages.push(`you must enter Date.`);
+            break;
+          case 'dateInvalid':
+            errorMessages.push(`The selected date is not allowed.`);
             break;
         }
       });
