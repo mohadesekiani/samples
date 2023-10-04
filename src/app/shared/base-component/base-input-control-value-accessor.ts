@@ -10,13 +10,16 @@ import { BaseControlValueAccessor } from './base-control-value-accessor';
 export abstract class BaseInputControlValueAccessor extends BaseControlValueAccessor {
   ngControl: NgControl | undefined;
 
-  constructor(private inj: Injector, public dataService: AbstractDataService) {
+  constructor(private baseInj: Injector) {
     super();
   }
-
-  ngAfterViewInit() {
-    this.ngControl = this.inj.get(NgControl);
+  ngOnInit() {
+    this.ngControl = this.baseInj.get(NgControl);
   }
+
+  // ngAfterViewInit() {
+  //   this.ngControl = this.baseInj.get(NgControl);
+  // }
 
   get errorMessage() {
     let errors = this.ngControl?.errors;
@@ -32,8 +35,8 @@ export abstract class BaseInputControlValueAccessor extends BaseControlValueAcce
             break;
         }
       });
-      return errorMessages[0] ?? null;
-    } else return null;
+      return errorMessages[0] ?? '';
+    } else return '';
   }
 
   abstract value: any;

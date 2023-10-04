@@ -1,9 +1,10 @@
 import {
   Component,
   HostListener,
+  Injector,
   Input,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { ICity } from 'src/app/models/city-type.interface';
 import { BaseInputControlValueAccessor } from 'src/app/shared/base-component/base-input-control-value-accessor';
@@ -31,6 +32,9 @@ export class FlightComponent extends BaseInputControlValueAccessor {
   showCityNotFound = true;
   loading = false;
 
+  constructor(private inj: Injector, private dataService: AbstractDataService) {
+    super(inj);
+  }
   @HostListener('focusin')
   onFocus() {
     this.markAsTouched();
