@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IFlight } from '../module/flight.model';
+import { IFlight } from '../module/interface/flight.interface';
 import { GeneralTypesEnum } from '../module/enum/general-types.enum';
 
 @Component({
