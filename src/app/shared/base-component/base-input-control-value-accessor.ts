@@ -7,20 +7,21 @@ import { BaseControlValueAccessor } from './base-control-value-accessor';
   selector: '',
   template: '',
 })
-export abstract class BaseInputControlValueAccessor extends BaseControlValueAccessor {
-  ngControl: NgControl | undefined;
+export abstract class BaseInputControlValueAccessor<T> extends BaseControlValueAccessor<T> {
 
-  constructor(private baseInj: Injector) {
+  constructor() {
     super();
   }
   ngOnInit() {
-    this.ngControl = this.baseInj.get(NgControl);
   }
 
   // ngAfterViewInit() {
   //   this.ngControl = this.baseInj.get(NgControl);
   // }
 
+
+  //TODO move me to base form
+  //common in base form control value accessor and base form component
   get errorMessage() {
     let errors = this.ngControl?.errors;
     if (errors) {
@@ -39,21 +40,11 @@ export abstract class BaseInputControlValueAccessor extends BaseControlValueAcce
     } else return '';
   }
 
-  abstract value: any;
-  abstract touched: boolean;
   override writeValue(obj: any): void {
     this.value = obj;
   }
 
-  markAsTouched() {
-    if (this.touched) {
-      return;
-    }
-    this.onTouched();
-    this.touched = true;
-  }
-
-  updateValueAndTouch(newValue: any): void {
+  updateValueAndValidity(newValue: any): void {
     this.onChange(newValue);
     this.markAsTouched();
   }

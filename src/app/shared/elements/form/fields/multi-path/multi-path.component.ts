@@ -42,9 +42,6 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
     if (this.form) this.onTravelTypeChange();
   }
   // form!: FormGroup<IForm<ISearchMultiPath>>;
-  touched = false;
-  disabled = false;
-  value!: [];
 
   travelTypes = Object.values(TravelTypesEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
@@ -60,11 +57,9 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
   constructor(fb: FormBuilder) {
     super(fb);
   }
-  ngOnInit(): void {
-    this.createForm();
-  }
 
-  createForm() {
+
+  override createForm() {
     const baseFormConfig: IForm<ISearchMultiPath> = {
       routes: this.fb.array<FormGroup<IForm<ISearchRoute>>>(
         [
@@ -87,7 +82,7 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
         [Validators.required]
       ),
     };
-    this.createBaseForm(baseFormConfig);
+    super.createForm(baseFormConfig);
     this.addNewRow();
     this.onTravelTypeChange();
   }
@@ -111,13 +106,6 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
 
   isMultiPath() {
     return this._travelType === TravelTypesEnum.MultiPath;
-  }
-
-  markAsTouched() {
-    if (!this.touched) {
-      this.onTouched();
-      this.touched = true;
-    }
   }
 
   prepareMultiPathControlsState() {

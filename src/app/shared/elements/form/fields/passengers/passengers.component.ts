@@ -28,9 +28,7 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
   errorMessage!: { actual: number; max: number };
   hasError = false;
   // form!: FormGroup<IForm<ISearchPassenger>>;
-  disabled = false;
   buttonText = '+';
-  touched = false;
   showDrop = false;
   //rename
   passengers: Array<any> = [
@@ -50,18 +48,14 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
     super(fb);
   }
 
-  ngOnInit() {
-    this.createForm();
-  }
 
-  createForm() {
-    const baseFormConfig: IForm<ISearchPassenger> = {
+  override createForm() {
+    super.createForm({
       Adult: [null, [Validators.required]],
       Child: [null],
       Infant: [null],
-    };
+    });
 
-    this.createBaseForm(baseFormConfig);
     this.form.setValidators(CustomValidators.maxFrom('Infant', 'Adult'));
     // this.form.valueChanges
     //   .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))

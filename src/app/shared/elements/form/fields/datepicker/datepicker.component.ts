@@ -32,7 +32,7 @@ const MY_DATE_FORMAT = {
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
   ],
 })
-export class DatepickerComponent extends BaseInputControlValueAccessor {
+export class DatepickerComponent extends BaseInputControlValueAccessor<Date> {
   @Input() label!: string;
   @Input() min = new Date();
   @Input() max = new Date(
@@ -40,14 +40,8 @@ export class DatepickerComponent extends BaseInputControlValueAccessor {
     new Date().getMonth() + 1,
     new Date().getDate()
   );
-  ngAfterViewChecked(): void {
-    // this.markAsTouched();
-  }
 
-  @Input() value!: Date;
   @Output() valueChange = new EventEmitter();
-  disabled = false;
-  touched = false;
 
   dateValueChanged(value: Date) {
     // iran time zone offset is  210
@@ -60,7 +54,7 @@ export class DatepickerComponent extends BaseInputControlValueAccessor {
   }
 
   private updateValue() {
-    this.updateValueAndTouch(this.value);
+    this.updateValueAndValidity(this.value);
     this.valueChange.emit(this.value);
   }
 }

@@ -23,10 +23,8 @@ import { BaseInputControlValueAccessor } from 'src/app/shared/base-component/bas
 })
 export class FlightComponent extends BaseInputControlValueAccessor {
   @Input() label = '';
-  value: any = '';
+  override value: any = '';
   filterText = '';
-  disabled!: boolean;
-  touched = false;
   filteredCities!: Array<any>;
   citySelect = '';
   showCityNotFound = true;
@@ -58,7 +56,7 @@ export class FlightComponent extends BaseInputControlValueAccessor {
     this.value = nameValue;
     this.filteredCities = [];
     this.showCityNotFound = false;
-    this.updateValueAndTouch(newValue);
+    this.updateValueAndValidity(newValue);
   }
 
   private loadData() {
@@ -81,7 +79,7 @@ export class FlightComponent extends BaseInputControlValueAccessor {
     this.filteredCities = [];
     this.value = null;
     this.showCityNotFound = false;
-    this.updateValueAndTouch(this.value);
+    this.updateValueAndValidity(this.value);
   }
 
   private isLessThanValidValue(value: string) {

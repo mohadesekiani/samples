@@ -15,9 +15,8 @@ import { BaseInputControlValueAccessor } from 'src/app/shared/base-component/bas
   ],
 })
 export class NumberPassengersComponent extends BaseInputControlValueAccessor {
-  value: number = 0;
-  disabled: boolean = false;
-  touched = false;
+  override value: number = 0;
+
 
   increased() {
     this.value = this.value + 1;
@@ -38,6 +37,7 @@ export class NumberPassengersComponent extends BaseInputControlValueAccessor {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     this.value = +value;
-    this.updateValueAndTouch(this.value);
+    
+    this.updateValueAndValidity(this.value);
   }
 }
