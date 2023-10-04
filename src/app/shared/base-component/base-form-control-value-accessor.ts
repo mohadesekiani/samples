@@ -5,7 +5,7 @@ import { IForm } from 'src/app/models/search-types.interface';
 import { Directive } from '@angular/core';
 
 @Directive()
-export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAccessor {
+export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAccessor<T> {
   form!: FormGroup<IForm<T>>;
 
   constructor(protected fb: FormBuilder) {

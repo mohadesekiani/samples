@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormControl, FormGroupDirective, NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
 import {
+  ErrorStateMatcher,
   MAT_DATE_FORMATS,
   _getOptionScrollPosition,
 } from '@angular/material/core';
@@ -19,6 +20,11 @@ const MY_DATE_FORMAT = {
   },
 };
 
+// export class MyErrorStateMatcher implements ErrorStateMatcher {
+//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+//     return true
+//   }
+// }
 @Component({
   selector: 'app-datepicker',
   templateUrl: './datepicker.component.html',
@@ -42,13 +48,14 @@ export class DatepickerComponent extends BaseInputControlValueAccessor<Date> {
   );
 
   @Output() valueChange = new EventEmitter();
+  // matcher = new MyErrorStateMatcher();
 
   dateValueChanged(value: Date) {
     // iran time zone offset is  210
-    var d = new Date(value);
-    let numericDate = d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
-    const date = new Date(numericDate);
-    this.value = date;
+    // var d = new Date(value);
+    // let numericDate = d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
+    // const date = new Date(numericDate);
+    // this.value = date;
     this.value = value;
     this.updateValue();
   }

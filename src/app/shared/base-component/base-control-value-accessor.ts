@@ -9,7 +9,7 @@ export abstract class BaseControlValueAccessor<T> implements ControlValueAccesso
   disabled = false;
   touched: any;
 
-  writeValue(obj: any): void { }
+  writeValue(obj: any): void {  }
 
   registerOnChange(fn: any): void {
     this.onChange = fn;

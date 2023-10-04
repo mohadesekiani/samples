@@ -14,7 +14,7 @@ import { BaseInputControlValueAccessor } from 'src/app/shared/base-component/bas
     },
   ],
 })
-export class NumberPassengersComponent extends BaseInputControlValueAccessor {
+export class NumberPassengersComponent extends BaseInputControlValueAccessor<number> {
   override value: number = 0;
 
 

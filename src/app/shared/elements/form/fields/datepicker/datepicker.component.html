@@ -13,7 +13,9 @@
       id="input"
       class="mat-input-invalid"
       required
-    />
+      />
+      <!-- [errorStateMatcher]="matcher" -->
+      <!-- https://material.angular.io/components/input/overview -->
     <!-- dateValueChanged(value) -->
     <mat-hint [align]="'start'">MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -21,5 +23,5 @@
     <mat-error> error: {{ errorMessage | json }}</mat-error>
   </mat-form-field>
 </div>
-{{ ngControl?.touched | json }}
+<!-- {{ ngControl?.touched | json }} -->
 {{ errorMessage | json }}

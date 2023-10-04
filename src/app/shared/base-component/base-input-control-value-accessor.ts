@@ -7,18 +7,18 @@ import { BaseControlValueAccessor } from './base-control-value-accessor';
   selector: '',
   template: '',
 })
-export abstract class BaseInputControlValueAccessor<T> extends BaseControlValueAccessor<T> {
+export abstract class BaseInputControlValueAccessor<
+  T
+> extends BaseControlValueAccessor<T> {
+  ngControl: NgControl | undefined;
 
-  constructor() {
+  constructor(private baseInj: Injector) {
     super();
   }
   ngOnInit() {
+        // this.ngControl = this.baseInj.get(NgControl);
+
   }
-
-  // ngAfterViewInit() {
-  //   this.ngControl = this.baseInj.get(NgControl);
-  // }
-
 
   //TODO move me to base form
   //common in base form control value accessor and base form component
