@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ITab } from '../module/search-types.interface';
+import { ITab } from '../module/interface/search-types.interface';
 
 @Component({
   selector: 'app-layout',

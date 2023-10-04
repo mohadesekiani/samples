@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IFlight } from '../module/flight.model';
-import { GeneralTypesEnum } from '../module/general-types.enum';
+import { GeneralTypesEnum } from '../module/enum/general-types.enum';
 
 @Component({
   selector: 'app-template-driven-form',

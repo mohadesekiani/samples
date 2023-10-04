@@ -1,6 +1,6 @@
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
-import { ClassTypesEnum } from './class-types.enum';
-import { TravelTypesEnum } from './travel-types.enum';
+import { ClassTypesEnum } from '../enum/class-types.enum';
+import { TravelTypesEnum } from '../enum/travel-types.enum';
 
 export type IForm<T> = {
   [K in keyof T]?: any;

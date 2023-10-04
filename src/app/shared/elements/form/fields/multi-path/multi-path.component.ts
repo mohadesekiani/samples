@@ -13,8 +13,8 @@ import {
   IForm,
   ISearchMultiPath,
   ISearchRoute,
-} from 'src/app/module/search-types.interface';
-import { TravelTypesEnum } from 'src/app/module/travel-types.enum';
+} from 'src/app/module/interface/search-types.interface';
+import { TravelTypesEnum } from 'src/app/module/enum/travel-types.enum';
 import { BaseFormControlValueAccessor } from 'src/app/shared/base-component/base-form-control-value-accessor';
 
 @Component({

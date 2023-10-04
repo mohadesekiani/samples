@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ClassTypesEnum } from '../module/enum/class-types.enum';
-import { TravelTypesEnum } from '../module/travel-types.enum';
+import { TravelTypesEnum } from '../module/enum/travel-types.enum';
 import { Router } from '@angular/router';
 import { distinctUntilChanged, skip, startWith } from 'rxjs';
-import { IForm, ISearchFlight } from '../module/search-types.interface';
+import { IForm, ISearchFlight } from '../module/interface/search-types.interface';
 
 @Component({
   selector: 'app-reactive-form',
