@@ -8,8 +8,9 @@ import {
 import { isEqual } from 'lodash-es';
 import { distinctUntilChanged } from 'rxjs';
 import { CustomValidators } from 'src/app/core/validations/custom.validators';
-import { PassengerTypesEnum } from 'src/app/module/enum/general-types.enum';
-import { IForm, ISearchPassenger } from 'src/app/module/interface/search-types.interface';
+import { PassengerTypesEnum } from 'src/app/core/module/enum/general-types.enum';
+
+import { IForm, ISearchPassenger } from 'src/app/core/module/interface/search-types.interface';
 import { BaseFormControlValueAccessor } from 'src/app/core/constance/base-component/base-form-control-value-accessor';
 
 @Component({

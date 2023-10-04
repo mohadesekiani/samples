@@ -1,7 +1,7 @@
 import { Component, HostListener, Injector, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
-import { ICity } from 'src/app/module/interface/city-type.interface';
+import { ICity } from 'src/app/core/module/interface/city-type.interface'
 import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-component/base-input-control-value-accessor';
 
 @Component({

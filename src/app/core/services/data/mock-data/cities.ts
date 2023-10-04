@@ -1,4 +1,4 @@
-import { ICity } from 'src/app/module/interface/city-type.interface';
+import { ICity } from 'src/app/core/module/interface/city-type.interface';
 
 export let cities: ICity[] = [
   {
