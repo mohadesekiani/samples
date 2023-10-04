@@ -20,10 +20,8 @@ export abstract class BaseInputControlValueAccessor extends BaseControlValueAcce
 
   get errorMessage() {
     let errors = this.ngControl?.errors;
-    // return errors;
     if (errors) {
       let errorMessages: any = [];
-      console.log('hi');
       Object.keys(errors).forEach((key) => {
         switch (key) {
           case 'required':
