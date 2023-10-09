@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TemplateDrivenFormComponent } from './template-driven-form.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -8,25 +7,26 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FlightComponent } from '../shared/elements/form/fields/flight/flight.component';
-import { TestUtil } from '../core/utils/test/test-util';
+import { SearchTrainComponent } from './search-train.component';
+import { TestUtil } from '../core/utils/test';
 
 
-describe('TemplateDrivenFormComponent', () => {
-  let sut: TemplateDrivenFormComponent;
-  let fixture: ComponentFixture<TemplateDrivenFormComponent>;
+describe('SearchTrainComponent', () => {
+  let sut: SearchTrainComponent;
+  let fixture: ComponentFixture<SearchTrainComponent>;
   let appFlight:FlightComponent;
   let appDatepicker;
   let appPassengers;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, SharedModule,FormsModule,BrowserModule,RouterTestingModule],
-      declarations: [TemplateDrivenFormComponent],
+      declarations: [SearchTrainComponent],
       providers: [AbstractDataService],
       schemas: [
         NO_ERRORS_SCHEMA
       ]
     });
-    fixture = TestBed.createComponent(TemplateDrivenFormComponent);
+    fixture = TestBed.createComponent(SearchTrainComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();
     appFlight = TestUtil.queryComponent(fixture,'app-flight')

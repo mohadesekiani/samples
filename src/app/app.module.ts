@@ -9,11 +9,12 @@ import { AbstractDataService } from './core/services/data/abstract-data.service'
 import { FakeDataService } from './core/services/data/fake-data.service';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
+import { SearchTrainComponent } from './search-train/search-train.component';
+import { SearchTrainModule } from './search-train/search-train.module';
 //import { ReactiveFormComponent } from './reactive-form/ReactiveFormComponent';
 
 @NgModule({
-  declarations: [AppComponent, TemplateDrivenFormComponent],
+  declarations: [AppComponent, SearchTrainComponent],
   imports: [
     FormsModule,
     FontAwesomeModule,
@@ -23,6 +24,7 @@ import { TemplateDrivenFormComponent } from './template-driven-form/template-dri
     SharedModule,
     RouterModule,
     AppRoutingModule,
+    SearchTrainModule,
   ],
 
   providers: [
