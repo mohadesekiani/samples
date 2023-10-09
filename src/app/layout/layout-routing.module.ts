@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout.component';
 import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormComponent } from '../reactive-form/reactive-form.component';
 import { ResultsComponent } from '../results/results.component';
-import { SearchFlightComponent } from '../search-flight/search-flight.component';
 
 const routes: Routes = [
   {
@@ -19,7 +17,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'flight',
+        path: '',
         loadChildren: () =>
           import('../search-flight/search-flight.module').then(
             (m) => m.SearchFlightModule

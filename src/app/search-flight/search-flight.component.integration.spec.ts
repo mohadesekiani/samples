@@ -11,7 +11,7 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { TestUtil } from "../core/utils/test";
 
 
-describe('SUT(Integration): ReactiveFormComponent', () => {
+describe('SUT(Integration): SearchFlightComponent', () => {
   let sut: SearchFlightComponent;
   let fixture: ComponentFixture<SearchFlightComponent>;
   let form: FormGroup<IForm<ISearchFlight>>;
