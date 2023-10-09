@@ -3,6 +3,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { ICity } from 'src/app/core/module/interface/city-type.interface'
 import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-component/base-input-control-value-accessor';
+import { BaseInput } from 'src/app/core/constance/base-component/base-input';
 
 @Component({
   selector: 'app-flight',
@@ -16,7 +17,7 @@ import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-compo
     },
   ],
 })
-export class FlightComponent extends BaseInputControlValueAccessor<any> {
+export class FlightComponent extends BaseInput<any> {
   @Input() label = '';
   override value: any = '';
   filterText = '';

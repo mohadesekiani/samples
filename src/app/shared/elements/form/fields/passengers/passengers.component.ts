@@ -56,7 +56,7 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
       Infant: [null],
     });
 
-    this.form.setValidators(CustomValidators.maxFrom('Infant', 'Adult'));
+    this.form.setValidators([CustomValidators.maxFrom('Infant', 'Adult'),Validators.required]);
     // this.form.valueChanges
     //   .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))
     //   .subscribe((x: any) => {

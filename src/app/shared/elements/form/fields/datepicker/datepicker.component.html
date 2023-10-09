@@ -4,7 +4,7 @@
     <input
       matInput
       [matDatepicker]="picker"
-      placeholder="PlaceHolder"
+      placeholder="MM/DD/YYYY"
       [disabled]="disabled"
       (focus)="this.markAsTouched()"
       (click)="picker.open()"
@@ -12,16 +12,15 @@
       [value]="value"
       id="input"
       class="mat-input-invalid"
-      required
+      [errorStateMatcher]="matcher"
+      formControlName ='formCtrl'
       />
-      <!-- [errorStateMatcher]="matcher" -->
-      <!-- https://material.angular.io/components/input/overview -->
+    <!-- [errorStateMatcher]="matcher" -->
+    <!-- https://material.angular.io/components/input/overview -->
     <!-- dateValueChanged(value) -->
-    <mat-hint [align]="'start'">MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-    <!-- <mat-error> error: {{ errorMessage | json }}</mat-error> -->
+    <mat-hint style="color: red"> {{ errorMessage | json }}</mat-hint>
   </mat-form-field>
 </div>
 <!-- {{ ngControl?.touched | json }} -->
-{{ errorMessage | json }}

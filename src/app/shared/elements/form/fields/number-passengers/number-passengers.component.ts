@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BaseInput } from 'src/app/core/constance/base-component/base-input';
 import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-component/base-input-control-value-accessor';
 
 @Component({
@@ -14,7 +15,7 @@ import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-compo
     },
   ],
 })
-export class NumberPassengersComponent extends BaseInputControlValueAccessor<number> {
+export class NumberPassengersComponent extends BaseInput<number> {
   override value: number = 0;
 
 

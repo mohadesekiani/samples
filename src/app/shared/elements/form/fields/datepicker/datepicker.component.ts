@@ -6,6 +6,7 @@ import {
   MAT_DATE_FORMATS,
   _getOptionScrollPosition,
 } from '@angular/material/core';
+import { BaseInput } from 'src/app/core/constance/base-component/base-input';
 import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-component/base-input-control-value-accessor';
 
 const MY_DATE_FORMAT = {
@@ -20,11 +21,13 @@ const MY_DATE_FORMAT = {
   },
 };
 
-// export class MyErrorStateMatcher implements ErrorStateMatcher {
-//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-//     return true
-//   }
-// }
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return true
+    // !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 @Component({
   selector: 'app-datepicker',
   templateUrl: './datepicker.component.html',
@@ -38,7 +41,7 @@ const MY_DATE_FORMAT = {
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
   ],
 })
-export class DatepickerComponent extends BaseInputControlValueAccessor<Date> {
+export class DatepickerComponent extends BaseInput<Date> {
   @Input() label!: string;
   @Input() min = new Date();
   @Input() max = new Date(
@@ -46,9 +49,8 @@ export class DatepickerComponent extends BaseInputControlValueAccessor<Date> {
     new Date().getMonth() + 1,
     new Date().getDate()
   );
-
   @Output() valueChange = new EventEmitter();
-  // matcher = new MyErrorStateMatcher();
+  matcher = new MyErrorStateMatcher();
 
   dateValueChanged(value: Date) {
     // iran time zone offset is  210
