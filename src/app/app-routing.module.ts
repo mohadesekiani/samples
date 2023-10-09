@@ -12,6 +12,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./results/results.module').then((m)=> m.ResultModule)
   },
+
 ];
 
 @NgModule({

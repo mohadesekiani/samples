@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { IForm, ISearchFlight } from '../core/module/interface/search-types.interface';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { TravelTypesEnum } from '../core/module/enum/travel-types.enum';
+import { ClassTypesEnum } from 'src/app/core/module/enum/class-types.enum'
+import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum'
 import { Router } from '@angular/router';
-import { ClassTypesEnum } from '../core/module/enum/class-types.enum';
+import { IForm, ISearchFlight } from 'src/app/core/module/interface/search-types.interface'
 
 @Component({
-  selector: 'app-search-travel',
-  templateUrl: './search-travel.component.html',
-  styleUrls: ['./search-travel.component.scss']
+  selector: 'app-search-flight',
+  templateUrl: './search-flight.component.html',
+  styleUrls: ['./search-flight.component.scss']
 })
-export class SearchTravelComponent  implements OnInit {
-
+export class SearchFlightComponent {
   classTypes = Object.values(ClassTypesEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
     value,
@@ -60,5 +59,4 @@ export class SearchTravelComponent  implements OnInit {
       alert('فرم ثبت نشد');
     }
   }
-
 }
