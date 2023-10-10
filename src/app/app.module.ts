@@ -14,12 +14,7 @@ import { SearchTrainModule } from './search-train/search-train.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    FormsModule,
-    FontAwesomeModule,
-    BrowserModule,
-    ReactiveFormsModule,
     BrowserAnimationsModule,
-    SharedModule,
     RouterModule,
     AppRoutingModule,
   ],

@@ -41,6 +41,7 @@ export abstract class BaseForm<T> extends BaseFormControlValueAccessor<T> {
       return errorMessages[0] ?? '';
     } else return;
   }
+
   get formCtrl() {
     let ctrl = this.ngControl;
     if (ctrl) {

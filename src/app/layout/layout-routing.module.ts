@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LayoutComponent } from './layout.component';
+import { LayoutComponent } from './components/layout.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ResultsComponent } from '../results/results.component';
 

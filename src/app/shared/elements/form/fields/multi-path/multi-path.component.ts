@@ -48,12 +48,12 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
   }));
 
   get routes() {
-    return this.form.controls.routes as FormArray<
+    return this.form?.controls.routes as FormArray<
       FormGroup<IForm<ISearchRoute>>
     >;
   }
 
-  constructor(fb: FormBuilder,inj:Injector) {
+  constructor(fb: FormBuilder) {
     super(fb);
   }
 
@@ -121,6 +121,8 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
   }
 
   private onTravelTypeChange() {
+    if (!this.form) { return; }
+
     this.prepareReturnDateState();
     this.prepareMultiPathControlsState();
   }

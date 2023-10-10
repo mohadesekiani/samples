@@ -1,4 +1,4 @@
-<div [formGroup]="form">
+<div [formGroup]="form" *ngIf="form">
   <div formArrayName="routes" id="routes">
     <ng-container *ngFor="let item of routes.controls; let i = index">
       <div *ngIf="routeIsActive(i)">

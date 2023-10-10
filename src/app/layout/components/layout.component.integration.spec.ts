@@ -13,10 +13,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { LayoutComponent } from './layout.component';
-import { AbstractDataService } from '../core/services/data/abstract-data.service';
-import { SharedModule } from '../shared/shared.module';
+import { AbstractDataService } from '../../core/services/data/abstract-data.service';
+import { SharedModule } from '../../shared/shared.module';
 import { Router } from '@angular/router';
-import { TestUtil } from '../core/utils/test/test-util';
+import { TestUtil } from '../../core/utils/test/test-util';
 
 describe('LayoutComponent', () => {
   let sut: LayoutComponent;

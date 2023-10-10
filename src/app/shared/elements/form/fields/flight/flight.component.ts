@@ -26,8 +26,8 @@ export class FlightComponent extends BaseInput<any> {
   showCityNotFound = true;
   loading = false;
 
-  constructor(private inj: Injector,private dataService: AbstractDataService) {
-    super(inj);
+  constructor(private dataService: AbstractDataService) {
+    super();
   }
   @HostListener('focusin')
   onFocus() {
