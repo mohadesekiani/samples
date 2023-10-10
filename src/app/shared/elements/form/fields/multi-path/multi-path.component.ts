@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Injector, Input } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -13,8 +13,8 @@ import {
   IForm,
   ISearchMultiPath,
   ISearchRoute,
-} from  'src/app/core/module/interface/search-types.interface'
-import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum'
+} from 'src/app/core/module/interface/search-types.interface';
+import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
 import { BaseFormControlValueAccessor } from 'src/app/core/constance/base-component/base-form-control-value-accessor';
 
 @Component({
@@ -33,13 +33,12 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
   baseFormConfig!: FormGroup<IForm<ISearchMultiPath>>;
   private _travelType: TravelTypesEnum = TravelTypesEnum.OneWay;
   travelTypesEnum = TravelTypesEnum;
-  //TODO read about getter setter @Input and about pass value between component
   @Input() get travelType(): TravelTypesEnum {
     return this._travelType;
   }
   set travelType(value: TravelTypesEnum) {
     this._travelType = value;
-    if (this.form) this.onTravelTypeChange();
+    this.onTravelTypeChange();
   }
   // form!: FormGroup<IForm<ISearchMultiPath>>;
 
@@ -54,10 +53,9 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
     >;
   }
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder,inj:Injector) {
     super(fb);
   }
-
 
   override createForm() {
     const baseFormConfig: IForm<ISearchMultiPath> = {
@@ -116,6 +114,7 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
 
       return;
     }
+
     this.routes.controls.slice(1).forEach((x) => {
       x.enable();
     });
@@ -128,11 +127,14 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
 
   private prepareReturnDateState() {
     if (!this.isRoundTrip()) {
-      this.form.controls.routes.at(0).controls.returnDate.disable();
+      // this.form.controls.routes.at(0).controls.returnDate.disable();
       this.routes.at(0).controls.returnDate.disable();
       return;
     }
+    console.log(this._travelType);
+
     this.routes.at(0).controls.returnDate.enable();
+    // this.form.controls.routes.at(0).controls.returnDate.enable();
   }
 
   private isRoundTrip() {

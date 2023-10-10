@@ -20,7 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { MatIconButton } from '@angular/material/button';
 import * as moment from 'moment';
-import { TestUtil } from 'src/app/core/utils/test/test-util';
+import { TestUtil } from 'src/app/core/utils/test';
 
 describe('SUT(Integration): DatepickerComponent', () => {
   let sut: DatepickerComponent;

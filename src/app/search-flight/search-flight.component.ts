@@ -32,7 +32,7 @@ export class SearchFlightComponent {
   }));
 
   get travelType(): TravelTypesEnum {    
-    return this.flightForm.controls.travelType?.value as any;
+    return this.flightForm.controls.travelType?.value as TravelTypesEnum;
   }
 
   constructor(private fb: FormBuilder, private router: Router) {}

@@ -1,9 +1,7 @@
 import { ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { ControlContainer, FormBuilder, FormControl } from '@angular/forms';
-import { IPassengerTypes } from 'src/app/module/passenger-types.interface';
 import { PassengersComponent } from './passengers.component';
 import { distinctUntilChanged } from 'rxjs';
-import { IForm, ISearchPassenger } from 'src/app/module/search-types.interface';
 
 describe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;

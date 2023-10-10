@@ -1,21 +1,17 @@
-import { Component, Injector } from '@angular/core';
-import { FormControl, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { BaseControlValueAccessor } from './base-control-value-accessor';
-import { BaseInputControlValueAccessor } from './base-input-control-value-accessor';
+import { FormBuilder, NgControl } from '@angular/forms';
+import { BaseFormControlValueAccessor } from './base-form-control-value-accessor';
+import { Directive, Injector } from '@angular/core';
 
-@Component({
-  selector: '',
-  template: '',
-})
-export abstract class BaseInput<T> extends BaseInputControlValueAccessor<T> {
+@Directive()
+export abstract class BaseForm<T> extends BaseFormControlValueAccessor<T> {
   ngControl: NgControl | undefined;
 
-  constructor(private baseInj: Injector) {
-    super();
+  constructor(fb: FormBuilder,protected baseInj: Injector) {
+    super(fb);
   }
-  ngOnInit() {
+  override ngOnInit(): void {
+    super.ngOnInit();
     this.ngControl = this.baseInj.get(NgControl);
-    
   }
 
   get errorMessage() {
@@ -46,10 +42,9 @@ export abstract class BaseInput<T> extends BaseInputControlValueAccessor<T> {
     } else return;
   }
   get formCtrl() {
-    let ctrl = this.ngControl;    
-    if (ctrl) {      
+    let ctrl = this.ngControl;
+    if (ctrl) {
       return ctrl;
     } else return;
   }
-
 }

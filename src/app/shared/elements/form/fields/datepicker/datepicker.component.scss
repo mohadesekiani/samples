@@ -11,3 +11,6 @@
 :host mat-error {
   color: red !important;
 }
+.mat-form-field-invalid {
+  border-color: red;
+}

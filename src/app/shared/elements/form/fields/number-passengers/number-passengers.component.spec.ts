@@ -11,7 +11,8 @@ describe('SUT: NumberPassengersComponent', () => {
   });
 
   beforeEach(() => {
-    sut = new NumberPassengersComponent();
+    // TODO
+    // sut = new NumberPassengersComponent();
     sut.registerOnChange(valueAccessor.onChange);
     sut.registerOnTouched(valueAccessor.onTouched);
   });

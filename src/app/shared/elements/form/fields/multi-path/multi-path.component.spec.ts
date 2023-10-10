@@ -1,11 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MultiPathComponent } from './multi-path.component';
 import { FormBuilder } from '@angular/forms';
-import { TravelTypesEnum } from 'src/app/module/travel-types.enum';
+import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
+import { Injector } from '@angular/core';
 
 describe('SUT: MultiPathComponent', () => {
   let sut: MultiPathComponent;
   let fb: FormBuilder;
+  let inj:Injector
   const valueAccessor = jasmine.createSpyObj<{
     onChange: (e: any) => {};
     onTouched: () => {};
@@ -15,7 +17,7 @@ describe('SUT: MultiPathComponent', () => {
   });
   beforeEach(() => {
     fb = new FormBuilder();
-    sut = new MultiPathComponent(fb);
+    sut = new MultiPathComponent(fb,inj);
     sut.ngOnInit();
   });
 
@@ -37,7 +39,6 @@ describe('SUT: MultiPathComponent', () => {
     };
     // assert
     expect(sut.form.value).toEqual(expectedFormValue);
-    // TODO اگه تراول تایپش رواندتریپ بود ریترن دیت باشد
   });
 
   it('should be when selected MultiPath length formArray to be two', () => {
@@ -69,7 +70,8 @@ describe('SUT: MultiPathComponent', () => {
 
     // act
     sut.addNewRow();
-    sut.ngOnChanges(TravelTypesEnum.MultiPath);
+    // sut.ngOnChanges(TravelTypesEnum.MultiPath);
+    sut.travelType =TravelTypesEnum.MultiPath
     sut.prepareMultiPathControlsState();
     sut.isMultiPath();
 

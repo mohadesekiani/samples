@@ -5,7 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControlName } from '@angular/forms';
 import { NumberPassengersComponent } from '../number-passengers/number-passengers.component';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { TestUtil } from 'src/app/core/utils/test/test-util';
+import { TestUtil } from 'src/app/core/utils/test';
 
 describe('SUT(Integration): PassengersComponent', () => {
   let sut: PassengersComponent;

@@ -1,13 +1,14 @@
 import { DatePipe } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroupDirective, NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { FormArray, FormControl, FormGroup, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
 import {
   ErrorStateMatcher,
   MAT_DATE_FORMATS,
+  ShowOnDirtyErrorStateMatcher,
   _getOptionScrollPosition,
 } from '@angular/material/core';
 import { BaseInput } from 'src/app/core/constance/base-component/base-input';
-import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-component/base-input-control-value-accessor';
+import { IForm, ISearchRoute } from 'src/app/core/module/interface/search-types.interface';
 
 const MY_DATE_FORMAT = {
   parse: {
@@ -21,13 +22,18 @@ const MY_DATE_FORMAT = {
   },
 };
 
+/** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return true
-    // !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    const routes = form?.form.controls['routes'] as FormArray<FormGroup<IForm<ISearchRoute>>>;
+
+    const route = routes.at(0);
+    const ctrl = route.controls.departureDate;
+
+    return !!(ctrl?.touched && ctrl.errors);
   }
 }
+
 @Component({
   selector: 'app-datepicker',
   templateUrl: './datepicker.component.html',
@@ -39,6 +45,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
       useExisting: DatepickerComponent,
     },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
+
   ],
 })
 export class DatepickerComponent extends BaseInput<Date> {
@@ -50,17 +57,17 @@ export class DatepickerComponent extends BaseInput<Date> {
     new Date().getDate()
   );
   @Output() valueChange = new EventEmitter();
-  matcher = new MyErrorStateMatcher();
 
   dateValueChanged(value: Date) {
     // iran time zone offset is  210
     // var d = new Date(value);
     // let numericDate = d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
     // const date = new Date(numericDate);
-    // this.value = date;
+    // this.value = date;    
     this.value = value;
     this.updateValue();
   }
+  matcher = new MyErrorStateMatcher();
 
   private updateValue() {
     this.updateValueAndValidity(this.value);

@@ -1,4 +1,4 @@
-import { PassengerTypesEnum } from "./general-types.enum";
+import { PassengerTypesEnum } from "../enum/general-types.enum";
 
 export type PassengerTypesType = Partial<{
   // use from keys

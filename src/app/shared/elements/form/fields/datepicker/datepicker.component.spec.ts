@@ -1,10 +1,11 @@
+import { Injector } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 
 describe('SUT: DatepickerComponent', () => {
   let sut: DatepickerComponent;
-
+  let baseInj:Injector
   beforeEach(() => {
-    sut = new DatepickerComponent();
+    sut = new DatepickerComponent(baseInj);
   });
 
   it('should create', () => {
