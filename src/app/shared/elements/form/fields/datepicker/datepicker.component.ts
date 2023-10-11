@@ -7,7 +7,7 @@ import {
   ShowOnDirtyErrorStateMatcher,
   _getOptionScrollPosition,
 } from '@angular/material/core';
-import { BaseInput } from 'src/app/core/constance/base-component/base-input';
+import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-component/base-input-control-value-accessor';
 import { IForm, ISearchRoute } from 'src/app/core/module/interface/search-types.interface';
 
 const MY_DATE_FORMAT = {
@@ -48,7 +48,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
   ],
 })
-export class DatepickerComponent extends BaseInput<Date> {
+export class DatepickerComponent extends BaseInputControlValueAccessor<Date> {
   @Input() label!: string;
   @Input() min = new Date();
   @Input() max = new Date(
