@@ -3,9 +3,8 @@ import { DatepickerComponent } from './datepicker.component';
 
 describe('SUT: DatepickerComponent', () => {
   let sut: DatepickerComponent;
-  let baseInj:Injector
   beforeEach(() => {
-    sut = new DatepickerComponent(baseInj);
+    sut = new DatepickerComponent();
   });
 
   it('should create', () => {

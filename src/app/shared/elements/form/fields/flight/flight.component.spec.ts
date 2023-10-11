@@ -6,7 +6,6 @@ import { Injector, inject } from '@angular/core';
 // spy of sut methods in unit tests is not valid
 
 describe('SUT: FlightComponent', () => {
-  let inj: Injector;
   let sut: FlightComponent;
   const fakeCities = [
     {
@@ -29,7 +28,7 @@ describe('SUT: FlightComponent', () => {
     onTouched: () => {},
   });
   beforeEach(() => {
-    sut = new FlightComponent(inj,dataService);
+    sut = new FlightComponent(dataService);
     sut.registerOnChange(valueAccessor.onChange);
     sut.registerOnTouched(valueAccessor.onTouched);
     // sut.setDisabledState(false);
@@ -41,7 +40,7 @@ describe('SUT: FlightComponent', () => {
 
   it('should be throw exception with null dataService', () => {
     // assert
-    expect(() => new FlightComponent(inj,null as any)).toThrowError(
+    expect(() => new FlightComponent(null as any)).toThrowError(
       'dataService is empty'
     );
   });

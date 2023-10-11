@@ -7,7 +7,6 @@ import { Injector } from '@angular/core';
 describe('SUT: MultiPathComponent', () => {
   let sut: MultiPathComponent;
   let fb: FormBuilder;
-  let inj:Injector
   const valueAccessor = jasmine.createSpyObj<{
     onChange: (e: any) => {};
     onTouched: () => {};
@@ -17,7 +16,7 @@ describe('SUT: MultiPathComponent', () => {
   });
   beforeEach(() => {
     fb = new FormBuilder();
-    sut = new MultiPathComponent(fb,inj);
+    sut = new MultiPathComponent(fb);
     sut.ngOnInit();
   });
 
