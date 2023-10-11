@@ -26,7 +26,9 @@ import { BaseFormControlValueAccessor } from 'src/app/core/constance/base-compon
   ],
 })
 export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPassenger> {
-  errorMessage!: { actual: number; max: number };
+
+  // errorMessage!: { actual: number; max: number };
+  errorTexts:any
   hasError = false;
   buttonText = '+';
   showDrop = false;
@@ -47,15 +49,18 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
   constructor(fb: FormBuilder) {
     super(fb);
   }
+  // errMes(x:any){
+    //    this.errorTexts = this.errorMessage.getErrorMessage(x)
+    
+    // }
 
-
-  override createForm() {
-    super.createForm({
-      Adult: [null, [Validators.required]],
-      Child: [null],
-      Infant: [null],
-    });
-
+      override createForm() {
+        super.createForm({
+          Adult: [null, [Validators.required]],
+          Child: [null],
+          Infant: [null],
+        });
+        
     this.form.setValidators([CustomValidators.maxFrom('Infant', 'Adult'),Validators.required]);
     // this.form.valueChanges
     //   .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))

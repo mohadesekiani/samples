@@ -47,12 +47,15 @@
               [attr.item-id]="item.name"
               (click)="stopPropagation($event)"
             ></app-number-passengers>
+            
           </div>
           <span *ngIf="getInfantError(item.name)" class="error-message">
             actual:<span>{{ form.controls.Infant.errors.max.actual }}</span>
             max:<span>{{ form.controls.Infant.errors.max.max }}</span>
           </span>
         </ng-container>
+        <!-- <div >{{ errorMessage.getErrorMessage(form.controls.Infant) }}</div>
+        <div >{{ errorMessage.getErrorMessage(form.controls.Adult) }}</div> -->
       </mat-menu>
     </div>
   </div>

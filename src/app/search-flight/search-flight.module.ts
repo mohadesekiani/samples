@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { SearchFlightRoutingModule } from './search-flight-routing.module';
 import { SearchFlightComponent } from './search-flight.component';
-import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
+import { ErrorMessagePipe } from '../shared/pips/error-message.pipe';
 
 
 @NgModule({
   declarations: [
-    SearchFlightComponent
+    SearchFlightComponent,
+    ErrorMessagePipe
   ],
   imports: [
     CommonModule,

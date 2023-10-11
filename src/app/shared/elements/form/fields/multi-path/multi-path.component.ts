@@ -133,7 +133,7 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
       this.routes.at(0).controls.returnDate.disable();
       return;
     }
-    console.log(this._travelType);
+    // console.log(this._travelType);
 
     this.routes.at(0).controls.returnDate.enable();
     // this.form.controls.routes.at(0).controls.returnDate.enable();
