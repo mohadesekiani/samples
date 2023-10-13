@@ -3,6 +3,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { ElementsModule } from './elements/elements.module';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorMessagePipe } from './pips/error-message.pipe';
 
 const SHARED_MODULES = [
   CommonModule,
@@ -14,8 +15,8 @@ const SHARED_MODULES = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [ErrorMessagePipe],
   imports: [SHARED_MODULES],
-  exports: [SHARED_MODULES],
+  exports: [SHARED_MODULES, ErrorMessagePipe],
 })
 export class SharedModule {}

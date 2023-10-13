@@ -1,16 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { ClassTypesEnum } from 'src/app/core/module/enum/class-types.enum'
-import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ClassTypesEnum } from 'src/app/core/module/enum/class-types.enum';
+import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
 import { Router } from '@angular/router';
-import { IForm, ISearchFlight } from 'src/app/core/module/interface/search-types.interface'
+import {
+  IForm,
+  ISearchFlight,
+} from 'src/app/core/module/interface/search-types.interface';
+import { ValidationErrorService } from '../shared/services/validation-error.service';
 
 @Component({
   selector: 'app-search-flight',
   templateUrl: './search-flight.component.html',
-  styleUrls: ['./search-flight.component.scss']
+  styleUrls: ['./search-flight.component.scss'],
 })
-
 export class SearchFlightComponent {
   classTypes = Object.values(ClassTypesEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
@@ -32,54 +35,31 @@ export class SearchFlightComponent {
     value,
   }));
 
-  get travelType(): TravelTypesEnum {    
+  get travelType(): TravelTypesEnum {
     return this.flightForm.controls.travelType?.value as TravelTypesEnum;
   }
 
-  constructor(private fb: FormBuilder, private router: Router,) {
-  }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private formValidationError: ValidationErrorService
+  ) {}
 
-  ngOnInit() {
-    // this.flightForm.controls.travelType?.valueChanges.subscribe((x) => {
-    //   this.flightForm.controls.travelType?.patchValue(x)
-    // });
-    
-  }
+  ngOnInit() {}
 
-   result:any = [];
+  result: any = [];
   private createForm() {
     return this.fb.group<IForm<ISearchFlight>>({
       passengers: [null, [Validators.required]],
       travelType: [TravelTypesEnum.OneWay],
-      classType: [null,[Validators.required]],
+      classType: [null, [Validators.required]],
       routes: [null, [Validators.required]],
     });
   }
-   getFormValidationErrors(form: FormGroup) {
-
-    Object.keys(form.controls).forEach(key => {
-  
-      const controlErrors:any = this.flightForm.get(key)?.errors
-      
-      if (controlErrors) {
-        Object.keys(controlErrors).forEach(keyError => {
-          this.result.push({
-            'control': key,
-            'error': keyError,
-            'value': controlErrors[keyError],
-          });
-        });
-      }
-    });
-  console.log(this.result);
-  
-    return this.result;
-  }
   submit() {
-
-    this.getFormValidationErrors(this.flightForm)
-    console.log(this.flightForm);
-    
+    this.result = this.formValidationError.getFormValidationErrors(
+      this.flightForm
+    );
     if (this.flightForm.valid) {
       this.router.navigate(['/results']);
     } else {

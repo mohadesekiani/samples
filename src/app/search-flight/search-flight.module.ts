@@ -6,21 +6,16 @@ import { SearchFlightComponent } from './search-flight.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
-import { ErrorMessagePipe } from '../shared/pips/error-message.pipe';
-
 
 @NgModule({
-  declarations: [
-    SearchFlightComponent,
-    ErrorMessagePipe
-  ],
+  declarations: [SearchFlightComponent],
   imports: [
     CommonModule,
     SearchFlightRoutingModule,
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
-  ]
+    RouterModule,
+  ],
 })
-export class SearchFlightModule { }
+export class SearchFlightModule {}

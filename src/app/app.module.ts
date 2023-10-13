@@ -10,20 +10,18 @@ import { FakeDataService } from './core/services/data/fake-data.service';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { SearchTrainModule } from './search-train/search-train.module';
+import { ValidationErrorService } from './shared/services/validation-error.service';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserAnimationsModule,
-    RouterModule,
-    AppRoutingModule,
-  ],
+  imports: [BrowserAnimationsModule, RouterModule, AppRoutingModule],
 
   providers: [
     {
       provide: AbstractDataService,
       useClass: FakeDataService,
     },
+    ValidationErrorService,
   ],
   bootstrap: [AppComponent],
 })
