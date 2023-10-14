@@ -19,6 +19,7 @@
               formControlName="departureDate"
               id="departureDate"
               placeholder="your departure date"
+              [error]="validationMessages['routes['+i+'].origin']"
               label="departure Date"
               [name]="nameCtrl"
               />

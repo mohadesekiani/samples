@@ -1,33 +1,36 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ValidationErrorService {
-  private result: any[] = [];
+  messages: { control: string, error: string, controller: AbstractControl }[] = [];
+  // to
+  messagesDic: { [key: string]: string } = {};
 
-  getFormValidationErrors(form: FormGroup): ValidationErrors | null {
+
+  getFormValidationErrors(form: FormGroup) {
     Object.keys(form.controls).forEach((key) => {
       const controlErrors: any = form.get(key)?.errors;
 
-      if (controlErrors) {
-        Object.keys(controlErrors).forEach((keyError) => {
-          const isDuplicate = this.result.some(
-            (item) => item.control === key && item.error === keyError
-          );
-
-          if (!isDuplicate) {
-            this.result.push({
-              control: key,
-              error: keyError,
-              controller: form.get(key)
-            });
-          }
-        });
+      if (!controlErrors) {
+        return;
       }
-    });
 
-    return this.result;
+      Object.keys(controlErrors).forEach((keyError) => {
+        const isDuplicate = this.messages.some(
+          (item) => item.control === key && item.error === keyError
+        );
+
+        if (!isDuplicate) {
+          this.messages.push({
+            control: key,
+            error: keyError,
+            controller: form.get(key) as AbstractControl
+          });
+        }
+      });
+    });
   }
 }

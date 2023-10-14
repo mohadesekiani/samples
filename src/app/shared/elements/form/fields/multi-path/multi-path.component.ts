@@ -37,12 +37,12 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
   travelTypesEnum = TravelTypesEnum;
   _result: any;
   nameCtrl: string = 'departureDate';
-  @Input() override get validationErrorMessage(): ValidationErrors | null {
-    return this.validation.getFormValidationErrors(this.routes.at(0));
-  }
-  override set validationErrorMessage(value) {
-    this._result = value;
-  }
+  // @Input() override get validationErrorMessage(): ValidationErrors | null {
+  //   return this.validation.getFormValidationErrors(this.routes.at(0));
+  // }
+  // override set validationErrorMessage(value) {
+  //   this._result = value;
+  // }
   @Input() get travelType(): TravelTypesEnum {
     return this._travelType;
   }

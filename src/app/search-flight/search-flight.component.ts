@@ -43,9 +43,12 @@ export class SearchFlightComponent {
     private fb: FormBuilder,
     private router: Router,
     private formValidationError: ValidationErrorService
-  ) {}
+  ) {
 
-  ngOnInit() {}
+    if (!fb) { throw ('formBuilder is null'); }
+  }
+
+  ngOnInit() { }
 
   result: any = [];
   private createForm() {
@@ -56,14 +59,19 @@ export class SearchFlightComponent {
       routes: [null, [Validators.required]],
     });
   }
+
   submit() {
     this.result = this.formValidationError.getFormValidationErrors(
       this.flightForm
     );
-    if (this.flightForm.valid) {
-      this.router.navigate(['/results']);
-    } else {
-      alert('فرم ثبت نشد');
+
+    if (this.flightForm.invalid) {
+      this.flightForm.markAsDirty();
+      this.flightForm.markAllAsTouched();
+
+      return;
     }
+
+    this.router.navigate(['/results']);
   }
 }

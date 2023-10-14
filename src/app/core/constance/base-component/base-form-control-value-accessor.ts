@@ -9,7 +9,11 @@ import { ValidationErrorService } from 'src/app/shared/services/validation-error
 export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAccessor<T> {
   form!: FormGroup<IForm<T>>;
   
-  constructor(protected fb: FormBuilder,protected validation:ValidationErrorService) {
+
+  constructor(
+    protected fb: FormBuilder,
+    protected validation: ValidationErrorService
+  ) {
     super();
   }
 
@@ -20,7 +24,7 @@ export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAc
   override writeValue(obj: any): void {
     this.form.patchValue(obj);
   }
-  
+
   refersValue() {
     if (this.form.valid) {
       this.onChange(this.form.value);
