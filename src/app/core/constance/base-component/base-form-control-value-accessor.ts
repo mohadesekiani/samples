@@ -20,7 +20,7 @@ export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAc
   override writeValue(obj: any): void {
     this.form.patchValue(obj);
   }
-
+  
   refersValue() {
     if (this.form.valid) {
       this.onChange(this.form.value);
@@ -28,6 +28,7 @@ export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAc
       return;
     }
 
+    super.messageError('departureDate')
     this.onChange(null);
   }
 

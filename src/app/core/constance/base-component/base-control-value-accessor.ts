@@ -17,7 +17,6 @@ export abstract class BaseControlValueAccessor<T>
   touched: any;
   result!: any[];
   @Input() abstract validationErrorMessage: any;
-  @Input() ngControl!: NgControl;
 
   writeValue(obj: any): void {}
 
@@ -33,6 +32,7 @@ export abstract class BaseControlValueAccessor<T>
     this.disabled = isDisabled;
   }
   markAsTouched() {
+    this.messageError('departureDate');
     if (!this.touched) {
       this.onTouched();
       this.touched = true;

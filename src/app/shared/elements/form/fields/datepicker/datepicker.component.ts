@@ -71,6 +71,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class DatepickerComponent extends BaseInputControlValueAccessor<Date> {
   @Input() label!: string;
+  @Input() name!: string;
   @Input() min = new Date();
   @Input() max = new Date(
     new Date().getFullYear(),
@@ -92,7 +93,7 @@ export class DatepickerComponent extends BaseInputControlValueAccessor<Date> {
 
   private updateValue() {
     this.updateValueAndValidity(this.value);
-    super.messageError('departureDate');
+    super.messageError(this.name);
     this.valueChange.emit(this.value);
   }
 }
