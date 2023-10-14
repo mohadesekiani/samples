@@ -2,11 +2,12 @@ import { ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { ControlContainer, FormBuilder, FormControl } from '@angular/forms';
 import { PassengersComponent } from './passengers.component';
 import { distinctUntilChanged } from 'rxjs';
+import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 
 describe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   let fb: FormBuilder;
-
+  let validation;
   const valueAccessor = jasmine.createSpyObj<{
     onChange: (e: any) => {};
     onTouched: () => {};
@@ -16,7 +17,8 @@ describe('SUT: PassengersComponent', () => {
   });
   beforeEach(() => {
     fb = new FormBuilder();
-    sut = new PassengersComponent(fb);
+    validation = new ValidationErrorService();
+    sut = new PassengersComponent(fb, validation);
     sut.ngOnInit();
   });
 

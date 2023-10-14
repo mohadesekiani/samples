@@ -3,10 +3,12 @@ import { MultiPathComponent } from './multi-path.component';
 import { FormBuilder } from '@angular/forms';
 import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
 import { Injector } from '@angular/core';
+import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 
 describe('SUT: MultiPathComponent', () => {
   let sut: MultiPathComponent;
   let fb: FormBuilder;
+  let validation
   const valueAccessor = jasmine.createSpyObj<{
     onChange: (e: any) => {};
     onTouched: () => {};
@@ -16,7 +18,9 @@ describe('SUT: MultiPathComponent', () => {
   });
   beforeEach(() => {
     fb = new FormBuilder();
-    sut = new MultiPathComponent(fb);
+    validation = new ValidationErrorService();
+
+    sut = new MultiPathComponent(fb,validation);
     sut.ngOnInit();
   });
 

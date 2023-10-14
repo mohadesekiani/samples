@@ -34,12 +34,12 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
   // errorMessage!: { actual: number; max: number };
   _result: any;
 
-  @Input() override get validationErrorMessage(): ValidationErrors | null {
-    return this.validation.getFormValidationErrors(this.form);
-  }
-  override set validationErrorMessage(value) {
-    this._result = value;
-  }
+  // @Input() override get validationErrorMessage(): ValidationErrors | null {
+  //   return this.validation.getFormValidationErrors(this.form);
+  // }
+  // override set validationErrorMessage(value) {
+  //   this._result = value;
+  // }
 
   errorTexts: any;
   hasError = false;
@@ -59,8 +59,8 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
     );
   }
 
-  constructor(fb: FormBuilder,validation:ValidationErrorService) {
-    super(fb,validation);
+  constructor(fb: FormBuilder, validation: ValidationErrorService) {
+    super(fb, validation);
   }
   // errMes(x:any){
   //    this.errorTexts = this.errorMessage.getErrorMessage(x)

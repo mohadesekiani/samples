@@ -5,16 +5,20 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassTypesEnum } from '../core/module/enum/class-types.enum';
 import { TravelTypesEnum } from '../core/module/enum/travel-types.enum';
+import { ValidationErrorService } from '../shared/services/validation-error.service';
 
 describe('SUT:SearchFlightComponent', () => {
   let sut: SearchFlightComponent;
   type FlightFormGroup = FormGroup;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
+  let formValidationError
   beforeEach(() => {
     fb = new FormBuilder();
     router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
-    sut = new SearchFlightComponent(fb, router);
+    formValidationError=new ValidationErrorService()
+
+    sut = new SearchFlightComponent(fb, router,formValidationError);
     sut.today = new Date();
     sut.ngOnInit();
   });
