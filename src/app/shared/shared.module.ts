@@ -15,8 +15,8 @@ const SHARED_MODULES = [
 ];
 
 @NgModule({
-  declarations: [ErrorMessagePipe],
+  declarations: [],
   imports: [SHARED_MODULES],
-  exports: [SHARED_MODULES, ErrorMessagePipe],
+  exports: [SHARED_MODULES,],
 })
 export class SharedModule {}

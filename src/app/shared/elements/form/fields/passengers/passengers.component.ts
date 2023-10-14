@@ -1,8 +1,9 @@
-import { Component, Host, Optional } from '@angular/core';
+import { Component, Host, Injector, Input, Optional } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   NG_VALUE_ACCESSOR,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { isEqual } from 'lodash-es';
@@ -15,6 +16,7 @@ import {
   ISearchPassenger,
 } from 'src/app/core/module/interface/search-types.interface';
 import { BaseFormControlValueAccessor } from 'src/app/core/constance/base-component/base-form-control-value-accessor';
+import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 
 @Component({
   selector: 'app-passengers',
@@ -30,6 +32,15 @@ import { BaseFormControlValueAccessor } from 'src/app/core/constance/base-compon
 })
 export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPassenger> {
   // errorMessage!: { actual: number; max: number };
+  _result: any;
+
+  @Input() override get validationErrorMessage(): ValidationErrors | null {
+    return this.validation.getFormValidationErrors(this.form);
+  }
+  override set validationErrorMessage(value) {
+    this._result = value;
+  }
+
   errorTexts: any;
   hasError = false;
   buttonText = '+';
@@ -48,8 +59,8 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
     );
   }
 
-  constructor(fb: FormBuilder) {
-    super(fb);
+  constructor(fb: FormBuilder,validation:ValidationErrorService) {
+    super(fb,validation);
   }
   // errMes(x:any){
   //    this.errorTexts = this.errorMessage.getErrorMessage(x)

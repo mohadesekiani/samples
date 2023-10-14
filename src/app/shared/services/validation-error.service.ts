@@ -13,15 +13,20 @@ export class ValidationErrorService {
 
       if (controlErrors) {
         Object.keys(controlErrors).forEach((keyError) => {
-          this.result.push({
-            control: key,
-            error: keyError,
-            value: controlErrors[keyError],
-          });
+          const isDuplicate = this.result.some(
+            (item) => item.control === key && item.error === keyError
+          );
+
+          if (!isDuplicate) {
+            this.result.push({
+              control: key,
+              error: keyError,
+              controller: form.get(key)
+            });
+          }
         });
       }
     });
-    console.log(this.result);
 
     return this.result;
   }

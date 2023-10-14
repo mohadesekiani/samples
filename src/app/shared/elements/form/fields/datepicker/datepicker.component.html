@@ -1,26 +1,30 @@
 <div class="m-2" id="xx">
   <mat-form-field>
     <mat-label>{{ label }}</mat-label>
-    <input matInput
-           [ngClass]="{ 'mat-form-field-invalid': true }"
-           [matDatepicker]="picker"
-           placeholder="MM/DD/YYYY"
-           [disabled]="disabled"
-           
-           (focus)="this.markAsTouched()"
-           (click)="picker.open()"
-           (dateChange)="dateValueChanged($event.value)"
-           [value]="value"
-           id="input"
-           class="mat-input-invalid"
-           [errorStateMatcher]="matcher" />
+    <input
+      matInput
+      [ngClass]="{ 'mat-form-field-invalid': true }"
+      [matDatepicker]="picker"
+      placeholder="MM/DD/YYYY"
+      [disabled]="disabled"
+      (focus)="this.markAsTouched()"
+      (click)="picker.open()"
+      (dateChange)="dateValueChanged($event.value)"
+      [value]="value"
+      id="input"
+      class="mat-input-invalid"
+      [errorStateMatcher]="matcher"
+    />
     <!-- [errorStateMatcher]="matcher" -->
     <!-- https://material.angular.io/components/input/overview -->
     <!-- dateValueChanged(value) -->
-    <mat-datepicker-toggle matIconSuffix
-                           [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-    <!-- <mat-error>{{ errorMessage | json }}</mat-error> -->
   </mat-form-field>
+  <span *ngFor="let item of result">
+    <mat-error *ngIf="item.controller.valid === false">
+      {{ item.error | errorMessage }}
+    </mat-error>
+  </span>
 </div>
 <!-- {{ ngControl?.touched | json }} -->

@@ -5,6 +5,7 @@ import {
   FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
@@ -16,6 +17,7 @@ import {
 } from 'src/app/core/module/interface/search-types.interface';
 import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
 import { BaseFormControlValueAccessor } from 'src/app/core/constance/base-component/base-form-control-value-accessor';
+import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 
 @Component({
   selector: 'app-multi-path',
@@ -33,6 +35,13 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
   baseFormConfig!: FormGroup<IForm<ISearchMultiPath>>;
   private _travelType: TravelTypesEnum = TravelTypesEnum.OneWay;
   travelTypesEnum = TravelTypesEnum;
+  _result: any;
+  @Input() override get validationErrorMessage(): ValidationErrors | null {
+    return this.validation.getFormValidationErrors(this.routes.at(0));
+  }
+  override set validationErrorMessage(value) {
+    this._result = value;
+  }
   @Input() get travelType(): TravelTypesEnum {
     return this._travelType;
   }
@@ -53,8 +62,8 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
     >;
   }
 
-  constructor(fb: FormBuilder) {
-    super(fb);
+  constructor(fb: FormBuilder, validation: ValidationErrorService) {
+    super(fb, validation);
   }
 
   override createForm() {
@@ -121,7 +130,9 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
   }
 
   private onTravelTypeChange() {
-    if (!this.form) { return; }
+    if (!this.form) {
+      return;
+    }
 
     this.prepareReturnDateState();
     this.prepareMultiPathControlsState();

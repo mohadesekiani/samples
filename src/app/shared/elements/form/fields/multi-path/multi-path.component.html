@@ -15,6 +15,7 @@
               label="destination"
             ></app-flight>
             <app-datepicker
+              [validationErrorMessage]="validationErrorMessage"
               formControlName="departureDate"
               id="departureDate"
               placeholder="your departure date"

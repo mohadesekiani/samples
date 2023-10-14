@@ -1,6 +1,20 @@
 import { DatePipe } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { FormArray, FormControl, FormGroup, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+  NgForm,
+} from '@angular/forms';
 import {
   ErrorStateMatcher,
   MAT_DATE_FORMATS,
@@ -8,7 +22,10 @@ import {
   _getOptionScrollPosition,
 } from '@angular/material/core';
 import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-component/base-input-control-value-accessor';
-import { IForm, ISearchRoute } from 'src/app/core/module/interface/search-types.interface';
+import {
+  IForm,
+  ISearchRoute,
+} from 'src/app/core/module/interface/search-types.interface';
 
 const MY_DATE_FORMAT = {
   parse: {
@@ -24,8 +41,13 @@ const MY_DATE_FORMAT = {
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const routes = form?.form.controls['routes'] as FormArray<FormGroup<IForm<ISearchRoute>>>;
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const routes = form?.form.controls['routes'] as FormArray<
+      FormGroup<IForm<ISearchRoute>>
+    >;
 
     const route = routes.at(0);
     const ctrl = route.controls.departureDate;
@@ -45,7 +67,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
       useExisting: DatepickerComponent,
     },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
-
   ],
 })
 export class DatepickerComponent extends BaseInputControlValueAccessor<Date> {
@@ -56,14 +77,14 @@ export class DatepickerComponent extends BaseInputControlValueAccessor<Date> {
     new Date().getMonth() + 1,
     new Date().getDate()
   );
+  @Input() validationErrorMessage!: any;
   @Output() valueChange = new EventEmitter();
-
-  dateValueChanged(value: Date) {
+  dateValueChanged(value: Date): void {
     // iran time zone offset is  210
     // var d = new Date(value);
     // let numericDate = d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
     // const date = new Date(numericDate);
-    // this.value = date;    
+    // this.value = date;
     this.value = value;
     this.updateValue();
   }
@@ -71,6 +92,7 @@ export class DatepickerComponent extends BaseInputControlValueAccessor<Date> {
 
   private updateValue() {
     this.updateValueAndValidity(this.value);
+    super.messageError('departureDate');
     this.valueChange.emit(this.value);
   }
 }
