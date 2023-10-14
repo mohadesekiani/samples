@@ -10,7 +10,10 @@ import { distinctUntilChanged } from 'rxjs';
 import { CustomValidators } from 'src/app/core/validations/custom.validators';
 import { PassengerTypesEnum } from 'src/app/core/module/enum/general-types.enum';
 
-import { IForm, ISearchPassenger } from 'src/app/core/module/interface/search-types.interface';
+import {
+  IForm,
+  ISearchPassenger,
+} from 'src/app/core/module/interface/search-types.interface';
 import { BaseFormControlValueAccessor } from 'src/app/core/constance/base-component/base-form-control-value-accessor';
 
 @Component({
@@ -26,9 +29,8 @@ import { BaseFormControlValueAccessor } from 'src/app/core/constance/base-compon
   ],
 })
 export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPassenger> {
-
   // errorMessage!: { actual: number; max: number };
-  errorTexts:any
+  errorTexts: any;
   hasError = false;
   buttonText = '+';
   showDrop = false;
@@ -50,18 +52,21 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
     super(fb);
   }
   // errMes(x:any){
-    //    this.errorTexts = this.errorMessage.getErrorMessage(x)
-    
-    // }
+  //    this.errorTexts = this.errorMessage.getErrorMessage(x)
 
-      override createForm() {
-        super.createForm({
-          Adult: [null, [Validators.required]],
-          Child: [null],
-          Infant: [null],
-        });
-        
-    this.form.setValidators([CustomValidators.maxFrom('Infant', 'Adult'),Validators.required]);
+  // }
+
+  override createForm() {
+    super.createForm({
+      Adult: [null, [Validators.required]],
+      Child: [null],
+      Infant: [null],
+    });
+
+    this.form.setValidators([
+      CustomValidators.maxFrom('Infant', 'Adult'),
+      Validators.required,
+    ]);
     // this.form.valueChanges
     //   .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))
     //   .subscribe((x: any) => {
