@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -12,16 +12,30 @@ export class ValidationErrorService {
 
   getFormValidationErrors(form: FormGroup): { [key: string]: string } {
     Object.keys(form.controls).forEach((key) => {
+
+      if ((form.get(key) instanceof FormArray)) {
+        debugger
+        // this.getFormValidationErrors(form.get(key))
+        return;
+      }
+
+      if ((form.get(key) instanceof FormGroup)) {
+
+        return;
+      }
+
       const controlErrors: any = form.get(key)?.errors;
 
       if (!controlErrors) {
         return;
       }
+
       Object.keys(controlErrors).forEach((keyError) => {
         const errorMessage = this.getErrorMessage(key, keyError);
         this.messagesDic[key] = errorMessage;
       });
     });
+
     return this.messagesDic;
   }
 
