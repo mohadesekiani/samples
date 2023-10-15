@@ -142,9 +142,4 @@ fdescribe('ValidationErrorService', () => {
     });
   });
 });
-// {
-//     'location[0].path': 'The field "path" is mandatory.',
-//     'origin.location[0].path': 'The field "path" is mandatory.',
-//     'path': 'The field "path" is mandatory.',
-//     'routes.origin.location[0].path': 'The field "path" is mandatory.',
-//   }
+
