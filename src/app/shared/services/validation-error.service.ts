@@ -10,9 +10,9 @@ import {
   providedIn: 'root',
 })
 export class ValidationErrorService {
-  messagesDic: { [key: string]: string } = {};
+  messages: { [key: string]: string } = {};
 
-  getFormValidationErrors(
+  process(
     form: FormGroup | FormArray,
     parentControlKey: string = ''
   ): { [key: string]: string } {
@@ -22,7 +22,7 @@ export class ValidationErrorService {
 
       if (control instanceof FormArray) {
         control.controls.forEach((arrayControl, index) =>
-          this.getFormValidationErrors(
+          this.process(
             arrayControl as FormGroup,
             `${controlKey}[${index}]`
           )
@@ -32,7 +32,7 @@ export class ValidationErrorService {
       }
 
       if (control instanceof FormGroup) {
-        this.getFormValidationErrors(control, controlKey);
+        this.process(control, controlKey);
 
         return;
       }
@@ -45,11 +45,11 @@ export class ValidationErrorService {
 
       Object.keys(controlErrors).forEach((keyError) => {
         const errorMessage = this.getErrorMessage(key, keyError);
-        this.messagesDic[controlKey] = errorMessage;
+        this.messages[controlKey] = errorMessage;
       });
     });
 
-    return this.messagesDic;
+    return this.messages;
   }
 
   private getErrorMessage(control: string, error: string): string {
