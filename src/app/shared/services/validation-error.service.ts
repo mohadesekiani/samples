@@ -13,13 +13,19 @@ import { Subscription } from 'rxjs';
 export class ValidationErrorService {
   messages: { [key: string]: string } = {};
   subs: Array<Subscription> = [];
-  watchFormChanges(form: FormGroup | FormArray, parentControlKey: string = ''): void {
+  isProcessing = false;
+  watchFormChanges(
+    form: FormGroup | FormArray,
+    parentControlKey: string = ''
+  ): void {
     // form.valueChanges.subscribe(() => {
     //   this.process(form, parentControlKey);
     // });
 
     const temp = form.statusChanges.subscribe(() => {
-      this.process(form, parentControlKey);
+      if (!this.isProcessing) {
+        this.process(form, parentControlKey);
+      }
     });
     this.subs.push(temp);
   }
@@ -27,6 +33,7 @@ export class ValidationErrorService {
     form: FormGroup | FormArray,
     parentControlKey: string = ''
   ): { [key: string]: string } {
+    this.isProcessing = true;
     this.watchFormChanges(form, parentControlKey);
     Object.keys(form.controls).forEach((key) => {
       const control = form.get(key);
@@ -57,7 +64,7 @@ export class ValidationErrorService {
         this.messages[controlKey] = errorMessage;
       });
     });
-
+    this.isProcessing = false;
     return this.messages;
   }
 
