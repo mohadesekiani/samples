@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 export class ValidationErrorService {
   messages: { [key: string]: string } = {};
   subs: Array<Subscription> = [];
+  subs2:Array<number> = [];
   isProcessing = false;
   watchFormChanges(
     form: FormGroup | FormArray,
@@ -29,11 +30,13 @@ export class ValidationErrorService {
     });
     this.subs.push(temp);
   }
+
   process(
     form: FormGroup | FormArray,
     parentControlKey: string = ''
   ): { [key: string]: string } {
     this.isProcessing = true;
+    this.subs2.push(1);
     this.watchFormChanges(form, parentControlKey);
     Object.keys(form.controls).forEach((key) => {
       const control = form.get(key);

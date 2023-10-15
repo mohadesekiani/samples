@@ -126,7 +126,9 @@ fdescribe('ValidationErrorService', () => {
         }),
       }),
     });
+//
     sut.process(form);
+
     form.patchValue({
       routes: {
         origin: {
@@ -134,11 +136,44 @@ fdescribe('ValidationErrorService', () => {
         },
       },
     });
+    // form.updateValueAndValidity();
 
     expect(sut.messages).toEqual({
       'routes.origin.location[0].path': 'The field "path" is mandatory.',
     });
 
+    // expect(sut.subs2.length).toBe(1);
+    expect(sut.subs.length).toBe(1);
+  });
+
+  fit('should return errors for the given form array', () => {
+    const form = fb.group({
+      routes: fb.group({
+        origin: new FormGroup({
+          location: new FormArray([
+            new FormGroup({
+              path: new FormControl('', Validators.required),
+            }),
+          ]),
+        }),
+      }),
+    });
+
+    sut.process(form);
+
+    expect(sut.messages).toEqual({
+      'routes.origin.location[0].path': 'The field "path" is mandatory.',
+    });
+
+    form.patchValue({
+      routes: {
+        origin: {
+          location: [{ path: 'test' }],
+        },
+      },
+    });
+
+    expect(sut.messages).toEqual({});
     expect(sut.subs.length).toBe(1);
   });
 });
