@@ -3,6 +3,7 @@ import {
   AbstractControl,
   FormArray,
   FormControl,
+  FormControlStatus,
   FormGroup,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -13,55 +14,49 @@ import { Subscription } from 'rxjs';
 export class ValidationErrorService {
   messages: { [key: string]: string } = {};
   subs: Array<Subscription> = [];
-  watchFormChanges(
-    form: FormGroup | FormArray,
-    parentControlKey: string = ''
-  ): void {
-    // form.valueChanges.subscribe(() => {
-    //   this.process(form, parentControlKey);
-    // });
 
-    const temp = form.statusChanges.subscribe(() => {
-        this.process(form, parentControlKey);
+  process(control: AbstractControl, parentKey: string = ''): void {
+
+    if (control instanceof FormArray) {
+
+      control.controls.forEach((ctrl, index) => {
+        this.process(ctrl, `${parentKey}[${index}]`);
+      });
+
+      return;
+    }
+
+    if (control instanceof FormGroup) {
+      Object.keys(control.controls).forEach((key) => {
+        this.process(control.controls[key], `${parentKey}${parentKey ? '.' : ''}${key}`);
+      });
+
+      return;
+    }
+    let controlState = control.status;
+    const temp = control.statusChanges.subscribe((state: FormControlStatus) => {
+      if (state !== 'INVALID' && controlState !== 'INVALID') {
+        return;
+      }
+
+      controlState = state;
+      this.setErrorMessage(state, parentKey, control);
     });
+    this.setErrorMessage(controlState, parentKey, control);
+
     this.subs.push(temp);
   }
 
-  process(
-    form: FormGroup | FormArray,
-    parentControlKey: string = ''
-  ): { [key: string]: string } {
-    this.watchFormChanges(form, parentControlKey);
-    Object.keys(form.controls).forEach((key) => {
-      const control = form.get(key);
-      const controlKey = parentControlKey ? `${parentControlKey}.${key}` : key;
+  private setErrorMessage(state: FormControlStatus, parentKey: string, control: AbstractControl) {
+    if (state !== 'INVALID') {
+      delete (this.messages[parentKey]);
+      return;
+    }
 
-      if (control instanceof FormArray) {
-        control.controls.forEach((arrayControl, index) =>
-          this.process(arrayControl as FormGroup, `${controlKey}[${index}]`)
-        );
-
-        return;
-      }
-
-      if (control instanceof FormGroup) {
-        this.process(control, controlKey);
-
-        return;
-      }
-
-      const controlErrors: any = form.get(key)?.errors;
-
-      if (!controlErrors) {
-        return;
-      }
-
-      Object.keys(controlErrors).forEach((keyError) => {
-        const errorMessage = this.getErrorMessage(key, keyError);
-        this.messages[controlKey] = errorMessage;
-      });
-    });
-    return this.messages;
+    for (const key in control.errors) {
+      this.messages[parentKey] = this.getErrorMessage(parentKey.split('.').slice(-1)[0], key);
+      break;
+    }
   }
 
   private getErrorMessage(control: string, error: string): string {

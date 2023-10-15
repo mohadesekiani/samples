@@ -61,7 +61,7 @@ export class SearchFlightComponent {
   }
 
   submit() {
-    this.result = this.formValidationError.process(
+    this.formValidationError.process(
       this.flightForm
     );
 
