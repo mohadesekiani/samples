@@ -5,27 +5,29 @@ import {
   FormControl,
   FormGroup,
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ValidationErrorService {
   messages: { [key: string]: string } = {};
-
+  subs: Array<Subscription> = [];
   watchFormChanges(form: FormGroup | FormArray, parentControlKey: string = ''): void {
-    form.valueChanges.subscribe(() => {
-      this.process(form,parentControlKey);
-    });
+    // form.valueChanges.subscribe(() => {
+    //   this.process(form, parentControlKey);
+    // });
 
-    form.statusChanges.subscribe(() => {
-      this.process(form,parentControlKey);
+    const temp = form.statusChanges.subscribe(() => {
+      this.process(form, parentControlKey);
     });
+    this.subs.push(temp);
   }
   process(
     form: FormGroup | FormArray,
     parentControlKey: string = ''
   ): { [key: string]: string } {
-    this.watchFormChanges(form,parentControlKey);
+    this.watchFormChanges(form, parentControlKey);
     Object.keys(form.controls).forEach((key) => {
       const control = form.get(key);
       const controlKey = parentControlKey ? `${parentControlKey}.${key}` : key;

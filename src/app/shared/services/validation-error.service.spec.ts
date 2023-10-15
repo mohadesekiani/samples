@@ -137,9 +137,10 @@ fdescribe('ValidationErrorService', () => {
     console.log(sut.messages);
 
     expect(sut.messages).toEqual({
-
       'routes.origin.location[0].path': 'The field "path" is mandatory.',
     });
+
+    expect(sut.subs.length).toBe(1);
   });
 });
 
