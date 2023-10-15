@@ -15,14 +15,14 @@
               label="destination"
             ></app-flight>
             <app-datepicker
-              [validationErrorMessage]="validationErrorMessage"
-              formControlName="departureDate"
-              id="departureDate"
-              placeholder="your departure date"
-              [error]="validationMessages['routes['+i+'].origin']"
-              label="departure Date"
-              [name]="nameCtrl"
-              />
+            formControlName="departureDate"
+            id="departureDate"
+            placeholder="your departure date"
+            label="departure Date"
+            [name]="nameCtrl"
+            />
+            <!-- [validationErrorMessage]="validationErrorMessage" -->
+              <!-- [error]="validationMessages['routes['+i+'].origin']" -->
               <!-- [error]="messages.departureDate" -->
             <!-- <mat-error *ngIf="isDateInvalid(i)">invalid </mat-error> -->
             <!-- <span

@@ -7,15 +7,17 @@ import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 export class ValidationErrorService {
   messagesDic: { [key: string]: string } = {};
 
-  getFormValidationErrors(form: FormGroup | FormArray, parentControlKey: string = ''): { [key: string]: string } {
+  getFormValidationErrors(form: FormGroup | FormArray,parentControlKey: string = ''): { [key: string]: string } {
     Object.keys(form.controls).forEach((key) => {
       const control = form.get(key);
       const controlKey = parentControlKey ? `${parentControlKey}.${key}` : key;
 
       if (control instanceof FormArray) {
-        // this.getFormValidationErrors(form.get(key))
-        control.controls.forEach((arrayControl,index) =>
-          this.getFormValidationErrors(arrayControl as FormGroup,`${controlKey}[${index}]`)
+        control.controls.forEach((arrayControl, index) =>
+          this.getFormValidationErrors(
+            arrayControl as FormGroup,
+            `${controlKey}[${index}]`
+          )
         );
 
         return;
@@ -32,8 +34,8 @@ export class ValidationErrorService {
       }
 
       Object.keys(controlErrors).forEach((keyError) => {
-        const errorMessage = this.getErrorMessage(key, keyError);
-        this.messagesDic[key] = errorMessage;
+        const errorMessage = this.getErrorMessage(controlKey, keyError);
+        this.messagesDic[controlKey] = errorMessage;
       });
     });
 
