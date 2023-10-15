@@ -39,7 +39,7 @@ import {
 } from '@angular/forms';
 import { ValidationErrorService } from './validation-error.service';
 
-fdescribe('ValidationErrorService', () => {
+fdescribe('SUT: ValidationErrorService', () => {
     let sut: ValidationErrorService;
     const fb = new FormBuilder();
     beforeEach(() => {
