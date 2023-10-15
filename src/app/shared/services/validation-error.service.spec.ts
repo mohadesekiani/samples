@@ -74,11 +74,11 @@ fdescribe('ValidationErrorService', () => {
     console.log(arrayFormErrors);
 
     expect(arrayFormErrors).toEqual({
-      'routes[0].origin': 'The field "routes[0].origin" is mandatory.',
+      'routes[0].origin': 'The field "origin" is mandatory.',
     });
   });
 
-  fit('should return errors for the given form array', () => {
+  it('should return errors for the given form array', () => {
     const formArray = new FormGroup({
       routes: new FormGroup({
         origin: new FormGroup({
@@ -90,25 +90,22 @@ fdescribe('ValidationErrorService', () => {
     const arrayFormErrors = sut.getFormValidationErrors(formArray);
 
     expect(arrayFormErrors).toEqual({
-      'routes[0].origin': 'Origin is mandatory.',
+      'routes.origin.location': 'The field "location" is mandatory.',
     });
   });
 
   fit('should return errors for the given form array', () => {
-      const formArray = new FormBuilder().group({
-          routes: {
-              origin: new FormGroup({
-                  location: new FormArray([
-                      new FormControl(null, Validators.required),
-                  ])
-              }),
-          },
-      });
+    const formArray = new FormBuilder().group({
+      routes: {
+        origin: new FormGroup({
+          location: new FormArray([new FormControl(null, Validators.required)]),
+        }),
+      },
+    });
+    const arrayFormErrors = sut.getFormValidationErrors(formArray);
 
-      const arrayFormErrors = sut.getFormValidationErrors(formArray);
-
-      expect(arrayFormErrors).toEqual({
-          'routes[0].origin': 'Origin is mandatory.',
-      });
+    expect(arrayFormErrors).toEqual({
+      'routes.origin.location[0]': 'The field "location" is mandatory.',
+    });
   });
 });
