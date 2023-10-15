@@ -12,20 +12,27 @@ import {
 export class ValidationErrorService {
   messages: { [key: string]: string } = {};
 
+  watchFormChanges(form: FormGroup | FormArray, parentControlKey: string = ''): void {
+    form.valueChanges.subscribe(() => {
+      this.process(form,parentControlKey);
+    });
+
+    form.statusChanges.subscribe(() => {
+      this.process(form,parentControlKey);
+    });
+  }
   process(
     form: FormGroup | FormArray,
     parentControlKey: string = ''
   ): { [key: string]: string } {
+    this.watchFormChanges(form,parentControlKey);
     Object.keys(form.controls).forEach((key) => {
       const control = form.get(key);
       const controlKey = parentControlKey ? `${parentControlKey}.${key}` : key;
 
       if (control instanceof FormArray) {
         control.controls.forEach((arrayControl, index) =>
-          this.process(
-            arrayControl as FormGroup,
-            `${controlKey}[${index}]`
-          )
+          this.process(arrayControl as FormGroup, `${controlKey}[${index}]`)
         );
 
         return;
