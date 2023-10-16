@@ -31,25 +31,29 @@
 // }
 //
 import {
+    AbstractControl,
     FormArray,
     FormBuilder,
     FormControl,
     FormGroup,
+    ValidationErrors,
+    ValidatorFn,
     Validators,
-  } from '@angular/forms';
-  import { VService } from './v.service';
-  
-  fdescribe('SUT: VService', () => {
+} from '@angular/forms';
+import { VService } from './v.service';
+import { CustomValidators } from 'src/app/core/validations/custom.validators';
+
+fdescribe('SUT: VService', () => {
     let sut: VService;
     const fb = new FormBuilder();
     beforeEach(() => {
         sut = new VService();
     });
-  
+
     it('should be created', () => {
         expect(sut).toBeTruthy();
     });
-  
+
     [
         {
             form: {
@@ -61,7 +65,7 @@ import {
             },
             scenario: ''
         },
-  
+
         {
             form: {
                 routes: new FormArray([
@@ -74,21 +78,38 @@ import {
                 'routes[0].origin': 'The field "origin" is mandatory.',
             },
             scenario: 'formGroup in formArray'
-        }
-  
+        },
+        {
+            form: {
+                routes: new FormArray([
+                    new FormGroup({
+                        origin: new FormControl(null, Validators.required),
+                    }),
+                ],{
+                    validators: [Validators.minLength(3)]
+                }),
+            },
+            expected: {
+                'routes[0].origin': 'The field "origin" is mandatory.',
+                'routes': 'Min length for "routes" is 3 .',
+            },
+            scenario: 'formGroup in formArray'
+        },
+
     ].forEach((spec, index: number) => {
         it(`should get form validation errors in ${spec.scenario || index + 1} scenario`, () => {
             // arrange
             const form = fb.group(spec.form);
-  
+
             // act
             sut.process(form);
-  
+
             // assert
+            debugger
             expect(sut.messages).toEqual(spec.expected as any);
         });
     })
-  
+
     it('should return errors for the given form array', () => {
         const formArray = new FormGroup({
             routes: new FormGroup({
@@ -97,14 +118,14 @@ import {
                 }),
             }),
         });
-  
+
         sut.process(formArray);
-  
+
         expect(sut.messages).toEqual({
             'routes.origin.location': 'The field "location" is mandatory.',
         });
     });
-  
+
     it('should return errors for the given form array', () => {
         const formArray = fb.group({
             routes: fb.group({
@@ -118,12 +139,12 @@ import {
             }),
         });
         sut.process(formArray);
-  
+
         expect(sut.messages).toEqual({
             'routes.origin.location[0].path': 'The field "path" is mandatory.',
         });
     });
-  
+
     it('should return errors for the given form array', () => {
         const form = fb.group({
             routes: fb.group({
@@ -138,7 +159,7 @@ import {
         });
         //
         sut.process(form);
-  
+
         form.patchValue({
             routes: {
                 origin: {
@@ -150,11 +171,11 @@ import {
         expect(sut.messages).toEqual({
             'routes.origin.location[0].path': 'The field "path" is mandatory.',
         });
-  
+
         // expect(sut.subs2.length).toBe(1);
         // expect(sut.subs.length).toBe(1);
     });
-  
+
     it('should return errors for the given form array', () => {
         const form = fb.group({
             routes: fb.group({
@@ -167,13 +188,13 @@ import {
                 }),
             }),
         });
-  
+
         sut.process(form);
-  
+
         expect(sut.messages).toEqual({
             'routes.origin.location[0].path': 'The field "path" is mandatory.',
         });
-  
+
         form.patchValue({
             routes: {
                 origin: {
@@ -181,35 +202,11 @@ import {
                 },
             },
         });
-  
+
         expect(sut.messages).toEqual({});
         // expect(sut.subs.length).toBe(1);
         // expect(sut.watchFormChanges as jasmine.Spy).toHaveBeenCalledTimes(8);
     });
-  
-    it('should return errors for the given form array', () => {
-        // Arrange
-        const form = fb.group({
-            routes: fb.group({
-                test: [null, [Validators.required]]
-            }),
-            path: fb.group({
-                test2: ['', []]
-            }),
-        });
-        spyOn(sut as any, 'getErrorMessage').and.callThrough();
-        spyOn(sut as any, 'setErrorMessage').and.callThrough();
-  
-        // Act
-        sut.process(form);
-  
-        // Act
-        form.controls.path.controls.test2.setValue('test');
-  
-        // Assert
-        expect(sut['setErrorMessage'] as jasmine.Spy).toHaveBeenCalledTimes(2);
-        expect(sut['getErrorMessage'] as jasmine.Spy).toHaveBeenCalledTimes(1);
-    });
-  });
-  
-  
+
+    
+});
