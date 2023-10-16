@@ -37,13 +37,13 @@ import {
     FormGroup,
     Validators,
   } from '@angular/forms';
-  import { ValidationErrorService } from './validation-error.service';
+  import { VService } from './v.service';
   
-  fdescribe('SUT: ValidationErrorService', () => {
-    let sut: ValidationErrorService;
+  fdescribe('SUT: VService', () => {
+    let sut: VService;
     const fb = new FormBuilder();
     beforeEach(() => {
-        sut = new ValidationErrorService();
+        sut = new VService();
     });
   
     it('should be created', () => {

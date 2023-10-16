@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ValidationErrorService {
+export class VService {
   messages: { [key: string]: string } = {};
   subs: Array<Subscription> = [];
   process(control: AbstractControl, parentKey: Array<string> = []): void {
@@ -39,16 +39,17 @@ export class ValidationErrorService {
 
   private setErrorMessage(control: AbstractControl, parentKey: Array<string>) {
     const finalKey = parentKey.join('.');
+   let replaceFinalKey = finalKey.replace(".[", "[")
 
     if (control.status === 'INVALID') {
       for (let key in control.errors) {
-        this.messages[finalKey] = this.getErrorMessage(
+        this.messages[replaceFinalKey] = this.getErrorMessage(
           parentKey[parentKey.length - 1],
           key
         );
       }
     } else {
-      delete this.messages[finalKey];
+      delete this.messages[replaceFinalKey];
     }
   }
 
