@@ -15,24 +15,16 @@ import { Subscription } from 'rxjs';
 export class ValidationErrorService {
   messages: { [key: string]: string } = {};
   subs: Array<Subscription> = [];
-  private customValidator: ValidatorFn | null = null;
-  controlWithCustomValidator: AbstractControl | null = null;
+  customMessages: { [key: string]: { [key: string]: string } } = {};
 
-  setCustomValidator(validator: ValidatorFn, control: AbstractControl): void {
-    this.customValidator = validator;
-    this.controlWithCustomValidator = control;
+  setCustomMessages(messages: {
+    [key: string]: { [key: string]: string };
+  }): void {
+    this.customMessages = messages;
+    console.log(this.customMessages);
+    
   }
   process(control: AbstractControl, parentKey: Array<string> = []): void {
-    if (
-      control instanceof FormControl &&
-      this.customValidator &&
-      this.controlWithCustomValidator === control
-    ) {
-      const validators = control.validator
-        ? [control.validator, this.customValidator]
-        : [this.customValidator];
-      control.setValidators(validators);
-    }
     if (control instanceof FormGroup) {
       Object.keys(control.controls).forEach((key) => {
         this.process(control.controls[key], [...parentKey, key]);
@@ -62,10 +54,13 @@ export class ValidationErrorService {
 
     if (control.status === 'INVALID') {
       for (let key in control.errors) {
+        const customMessage = this.customMessages[finalKey]?.[key];
+
         this.messages[finalKey] = this.getErrorMessage(
           parentKey[parentKey.length - 1],
           key,
-          control.errors[key]
+          control.errors[key],
+          customMessage
         );
       }
       return;
@@ -77,7 +72,8 @@ export class ValidationErrorService {
   private getErrorMessage(
     control: string,
     errorKey: string,
-    errorValue: any
+    errorValue: any,
+    customMessage:string | undefined
   ): string {
     switch (errorKey) {
       case 'required':
@@ -90,14 +86,15 @@ export class ValidationErrorService {
         return `The number of "${control}" cannot be more than adults.`;
       case 'minlength':
         return `Min length for "${control}" is ${errorValue.requiredLength} .`;
-
       case 'customError':
         if (typeof errorValue === 'object') {
-          return `Custom validation error for "${control}" with value: ${
+          return `${customMessage || 'Custom validation error'} with value: ${
             Object.values(errorValue)[0]
           }, ${Object.values(errorValue)[1]}.`;
         } else {
-          return `Custom validation error for "${control}" with value: ${errorValue}.`;
+          return `${
+            customMessage || 'Custom validation error'
+          } with value: ${errorValue}.`;
         }
       default:
         return `Validation error for "${control}".`;

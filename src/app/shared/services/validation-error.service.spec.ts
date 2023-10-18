@@ -212,71 +212,57 @@ fdescribe('SUT: VService', () => {
   });
 
   fit('should handle custom error message', () => {
-    const customValidator: any = (control: FormControl) => {
-      if (control.value === 'test') {
-        return { customError: true };
-      }
-      return null;
-    };
-
+    const expected_error = 'routes has some error';
     const form = fb.group({
-      routes: fb.group({
-        path: new FormControl('', Validators.required),
-        location: new FormControl('', Validators.required),
-      }),
+      routes: [],
     });
-    const pathControl: any = form.get('routes.path');
+    form.controls.routes.setErrors({ some_error: true });
 
-    sut.setCustomValidator(customValidator, pathControl);
+    sut.setCustomMessages({ routes: { some_error: 'routes has some error' } });
+    // sut.setCustomValidator(customValidator, pathControl);
     sut.process(form);
 
-    form.patchValue({
-      routes: {
-        path: 'test',
-        location: 'test',
-      },
-    });
     expect(sut.messages).toEqual({
-      'routes.path': 'Custom validation error for "path" with value: true.',
+      routes: expected_error,
     });
   });
 
-  fit('should handle custom error message', () => {
-    const customValidator: any = (control: FormControl) => {
-      if (control.value === 'test') {
-        return { customError: { max: 10, min: 2 } };
-      }
-      return null;
-    };
+  // it('should handle custom error message', () => {
+  //   const customValidator: any = (control: FormControl) => {
+  //     if (control.value === 'test') {
+  //       return { customError: { max: 10, min: 2 } };
+  //     }
+  //     return null;
+  //   };
 
-    const form = fb.group({
-      routes: fb.group({
-        origin: new FormGroup({
-          location: new FormArray([
-            new FormGroup({
-              path: new FormControl('', Validators.required),
-            }),
-          ]),
-        }),
-      }),
-    });
-    const pathControl =
-      form.controls.routes.controls.origin.controls.location.at(0).controls
-        .path;
-    sut.setCustomValidator(customValidator, pathControl);
+  //   const form = fb.group({
+  //     routes: fb.group({
+  //       origin: new FormGroup({
+  //         location: new FormArray([
+  //           new FormGroup({
+  //             path: new FormControl('', Validators.required),
+  //           }),
+  //         ]),
+  //       }),
+  //     }),
+  //   });
+  //   const pathControl =
+  //     form.controls.routes.controls.origin.controls.location.at(0).controls
+  //       .path;
+  //   // sut.setCustomValidator(customValidator, pathControl);
 
-    sut.process(form);
+  //   sut.process(form);
 
-    form.patchValue({
-      routes: {
-        origin: {
-          location: [{ path: 'test' }],
-        },
-      },
-    });
-    expect(sut.messages).toEqual({
-      'routes.origin.location[0].path':
-        'Custom validation error for "path" with value: 10, 2.',
-    });
-  });
+  //   form.patchValue({
+  //     routes: {
+  //       origin: {
+  //         location: [{ path: 'test' }],
+  //       },
+  //     },
+  //   });
+  //   expect(sut.messages).toEqual({
+  //     'routes.origin.location[0].path':
+  //       'Custom validation error for "path" with value: 10, 2.',
+  //   });
+  // });
 });
