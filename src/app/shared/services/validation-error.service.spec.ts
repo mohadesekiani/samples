@@ -261,7 +261,6 @@ fdescribe('SUT: VService', () => {
       }),
     });
     const pathControl = form.controls.routes.controls.origin.controls.location.at(0).controls.path
-    console.log(pathControl);
     sut.setCustomValidator(customValidator, pathControl);
 
     sut.process(form);
