@@ -45,6 +45,7 @@
               class="flex-item-right"
               [formControlName]="item.name"
               [attr.item-id]="item.name"
+              [error]="''"
               (click)="stopPropagation($event)"
             ></app-number-passengers>
             

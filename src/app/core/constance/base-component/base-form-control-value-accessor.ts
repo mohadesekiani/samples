@@ -1,4 +1,4 @@
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn } from '@angular/forms';
 import { BaseControlValueAccessor } from './base-control-value-accessor';
 import { distinctUntilChanged } from 'rxjs';
 import { IForm } from 'src/app/core/module/interface/search-types.interface'
@@ -12,7 +12,7 @@ export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAc
 
   constructor(
     protected fb: FormBuilder,
-    protected validation: ValidationErrorService
+    protected validationErrorService: ValidationErrorService
   ) {
     super();
   }
@@ -36,8 +36,10 @@ export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAc
     this.onChange(null);
   }
 
-  createForm(baseFormConfig?: IForm<T>) {
-    this.form = this.fb.group(baseFormConfig as IForm<T>);
+  createForm(baseFormConfig?: IForm<T>,validators?:ValidatorFn | ValidatorFn[] | null) {
+    this.form = this.fb.group(baseFormConfig as IForm<T>,{
+      validators
+    });
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x: any) => {
       this.refersValue();
     });

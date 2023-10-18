@@ -1,5 +1,6 @@
 import { Component, Host, Injector, Input, Optional } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
   NG_VALUE_ACCESSOR,
@@ -70,14 +71,16 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
   override createForm() {
     super.createForm({
       Adult: [null, [Validators.required]],
-      Child: [null],
+      Child: [null,this.validation()],
       Infant: [null],
-    });
-
-    this.form.setValidators([
+    },[
       CustomValidators.maxFrom('Infant', 'Adult'),
       Validators.required,
     ]);
+    // this.vService.addCustomErrorValidator('Child', this.validation());
+
+
+
     // this.form.valueChanges
     //   .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))
     //   .subscribe((x: any) => {
@@ -86,6 +89,25 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
     //       this.oldValueValid(x);
     //     });
     //   });
+
+    
+  }
+
+  // Infant should be set 20 not 1100
+  validation(): any {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if(!control.value){
+        return null;
+      }
+
+      if(control.value<3){
+        return null;
+      }
+
+      return {
+        maxInfant:{actual:control.value,expected:2}
+      }
+    }
   }
 
   toggleDropDown() {

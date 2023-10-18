@@ -1,7 +1,7 @@
 import { Component, HostListener, Injector, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
-import { ICity } from 'src/app/core/module/interface/city-type.interface'
+import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-component/base-input-control-value-accessor';
 
 @Component({
@@ -34,7 +34,15 @@ export class FlightComponent extends BaseInputControlValueAccessor<any> {
   onFocus() {
     this.markAsTouched();
   }
-
+  optionSelected(city: any) {
+    let newValue = city.id;
+    let nameValue = city.title;
+    this.value = nameValue;
+    this.filteredCities = [];
+    this.showCityNotFound = false;
+    this.updateValueAndValidity(newValue);
+  }
+  
   onCityInputChange(value: string) {
     this.filterText = value;
 
@@ -45,15 +53,6 @@ export class FlightComponent extends BaseInputControlValueAccessor<any> {
     }
 
     this.loadData();
-  }
-
-  optionSelected(city: any) {
-    let newValue = city.id;
-    let nameValue = city.title;
-    this.value = nameValue;
-    this.filteredCities = [];
-    this.showCityNotFound = false;
-    this.updateValueAndValidity(newValue);
   }
 
   private loadData() {
