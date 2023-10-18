@@ -211,7 +211,7 @@ fdescribe('SUT: VService', () => {
     // expect(sut.watchFormChanges as jasmine.Spy).toHaveBeenCalledTimes(8);
   });
 
-  it('should handle custom error message', () => {
+  fit('should handle custom error message', () => {
     const customValidator: any = (control: FormControl) => {
       if (control.value === 'test') {
         return { customError: true };
@@ -237,14 +237,14 @@ fdescribe('SUT: VService', () => {
       },
     });
     expect(sut.messages).toEqual({
-      'routes.path': 'Custom validation error for "path".',
+      'routes.path': 'Custom validation error for "path" with value: true.',
     });
   });
 
-  it('should handle custom error message', () => {
+  fit('should handle custom error message', () => {
     const customValidator: any = (control: FormControl) => {
       if (control.value === 'test') {
-        return { customError: true };
+        return { customError: { max: 10, min: 2 } };
       }
       return null;
     };
@@ -260,7 +260,9 @@ fdescribe('SUT: VService', () => {
         }),
       }),
     });
-    const pathControl = form.controls.routes.controls.origin.controls.location.at(0).controls.path
+    const pathControl =
+      form.controls.routes.controls.origin.controls.location.at(0).controls
+        .path;
     sut.setCustomValidator(customValidator, pathControl);
 
     sut.process(form);
@@ -273,7 +275,8 @@ fdescribe('SUT: VService', () => {
       },
     });
     expect(sut.messages).toEqual({
-      'routes.origin.location[0].path': 'Custom validation error for "path".',
+      'routes.origin.location[0].path':
+        'Custom validation error for "path" with value: 10, 2.',
     });
   });
 });

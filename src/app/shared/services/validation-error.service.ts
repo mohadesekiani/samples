@@ -21,10 +21,13 @@ export class ValidationErrorService {
   setCustomValidator(validator: ValidatorFn, control: AbstractControl): void {
     this.customValidator = validator;
     this.controlWithCustomValidator = control;
-
   }
   process(control: AbstractControl, parentKey: Array<string> = []): void {
-    if (control instanceof FormControl && this.customValidator && this.controlWithCustomValidator === control) {
+    if (
+      control instanceof FormControl &&
+      this.customValidator &&
+      this.controlWithCustomValidator === control
+    ) {
       const validators = control.validator
         ? [control.validator, this.customValidator]
         : [this.customValidator];
@@ -87,8 +90,15 @@ export class ValidationErrorService {
         return `The number of "${control}" cannot be more than adults.`;
       case 'minlength':
         return `Min length for "${control}" is ${errorValue.requiredLength} .`;
+
       case 'customError':
-        return `Custom validation error for "${control}".`;
+        if (typeof errorValue === 'object') {
+          return `Custom validation error for "${control}" with value: ${
+            Object.values(errorValue)[0]
+          }, ${Object.values(errorValue)[1]}.`;
+        } else {
+          return `Custom validation error for "${control}" with value: ${errorValue}.`;
+        }
       default:
         return `Validation error for "${control}".`;
     }
