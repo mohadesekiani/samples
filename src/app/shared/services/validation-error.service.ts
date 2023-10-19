@@ -21,8 +21,6 @@ export class ValidationErrorService {
     [key: string]: { [key: string]: string };
   }): void {
     this.customMessages = messages;
-    console.log(this.customMessages);
-    
   }
   process(control: AbstractControl, parentKey: Array<string> = []): void {
     if (control instanceof FormGroup) {
@@ -55,7 +53,7 @@ export class ValidationErrorService {
     if (control.status === 'INVALID') {
       for (let key in control.errors) {
         const customMessage = this.customMessages[finalKey]?.[key];
-
+        // customMessage ? (key = 'customError') : key;
         this.messages[finalKey] = this.getErrorMessage(
           parentKey[parentKey.length - 1],
           key,
@@ -73,7 +71,7 @@ export class ValidationErrorService {
     control: string,
     errorKey: string,
     errorValue: any,
-    customMessage:string | undefined
+    customMessage: string | undefined
   ): string {
     switch (errorKey) {
       case 'required':
@@ -86,15 +84,15 @@ export class ValidationErrorService {
         return `The number of "${control}" cannot be more than adults.`;
       case 'minlength':
         return `Min length for "${control}" is ${errorValue.requiredLength} .`;
-      case 'customError':
-        if (typeof errorValue === 'object') {
-          return `${customMessage || 'Custom validation error'} with value: ${
-            Object.values(errorValue)[0]
-          }, ${Object.values(errorValue)[1]}.`;
-        } else {
-          return `${
-            customMessage || 'Custom validation error'
-          } with value: ${errorValue}.`;
+      case `${errorKey}`:
+        if (customMessage) {
+          if (typeof errorValue === 'object') {
+            return `${customMessage || 'Custom validation error'} with value: ${
+              Object.values(errorValue)[0]
+            }, ${Object.values(errorValue)[1]}.`;
+          } else {
+            return `${customMessage}`;
+          }
         }
       default:
         return `Validation error for "${control}".`;
