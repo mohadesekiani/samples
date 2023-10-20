@@ -1,35 +1,3 @@
-// SearchFlightComponent
-// {
-//     validationMessages:{
-//         'routes':'routes is mandatory',
-//         ...
-//     }
-// }
-
-// MultiPathComponent
-// {
-// messagesDic={
-//     'routes[0].origin':'origin is mandatory',
-//     ...
-// }
-// }
-//
-
-// {
-// messagesDic={
-//     'routes.origin.location':'location is mandatory',
-//     ...
-// }
-// }
-//
-
-// {
-// messagesDic={
-//     'routes.origin.location[0].path':'path is mandatory',
-//     ...
-// }
-// }
-//
 import {
   AbstractControl,
   FormArray,
@@ -65,7 +33,6 @@ fdescribe('SUT: VService', () => {
       },
       scenario: '',
     },
-
     {
       form: {
         routes: new FormArray([
@@ -94,9 +61,39 @@ fdescribe('SUT: VService', () => {
       },
       expected: {
         'routes[0].origin': 'The field "origin" is mandatory.',
-        routes: 'Min length for "routes" is 3 .',
+        routes: 'Min length for "routes" is 3.',
       },
       scenario: 'formGroup in formArray',
+    },
+    {
+      form: {
+        routes: new FormGroup({
+          origin: new FormGroup({
+            location: new FormControl(null, Validators.required),
+          }),
+        }),
+      },
+      expected: {
+        'routes.origin.location': 'The field "location" is mandatory.',
+      },
+      scenario: 'formGroup in formGroup',
+    },
+    {
+      form: {
+        routes: fb.group({
+          origin: fb.group({
+            location: fb.array([
+              fb.group({
+                path: fb.control(null, Validators.required),
+              }),
+            ]),
+          }),
+        }),
+      },
+      expected: {
+        'routes.origin.location[0].path': 'The field "path" is mandatory.',
+      },
+      scenario: 'formGroup.formGroup.formArray',
     },
   ].forEach((spec, index: number) => {
     it(`should get form validation errors in ${
@@ -110,41 +107,6 @@ fdescribe('SUT: VService', () => {
 
       // assert
       expect(sut.messages).toEqual(spec.expected as any);
-    });
-  });
-
-  it('should return errors for the given form array', () => {
-    const formArray = new FormGroup({
-      routes: new FormGroup({
-        origin: new FormGroup({
-          location: new FormControl(null, Validators.required),
-        }),
-      }),
-    });
-
-    sut.process(formArray);
-
-    expect(sut.messages).toEqual({
-      'routes.origin.location': 'The field "location" is mandatory.',
-    });
-  });
-
-  it('should return errors for the given form array', () => {
-    const formArray = fb.group({
-      routes: fb.group({
-        origin: new FormGroup({
-          location: new FormArray([
-            new FormGroup({
-              path: new FormControl(null, Validators.required),
-            }),
-          ]),
-        }),
-      }),
-    });
-    sut.process(formArray);
-
-    expect(sut.messages).toEqual({
-      'routes.origin.location[0].path': 'The field "path" is mandatory.',
     });
   });
 
@@ -211,7 +173,7 @@ fdescribe('SUT: VService', () => {
     // expect(sut.watchFormChanges as jasmine.Spy).toHaveBeenCalledTimes(8);
   });
 
-  fit('should handle custom error message', () => {
+  it('should handle custom error message', () => {
     const expected_error = 'routes has some error';
     const form = fb.group({
       routes: [],
@@ -226,43 +188,19 @@ fdescribe('SUT: VService', () => {
       routes: expected_error,
     });
   });
+  it('should handle custom error message', () => {
+    const expected_error = 'routes has some error with value: min:1,max:3.';
+    const form = fb.group({
+      routes: [],
+    });
+    form.controls.routes.setErrors({ some_error: { min: 1, max: 3 } });
 
-  // it('should handle custom error message', () => {
-  //   const customValidator: any = (control: FormControl) => {
-  //     if (control.value === 'test') {
-  //       return { customError: { max: 10, min: 2 } };
-  //     }
-  //     return null;
-  //   };
-
-  //   const form = fb.group({
-  //     routes: fb.group({
-  //       origin: new FormGroup({
-  //         location: new FormArray([
-  //           new FormGroup({
-  //             path: new FormControl('', Validators.required),
-  //           }),
-  //         ]),
-  //       }),
-  //     }),
-  //   });
-  //   const pathControl =
-  //     form.controls.routes.controls.origin.controls.location.at(0).controls
-  //       .path;
-  //   // sut.setCustomValidator(customValidator, pathControl);
-
-  //   sut.process(form);
-
-  //   form.patchValue({
-  //     routes: {
-  //       origin: {
-  //         location: [{ path: 'test' }],
-  //       },
-  //     },
-  //   });
-  //   expect(sut.messages).toEqual({
-  //     'routes.origin.location[0].path':
-  //       'Custom validation error for "path" with value: 10, 2.',
-  //   });
-  // });
+    sut.setCustomMessages({
+      routes: { some_error: 'routes has some error' },
+    });
+    sut.process(form);
+    expect(sut.messages).toEqual({
+      routes: expected_error,
+    });
+  });
 });

@@ -72,30 +72,31 @@ export class ValidationErrorService {
     errorKey: string,
     errorValue: any,
     customMessage: string | undefined
-  ): string {
-    switch (errorKey) {
-      case 'required':
-        return `The field "${control}" is mandatory.`;
-      case 'dateInvalid':
-        return `The selected date for "${control}" is not allowed.`;
-      case 'returnDateInvalid':
-        return `The selected date for "${control}" cannot be smaller than the original date.`;
-      case 'max':
-        return `The number of "${control}" cannot be more than adults.`;
-      case 'minlength':
-        return `Min length for "${control}" is ${errorValue.requiredLength} .`;
-      case `${errorKey}`:
-        if (customMessage) {
-          if (typeof errorValue === 'object') {
-            return `${customMessage || 'Custom validation error'} with value: ${
-              Object.values(errorValue)[0]
-            }, ${Object.values(errorValue)[1]}.`;
-          } else {
-            return `${customMessage}`;
-          }
-        }
-      default:
-        return `Validation error for "${control}".`;
+  ): any {
+    const errorMessages: { [key: string]: string } = {
+      required: `The field "${control}" is mandatory.`,
+      dateInvalid: `The selected date for "${control}" is not allowed.`,
+      returnDateInvalid: `The selected date for "${control}" cannot be smaller than the original date.`,
+      max: `The number of "${control}" cannot be more than adults.`,
+      minlength: `Min length for "${control}" is ${errorValue.requiredLength}.`,
+    };
+    if (errorMessages.hasOwnProperty(errorKey)) {
+      return errorMessages[errorKey];
+    }
+    if (customMessage) {
+      return this.createCustomErrorMessage(customMessage, errorValue);
+    }
+  }
+  private createCustomErrorMessage(
+    customMessage: string | undefined,
+    errorValue: any
+  ) {
+    if (typeof errorValue === 'object') {
+      return `${customMessage} with value: ${Object.keys(errorValue)[0]}:${
+        Object.values(errorValue)[0]
+      },${Object.keys(errorValue)[1]}:${Object.values(errorValue)[1]}.`;
+    } else {
+      return `${customMessage}`;
     }
   }
 }
