@@ -5,8 +5,8 @@ import {
   FormBuilder,
   FormArray,
 } from '@angular/forms';
-import { CustomValidators } from './custom.validators'; // Import your custom validators
 import { IForm, ISearchMultiPath, ISearchRoute } from '../module/interface/search-types.interface';
+import { CustomValidators } from './custom.validators';
 
 
 describe('CustomValidators', () => {
