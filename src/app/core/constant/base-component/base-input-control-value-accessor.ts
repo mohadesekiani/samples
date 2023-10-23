@@ -1,15 +1,8 @@
-import { Component, Injector } from '@angular/core';
-import { NgControl } from '@angular/forms';
-import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
+import { Directive } from '@angular/core';
 import { BaseControlValueAccessor } from './base-control-value-accessor';
 
-@Component({
-  selector: '',
-  template: '',
-})
-export abstract class BaseInputControlValueAccessor<
-  T
-> extends BaseControlValueAccessor<T> {
+@Directive()
+export abstract class BaseInputControlValueAccessor<T> extends BaseControlValueAccessor<T> {
   // ngControl: NgControl | undefined;
 
   // constructor(private baseInj: Injector) {
