@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ClassTypesEnum } from 'src/app/core/module/enum/class-types.enum';
 import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
-import { Router } from '@angular/router';
 import {
   IForm,
   ISearchFlight,

@@ -1,22 +1,18 @@
-import { Component, Host, Injector, Input, Optional } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormGroup,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validators,
+  Validators
 } from '@angular/forms';
-import { isEqual } from 'lodash-es';
-import { distinctUntilChanged } from 'rxjs';
-import { CustomValidators } from 'src/app/core/validations/custom.validators';
 import { PassengerTypesEnum } from 'src/app/core/module/enum/general-types.enum';
+import { CustomValidators } from 'src/app/core/validations/custom.validators';
 
+import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
 import {
-  IForm,
-  ISearchPassenger,
+  ISearchPassenger
 } from 'src/app/core/module/interface/search-types.interface';
-import { BaseFormControlValueAccessor } from 'src/app/core/constance/base-component/base-form-control-value-accessor';
 import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 
 @Component({

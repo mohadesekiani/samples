@@ -48,12 +48,12 @@
   </div>
 
   <!-- TODO -->
-  <ul *ngFor="let item of result">
+  <!-- <ul *ngFor="let item of result">
     <li>
       {{ item.control }}:
       <div>{{ item.error | errorMessage }}</div>
     </li>
-  </ul>
+  </ul> -->
   <button type="submit" (click)="submit()">Submit</button>
 </form>
 {{ flightForm.value | json }}

@@ -1,10 +1,5 @@
-import { DatePipe } from '@angular/common';
 import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
+  Component
 } from '@angular/core';
 import {
   FormArray,
@@ -12,18 +7,14 @@ import {
   FormGroup,
   FormGroupDirective,
   NG_VALUE_ACCESSOR,
-  NgControl,
-  NgForm,
+  NgForm
 } from '@angular/forms';
 import {
   ErrorStateMatcher,
-  MAT_DATE_FORMATS,
-  ShowOnDirtyErrorStateMatcher,
-  _getOptionScrollPosition,
+  MAT_DATE_FORMATS
 } from '@angular/material/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { BaseDatepickerComponent } from 'src/app/core/constance/base-component/base-date-picker';
-import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-component/base-input-control-value-accessor';
+import { BaseDatepickerComponent } from 'src/app/core/constant/base-component/base-date-picker';
 import {
   IForm,
   ISearchRoute,

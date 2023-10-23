@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
-import { ElementsModule } from './elements/elements.module';
-import { MaterialModule } from '../material/material.module';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ErrorMessagePipe } from './pips/error-message.pipe';
+import { MaterialModule } from '../material/material.module';
+import { ElementsModule } from './elements/elements.module';
 
 const SHARED_MODULES = [
   CommonModule,

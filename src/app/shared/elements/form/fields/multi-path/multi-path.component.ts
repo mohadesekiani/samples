@@ -16,7 +16,7 @@ import {
   ISearchRoute,
 } from 'src/app/core/module/interface/search-types.interface';
 import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
-import { BaseFormControlValueAccessor } from 'src/app/core/constance/base-component/base-form-control-value-accessor';
+import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
 import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 
 @Component({

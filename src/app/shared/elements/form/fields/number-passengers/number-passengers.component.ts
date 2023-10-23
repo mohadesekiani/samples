@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-component/base-input-control-value-accessor';
+import { BaseInputControlValueAccessor } from 'src/app/core/constant/base-component/base-input-control-value-accessor';
 
 @Component({
   selector: 'app-number-passengers',
