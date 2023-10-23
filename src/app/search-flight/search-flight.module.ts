@@ -6,9 +6,11 @@ import { SearchFlightComponent } from './search-flight.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { ListFlightComponent } from './elements/fields/list-flight/list-flight.component';
+import { FilterFlightComponent } from './elements/fields/filter-flight/filter-flight.component';
 
 @NgModule({
-  declarations: [SearchFlightComponent],
+  declarations: [SearchFlightComponent, ListFlightComponent, FilterFlightComponent],
   imports: [
     CommonModule,
     SearchFlightRoutingModule,

@@ -16,6 +16,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import {MatSliderModule} from '@angular/material/slider';
+
 const appearanceOutlineOptions = {
   appearance: 'outline',
 };
@@ -23,6 +25,7 @@ const components=[
   DatepickerComponent
 ];
 const modules=[
+  MatSliderModule,
   MatRadioModule,
   MatInputModule,
   MatAutocompleteModule,
