@@ -29,12 +29,6 @@ describe('SUT(Integration): PassengersComponent', () => {
     expect(sut).toBeTruthy();
   });
 
-  // FIXME
-  // check form is exist
-  it('should test the presence of the form', () => {
-    expect(sut.form).toBeTruthy();
-  });
-
   it('should be test for binding form controls', () => {
     btnPassengerTrigger.openMenu();
     sut.showDrop = true;

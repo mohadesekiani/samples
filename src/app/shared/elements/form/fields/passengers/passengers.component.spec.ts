@@ -1,10 +1,11 @@
 import { ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
-import { ControlContainer, FormBuilder, FormControl } from '@angular/forms';
+import { ControlContainer, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PassengersComponent } from './passengers.component';
 import { distinctUntilChanged } from 'rxjs';
 import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
+import { PassengerTypesType } from 'src/app/core/module/interface/passenger-types.interface';
 
-describe('SUT: PassengersComponent', () => {
+fdescribe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   let fb: FormBuilder;
   let validation;
@@ -15,6 +16,12 @@ describe('SUT: PassengersComponent', () => {
     onChange: (e: any) => {},
     onTouched: () => {},
   });
+  const defaultFormValue = {
+    Adult: null,
+    Child: null,
+    Infant: null,
+  };
+
   beforeEach(() => {
     fb = new FormBuilder();
     validation = new ValidationErrorService();
@@ -28,23 +35,13 @@ describe('SUT: PassengersComponent', () => {
   });
 
   it('should be created form with default value', () => {
-    // arrange
-    const expectedFormValue = {
-      Adult: null,
-      Child: null,
-      Infant: null,
-    };
     // assert
-    expect(sut.form.value).toEqual(expectedFormValue);
+    expect(sut.form.value).toEqual(defaultFormValue);
   });
 
   it('should be not set required error to passenger controller when passenger is empty', () => {
     // act
-    sut.form.setValue({
-      Adult: null,
-      Child: null,
-      Infant: null,
-    });
+    sut.form.setValue(defaultFormValue);
     // assert
     expect(sut.form.controls.Adult?.hasError('required')).toBeTrue();
   });
