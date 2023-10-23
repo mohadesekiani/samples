@@ -21,6 +21,8 @@ import {
   ShowOnDirtyErrorStateMatcher,
   _getOptionScrollPosition,
 } from '@angular/material/core';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { BaseDatepickerComponent } from 'src/app/core/constance/base-component/base-date-picker';
 import { BaseInputControlValueAccessor } from 'src/app/core/constance/base-component/base-input-control-value-accessor';
 import {
   IForm,
@@ -69,31 +71,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
   ],
 })
-export class DatepickerComponent extends BaseInputControlValueAccessor<Date> {
-  @Input() label!: string;
-  @Input() name!: string;
-  @Input() min = new Date();
-  @Input() max = new Date(
-    new Date().getFullYear(),
-    new Date().getMonth() + 1,
-    new Date().getDate()
-  );
-  @Input() validationErrorMessage!: any;
-  @Output() valueChange = new EventEmitter();
-  dateValueChanged(value: Date): void {
-    // iran time zone offset is  210
-    // var d = new Date(value);
-    // let numericDate = d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
-    // const date = new Date(numericDate);
-    // this.value = date;
-    this.value = value;
-    this.updateValue();
-  }
+export class DatepickerComponent extends BaseDatepickerComponent {
+ 
   matcher = new MyErrorStateMatcher();
 
-  private updateValue() {
-    this.updateValueAndValidity(this.value);
-    // super.messageError(this.name);
-    this.valueChange.emit(this.value);
+  onDateValueChanged(event:MatDatepickerInputEvent<any,any>){
+    super.dateValueChanged(event.value);
   }
 }

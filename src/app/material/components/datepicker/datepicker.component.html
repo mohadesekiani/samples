@@ -9,9 +9,9 @@
       [disabled]="disabled"
       (focus)="this.markAsTouched()"
       (click)="picker.open()"
-      (dateChange)="dateValueChanged($event.value)"
+      (dateChange)="onDateValueChanged($event)"
       [value]="value"
-      id="input"
+      item-id="input"
       class="mat-input-invalid"
       [errorStateMatcher]="matcher"
     />
@@ -22,9 +22,9 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <span *ngFor="let item of result">
-    <mat-error *ngIf="item.controller.valid === false">
+    <!-- <mat-error *ngIf="item.controller.valid === false">
       {{ item.error | errorMessage }}
-    </mat-error>
+    </mat-error> -->
   </span>
 </div>
 <!-- {{ ngControl?.touched | json }} -->

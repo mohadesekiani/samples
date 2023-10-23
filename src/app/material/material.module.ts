@@ -15,24 +15,36 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 const appearanceOutlineOptions = {
   appearance: 'outline',
 };
+const components=[
+  DatepickerComponent
+];
+const modules=[
+  MatRadioModule,
+  MatInputModule,
+  MatAutocompleteModule,
+  MatFormFieldModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatButtonToggleModule,
+  MatIconModule,
+  MatMenuModule,
+  NativeDateModule,
+]
 
 @NgModule({
-  declarations: [],
+  imports:[
+    CommonModule,
+   ...modules,
+  ],
+  declarations: [...components],
   exports: [
-    MatRadioModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatButtonToggleModule,
-    MatIconModule,
-    MatMenuModule,
-    NativeDateModule,
+   ...modules,
+    ...components
   ],
   providers: [
     {

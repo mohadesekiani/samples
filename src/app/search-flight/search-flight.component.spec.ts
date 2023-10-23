@@ -1,24 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SearchFlightComponent } from './search-flight.component';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassTypesEnum } from '../core/module/enum/class-types.enum';
 import { TravelTypesEnum } from '../core/module/enum/travel-types.enum';
 import { ValidationErrorService } from '../shared/services/validation-error.service';
+import { SearchFlightComponent } from './search-flight.component';
 
 describe('SUT:SearchFlightComponent', () => {
   let sut: SearchFlightComponent;
-  type FlightFormGroup = FormGroup;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
-  let formValidationError
+  let formValidationError;
   beforeEach(() => {
     fb = new FormBuilder();
     router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
-    formValidationError=new ValidationErrorService()
+    formValidationError = new ValidationErrorService();
 
-    sut = new SearchFlightComponent(fb, router,formValidationError);
+    sut = new SearchFlightComponent(fb, router, formValidationError);
     sut.today = new Date();
     sut.ngOnInit();
   });
@@ -63,8 +60,10 @@ describe('SUT:SearchFlightComponent', () => {
       travelType: 'OneWay',
       classType: 'FirstClass',
     });
+
     // act
     sut.submit();
+
     // assert
     expect(router.navigate).toHaveBeenCalledWith(['/results']);
   });
@@ -80,5 +79,4 @@ describe('SUT:SearchFlightComponent', () => {
     // assert
     expect(window.alert).toHaveBeenCalledWith('فرم ثبت نشد');
   });
-
 });
