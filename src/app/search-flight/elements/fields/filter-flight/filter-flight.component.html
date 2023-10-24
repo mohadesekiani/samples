@@ -1,38 +1,4 @@
-<form [formGroup]="form" class="filter-container">
-
-  <mat-slider
-    formControlName="hourRange"
-    class="example-margin"
-    [max]="max"
-    [min]="min"
-    [step]="step"
-    [discrete]="thumbLabel"
-    [showTickMarks]="showTicks"
-  >
-    <input matSliderThumb formControlName="hourRange" #slider />
-  </mat-slider>
-  <mat-slider
-    formControlName="priceRange"
-    min="0"
-    max="1000"
-    step="10"
-    thumbLabel
-    tickInterval="50"
-  ></mat-slider>
-
-  <mat-form-field>
-    <mat-label>Airline</mat-label>
-    <mat-select formControlName="selectedAirline"> </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Class</mat-label>
-    <mat-select formControlName="selectedClass">
-      <!-- Populate this with your class options -->
-    </mat-select>
-  </mat-form-field>
-
-  <div class="available-tickets">
-    Available Tickets: {{ filterService.availableTickets }}
-  </div>
+<form [formGroup]="form">
+<app-time-range></app-time-range>
 </form>
+{{form.value | json}}

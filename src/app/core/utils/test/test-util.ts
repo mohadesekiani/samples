@@ -1,20 +1,49 @@
-import { ComponentFixture } from "@angular/core/testing";
-import { FormArrayName, FormControlDirective, FormControlName } from "@angular/forms";
-import { By } from "@angular/platform-browser";
+import { ComponentFixture } from '@angular/core/testing';
+import {
+  FormArrayName,
+  FormControlDirective,
+  FormControlName,
+  FormGroupDirective,
+  FormGroupName,
+} from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 export class TestUtil {
   static directiveElement(fixture: ComponentFixture<any>, directive: any) {
-    return fixture.debugElement.query(By.directive(directive)).injector.get<any>(directive);
+    return fixture.debugElement
+      .query(By.directive(directive))
+      .injector.get<any>(directive);
   }
-
+  private static directiveForm(
+    fixture: ComponentFixture<any>,
+    selector: string,
+    directive: any
+  ) {
+    return fixture.debugElement
+      .query(By.css(selector))
+      .injector.get<any>(directive);
+  }
   static formControl(fixture: ComponentFixture<any>, selector: string) {
-    return this.debugElement(fixture, selector).injector.get<any>(FormControlName);
+    return this.debugElement(fixture, selector).injector.get<any>(
+      FormControlName
+    );
   }
   static formArray(fixture: ComponentFixture<any>, selector: string) {
-    return this.debugElement(fixture, selector).injector.get<any>(FormArrayName);
+    return this.debugElement(fixture, selector).injector.get<any>(
+      FormArrayName
+    );
   }
-  static queryElement(fixture: ComponentFixture<any>, cssSelector: string, directiveElement: any) {
-    return fixture.debugElement.query(By.css(cssSelector)).injector.get<any>(directiveElement);
+  static formGroup(fixture: ComponentFixture<any>, selector: string) {
+    return this.directiveForm(fixture, selector, FormGroupDirective);
+  }
+  static queryElement(
+    fixture: ComponentFixture<any>,
+    cssSelector: string,
+    directiveElement: any
+  ) {
+    return fixture.debugElement
+      .query(By.css(cssSelector))
+      .injector.get<any>(directiveElement);
   }
 
   static queryComponent(fixture: ComponentFixture<any>, cssSelector: string) {
@@ -22,7 +51,10 @@ export class TestUtil {
     return debugElement.componentInstance;
   }
 
-  static nativeElement<T = any>(fixture: ComponentFixture<any>, element: string) {
+  static nativeElement<T = any>(
+    fixture: ComponentFixture<any>,
+    element: string
+  ) {
     const query = this.debugElement(fixture, element).nativeElement as T;
     return query;
   }
@@ -31,8 +63,8 @@ export class TestUtil {
     return fixture.debugElement.query(By.css(element));
   }
 
-  static querySelector(fixture: ComponentFixture<any>, element:string) {
-    const query = fixture.debugElement.nativeElement.querySelector(element)
+  static querySelector(fixture: ComponentFixture<any>, element: string) {
+    const query = fixture.debugElement.nativeElement.querySelector(element);
     return query;
   }
 }

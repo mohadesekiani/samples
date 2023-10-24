@@ -8,9 +8,10 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ListFlightComponent } from './elements/fields/list-flight/list-flight.component';
 import { FilterFlightComponent } from './elements/fields/filter-flight/filter-flight.component';
+import { ResultFlightComponent } from './page/result-flight/result-flight.component';
 
 @NgModule({
-  declarations: [SearchFlightComponent, ListFlightComponent, FilterFlightComponent],
+  declarations: [SearchFlightComponent, ListFlightComponent, FilterFlightComponent, ResultFlightComponent],
   imports: [
     CommonModule,
     SearchFlightRoutingModule,

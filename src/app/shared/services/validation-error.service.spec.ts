@@ -11,7 +11,7 @@ import {
 import { ValidationErrorService } from './validation-error.service';
 // import { CustomValidators } from 'src/app/core/validations/custom.validators';
 
-fdescribe('SUT: VService', () => {
+describe('SUT: VService', () => {
   let sut: ValidationErrorService;
   const fb = new FormBuilder();
   beforeEach(() => {

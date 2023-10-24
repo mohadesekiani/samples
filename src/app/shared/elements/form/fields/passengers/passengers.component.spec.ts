@@ -5,7 +5,7 @@ import { distinctUntilChanged } from 'rxjs';
 import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 import { PassengerTypesType } from 'src/app/core/module/interface/passenger-types.interface';
 
-fdescribe('SUT: PassengersComponent', () => {
+describe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   let fb: FormBuilder;
   let validation;

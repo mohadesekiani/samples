@@ -72,6 +72,6 @@ export class SearchFlightComponent {
       return;
     }
 
-    this.router.navigate(['/results']);
+    this.router.navigate(['/result-flight']);
   }
 }

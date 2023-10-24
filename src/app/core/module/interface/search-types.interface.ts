@@ -1,4 +1,9 @@
-import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
 import { ClassTypesEnum } from '../enum/class-types.enum';
 import { TravelTypesEnum } from '../enum/travel-types.enum';
 
@@ -16,7 +21,16 @@ export interface ISearchFlight {
   classType: ClassTypesEnum;
   routes: ISearchRoute[];
 }
-
+export interface IFilterFlight {
+  timeRange: [number, number];
+  priceRange: [number, number];
+  airline: string;
+  class: string;
+}
+export interface IRangeTime {
+  startTime: string;
+  endTime: string;
+}
 export interface ISearchPassenger {
   Adult: number;
   Child: number;
@@ -31,7 +45,7 @@ export interface ISearchRoute {
 }
 
 export interface ISearchMultiPath {
-  routes:any
+  routes: any;
   //  FormArray<FormGroup<IForm<ISearchRoute>>>;
 }
 
