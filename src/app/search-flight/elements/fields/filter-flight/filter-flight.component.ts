@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { IFilterFlight, IForm } from 'src/app/core/module/interface/search-types.interface';
+import {
+  IFilterFlight,
+  IForm,
+} from 'src/app/core/module/interface/search-types.interface';
 
 @Component({
   selector: 'app-filter-flight',
@@ -11,10 +14,15 @@ export class FilterFlightComponent {
   //baseClass
 
   form = this.createForm();
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    if (!fb) {
+      throw 'formBuilder is null';
+    }
+  }
+
   private createForm() {
     return this.fb.group<IForm<IFilterFlight>>({
-      timeRange: [],
+      timeRange: [null],
       priceRange: [],
       airline: [],
       class: [],

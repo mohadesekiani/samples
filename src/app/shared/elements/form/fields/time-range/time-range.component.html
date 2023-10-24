@@ -1,11 +1,7 @@
 <form [formGroup]="form">
-  <mat-form-field class="example-full-width" style="padding: 5px;">
-    <mat-label>startTime</mat-label>
-    <input formControlName="startTime" matInput />
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-label>endTime</mat-label>
-    <input formControlName="endTime" matInput />
-  </mat-form-field>
+  <mat-slider formControlName="timeRange" min="300" max="1320" step="30" showTickMarks discrete [displayWith]="formatTime">
+    <input  formControlName="startTime" matSliderStartThumb />
+    <input  formControlName="endTime" matSliderEndThumb />
+  </mat-slider>
+  {{form.value | json}}
 </form>
-<div>{{ form.value | json }}</div>

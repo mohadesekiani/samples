@@ -28,8 +28,9 @@ export interface IFilterFlight {
   class: string;
 }
 export interface IRangeTime {
-  startTime: string;
-  endTime: string;
+  startTime: number;
+  endTime: number;
+
 }
 export interface ISearchPassenger {
   Adult: number;

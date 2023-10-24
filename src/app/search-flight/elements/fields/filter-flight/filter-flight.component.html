@@ -1,4 +1,4 @@
-<form [formGroup]="form">
-<app-time-range></app-time-range>
+<form [formGroup]="form" style="padding: 20px;">
+<app-time-range formControlName="timeRange"></app-time-range>
 </form>
 {{form.value | json}}

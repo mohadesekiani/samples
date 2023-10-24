@@ -22,7 +22,7 @@ import { TimeRangeComponent } from './time-range.component';
 import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
 import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 
-fdescribe('SUT(Integration): TimeRangeComponent', () => {
+describe('SUT(Integration): TimeRangeComponent', () => {
   let sut: TimeRangeComponent;
   let fixture: ComponentFixture<TimeRangeComponent>;
   let form: FormGroup<IForm<IRangeTime>>;
@@ -40,9 +40,9 @@ fdescribe('SUT(Integration): TimeRangeComponent', () => {
     });
     fixture = TestBed.createComponent(TimeRangeComponent);
     sut = fixture.componentInstance;
-    form = sut.form;
-
+    
     fixture.detectChanges();
+    form = sut.form;
   });
 
   it('should create', () => {
@@ -50,7 +50,7 @@ fdescribe('SUT(Integration): TimeRangeComponent', () => {
     expect(sut).toBeTruthy();
   });
 
-  xit('should be binding formGroup', () => {
+  it('should be binding formGroup', () => {
     // arrange
     const formGroupDirective = TestUtil.formGroup(fixture, 'form');
 

@@ -33,8 +33,6 @@ export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAc
       this.onTouched();
       return;
     }
-
-    // super.messageError('departureDate')
     this.onChange(null);
   }
 
