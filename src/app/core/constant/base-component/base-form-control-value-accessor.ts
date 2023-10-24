@@ -8,13 +8,15 @@ import { ValidationErrorService } from 'src/app/shared/services/validation-error
 @Directive()
 export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAccessor<T> {
   form!: FormGroup<IForm<T>>;
-  
+
 
   constructor(
     protected fb: FormBuilder,
     protected validationErrorService: ValidationErrorService
   ) {
     super();
+
+    if (!fb) { throw new Error('formBuilder is null'); }
   }
 
   ngOnInit(): void {
@@ -36,8 +38,8 @@ export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAc
     this.onChange(null);
   }
 
-  createForm(baseFormConfig?: IForm<T>,validators?:ValidatorFn | ValidatorFn[] | null) {
-    this.form = this.fb.group(baseFormConfig as IForm<T>,{
+  createForm(baseFormConfig?: IForm<T>, validators?: ValidatorFn | ValidatorFn[] | null) {
+    this.form = this.fb.group(baseFormConfig as IForm<T>, {
       validators
     });
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x: any) => {

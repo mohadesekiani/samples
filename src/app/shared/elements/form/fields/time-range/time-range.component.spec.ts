@@ -5,7 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 import { IRangeTime } from 'src/app/core/module/interface/search-types.interface';
 
-fdescribe('SUT:TimeRangeComponent', () => {
+describe('SUT: TimeRangeComponent', () => {
   let sut: TimeRangeComponent;
   let fb: FormBuilder;
   let formValidationError;
@@ -17,7 +17,7 @@ fdescribe('SUT:TimeRangeComponent', () => {
     sut.ngOnInit();
   });
 
-  it('Should be create', () => {
+  it('should be create', () => {
     expect(sut).toBeTruthy();
   });
 

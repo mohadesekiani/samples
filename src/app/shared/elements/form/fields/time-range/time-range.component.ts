@@ -5,6 +5,7 @@ import {
   IForm,
   IRangeTime,
 } from 'src/app/core/module/interface/search-types.interface';
+import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 
 @Component({
   selector: 'app-time-range',
@@ -12,6 +13,11 @@ import {
   styleUrls: ['./time-range.component.scss'],
 })
 export class TimeRangeComponent extends BaseFormControlValueAccessor<IRangeTime> {
+
+  constructor(fb: FormBuilder, validationErrorService: ValidationErrorService) {
+    super(fb, validationErrorService);
+  }
+
   override createForm() {
     super.createForm({
       startTime: ['05:30'],
