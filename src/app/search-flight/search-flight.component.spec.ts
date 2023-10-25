@@ -5,7 +5,7 @@ import { TravelTypesEnum } from '../core/module/enum/travel-types.enum';
 import { ValidationErrorService } from '../shared/services/validation-error.service';
 import { SearchFlightComponent } from './search-flight.component';
 
-describe('SUT:SearchFlightComponent', () => {
+describe('SUT: SearchFlightComponent', () => {
   let sut: SearchFlightComponent;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;

@@ -1,4 +1,34 @@
-<form [formGroup]="form" style="padding: 20px;">
-<app-time-range formControlName="timeRange"></app-time-range>
+<form [formGroup]="form" style="padding: 20px">
+  <div class="grid grid-cols-5 gap-4">
+    <div style="border: 1px solid #ccc; margin: auto; padding: auto">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> selected time range </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-time-range formControlName="timeRange"></app-time-range>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> enter price range</mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-price-range formControlName="priceRange"></app-price-range>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> enter class range</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field>
+            <mat-label>Toppings</mat-label>
+            <mat-select formControlName="class" multiple>
+              <mat-option *ngFor="let class of classes" [value]="class">{{class.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-span-4">result</div>
+  </div>
 </form>
-{{form.value | json}}
+
+{{ form.value | json }}

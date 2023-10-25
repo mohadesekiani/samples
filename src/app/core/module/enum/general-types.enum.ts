@@ -8,3 +8,9 @@ export enum PassengerTypesEnum {
   Child = 'Child',
   Infant = 'Infant',
 }
+export enum classesTypesEnum {
+  Classy = 'Classy',
+  CommercialGrade = 'CommercialGrade',
+  EconomicGrade = 'EconomicGrade',
+  PremiumGrade = 'PremiumGrade',
+}

@@ -31,11 +31,9 @@ export class TimeRangeComponent extends BaseFormControlValueAccessor<IRangeTime>
   formatTime(timeValue: number) {
     const hours = Math.floor(timeValue / 60);
     const minutes = timeValue % 60;
-
     const formattedTime = `${String(hours).padStart(2, '0')}:${String(
       minutes
     ).padStart(2, '0')}`;
-    console.log(formattedTime);
     return formattedTime;
   }
 }

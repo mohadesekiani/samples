@@ -19,6 +19,7 @@ import { ResultFlightComponent } from './page/result-flight/result-flight.compon
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
+    
   ],
 })
 export class SearchFlightModule {}

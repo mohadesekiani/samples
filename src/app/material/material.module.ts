@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 const appearanceOutlineOptions = {
   appearance: 'outline',
@@ -37,6 +38,7 @@ const modules=[
   MatIconModule,
   MatMenuModule,
   NativeDateModule,
+  MatExpansionModule,
 ]
 
 @NgModule({

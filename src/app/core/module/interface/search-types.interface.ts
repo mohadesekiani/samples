@@ -22,15 +22,18 @@ export interface ISearchFlight {
   routes: ISearchRoute[];
 }
 export interface IFilterFlight {
-  timeRange: [number, number];
-  priceRange: [number, number];
+  timeRange: IRangeTime
+  priceRange: IRangePrice
   airline: string;
   class: string;
 }
 export interface IRangeTime {
   startTime: number;
   endTime: number;
-
+}
+export interface IRangePrice {
+  minPrice: number;
+  maxPrice: number;
 }
 export interface ISearchPassenger {
   Adult: number;

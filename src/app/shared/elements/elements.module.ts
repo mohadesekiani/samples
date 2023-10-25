@@ -7,16 +7,19 @@ import { MultiPathComponent } from './form/fields/multi-path/multi-path.componen
 import { NumberPassengersComponent } from './form/fields/number-passengers/number-passengers.component';
 import { PassengersComponent } from './form/fields/passengers/passengers.component';
 import { TimeRangeComponent } from './form/fields/time-range/time-range.component';
+import { PriceRangeComponent } from './form/fields/price-range/price-range.component';
+import { ClassFlightComponent } from './form/fields/class-flight/class-flight.component';
 const COMPONENTS = [
   FlightComponent,
   PassengersComponent,
   NumberPassengersComponent,
   MultiPathComponent,
-  TimeRangeComponent
+  TimeRangeComponent,
+  PriceRangeComponent
 ];
 
 @NgModule({
-  declarations: [COMPONENTS],
+  declarations: [COMPONENTS, ClassFlightComponent],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, MaterialModule],
   exports: [COMPONENTS],
 })
