@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
 import { IRangePrice } from 'src/app/core/module/interface/search-types.interface';
-import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 
 @Component({
   selector: 'app-price-range',
@@ -17,8 +16,8 @@ import { ValidationErrorService } from 'src/app/shared/services/validation-error
   ],
 })
 export class PriceRangeComponent extends BaseFormControlValueAccessor<IRangePrice>   {
-  constructor(fb: FormBuilder, validationErrorService: ValidationErrorService) {
-    super(fb, validationErrorService);
+  constructor() {
+    super();
   }
   
   override createForm() {

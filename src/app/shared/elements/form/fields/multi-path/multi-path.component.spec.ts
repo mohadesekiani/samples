@@ -7,20 +7,9 @@ import { ValidationErrorService } from 'src/app/shared/services/validation-error
 
 describe('SUT: MultiPathComponent', () => {
   let sut: MultiPathComponent;
-  let fb: FormBuilder;
-  let validation
-  const valueAccessor = jasmine.createSpyObj<{
-    onChange: (e: any) => {};
-    onTouched: () => {};
-  }>({
-    onChange: (e: any) => {},
-    onTouched: () => {},
-  });
-  beforeEach(() => {
-    fb = new FormBuilder();
-    validation = new ValidationErrorService();
 
-    sut = new MultiPathComponent(fb,validation);
+  beforeEach(() => {
+    sut = new MultiPathComponent();
     sut.ngOnInit();
   });
 
@@ -74,7 +63,7 @@ describe('SUT: MultiPathComponent', () => {
     // act
     sut.addNewRow();
     // sut.ngOnChanges(TravelTypesEnum.MultiPath);
-    sut.travelType =TravelTypesEnum.MultiPath
+    sut.travelType = TravelTypesEnum.MultiPath
     sut.prepareMultiPathControlsState();
     sut.isMultiPath();
 

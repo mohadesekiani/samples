@@ -9,13 +9,7 @@ describe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   let fb: FormBuilder;
   let validation;
-  const valueAccessor = jasmine.createSpyObj<{
-    onChange: (e: any) => {};
-    onTouched: () => {};
-  }>({
-    onChange: (e: any) => {},
-    onTouched: () => {},
-  });
+
   const defaultFormValue = {
     Adult: null,
     Child: null,
@@ -25,7 +19,7 @@ describe('SUT: PassengersComponent', () => {
   beforeEach(() => {
     fb = new FormBuilder();
     validation = new ValidationErrorService();
-    sut = new PassengersComponent(fb, validation);
+    sut = new PassengersComponent();
     sut.ngOnInit();
   });
 

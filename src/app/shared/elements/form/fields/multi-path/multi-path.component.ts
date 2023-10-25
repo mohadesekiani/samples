@@ -63,8 +63,8 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
     >;
   }
 
-  constructor(fb: FormBuilder, validation: ValidationErrorService) {
-    super(fb, validation);
+  constructor() {
+    super();
   }
 
   override createForm() {

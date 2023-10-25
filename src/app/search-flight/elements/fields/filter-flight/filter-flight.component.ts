@@ -28,15 +28,13 @@ export class FilterFlightComponent {
 
   constructor(
     private fb: FormBuilder,
-    private abstractDataService: AbstractDataService
+    private dataService: AbstractDataService
   ) {
-    if (!fb) {
-      throw 'formBuilder is null';
-    }
+    if (!fb) { throw 'formBuilder is null'; }
   }
 
-  ngOnInit(): void {    
-    this.abstractDataService.items$.subscribe((items: ICity[]) => {
+  ngOnInit(): void {
+    this.dataService.items$.subscribe((items: ICity[]) => {
       this.allItems = items;
     });
     this.form.valueChanges
@@ -45,7 +43,7 @@ export class FilterFlightComponent {
         this.applyFilter(this.form.value as IFilterFlight);
       });
 
-    this.abstractDataService.getAllFakeData();
+    this.dataService.getAllFakeData();
   }
 
   applyFilter(filter: IFilterFlight) {

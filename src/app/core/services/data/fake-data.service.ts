@@ -11,13 +11,16 @@ export class FakeDataService extends AbstractDataService {
   constructor() {
     super();
   }
+
+  // TODO what is this 
+  // what is difference itemsSubject and items$
   private itemsSubject = new BehaviorSubject<ICity[]>([]);
   items$ = this.itemsSubject.asObservable();
+
   /**
    * receive filter searchValue
    * @returns
    */
-
   public getFakeData(searchValue: string): Observable<any> {
     return of(
       fakeData.cities.filter((city) =>
@@ -25,8 +28,8 @@ export class FakeDataService extends AbstractDataService {
       )
     ).pipe(delay(0));
   }
+
   public getAllFakeData() {
-    
     return this.itemsSubject.next(fakeData.cities);
   }
 }

@@ -11,13 +11,14 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestUtil } from 'src/app/core/utils/test';
 import { MatFormField } from '@angular/material/form-field';
 
-fdescribe('SUT(Integration): PriceRangeComponent', () => {
+describe('SUT(Integration): PriceRangeComponent', () => {
   let sut: PriceRangeComponent;
   let fixture: ComponentFixture<PriceRangeComponent>;
   let form: FormGroup<IForm<IRangePrice>>;
   let formFieldElement: MatFormField;
   let minPriceInput: HTMLInputElement;
   let maxPriceInput: HTMLInputElement;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -37,12 +38,12 @@ fdescribe('SUT(Integration): PriceRangeComponent', () => {
     minPriceInput = TestUtil.nativeElement(fixture, '#minPrice');
     maxPriceInput = TestUtil.nativeElement(fixture, '#maxPrice');
   });
+
   it('should be create', () => {
     //assert
     expect(sut).toBeTruthy();
     expect(minPriceInput).toBeTruthy();
     expect(maxPriceInput).toBeTruthy();
-
   });
 
   it('should be binding formControl and formGroup', () => {

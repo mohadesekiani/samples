@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
   Validators
@@ -13,7 +12,6 @@ import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-compone
 import {
   ISearchPassenger
 } from 'src/app/core/module/interface/search-types.interface';
-import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 
 @Component({
   selector: 'app-passengers',
@@ -56,8 +54,8 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
     );
   }
 
-  constructor(fb: FormBuilder, validation: ValidationErrorService) {
-    super(fb, validation);
+  constructor() {
+    super();
   }
   // errMes(x:any){
   //    this.errorTexts = this.errorMessage.getErrorMessage(x)

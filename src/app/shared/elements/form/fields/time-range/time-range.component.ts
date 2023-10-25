@@ -17,8 +17,8 @@ import { ValidationErrorService } from 'src/app/shared/services/validation-error
   ],
 })
 export class TimeRangeComponent extends BaseFormControlValueAccessor<IRangeTime> {
-  constructor(fb: FormBuilder, validationErrorService: ValidationErrorService) {
-    super(fb, validationErrorService);
+  constructor() {
+    super();
   }
 
   override createForm() {

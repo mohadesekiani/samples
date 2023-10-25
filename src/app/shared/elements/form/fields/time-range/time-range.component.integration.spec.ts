@@ -11,12 +11,13 @@ import { TestUtil } from 'src/app/core/utils/test';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TimeRangeComponent } from './time-range.component';
 
-fdescribe('SUT(Integration): TimeRangeComponent', () => {
+describe('SUT(Integration): TimeRangeComponent', () => {
   let sut: TimeRangeComponent;
   let fixture: ComponentFixture<TimeRangeComponent>;
   let form: FormGroup<IForm<IRangeTime>>;
   let sliderElement: MatSlider;
   let sliderThumbElement: MatSliderThumb;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -47,12 +48,12 @@ fdescribe('SUT(Integration): TimeRangeComponent', () => {
 
   it('should be binding formControl and formGroup', () => {
     // arrange
-    const formGroupDirective = TestUtil.formGroup(fixture, 'form');
+    const formEl = TestUtil.formGroup(fixture, 'form');
     const startTimeCtrl = TestUtil.formControl(fixture, '#startTime');
     const endTimeCtrl = TestUtil.formControl(fixture, '#endTime');
 
     //assert
-    expect(form).toBe(formGroupDirective.form);
+    expect(form).toBe(formEl.form);
     expect(sut.form.controls.startTime).toBe(startTimeCtrl.control);
     expect(sut.form.controls.endTime).toBe(endTimeCtrl.control);
   });

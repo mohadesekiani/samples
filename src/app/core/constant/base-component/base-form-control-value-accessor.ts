@@ -1,22 +1,20 @@
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn } from '@angular/forms';
-import { BaseControlValueAccessor } from './base-control-value-accessor';
+import { Directive } from '@angular/core';
+import { FormBuilder, FormGroup, ValidatorFn } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
-import { IForm } from 'src/app/core/module/interface/search-types.interface'
-import { Directive, Injector, Input } from '@angular/core';
+import { IForm } from 'src/app/core/module/interface/search-types.interface';
 import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
+import { BaseControlValueAccessor } from './base-control-value-accessor';
 
 @Directive()
 export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAccessor<T> {
   form!: FormGroup<IForm<T>>;
 
+  protected fb = new FormBuilder()
+  protected validationErrorService = new ValidationErrorService();
 
   constructor(
-    protected fb: FormBuilder,
-    protected validationErrorService: ValidationErrorService
   ) {
     super();
-
-    if (!fb) { throw new Error('formBuilder is null'); }
   }
 
   ngOnInit(): void {

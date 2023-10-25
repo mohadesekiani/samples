@@ -1,18 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PriceRangeComponent } from './price-range.component';
 import { FormBuilder } from '@angular/forms';
-import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
-import { IRangePrice } from 'src/app/core/module/interface/search-types.interface';
+import { PriceRangeComponent } from './price-range.component';
 
-fdescribe('PriceRangeComponent', () => {
+fdescribe('SUT: PriceRangeComponent', () => {
   let sut: PriceRangeComponent;
-  let fb: FormBuilder;
-  let formValidationError;
+
   beforeEach(() => {
-    fb = new FormBuilder();
-    formValidationError = new ValidationErrorService();
-    sut = new PriceRangeComponent(fb, formValidationError);
+    sut = new PriceRangeComponent();
     sut.ngOnInit();
   });
 
@@ -34,7 +28,7 @@ fdescribe('PriceRangeComponent', () => {
 
   it('should patch value to the form', () => {
     // arrange
-    const expectedFormValue: IRangePrice = {
+    const expectedFormValue = {
       minPrice: 100000,
       maxPrice: 1000000,
     };

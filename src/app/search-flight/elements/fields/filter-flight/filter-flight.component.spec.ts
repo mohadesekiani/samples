@@ -1,15 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterFlightComponent } from './filter-flight.component';
 import { FormBuilder } from '@angular/forms';
-import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { of } from 'rxjs';
 import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import { IFilterFlight } from 'src/app/core/module/interface/search-types.interface';
+import { FilterFlightComponent } from './filter-flight.component';
 
-fdescribe('SUT: FilterFlightComponent', () => {
+describe('SUT: FilterFlightComponent', () => {
   let sut: FilterFlightComponent;
-  let fixture: ComponentFixture<FilterFlightComponent>;
   let fb: FormBuilder;
   const fakeCities: ICity[] = [
     {
@@ -47,8 +44,9 @@ fdescribe('SUT: FilterFlightComponent', () => {
   // const dataService = jasmine.createSpyObj<AbstractDataService>({
   //   items$: of(fakeCities),
   // });
-  const dataService = jasmine.createSpyObj('AbstractDataService', ['getAllFakeData', 'items$']);
-  dataService.items$.and.returnValue(of(fakeCities));
+  const dataService = jasmine.createSpyObj('AbstractDataService', ['getAllFakeData']);
+  dataService.items$ = of(fakeCities);
+
   beforeEach(() => {
     fb = new FormBuilder();
     sut = new FilterFlightComponent(fb, dataService);
@@ -62,7 +60,7 @@ fdescribe('SUT: FilterFlightComponent', () => {
   it('should initialize form', () => {
     //assert
     console.log(sut.form.value);
-    
+
     expect(sut.form.value).toEqual({
       timeRange: { startTime: 300, endTime: 1320 },
       priceRange: { minPrice: 0, maxPrice: 10 },
@@ -70,10 +68,9 @@ fdescribe('SUT: FilterFlightComponent', () => {
       airline: null,
     });
   });
+  
   it('should apply filter correctly', () => {
     //arrange
-    dataService.items$ = of(fakeCities);
-    fixture.detectChanges();
 
     // act 
     sut.form.setValue({
