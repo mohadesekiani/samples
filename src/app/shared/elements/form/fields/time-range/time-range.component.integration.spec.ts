@@ -1,28 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  ValidatorFn,
-} from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FormGroup, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  IFilterFlight,
   IForm,
   IRangeTime,
 } from 'src/app/core/module/interface/search-types.interface';
 import { TestUtil } from 'src/app/core/utils/test';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { TimeRangeComponent } from './time-range.component';
-import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
-import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 
-describe('SUT(Integration): TimeRangeComponent', () => {
+fdescribe('SUT(Integration): TimeRangeComponent', () => {
   let sut: TimeRangeComponent;
   let fixture: ComponentFixture<TimeRangeComponent>;
   let form: FormGroup<IForm<IRangeTime>>;
@@ -40,7 +28,7 @@ describe('SUT(Integration): TimeRangeComponent', () => {
     });
     fixture = TestBed.createComponent(TimeRangeComponent);
     sut = fixture.componentInstance;
-    
+
     fixture.detectChanges();
     form = sut.form;
   });
@@ -57,4 +45,16 @@ describe('SUT(Integration): TimeRangeComponent', () => {
     //assert
     expect(form).toBe(formGroupDirective.form);
   });
+
+  it('should be binding formControl', () => {
+    // arrange
+    const startTimeCtrl = TestUtil.formControl(fixture, '#startTime');
+    const endTimeCtrl = TestUtil.formControl(fixture, '#endTime');
+
+    //assert
+    expect(sut.form.controls.startTime).toBe(startTimeCtrl.control);
+    expect(sut.form.controls.endTime).toBe(endTimeCtrl.control);
+  });
+
+  // matDatepicker = TestUtil.queryComponent(fixture, 'mat-datepicker');
 });
