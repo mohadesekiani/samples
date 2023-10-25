@@ -55,7 +55,7 @@ fdescribe('SUT: FilterFlightComponent', () => {
     sut.ngOnInit();
   });
 
-  fit('should create', () => {
+  it('should create', () => {
     expect(sut).toBeTruthy();
   });
 
