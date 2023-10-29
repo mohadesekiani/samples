@@ -8,7 +8,7 @@ export enum PassengerTypesEnum {
   Child = 'Child',
   Infant = 'Infant',
 }
-export enum classesTypesEnum {
+export enum ClassesTypesFlightEnum {
   Classy = 'Classy',
   CommercialGrade = 'CommercialGrade',
   EconomicGrade = 'EconomicGrade',

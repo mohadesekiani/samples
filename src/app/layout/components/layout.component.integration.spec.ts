@@ -1,22 +1,18 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
-  async,
   ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick,
-  waitForAsync,
+  TestBed
 } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { RouterTestingModule } from '@angular/router/testing';
-import { LayoutComponent } from './layout.component';
-import { AbstractDataService } from '../../core/services/data/abstract-data.service';
-import { SharedModule } from '../../shared/shared.module';
 import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AbstractDataService } from '../../core/services/data/abstract-data.service';
 import { TestUtil } from '../../core/utils/test/test-util';
+import { SharedModule } from '../../shared/shared.module';
+import { LayoutComponent } from './layout.component';
 
 describe('LayoutComponent', () => {
   let sut: LayoutComponent;

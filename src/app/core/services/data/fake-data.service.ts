@@ -12,10 +12,10 @@ export class FakeDataService extends AbstractDataService {
     super();
   }
 
-  // TODO what is this 
+  // TODO what is this
   // what is difference itemsSubject and items$
-  private itemsSubject = new BehaviorSubject<ICity[]>([]);
-  items$ = this.itemsSubject.asObservable();
+  // private itemsSubject = new BehaviorSubject<ICity[]>([]);
+  // items$ = this.itemsSubject.asObservable();
 
   /**
    * receive filter searchValue
@@ -30,6 +30,7 @@ export class FakeDataService extends AbstractDataService {
   }
 
   public getAllFakeData() {
-    return this.itemsSubject.next(fakeData.cities);
+    return of(fakeData.cities);
+    // return this.itemsSubject.next(fakeData.cities);
   }
 }

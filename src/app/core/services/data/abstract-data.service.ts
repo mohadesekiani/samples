@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
+import { ICity } from '../../module/interface/city-type.interface';
 
 export abstract class AbstractDataService {
-  abstract items$ :any
   abstract getFakeData(searchValue: string): Observable<any>;
-  abstract getAllFakeData():any;
+  abstract getAllFakeData():Observable<any>;
 }

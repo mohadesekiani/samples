@@ -1,0 +1,37 @@
+.flight-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .flight-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .flight-title {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .flight-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .flight-info-item {
+    flex: 1;
+    margin-right: 8px;
+  }
+  
+  .flight-price {
+    color: #27ae60;
+  }
+  
+  .flight-time {
+    color: #3498db;
+  }
+  

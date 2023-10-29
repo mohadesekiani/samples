@@ -1,3 +1,17 @@
-<div style="margin: 10px;">
-  <app-filter-flight></app-filter-flight>
+<!-- <div style="margin: 10px" class="grow grid grid-cols-5">
+  <div class="grow grid grid-cols-2 gap-4">
+    <app-filter-flight (newItemEvent)="receiveData($event)"></app-filter-flight>
+  </div>
+  <div class="grow col-span-3">
+    <app-list-flight [filteredItems]="filteredItems"></app-list-flight>
+  </div>
+</div> -->
+<div style="margin: 10px" class="grow flex">
+  <div class="grow w-1/4">
+    <app-filter-flight (newItemEvent)="receiveData($event)"></app-filter-flight>
+  </div>
+  <div class="grow w-2/4 m-4" >
+    <app-list-flight [filteredItems]="filteredItems"></app-list-flight>
+  </div>
 </div>
+

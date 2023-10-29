@@ -1,10 +1,5 @@
-import {
-  AbstractControl,
-  FormArray,
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
 import { ClassTypesEnum } from '../enum/class-types.enum';
+import { ClassesTypesFlightEnum } from '../enum/general-types.enum';
 import { TravelTypesEnum } from '../enum/travel-types.enum';
 
 export type IForm<T> = {
@@ -22,10 +17,10 @@ export interface ISearchFlight {
   routes: ISearchRoute[];
 }
 export interface IFilterFlight {
-  timeRange: IRangeTime
-  priceRange: IRangePrice
+  timeRange: IRangeTime;
+  priceRange: IRangePrice;
+  class: any;
   airline: string;
-  class: string;
 }
 export interface IRangeTime {
   startTime: number;

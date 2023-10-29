@@ -16,16 +16,18 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
 const appearanceOutlineOptions = {
   appearance: 'outline',
 };
-const components=[
-  DatepickerComponent
-];
-const modules=[
+const components = [DatepickerComponent];
+const modules = [
+  MatCardModule,
+  MatListModule,
   MatSliderModule,
   MatRadioModule,
   MatInputModule,
@@ -39,18 +41,12 @@ const modules=[
   MatMenuModule,
   NativeDateModule,
   MatExpansionModule,
-]
+];
 
 @NgModule({
-  imports:[
-    CommonModule,
-   ...modules,
-  ],
+  imports: [CommonModule, ...modules],
   declarations: [...components],
-  exports: [
-   ...modules,
-    ...components
-  ],
+  exports: [...modules, ...components],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,

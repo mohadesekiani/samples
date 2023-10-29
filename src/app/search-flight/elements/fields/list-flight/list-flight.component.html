@@ -1,1 +1,8 @@
-<p>list-flight works!</p>
+<mat-card *ngFor="let item of filteredItems" class="m-2">
+  <mat-list>
+    <mat-card-header> {{ item.title }}</mat-card-header>
+    <mat-card-content>Class: {{ item.class }}</mat-card-content>
+    <mat-card-content>Price: {{ item.price }}</mat-card-content>
+    <mat-card-content>{{item.time | formatTime}}</mat-card-content>
+  </mat-list>
+</mat-card>
