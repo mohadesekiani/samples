@@ -1,10 +1,5 @@
 import { FormBuilder } from '@angular/forms';
-import { of } from 'rxjs';
-import { ICity } from 'src/app/core/module/interface/city-type.interface';
-import { IFilterFlight } from 'src/app/core/module/interface/search-types.interface';
 import { FilterFlightComponent } from './filter-flight.component';
-import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
-import { fakeAsync, tick } from '@angular/core/testing';
 
 fdescribe('SUT: FilterFlightComponent', () => {
   let sut: FilterFlightComponent;

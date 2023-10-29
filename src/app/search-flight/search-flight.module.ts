@@ -9,7 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ListFlightComponent } from './elements/fields/list-flight/list-flight.component';
 import { FilterFlightComponent } from './elements/fields/filter-flight/filter-flight.component';
 import { ResultFlightComponent } from './page/result-flight/result-flight.component';
-import { FormatTimePipe } from './pipe/format-time';
+import { FormatTimePipe } from './pipe/format-time.pipe';
 
 @NgModule({
   declarations: [
