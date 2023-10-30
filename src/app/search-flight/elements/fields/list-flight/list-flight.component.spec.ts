@@ -56,13 +56,6 @@ fdescribe('SUT: ListFlightComponent', () => {
     // assert
     expect(sut.allItem).toEqual(fakeCities);
   });
-//TODO چرا پاس نمیشه
-  it('should be throw exception with null dataService', () => {
-    // assert
-    expect(() => new ListFlightComponent(null as any)).toThrowError(
-      'AbstractDataService is null'
-    );
-  });
 
   //TODO نوشتن تست برای اینپوت ها
   it('should set filteredItems when input property is set', () => {

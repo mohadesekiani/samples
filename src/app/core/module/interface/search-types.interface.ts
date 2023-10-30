@@ -43,6 +43,10 @@ export interface ISearchRoute {
   returnDate: Date;
 }
 
+export interface IClassFlightGroup {
+classy:ClassesTypesFlightEnum.Classy
+commercialGrade:ClassesTypesFlightEnum.CommercialGrade
+}
 export interface ISearchMultiPath {
   routes: any;
   //  FormArray<FormGroup<IForm<ISearchRoute>>>;
@@ -52,4 +56,8 @@ export interface ITab {
   title: string;
   active: boolean;
   route: string;
+}
+
+export interface IClassFlight {
+  classes: ClassTypesEnum[];
 }

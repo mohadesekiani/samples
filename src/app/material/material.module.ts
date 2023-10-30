@@ -20,6 +20,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const appearanceOutlineOptions = {
   appearance: 'outline',
@@ -41,6 +42,7 @@ const modules = [
   MatMenuModule,
   NativeDateModule,
   MatExpansionModule,
+  MatCheckboxModule,
 ];
 
 @NgModule({

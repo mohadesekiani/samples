@@ -30,6 +30,8 @@ export class ResultFlightComponent {
   }
 
   private applyFilter(filter: IFilterFlight): ICity[] {
+    console.log(filter);
+    
     this.filteredItems = this.timeCombinePrice(filter);
     if (filter.class === null) {
       return this.filteredItems;

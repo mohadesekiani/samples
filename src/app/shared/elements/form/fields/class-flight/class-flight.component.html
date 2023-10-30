@@ -1,1 +1,16 @@
-<p>class-flight works!</p>
+<form [formGroup]="form" > 
+ <div>
+    <div *ngFor="let cbx of classesFormArray.controls; let i = index">
+      <label formArrayName="classes">
+        <input
+          type="checkbox"
+          [formControlName]="i"
+        />
+        {{ classesTypesFlight[i].title }}
+      </label>
+    </div>
+  </div>
+
+
+</form>
+{{form.value | json}}

@@ -18,12 +18,8 @@
           <mat-expansion-panel-header>
             <mat-panel-title> enter class range</mat-panel-title>
           </mat-expansion-panel-header>
-          <mat-form-field>
-            <mat-label>Toppings</mat-label>
-            <mat-select formControlName="class" multiple>
-              <mat-option *ngFor="let class of classes" [value]="class.value">{{class.title}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+          <app-class-flight formControlName="class"></app-class-flight>
+       
         </mat-expansion-panel>
       </mat-accordion>
     </div>

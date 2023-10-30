@@ -15,7 +15,8 @@ const COMPONENTS = [
   NumberPassengersComponent,
   MultiPathComponent,
   TimeRangeComponent,
-  PriceRangeComponent
+  PriceRangeComponent,
+  ClassFlightComponent,
 ];
 
 @NgModule({
