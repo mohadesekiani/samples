@@ -156,7 +156,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
         minPrice: 0,
         maxPrice: 10,
       },
-      class: ['Classy'],
+      class: { classes: ['Classy', false, false, false] },
       airline: '',
     };
 
@@ -295,5 +295,28 @@ fdescribe('SUT: ResultFlightComponent', () => {
         time: 300,
       },
     ]);
+  });
+
+  it(`should be haven't class result to be []`, () => {
+    // arrange
+    const filter = {
+      timeRange: {
+        startTime: 300,
+        endTime: 300,
+      },
+      priceRange: {
+        minPrice: 10,
+        maxPrice: 10,
+      },
+      class: ['PremiumGrade'],
+      airline: '',
+    };
+
+    // act 
+    sut.receiveData(filter);
+
+    // assert 
+    expect(sut.filteredItems).toEqual([])
+
   });
 });

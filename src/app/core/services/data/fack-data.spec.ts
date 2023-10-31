@@ -1,8 +1,9 @@
 import { TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { FakeDataService } from './fake-data.service';
+import { ICity } from '../../module/interface/city-type.interface';
 
-describe('SUT: FakeDataService', () => {
+fdescribe('SUT: FakeDataService', () => {
   let sut: FakeDataService;
   beforeEach(() => {
     sut = new FakeDataService();
@@ -13,21 +14,23 @@ describe('SUT: FakeDataService', () => {
   });
 
   it('should filter data based on search value', fakeAsync(() => {
-    const searchValue = 'Isf';
+    const searchValue = 'Abu Musa Island Airport';
     const expectedResults = [
       {
-        id: '315768d5-57d9-47da-a6c3-bed05ec8a890',
-        title: 'Isfahan',
-        alternateTitle: 'اصفهان',
-        code: 'IFN',
-        type: 'GeographicalLocation',
-        subType: 'City',
-        cityId: null,
+        id: 'bdebddba-f11e-452d-a2d7-81188acecac1',
+        title: 'Abu Musa Island Airport',
+        alternateTitle: 'فرودگاه جزیره ابوموسی',
+        code: 'AEU',
+        type: 'Facility',
+        subType: 'Airport',
+        cityId: 'b1b86ea7-8fb4-4eec-9fe0-5f2ea03af777',
         countryCode: 'IR',
         countryTitle: 'Iran (Islamic Republic of)',
         countryAlternateTitle: 'ايران',
+        price: 3,
+        class: 'EconomicGrade',
+        time: 600,
       },
-      
     ];
     let actual: any = [];
 
@@ -35,7 +38,7 @@ describe('SUT: FakeDataService', () => {
       actual = res;
     });
 
-    tick(3000);    
+    tick(3000);
     expect(actual).toEqual(expectedResults);
   }));
 
@@ -43,20 +46,23 @@ describe('SUT: FakeDataService', () => {
     // arrange
     const expectedResults = [
       {
-        id: '315768d5-57d9-47da-a6c3-bed05ec8a890',
-        title: 'Isfahan',
-        alternateTitle: 'اصفهان',
-        code: 'IFN',
-        type: 'GeographicalLocation',
-        subType: 'City',
-        cityId: null,
+        id: 'bdebddba-f11e-452d-a2d7-81188acecac1',
+        title: 'Abu Musa Island Airport',
+        alternateTitle: 'فرودگاه جزیره ابوموسی',
+        code: 'AEU',
+        type: 'Facility',
+        subType: 'Airport',
+        cityId: 'b1b86ea7-8fb4-4eec-9fe0-5f2ea03af777',
         countryCode: 'IR',
         countryTitle: 'Iran (Islamic Republic of)',
         countryAlternateTitle: 'ايران',
+        price: 3,
+        class: 'EconomicGrade',
+        time: 600,
       },
     ];
     // act
-    const actual = await lastValueFrom(sut.getFakeData('Isf'));
+    const actual = await lastValueFrom(sut.getFakeData('Abu Musa Is'));
 
     // assert
     expect(actual).toEqual(expectedResults);
@@ -68,5 +74,76 @@ describe('SUT: FakeDataService', () => {
 
     // assert
     expect(actual).toEqual([]);
+  });
+
+  it('should return an observable of fake cities data', () => {
+    const expectedResults = [
+      {
+        id: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
+        title: 'Abadan',
+        alternateTitle: 'آبادان',
+        code: 'ABD',
+        type: 'GeographicalLocation',
+        subType: 'City',
+        cityId: null,
+        countryCode: 'IR',
+        countryTitle: 'Iran (Islamic Republic of)',
+        countryAlternateTitle: 'ايران',
+        price: 5,
+        class: 'Classy',
+        time: 300,
+      },
+      {
+        id: '2e63cb40-d5f2-4975-a9ef-e6588d1fa503',
+        title: 'Abadan Intl Airport',
+        alternateTitle: 'فرودگاه آبادان',
+        code: 'ABD',
+        type: 'Facility',
+        subType: 'Airport',
+        cityId: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
+        countryCode: 'IR',
+        countryTitle: 'Iran (Islamic Republic of)',
+        countryAlternateTitle: 'ايران',
+        price: 10,
+        class: 'CommercialGrade',
+        time: 1320,
+      },
+      {
+        id: 'b1b86ea7-8fb4-4eec-9fe0-5f2ea03af777',
+        title: 'Abu Musa',
+        alternateTitle: 'ابوموسی',
+        code: 'AEU',
+        type: 'GeographicalLocation',
+        subType: 'City',
+        cityId: null,
+        countryCode: 'IR',
+        countryTitle: 'Iran (Islamic Republic of)',
+        countryAlternateTitle: 'ايران',
+        price: 2,
+        class: 'EconomicGrade',
+        time: 1000,
+      },
+      {
+        id: 'bdebddba-f11e-452d-a2d7-81188acecac1',
+        title: 'Abu Musa Island Airport',
+        alternateTitle: 'فرودگاه جزیره ابوموسی',
+        code: 'AEU',
+        type: 'Facility',
+        subType: 'Airport',
+        cityId: 'b1b86ea7-8fb4-4eec-9fe0-5f2ea03af777',
+        countryCode: 'IR',
+        countryTitle: 'Iran (Islamic Republic of)',
+        countryAlternateTitle: 'ايران',
+        price: 3,
+        class: 'EconomicGrade',
+        time: 600,
+      },
+    ];
+    let actual: ICity[] = [];
+
+    sut.getAllFakeData().subscribe((res) => {
+      actual = res;
+    });
+    expect(actual).toEqual(expectedResults);
   });
 });

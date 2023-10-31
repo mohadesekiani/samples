@@ -17,10 +17,6 @@ export class FakeDataService extends AbstractDataService {
   // private itemsSubject = new BehaviorSubject<ICity[]>([]);
   // items$ = this.itemsSubject.asObservable();
 
-  /**
-   * receive filter searchValue
-   * @returns
-   */
   public getFakeData(searchValue: string): Observable<any> {
     return of(
       fakeData.cities.filter((city) =>

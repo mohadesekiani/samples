@@ -39,7 +39,7 @@ export class ClassFlightComponent extends BaseFormControlValueAccessor<IClassFli
   }));
 
   get classesFormArray() {
-    return this.form.controls['classes'] as FormArray;
+    return this.form.controls.classes as FormArray;
   }
   constructor() {
     super();
@@ -51,16 +51,10 @@ export class ClassFlightComponent extends BaseFormControlValueAccessor<IClassFli
     };
     super.createForm(baseFormConfig);
     this.addCheckboxesToForm();
-    this.classesFormArray.valueChanges.subscribe((values) => {
-      const selectedOrderIds = values
-        .map((checked: any, i: number) =>
-          checked ? this.classesTypesFlight.at(i)?.value : null
-        )
-        .filter((v: any) => v !== null);
-      console.log(selectedOrderIds);
-
-      this.form.patchValue({ classes: selectedOrderIds }, { emitEvent: false });
-    });
+  }
+  changeCheckBox(e: Event, i: any) {    
+    const target = e.target as HTMLInputElement;
+    this.classesFormArray.at(i).setValue(target.checked ? target.value : false);
   }
 
   private addCheckboxesToForm() {

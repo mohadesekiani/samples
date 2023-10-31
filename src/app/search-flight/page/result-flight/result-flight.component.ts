@@ -30,8 +30,6 @@ export class ResultFlightComponent {
   }
 
   private applyFilter(filter: IFilterFlight): ICity[] {
-    console.log(filter);
-    
     this.filteredItems = this.timeCombinePrice(filter);
     if (filter.class === null) {
       return this.filteredItems;
@@ -67,13 +65,14 @@ export class ResultFlightComponent {
       return this.timeRange(item, filter) && this.priceRange(item, filter);
     });
   }
-  private selectedClass(filter: ClassesTypesFlightEnum): ICity[] {
-    if (!Array.isArray(filter)) {
-      return [];
+  private selectedClass(filter: any): ICity[] {
+    if (!filter || !filter.classes) {
+      return this.allData;
     }
+    let x: Array<ClassesTypesFlightEnum> = filter.classes;
     let tempFilteredItems = this.allData.slice();
     let commonElements = tempFilteredItems.filter((element) =>
-      filter.some((f) => element.class.includes(f))
+      x.some((f) => element.class.includes(f))
     );
     if (commonElements.length === 0) {
       return this.filteredItems;

@@ -1,16 +1,16 @@
-<form [formGroup]="form" > 
- <div>
+<form [formGroup]="form">
+  <div>
     <div *ngFor="let cbx of classesFormArray.controls; let i = index">
       <label formArrayName="classes">
         <input
           type="checkbox"
           [formControlName]="i"
+          (change)="changeCheckBox($event, i)"
+          [value]="classesTypesFlight[i].value"
         />
         {{ classesTypesFlight[i].title }}
       </label>
     </div>
   </div>
-
-
 </form>
-{{form.value | json}}
+{{ form.value | json }}
