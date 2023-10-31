@@ -4,6 +4,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ClassesTypesFlightEnum } from 'src/app/core/module/enum/general-types.enum';
 import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import {
+  IClassFlight,
   IFilterFlight,
   IForm,
 } from 'src/app/core/module/interface/search-types.interface';
@@ -16,6 +17,9 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
 })
 export class FilterFlightComponent {
   //TODO baseClass
+  baseFormConfig: IForm<IClassFlight> = {
+    classes: this.fb.array([]),
+  };
   panelOpenState = false;
   classes = Object.values(ClassesTypesFlightEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
@@ -50,6 +54,7 @@ export class FilterFlightComponent {
       priceRange: [{ minPrice: 0, maxPrice: 10 }],
       class: [],
       airline: [null],
+      company:[]
     });
   }
 }

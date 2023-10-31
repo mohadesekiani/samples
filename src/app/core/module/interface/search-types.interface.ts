@@ -21,6 +21,7 @@ export interface IFilterFlight {
   priceRange: IRangePrice;
   class: any;
   airline: string;
+  company:any
 }
 export interface IRangeTime {
   startTime: number;

@@ -9,6 +9,7 @@ import { PassengersComponent } from './form/fields/passengers/passengers.compone
 import { TimeRangeComponent } from './form/fields/time-range/time-range.component';
 import { PriceRangeComponent } from './form/fields/price-range/price-range.component';
 import { ClassFlightComponent } from './form/fields/class-flight/class-flight.component';
+import { CompanyFlightComponent } from './form/fields/company-flight/company-flight.component';
 const COMPONENTS = [
   FlightComponent,
   PassengersComponent,
@@ -20,7 +21,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [COMPONENTS, ClassFlightComponent],
+  declarations: [COMPONENTS, ClassFlightComponent, CompanyFlightComponent],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, MaterialModule],
   exports: [COMPONENTS],
 })

@@ -1,12 +1,12 @@
 <form [formGroup]="form">
-  <div>
-    <div *ngFor="let cbx of classesFormArray.controls; let i = index">
+  <div *ngIf="classesFormArray.controls">
+    <div *ngFor="let cbx of classesFormArray?.controls; let i = index">
       <label formArrayName="classes">
         <input
           type="checkbox"
           [formControlName]="i"
-          (change)="changeCheckBox($event, i)"
           [value]="classesTypesFlight[i].value"
+          (change)="changeCheckBox($event, i)"
         />
         {{ classesTypesFlight[i].title }}
       </label>

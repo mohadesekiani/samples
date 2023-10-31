@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -33,6 +33,16 @@ export interface Task {
   ],
 })
 export class ClassFlightComponent extends BaseFormControlValueAccessor<IClassFlight> {
+  // @Input() baseFormConfig!: IForm<IClassFlight>;
+  private _baseFormConfig!: IForm<IClassFlight>;
+
+  @Input() get baseFormConfig(): IForm<IClassFlight> {
+    return this._baseFormConfig;
+  }
+  set baseFormConfig(value: IForm<IClassFlight>) {
+    this._baseFormConfig = value;
+  }
+
   classesTypesFlight = Object.values(ClassesTypesFlightEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
     value,
@@ -41,18 +51,17 @@ export class ClassFlightComponent extends BaseFormControlValueAccessor<IClassFli
   get classesFormArray() {
     return this.form.controls.classes as FormArray;
   }
+
   constructor() {
     super();
   }
 
   override createForm() {
-    const baseFormConfig: IForm<IClassFlight> = {
-      classes: this.fb.array([]),
-    };
-    super.createForm(baseFormConfig);
+    super.createForm(this._baseFormConfig);
     this.addCheckboxesToForm();
   }
-  changeCheckBox(e: Event, i: any) {    
+
+  changeCheckBox(e: Event, i: any) {
     const target = e.target as HTMLInputElement;
     this.classesFormArray.at(i).setValue(target.checked ? target.value : false);
   }
