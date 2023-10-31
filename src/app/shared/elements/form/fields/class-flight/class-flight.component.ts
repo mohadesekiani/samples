@@ -35,6 +35,7 @@ export interface Task {
 export class ClassFlightComponent extends BaseFormControlValueAccessor<IClassFlight> {
   // @Input() baseFormConfig!: IForm<IClassFlight>;
   private _baseFormConfig!: IForm<IClassFlight>;
+   _classesTypesFlight!:any
 
   @Input() get baseFormConfig(): IForm<IClassFlight> {
     return this._baseFormConfig;
@@ -43,10 +44,14 @@ export class ClassFlightComponent extends BaseFormControlValueAccessor<IClassFli
     this._baseFormConfig = value;
   }
 
-  classesTypesFlight = Object.values(ClassesTypesFlightEnum).map((value) => ({
-    title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
-    value,
-  }));
+
+  @Input() get classesTypesFlight(){
+    return this._classesTypesFlight;
+  }
+  set classesTypesFlight(value) {
+    this._classesTypesFlight= value;
+  }
+
 
   get classesFormArray() {
     return this.form.controls.classes as FormArray;
@@ -67,7 +72,7 @@ export class ClassFlightComponent extends BaseFormControlValueAccessor<IClassFli
   }
 
   private addCheckboxesToForm() {
-    this.classesTypesFlight.forEach(() =>
+    this._classesTypesFlight.forEach(() =>
       this.classesFormArray.push(this.fb.control(false))
     );
   }

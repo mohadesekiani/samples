@@ -20,6 +20,12 @@ export class FilterFlightComponent {
   baseFormConfig: IForm<IClassFlight> = {
     classes: this.fb.array([]),
   };
+  classesTypesFlight: any = Object.values(ClassesTypesFlightEnum).map(
+    (value) => ({
+      title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
+      value,
+    })
+  );
   panelOpenState = false;
   classes = Object.values(ClassesTypesFlightEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
@@ -54,7 +60,7 @@ export class FilterFlightComponent {
       priceRange: [{ minPrice: 0, maxPrice: 10 }],
       class: [],
       airline: [null],
-      company:[]
+      company: [],
     });
   }
 }

@@ -5,10 +5,10 @@
         <input
           type="checkbox"
           [formControlName]="i"
-          [value]="classesTypesFlight[i].value"
+          [value]="_classesTypesFlight[i].value"
           (change)="changeCheckBox($event, i)"
         />
-        {{ classesTypesFlight[i].title }}
+        {{ _classesTypesFlight[i].title }}
       </label>
     </div>
   </div>
