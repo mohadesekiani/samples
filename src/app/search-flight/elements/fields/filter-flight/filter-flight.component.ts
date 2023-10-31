@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { ClassesTypesFlightEnum } from 'src/app/core/module/enum/general-types.enum';
+import { ClassesTypesFlightEnum, CompanyTypesFlightEnum } from 'src/app/core/module/enum/general-types.enum';
 import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import {
   IClassFlight,
@@ -20,7 +20,16 @@ export class FilterFlightComponent {
   baseFormConfig: IForm<IClassFlight> = {
     classes: this.fb.array([]),
   };
+  baseFormConfigCompany: IForm<IClassFlight> = {
+    classes: this.fb.array([]),
+  };
   classesTypesFlight: any = Object.values(ClassesTypesFlightEnum).map(
+    (value) => ({
+      title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
+      value,
+    })
+  );
+  companyTypesFlight: any = Object.values(CompanyTypesFlightEnum).map(
     (value) => ({
       title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
       value,

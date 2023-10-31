@@ -14,3 +14,8 @@ export enum ClassesTypesFlightEnum {
   EconomicGrade = 'EconomicGrade',
   PremiumGrade = 'PremiumGrade',
 }
+export enum CompanyTypesFlightEnum {
+  Chabahar = 'Chabahar',
+  Caspian = 'Caspian',
+  Mahan = 'Mahan',
+}
