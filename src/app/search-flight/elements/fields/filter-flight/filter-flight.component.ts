@@ -5,10 +5,10 @@ import { ClassesTypesFlightEnum, CompanyTypesFlightEnum } from 'src/app/core/mod
 import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import {
   IClassFlight,
+  ICompanyFlight,
   IFilterFlight,
   IForm,
 } from 'src/app/core/module/interface/search-types.interface';
-import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 
 @Component({
   selector: 'app-filter-flight',
@@ -17,11 +17,11 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
 })
 export class FilterFlightComponent {
   //TODO baseClass
-  baseFormConfig: IForm<IClassFlight> = {
+  baseFormConfig: IForm<any> = {
     classes: this.fb.array([]),
   };
-  baseFormConfigCompany: IForm<IClassFlight> = {
-    classes: this.fb.array([]),
+  baseFormConfigCompany: IForm<any> = {
+    companies: this.fb.array([]),
   };
   classesTypesFlight: any = Object.values(ClassesTypesFlightEnum).map(
     (value) => ({
@@ -68,8 +68,8 @@ export class FilterFlightComponent {
       timeRange: [{ startTime: 300, endTime: 1320 }],
       priceRange: [{ minPrice: 0, maxPrice: 10 }],
       class: [],
-      airline: [null],
       company: [],
+      airline: [null],
     });
   }
 }

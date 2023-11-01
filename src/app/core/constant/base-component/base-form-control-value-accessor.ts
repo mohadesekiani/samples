@@ -6,14 +6,15 @@ import { ValidationErrorService } from 'src/app/shared/services/validation-error
 import { BaseControlValueAccessor } from './base-control-value-accessor';
 
 @Directive()
-export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAccessor<T> {
+export abstract class BaseFormControlValueAccessor<
+  T
+> extends BaseControlValueAccessor<T> {
   form!: FormGroup<IForm<T>>;
 
-  protected fb = new FormBuilder()
+  protected fb = new FormBuilder();
   protected validationErrorService = new ValidationErrorService();
 
-  constructor(
-  ) {
+  constructor() {
     super();
   }
 
@@ -34,13 +35,15 @@ export abstract class BaseFormControlValueAccessor<T> extends BaseControlValueAc
     this.onChange(null);
   }
 
-  createForm(baseFormConfig?: IForm<T>, validators?: ValidatorFn | ValidatorFn[] | null) {
+  createForm(
+    baseFormConfig?: IForm<T>,
+    validators?: ValidatorFn | ValidatorFn[] | null
+  ) {
     this.form = this.fb.group(baseFormConfig as IForm<T>, {
-      validators
+      validators,
     });
     this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x: any) => {
       this.refersValue();
     });
   }
-
 }

@@ -22,6 +22,8 @@ fdescribe('SUT: ListFlightComponent', () => {
       price: 5,
       class: 'Classy',
       time: 300,
+      company:'Mahan'
+
     },
     {
       id: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
@@ -37,6 +39,8 @@ fdescribe('SUT: ListFlightComponent', () => {
       price: 10,
       class: 'CommercialGrade',
       time: 1320,
+      company:'Mahan'
+
     },
   ];
   const dataService = jasmine.createSpyObj<AbstractDataService>({
@@ -75,6 +79,7 @@ fdescribe('SUT: ListFlightComponent', () => {
         price: 5,
         class: 'Classy',
         time: 300,
+        company: 'Mahan',
       },
     ];
     // act

@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div *ngIf="classesFormArray.controls">
     <div *ngFor="let cbx of classesFormArray?.controls; let i = index">
-      <label formArrayName="classes">
+      <label [formArrayName]="_arrayName">
         <input
           type="checkbox"
           [formControlName]="i"

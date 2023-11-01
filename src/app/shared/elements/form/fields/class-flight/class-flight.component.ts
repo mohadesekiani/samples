@@ -32,29 +32,35 @@ export interface Task {
     },
   ],
 })
-export class ClassFlightComponent extends BaseFormControlValueAccessor<IClassFlight> {
+export class ClassFlightComponent extends BaseFormControlValueAccessor<any> {
   // @Input() baseFormConfig!: IForm<IClassFlight>;
   private _baseFormConfig!: IForm<IClassFlight>;
-   _classesTypesFlight!:any
+  _classesTypesFlight!: any;
+  _arrayName!: string;
 
-  @Input() get baseFormConfig(): IForm<IClassFlight> {
+  @Input() get baseFormConfig(): IForm<any> {
     return this._baseFormConfig;
   }
-  set baseFormConfig(value: IForm<IClassFlight>) {
+  set baseFormConfig(value: IForm<any>) {
     this._baseFormConfig = value;
   }
 
-
-  @Input() get classesTypesFlight(){
+  @Input() get classesTypesFlight() {
     return this._classesTypesFlight;
   }
   set classesTypesFlight(value) {
-    this._classesTypesFlight= value;
+    this._classesTypesFlight = value;
   }
 
+  @Input() get arrayName() {
+    return this._arrayName;
+  }
+  set arrayName(value) {
+    this._arrayName = value;
+  }
 
   get classesFormArray() {
-    return this.form.controls.classes as FormArray;
+    return this.form.controls[this._arrayName] as FormArray;
   }
 
   constructor() {

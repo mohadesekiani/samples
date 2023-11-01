@@ -30,6 +30,7 @@ fdescribe('SUT: FakeDataService', () => {
         price: 3,
         class: 'EconomicGrade',
         time: 600,
+        company:'Chabahar'
       },
     ];
     let actual: any = [];
@@ -59,8 +60,10 @@ fdescribe('SUT: FakeDataService', () => {
         price: 3,
         class: 'EconomicGrade',
         time: 600,
+        company:'Chabahar'
       },
     ];
+
     // act
     const actual = await lastValueFrom(sut.getFakeData('Abu Musa Is'));
 
@@ -92,6 +95,7 @@ fdescribe('SUT: FakeDataService', () => {
         price: 5,
         class: 'Classy',
         time: 300,
+        company: 'Mahan',
       },
       {
         id: '2e63cb40-d5f2-4975-a9ef-e6588d1fa503',
@@ -107,6 +111,7 @@ fdescribe('SUT: FakeDataService', () => {
         price: 10,
         class: 'CommercialGrade',
         time: 1320,
+        company: 'Caspian',
       },
       {
         id: 'b1b86ea7-8fb4-4eec-9fe0-5f2ea03af777',
@@ -122,6 +127,7 @@ fdescribe('SUT: FakeDataService', () => {
         price: 2,
         class: 'EconomicGrade',
         time: 1000,
+        company: 'Mahan',
       },
       {
         id: 'bdebddba-f11e-452d-a2d7-81188acecac1',
@@ -137,6 +143,7 @@ fdescribe('SUT: FakeDataService', () => {
         price: 3,
         class: 'EconomicGrade',
         time: 600,
+        company: 'Chabahar',
       },
     ];
     let actual: ICity[] = [];

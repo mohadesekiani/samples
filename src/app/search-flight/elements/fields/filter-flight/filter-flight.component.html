@@ -18,21 +18,20 @@
           <mat-expansion-panel-header>
             <mat-panel-title> enter class range</mat-panel-title>
           </mat-expansion-panel-header>
-          <app-class-flight
-            formControlName="class"
-            [baseFormConfig]="baseFormConfig"
-            [classesTypesFlight]="classesTypesFlight"
-          ></app-class-flight>
+          <app-check-box-group formControlName="class"></app-check-box-group>
         </mat-expansion-panel>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title> enter company range</mat-panel-title>
           </mat-expansion-panel-header>
-          <app-class-flight
+          <app-company-flight formControlName="company" ></app-company-flight>
+
+          <!-- <app-class-flight
+            arrayName="companies"
             formControlName="company"
             [baseFormConfig]="baseFormConfigCompany"
             [classesTypesFlight]="companyTypesFlight"
-          ></app-class-flight>
+          ></app-class-flight> -->
         </mat-expansion-panel>
       </mat-accordion>
     </div>

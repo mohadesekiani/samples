@@ -31,14 +31,22 @@ export class ResultFlightComponent {
 
   private applyFilter(filter: IFilterFlight): ICity[] {
     this.filteredItems = this.timeCombinePrice(filter);
-    if (filter.class === null) {
-      return this.filteredItems;
+    if (filter.company) {
+      let filterCompany: ICity[] = this.selectedCheckBox(
+        filter.company,
+        'company'
+      );
+      this.filteredItems = this.filteredItems.filter((value) =>
+        filterCompany.includes(value)
+      );
+    }
+    if (filter.class) {
+      let filterClass: ICity[] = this.selectedCheckBox(filter.class, 'class');
+      this.filteredItems = this.filteredItems.filter((value) =>
+        filterClass.includes(value)
+      );
     }
 
-    let filterClass: ICity[] = this.selectedClass(filter.class);
-    this.filteredItems = this.filteredItems.filter((value) =>
-      filterClass.includes(value)
-    );
     return this.filteredItems;
   }
 
@@ -65,14 +73,19 @@ export class ResultFlightComponent {
       return this.timeRange(item, filter) && this.priceRange(item, filter);
     });
   }
-  private selectedClass(filter: any): ICity[] {
-    if (!filter || !filter.classes) {
+
+  private selectedCheckBox(filter: any, name: string): ICity[] {
+    const trueKeysArray = Object.keys(filter).filter((key) => filter[key]);
+    if (!filter) {
       return this.allData;
     }
-    let x: Array<ClassesTypesFlightEnum> = filter.classes;
+
     let tempFilteredItems = this.allData.slice();
+
     let commonElements = tempFilteredItems.filter((element) =>
-      x.some((f) => element.class.includes(f))
+      trueKeysArray.some((f) =>
+        (element as Record<string, any>)[name].includes(f)
+      )
     );
     if (commonElements.length === 0) {
       return this.filteredItems;

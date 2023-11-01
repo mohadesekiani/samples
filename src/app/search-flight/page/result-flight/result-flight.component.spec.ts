@@ -24,6 +24,8 @@ fdescribe('SUT: ResultFlightComponent', () => {
       price: 5,
       class: 'Classy',
       time: 300,
+      company:'Mahan'
+
     },
     {
       id: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
@@ -39,6 +41,8 @@ fdescribe('SUT: ResultFlightComponent', () => {
       price: 10,
       class: 'CommercialGrade',
       time: 1320,
+      company:'Mahan'
+
     },
   ];
   const dataService = jasmine.createSpyObj<AbstractDataService>({
@@ -59,6 +63,8 @@ fdescribe('SUT: ResultFlightComponent', () => {
       priceRange: { minPrice: 0, maxPrice: 10 },
       class: null,
       airline: '',
+      company:null
+
     };
 
     // act
@@ -88,6 +94,8 @@ fdescribe('SUT: ResultFlightComponent', () => {
       },
       class: null,
       airline: '',
+      company:null
+
     };
 
     // act
@@ -111,6 +119,8 @@ fdescribe('SUT: ResultFlightComponent', () => {
       },
       class: null,
       airline: '',
+      company:null
+
     };
 
     // act
@@ -123,7 +133,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
 
   it('should be when have not class no calling selectedClass', () => {
     // arrange
-    spyOn(sut as any, 'selectedClass');
+    spyOn(sut as any, 'selectedCheckBox');
     const expectedValue = {
       timeRange: {
         startTime: 300,
@@ -135,13 +145,14 @@ fdescribe('SUT: ResultFlightComponent', () => {
       },
       class: null,
       airline: '',
+      company: null,
     };
 
     // act
     sut.receiveData(expectedValue);
 
     // assert
-    expect((sut as any).selectedClass).not.toHaveBeenCalled();
+    expect((sut as any).selectedCheckBox).not.toHaveBeenCalled();
     expect(sut.filteredItems).toEqual(fakeCities);
   });
 
@@ -158,6 +169,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
       },
       class: { classes: ['Classy', false, false, false] },
       airline: '',
+      company: null,
     };
 
     // act
@@ -179,6 +191,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
         price: 5,
         class: 'Classy',
         time: 300,
+        company: 'Mahan',
       },
     ]);
   });
@@ -196,6 +209,8 @@ fdescribe('SUT: ResultFlightComponent', () => {
       },
       class: null,
       airline: '',
+      company:null
+
     };
 
     // act
@@ -217,6 +232,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
         price: 5,
         class: 'Classy',
         time: 300,
+        company: 'Mahan',
       },
     ]);
   });
@@ -234,6 +250,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
       },
       class: null,
       airline: '',
+      company: null,
     };
 
     // act
@@ -255,6 +272,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
         price: 5,
         class: 'Classy',
         time: 300,
+        company: 'Mahan',
       },
     ]);
   });
@@ -272,6 +290,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
       },
       class: ['Classy'],
       airline: '',
+      company: null,
     };
 
     // act
@@ -293,6 +312,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
         price: 5,
         class: 'Classy',
         time: 300,
+        company: 'Mahan',
       },
     ]);
   });
@@ -309,14 +329,14 @@ fdescribe('SUT: ResultFlightComponent', () => {
         maxPrice: 10,
       },
       class: ['PremiumGrade'],
+      company: null,
       airline: '',
     };
 
-    // act 
+    // act
     sut.receiveData(filter);
 
-    // assert 
-    expect(sut.filteredItems).toEqual([])
-
+    // assert
+    expect(sut.filteredItems).toEqual([]);
   });
 });

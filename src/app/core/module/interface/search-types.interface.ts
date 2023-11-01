@@ -1,7 +1,6 @@
 import { ClassTypesEnum } from '../enum/class-types.enum';
 import {
-  ClassesTypesFlightEnum,
-  CompanyTypesFlightEnum,
+  ClassesTypesFlightEnum
 } from '../enum/general-types.enum';
 import { TravelTypesEnum } from '../enum/travel-types.enum';
 
@@ -40,6 +39,19 @@ export interface ISearchPassenger {
   Infant: number;
 }
 
+export interface IClassFlight {
+  Classy: boolean;
+  CommercialGrade: boolean;
+  EconomicGrade: boolean;
+  PremiumGrade: boolean;
+}
+
+export interface ICompanyFlight {
+  Mahan: boolean;
+  Caspian: boolean;
+  Chabahar: boolean;
+}
+
 export interface ISearchRoute {
   origin: string;
   destination: string;
@@ -64,9 +76,9 @@ export interface ITab {
 // export interface IClassFlight {
 //   classes: ClassTypesEnum[];
 // }
-export interface IClassFlight {
-  classes: ClassesTypesFlightEnum[];
-}
-export interface ICompanyFlight {
-  companies: CompanyTypesFlightEnum[];
-}
+// export interface IClassFlight {
+//   classes: ClassesTypesFlightEnum[];
+// }
+// export interface ICompanyFlight {
+//   companies: CompanyTypesFlightEnum[];
+// }

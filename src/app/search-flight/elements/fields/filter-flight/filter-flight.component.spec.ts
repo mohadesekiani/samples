@@ -22,6 +22,7 @@ fdescribe('SUT: FilterFlightComponent', () => {
       priceRange: { minPrice: 0, maxPrice: 10 },
       class: null,
       airline: null,
+      company:null
     });
   });
 

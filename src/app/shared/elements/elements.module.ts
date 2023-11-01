@@ -10,6 +10,8 @@ import { TimeRangeComponent } from './form/fields/time-range/time-range.componen
 import { PriceRangeComponent } from './form/fields/price-range/price-range.component';
 import { ClassFlightComponent } from './form/fields/class-flight/class-flight.component';
 import { CompanyFlightComponent } from './form/fields/company-flight/company-flight.component';
+import { CheckBoxComponent } from './form/fields/check-box/check-box.component';
+import { CheckBoxGroupComponent } from './form/fields/check-box-group/check-box-group.component';
 const COMPONENTS = [
   FlightComponent,
   PassengersComponent,
@@ -18,10 +20,17 @@ const COMPONENTS = [
   TimeRangeComponent,
   PriceRangeComponent,
   ClassFlightComponent,
+  CheckBoxGroupComponent,
+  CompanyFlightComponent,
+
 ];
 
 @NgModule({
-  declarations: [COMPONENTS, ClassFlightComponent, CompanyFlightComponent],
+  declarations: [
+    COMPONENTS,
+    ClassFlightComponent,
+    CheckBoxComponent,
+  ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, MaterialModule],
   exports: [COMPONENTS],
 })
