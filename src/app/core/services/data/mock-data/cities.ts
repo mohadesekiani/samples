@@ -12,9 +12,10 @@ export let cities: ICity[] = [
     countryCode: 'IR',
     countryTitle: 'Iran (Islamic Republic of)',
     countryAlternateTitle: 'ايران',
-    price:5,
-    class:'Classy',
-    time:300
+    price: 5,
+    class: 'Classy',
+    time: 300,
+    company: 'Mahan',
   },
   {
     id: '2e63cb40-d5f2-4975-a9ef-e6588d1fa503',
@@ -27,9 +28,10 @@ export let cities: ICity[] = [
     countryCode: 'IR',
     countryTitle: 'Iran (Islamic Republic of)',
     countryAlternateTitle: 'ايران',
-  price:10,
-  class:'CommercialGrade',
-  time:1320
+    price: 10,
+    class: 'CommercialGrade',
+    time: 1320,
+    company: 'Caspian',
   },
   {
     id: 'b1b86ea7-8fb4-4eec-9fe0-5f2ea03af777',
@@ -42,9 +44,10 @@ export let cities: ICity[] = [
     countryCode: 'IR',
     countryTitle: 'Iran (Islamic Republic of)',
     countryAlternateTitle: 'ايران',
-    price:2,
-    class:'EconomicGrade',
-    time:1000
+    price: 2,
+    class: 'EconomicGrade',
+    time: 1000,
+    company: 'Mahan',
   },
   {
     id: 'bdebddba-f11e-452d-a2d7-81188acecac1',
@@ -57,9 +60,10 @@ export let cities: ICity[] = [
     countryCode: 'IR',
     countryTitle: 'Iran (Islamic Republic of)',
     countryAlternateTitle: 'ايران',
-    price:3,
-    class:'EconomicGrade',
-    time:600
+    price: 3,
+    class: 'EconomicGrade',
+    time: 600,
+    company: 'Chabahar',
   },
   // {
   //   id: 'a4094910-94ea-4f87-a0cd-84cc1f7e7ab7',

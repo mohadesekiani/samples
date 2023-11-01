@@ -1,5 +1,8 @@
 import { ClassTypesEnum } from '../enum/class-types.enum';
-import { ClassesTypesFlightEnum } from '../enum/general-types.enum';
+import {
+  ClassesTypesFlightEnum,
+  CompanyTypesFlightEnum,
+} from '../enum/general-types.enum';
 import { TravelTypesEnum } from '../enum/travel-types.enum';
 
 export type IForm<T> = {
@@ -21,7 +24,7 @@ export interface IFilterFlight {
   priceRange: IRangePrice;
   class: any;
   airline: string;
-  company:any
+  company: any;
 }
 export interface IRangeTime {
   startTime: number;
@@ -45,8 +48,8 @@ export interface ISearchRoute {
 }
 
 export interface IClassFlightGroup {
-classy:ClassesTypesFlightEnum.Classy
-commercialGrade:ClassesTypesFlightEnum.CommercialGrade
+  classy: ClassesTypesFlightEnum.Classy;
+  commercialGrade: ClassesTypesFlightEnum.CommercialGrade;
 }
 export interface ISearchMultiPath {
   routes: any;
@@ -58,7 +61,12 @@ export interface ITab {
   active: boolean;
   route: string;
 }
-
+// export interface IClassFlight {
+//   classes: ClassTypesEnum[];
+// }
 export interface IClassFlight {
-  classes: ClassTypesEnum[];
+  classes: ClassesTypesFlightEnum[];
+}
+export interface ICompanyFlight {
+  companies: CompanyTypesFlightEnum[];
 }

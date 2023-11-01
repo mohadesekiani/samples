@@ -9,7 +9,8 @@ export interface ICity {
   countryCode: string;
   countryTitle: string;
   countryAlternateTitle: string;
-  price:number,
-  class:string,
-  time:number
+  price: number;
+  class: string;
+  time: number;
+  company: string;
 }
