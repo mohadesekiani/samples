@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompanyFlightComponent } from './company-flight.component';
 
-fdescribe('SUT: CompanyFlightComponent', () => {
+describe('SUT: CompanyFlightComponent', () => {
   let sut: CompanyFlightComponent;
 
   beforeEach(() => {

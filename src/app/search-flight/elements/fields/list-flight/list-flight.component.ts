@@ -9,18 +9,12 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
 })
 export class ListFlightComponent {
   allItem!: ICity[];
-  private _filteredItems!: ICity[];
-  @Input() get filteredItems(): ICity[] {
-    return this._filteredItems;
-  }
-  set filteredItems(value: ICity[]) {
-    this._filteredItems = value;
-  }
+  @Input() filteredItems!: ICity[];
+
   constructor(private dataService: AbstractDataService) {
-    if (!this.dataService) {
-      throw 'AbstractDataService is null';
-    }
+    if (!dataService) { throw 'dataService is null'; }
   }
+
   ngOnInit(): void {
     this.dataService.getAllFakeData().subscribe((items: ICity[]) => {
       this.allItem = items;

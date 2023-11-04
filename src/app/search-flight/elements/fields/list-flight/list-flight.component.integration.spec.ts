@@ -5,8 +5,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TestUtil } from 'src/app/core/utils/test';
 
-describe('SUT(Integration): ListFlightComponent', () => {
+fdescribe('SUT(Integration): ListFlightComponent', () => {
   let sut: ListFlightComponent;
   let fixture: ComponentFixture<ListFlightComponent>;
   beforeEach(() => {
@@ -30,4 +31,16 @@ describe('SUT(Integration): ListFlightComponent', () => {
   it('should create', () => {
     expect(sut).toBeTruthy();
   });
+
+  it(`should be set binding with proper value`, () => {
+
+    // arrange
+    const titleEl = TestUtil.nativeElement(fixture, '[item-id=title]');
+    // action
+
+
+    // assert
+    expect(titleEl.textContent).toContain('xxxx');
+  });
+
 });

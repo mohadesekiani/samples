@@ -11,7 +11,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestUtil } from 'src/app/core/utils/test';
 import { MatFormField } from '@angular/material/form-field';
 
-describe('SUT(Integration): PriceRangeComponent', () => {
+fdescribe('SUT(Integration): PriceRangeComponent', () => {
   let sut: PriceRangeComponent;
   let fixture: ComponentFixture<PriceRangeComponent>;
   let form: FormGroup<IForm<IRangePrice>>;

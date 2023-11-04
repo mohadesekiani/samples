@@ -8,7 +8,9 @@
 </div> -->
 <div style="margin: 10px" class="grow flex">
   <div class="grow w-1/4">
-    <app-filter-flight (newItemEvent)="receiveData($event)"></app-filter-flight>
+    <app-filter-flight ></app-filter-flight>
+    <!-- TODO -->
+    <!-- (newItemEvent)="receiveData($event)" -->
   </div>
   <div class="grow w-2/4 m-4" >
     <app-list-flight [filteredItems]="filteredItems"></app-list-flight>

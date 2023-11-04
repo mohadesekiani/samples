@@ -5,7 +5,7 @@ import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 import { of } from 'rxjs';
 
-fdescribe('SUT: ListFlightComponent', () => {
+describe('SUT: ListFlightComponent', () => {
   let sut: ListFlightComponent;
   const fakeCities: ICity[] = [
     {
@@ -23,7 +23,6 @@ fdescribe('SUT: ListFlightComponent', () => {
       class: 'Classy',
       time: 300,
       company:'Mahan'
-
     },
     {
       id: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
@@ -40,7 +39,6 @@ fdescribe('SUT: ListFlightComponent', () => {
       class: 'CommercialGrade',
       time: 1320,
       company:'Mahan'
-
     },
   ];
   const dataService = jasmine.createSpyObj<AbstractDataService>({

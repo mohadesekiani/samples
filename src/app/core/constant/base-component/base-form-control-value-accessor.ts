@@ -1,6 +1,6 @@
-import { Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn } from '@angular/forms';
-import { distinctUntilChanged } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { IForm } from 'src/app/core/module/interface/search-types.interface';
 import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 import { BaseControlValueAccessor } from './base-control-value-accessor';
@@ -11,15 +11,17 @@ export abstract class BaseFormControlValueAccessor<
 > extends BaseControlValueAccessor<T> {
   form!: FormGroup<IForm<T>>;
 
+  protected formConfig!: IForm<T>;
   protected fb = new FormBuilder();
   protected validationErrorService = new ValidationErrorService();
+  @Input() delayTime = 0;
 
   constructor() {
     super();
   }
 
   ngOnInit(): void {
-    this.createForm();
+    this.createForm(this.formConfig);
   }
 
   override writeValue(obj: any): void {
@@ -39,10 +41,15 @@ export abstract class BaseFormControlValueAccessor<
     baseFormConfig?: IForm<T>,
     validators?: ValidatorFn | ValidatorFn[] | null
   ) {
+
     this.form = this.fb.group(baseFormConfig as IForm<T>, {
       validators,
     });
-    this.form.valueChanges.pipe(distinctUntilChanged()).subscribe((x: any) => {
+
+    this.form.valueChanges.pipe(
+      debounceTime(this.delayTime),
+      distinctUntilChanged()
+    ).subscribe((x: any) => {
       this.refersValue();
     });
   }

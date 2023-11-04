@@ -8,18 +8,14 @@ import { IRangePrice } from 'src/app/core/module/interface/search-types.interfac
   templateUrl: './price-range.component.html',
   styleUrls: ['./price-range.component.scss'],
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: PriceRangeComponent,
-    },
+    { provide: NG_VALUE_ACCESSOR, multi: true, useExisting: PriceRangeComponent },
   ],
 })
 export class PriceRangeComponent extends BaseFormControlValueAccessor<IRangePrice>   {
   constructor() {
     super();
   }
-  
+
   override createForm() {
     super.createForm({
       minPrice: [null, [Validators.required]],

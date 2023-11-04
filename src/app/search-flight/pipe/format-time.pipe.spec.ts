@@ -1,6 +1,6 @@
 import { FormatTimePipe } from './format-time.pipe';
 
-fdescribe('SUT: FormatTimePipe', () => {
+describe('SUT: FormatTimePipe', () => {
   let sut: FormatTimePipe;
   beforeEach(() => {
     sut = new FormatTimePipe();

@@ -6,7 +6,11 @@ import { IForm } from '../../module/interface/search-types.interface';
 export abstract class BaseForm<T> {
   form!: FormGroup<IForm<T>>
   protected fb = new FormBuilder();
-  ngOnInit() {}
+  protected formConfig!: IForm<T>;
+
+  ngOnInit() {
+    this.createForm(this.formConfig);
+  }
 
   createForm(
     baseFormConfig?: IForm<T>,

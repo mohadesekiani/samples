@@ -3,7 +3,7 @@ import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { FakeDataService } from './fake-data.service';
 import { ICity } from '../../module/interface/city-type.interface';
 
-fdescribe('SUT: FakeDataService', () => {
+describe('SUT: FakeDataService', () => {
   let sut: FakeDataService;
   beforeEach(() => {
     sut = new FakeDataService();

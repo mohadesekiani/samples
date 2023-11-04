@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 import { ClassesTypesFlightEnum } from 'src/app/core/module/enum/general-types.enum';
 import { IFilterFlight } from 'src/app/core/module/interface/search-types.interface';
 
-fdescribe('SUT: ResultFlightComponent', () => {
+describe('SUT: ResultFlightComponent', () => {
   let sut: ResultFlightComponent;
   const fakeCities: ICity[] = [
     {

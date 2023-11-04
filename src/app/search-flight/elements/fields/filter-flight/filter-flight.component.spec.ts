@@ -1,7 +1,7 @@
 import { FormBuilder } from '@angular/forms';
 import { FilterFlightComponent } from './filter-flight.component';
 
-fdescribe('SUT: FilterFlightComponent', () => {
+describe('SUT: FilterFlightComponent', () => {
   let sut: FilterFlightComponent;
   let fb: FormBuilder;
 
@@ -28,7 +28,7 @@ fdescribe('SUT: FilterFlightComponent', () => {
 
   it('should emit value on form value changes', (done) => {
     // arrange
-    spyOn(sut.newItemEvent, 'emit');
+    spyOn(sut.refersValue, 'emit');
 
     // act
     sut.form.patchValue({
@@ -39,7 +39,7 @@ fdescribe('SUT: FilterFlightComponent', () => {
     setTimeout(() => {
       expect(sut.form.valid).toBeTruthy();
       expect(sut.newItemEvent.emit).toHaveBeenCalled();
-      expect(sut.newItemEvent.emit).toHaveBeenCalledWith(sut.getFormValue);
+      expect(sut.newItemEvent.emit).toHaveBeenCalledWith(sut.formValue);
       done();
     }, 300);
   });

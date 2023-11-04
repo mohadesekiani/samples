@@ -51,12 +51,14 @@ export class TestUtil {
     return debugElement.componentInstance;
   }
 
-  static nativeElement<T = any>(
+  static nativeElement<T = HTMLElement>(
     fixture: ComponentFixture<any>,
     element: string
-  ) {
+  ): HTMLElement {
     const query = this.debugElement(fixture, element).nativeElement as T;
-    return query;
+
+    // todo
+    return query as any;
   }
 
   static debugElement(fixture: ComponentFixture<any>, element: string) {
