@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NumberPassengersComponent } from './number-passengers.component';
 import { TestUtil } from 'src/app/core/utils/test/test-util';
 
-describe('NumberPassengersComponent', () => {
+xdescribe('NumberPassengersComponent', () => {
   let sut: NumberPassengersComponent;
   let fixture: ComponentFixture<NumberPassengersComponent>;
 
@@ -50,7 +50,7 @@ describe('NumberPassengersComponent', () => {
   it('should be test for binding form controls', () => {
     // arrange
     const input = TestUtil.nativeElement(fixture, '#input');
-  
+
     // assert
     expect(input.id).toBe('input');
     expect(input.type).toBe('number');

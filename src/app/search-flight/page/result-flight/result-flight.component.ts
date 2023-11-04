@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ClassesTypesFlightEnum } from 'src/app/core/module/enum/general-types.enum';
 import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import {
@@ -15,9 +16,10 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
   styleUrls: ['./result-flight.component.scss'],
 })
 export class ResultFlightComponent {
-  filterData: any;
+  delayTime = 300;
+  // filterData: any;
   form!: FormGroup;
-  filteredItems!: ICity[];
+  // filteredItems!: ICity[];
   allData!: ICity[];
   constructor(
     private dataService: AbstractDataService,
@@ -36,37 +38,37 @@ export class ResultFlightComponent {
   ngOnInit(): void {
     this.createForm();
     this.dataService.getAllFakeData().subscribe((items: ICity[]) => {
-      this.filteredItems = items;
+      this.form.value.result = items;
       this.allData = items;
     });
-  }
-
-  receiveData(value: IFilterFlight) {
-    this.filterData = value;
-    this.applyFilter(this.filterData);
+    this.form.valueChanges
+      .pipe(debounceTime(this.delayTime), distinctUntilChanged())
+      .subscribe((filter: IFilterFlight) => {
+        this.form.value.result = this.applyFilter(filter);
+      });
   }
 
   private applyFilter(filter: IFilterFlight): ICity[] {
     filter = this.form.value.filter;
-    this.filteredItems = this.timeCombinePrice(this.form.value.filter);
+    this.form.value.result = this.timeCombinePrice(this.form.value.filter);
     if (filter.company) {
       let filterCompany: ICity[] = this.selectedCheckBox(
         filter.company,
         'company'
       );
-      this.filteredItems = this.filteredItems.filter((value) =>
+      this.form.value.result = this.form.value.result.filter((value: ICity) =>
         filterCompany.includes(value)
       );
     }
     if (filter.class) {
       let filterClass: ICity[] = this.selectedCheckBox(filter.class, 'class');
 
-      this.filteredItems = this.filteredItems.filter((value) =>
+      this.form.value.result = this.form.value.result.filter((value: ICity) =>
         filterClass.includes(value)
       );
     }
 
-    return this.filteredItems;
+    return this.form.value.result;
   }
 
   private timeRange(item: ICity, filter: IFilterFlight) {
@@ -107,7 +109,7 @@ export class ResultFlightComponent {
       )
     );
     if (commonElements.length === 0) {
-      return this.filteredItems;
+      return this.form.value.result;
     }
     return commonElements;
   }

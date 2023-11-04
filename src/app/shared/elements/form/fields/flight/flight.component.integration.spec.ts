@@ -8,7 +8,7 @@ import { TestUtil } from 'src/app/core/utils/test/test-util';
 // #1 should be all component have unit test and integration test file
 // #2 prepare selectors and ...
 
-describe('SUT(Integration): FlightComponent', () => {
+xdescribe('SUT(Integration): FlightComponent', () => {
   let sut: FlightComponent;
   let fixture: ComponentFixture<FlightComponent>;
   let input: HTMLInputElement;

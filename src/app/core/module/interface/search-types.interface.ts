@@ -1,6 +1,7 @@
 import { ClassTypesEnum } from '../enum/class-types.enum';
 import { ClassesTypesFlightEnum } from '../enum/general-types.enum';
 import { TravelTypesEnum } from '../enum/travel-types.enum';
+import { ICity } from './city-type.interface';
 
 export type IForm<T> = {
   [K in keyof T]?: any;
@@ -11,7 +12,7 @@ export type IForm<T> = {
 // };
 export interface ISearchResult {
   filter: IFilterFlight;
-  result: any;
+  result: ICity;
 }
 
 export interface ISearchFlight {
