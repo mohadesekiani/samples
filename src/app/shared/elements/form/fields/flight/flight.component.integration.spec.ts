@@ -44,7 +44,7 @@ describe('SUT(Integration): FlightComponent', () => {
   });
   it('should be bind placeholder', () => {
     //arrange
-    const input: HTMLInputElement = TestUtil.nativeElement(fixture, '#input');
+    const input = TestUtil.nativeElement<HTMLInputElement>(fixture, '#input');
 
     //assert
     expect(input.placeholder).toBe('select');
