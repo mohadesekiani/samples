@@ -7,7 +7,7 @@ fdescribe('SUT: FilterFlightComponent', () => {
 
   beforeEach(() => {
     fb = new FormBuilder();
-    sut = new FilterFlightComponent(fb);
+    sut = new FilterFlightComponent();
     sut.ngOnInit();
   });
 

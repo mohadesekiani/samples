@@ -15,7 +15,7 @@ describe('SUT: SearchFlightComponent', () => {
     router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
     formValidationError = new ValidationErrorService();
 
-    sut = new SearchFlightComponent(fb, router, formValidationError);
+    sut = new SearchFlightComponent( router, formValidationError);
     sut.today = new Date();
     sut.ngOnInit();
   });
@@ -38,13 +38,13 @@ describe('SUT: SearchFlightComponent', () => {
       travelType: 'OneWay',
       classType: null,
     };
-    expect(sut.flightForm.value).toEqual(expectedFormValue);
+    expect(sut.form.value).toEqual(expectedFormValue);
   });
 
   // onSubmit
   it('should check form is valid then go to result page ', () => {
     // arrange
-    sut.flightForm.setValue({
+    sut.form.setValue({
       routes: {
         travelType: TravelTypesEnum.OneWay,
         routes: [
@@ -71,7 +71,7 @@ describe('SUT: SearchFlightComponent', () => {
   it('should check form is valid then go to result alert', () => {
     // arrange
     spyOn(window, 'alert');
-    sut.flightForm.patchValue({
+    sut.form.patchValue({
       passengers: null,
     });
     // act

@@ -33,7 +33,7 @@ describe('SUT(Integration): SearchFlightComponent', () => {
 
     fixture = TestBed.createComponent(SearchFlightComponent);
     sut = fixture.componentInstance;
-    form = sut.flightForm;
+    form = sut.form;
     fixture.detectChanges();
     try {
       

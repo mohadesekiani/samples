@@ -24,4 +24,9 @@ describe('SUT(Integration): CompanyFlightComponent', () => {
     sut = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  it('should be create', () => {
+    //assert
+    expect(sut).toBeTruthy();
+  });
 });
