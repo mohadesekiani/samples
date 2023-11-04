@@ -1,7 +1,5 @@
 import { ClassTypesEnum } from '../enum/class-types.enum';
-import {
-  ClassesTypesFlightEnum
-} from '../enum/general-types.enum';
+import { ClassesTypesFlightEnum } from '../enum/general-types.enum';
 import { TravelTypesEnum } from '../enum/travel-types.enum';
 
 export type IForm<T> = {
@@ -11,6 +9,10 @@ export type IForm<T> = {
 // export type IToAbstractControlMapper<T> = {
 //   [K in keyof T]: AbstractControl<T[K]>;
 // };
+export interface ISearchResult {
+  filter: IFilterFlight;
+  result: any;
+}
 
 export interface ISearchFlight {
   passengers: ISearchPassenger;

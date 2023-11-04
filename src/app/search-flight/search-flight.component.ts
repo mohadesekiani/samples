@@ -16,16 +16,12 @@ import { BaseForm } from '../core/constant/base-component/base-form';
   styleUrls: ['./search-flight.component.scss'],
 })
 export class SearchFlightComponent extends BaseForm<ISearchFlight> {
-  baseFormConfig:IForm<ISearchFlight> = {
+  override form: FormGroup<IForm<ISearchFlight>> = super.createForm({
     passengers: [null, [Validators.required]],
     travelType: [TravelTypesEnum.OneWay],
     classType: [null, [Validators.required]],
     routes: [null, [Validators.required]],
-  };
-  override form: FormGroup<IForm<ISearchFlight>> = super.createForm(
-    this.baseFormConfig,
-    null
-  );
+  });
 
   classTypes = Object.values(ClassTypesEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),

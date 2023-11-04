@@ -1,7 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { BaseForm } from 'src/app/core/constant/base-component/base-form';
+import { Component } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
 import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import {
@@ -13,6 +11,13 @@ import {
   selector: 'app-filter-flight',
   templateUrl: './filter-flight.component.html',
   styleUrls: ['./filter-flight.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: FilterFlightComponent,
+    },
+  ],
 })
 export class FilterFlightComponent extends BaseFormControlValueAccessor<IFilterFlight> {
   override formConfig: IForm<IFilterFlight> = {

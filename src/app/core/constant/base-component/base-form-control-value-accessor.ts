@@ -46,11 +46,10 @@ export abstract class BaseFormControlValueAccessor<
       validators,
     });
 
-    this.form.valueChanges.pipe(
-      debounceTime(this.delayTime),
-      distinctUntilChanged()
-    ).subscribe((x: any) => {
-      this.refersValue();
-    });
+    this.form.valueChanges
+      .pipe(debounceTime(this.delayTime), distinctUntilChanged())
+      .subscribe((x: any) => {
+        this.refersValue();
+      });
   }
 }

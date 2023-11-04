@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ClassesTypesFlightEnum } from 'src/app/core/module/enum/general-types.enum';
 import { ICity } from 'src/app/core/module/interface/city-type.interface';
-import { IFilterFlight } from 'src/app/core/module/interface/search-types.interface';
+import {
+  IFilterFlight,
+  IForm,
+  ISearchResult,
+} from 'src/app/core/module/interface/search-types.interface';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 
 @Component({
@@ -10,27 +15,40 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
   styleUrls: ['./result-flight.component.scss'],
 })
 export class ResultFlightComponent {
-  filterData!: IFilterFlight;
+  filterData: any;
+  form!: FormGroup;
   filteredItems!: ICity[];
   allData!: ICity[];
-  constructor(private dataService: AbstractDataService) {
+  constructor(
+    private dataService: AbstractDataService,
+    private fb: FormBuilder
+  ) {
     if (!this.dataService) {
       throw 'AbstractDataService is null';
     }
   }
+  createForm() {
+    this.form = this.fb.group<IForm<ISearchResult>>({
+      filter: [null],
+      result: [null],
+    });
+  }
   ngOnInit(): void {
+    this.createForm();
     this.dataService.getAllFakeData().subscribe((items: ICity[]) => {
       this.filteredItems = items;
       this.allData = items;
     });
   }
+
   receiveData(value: IFilterFlight) {
     this.filterData = value;
     this.applyFilter(this.filterData);
   }
 
   private applyFilter(filter: IFilterFlight): ICity[] {
-    this.filteredItems = this.timeCombinePrice(filter);
+    filter = this.form.value.filter;
+    this.filteredItems = this.timeCombinePrice(this.form.value.filter);
     if (filter.company) {
       let filterCompany: ICity[] = this.selectedCheckBox(
         filter.company,
