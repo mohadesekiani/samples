@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { PriceRangeComponent } from './price-range.component';
 import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
 
-fdescribe('SUT: PriceRangeComponent', () => {
+describe('SUT: PriceRangeComponent', () => {
   let sut: BaseFormControlValueAccessor<any>;
 
   beforeEach(() => {

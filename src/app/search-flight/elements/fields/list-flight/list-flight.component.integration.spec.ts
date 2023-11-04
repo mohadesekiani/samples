@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TestUtil } from 'src/app/core/utils/test';
 
-fdescribe('SUT(Integration): ListFlightComponent', () => {
+describe('SUT(Integration): ListFlightComponent', () => {
   let sut: ListFlightComponent;
   let fixture: ComponentFixture<ListFlightComponent>;
   beforeEach(() => {
