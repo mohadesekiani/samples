@@ -27,4 +27,7 @@ describe('SUT(Integration): ListFlightComponent', () => {
     sut = fixture.componentInstance;
     fixture.detectChanges();
   });
+  it('should create', () => {
+    expect(sut).toBeTruthy();
+  });
 });

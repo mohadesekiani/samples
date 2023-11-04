@@ -30,10 +30,7 @@ export class ResultFlightComponent {
   }
 
   private applyFilter(filter: IFilterFlight): ICity[] {
-    // debugger;
     this.filteredItems = this.timeCombinePrice(filter);
-    console.log(this.filteredItems);
-    
     if (filter.company) {
       let filterCompany: ICity[] = this.selectedCheckBox(
         filter.company,

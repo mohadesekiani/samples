@@ -358,7 +358,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
         Chabahar: false,
       },
     };
-   console.log(filter.company)
+
     // act
     sut.receiveData(filter);
 

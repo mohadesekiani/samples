@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ClassFlightComponent } from './class-flight.component';
 
 describe('SUT(Integration): ClassFlightComponent', () => {
-  let sut: ClassFlightComponent
+  let sut: ClassFlightComponent;
   let fixture: ComponentFixture<ClassFlightComponent>;
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -23,5 +23,9 @@ describe('SUT(Integration): ClassFlightComponent', () => {
     fixture = TestBed.createComponent(ClassFlightComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(sut).toBeTruthy();
   });
 });
