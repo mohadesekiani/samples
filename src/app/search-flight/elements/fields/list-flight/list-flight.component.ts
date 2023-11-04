@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 

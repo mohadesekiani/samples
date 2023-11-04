@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassTypesEnum } from 'src/app/core/module/enum/class-types.enum';
 import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
@@ -8,19 +8,30 @@ import {
   ISearchFlight,
 } from 'src/app/core/module/interface/search-types.interface';
 import { ValidationErrorService } from '../shared/services/validation-error.service';
+import { BaseForm } from '../core/constant/base-component/base-form';
 
 @Component({
   selector: 'app-search-flight',
   templateUrl: './search-flight.component.html',
   styleUrls: ['./search-flight.component.scss'],
 })
-export class SearchFlightComponent {
+export class SearchFlightComponent extends BaseForm<ISearchFlight> {
+  baseFormConfig:IForm<ISearchFlight> = {
+    passengers: [null, [Validators.required]],
+    travelType: [TravelTypesEnum.OneWay],
+    classType: [null, [Validators.required]],
+    routes: [null, [Validators.required]],
+  };
+  override form: FormGroup<IForm<ISearchFlight>> = super.createForm(
+    this.baseFormConfig,
+    null
+  );
+
   classTypes = Object.values(ClassTypesEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
     value,
   }));
 
-  flightForm = this.createForm();
   today = new Date();
   showDrop = false;
   passenger: Array<any> = [
@@ -36,38 +47,22 @@ export class SearchFlightComponent {
   }));
 
   get travelType(): TravelTypesEnum {
-    return this.flightForm.controls.travelType?.value as TravelTypesEnum;
+    return this.form.controls.travelType?.value as TravelTypesEnum;
   }
 
   constructor(
-    private fb: FormBuilder,
     private router: Router,
     private formValidationError: ValidationErrorService
   ) {
-
-    if (!fb) { throw ('formBuilder is null'); }
-  }
-
-  ngOnInit() { }
-
-  result: any = [];
-  private createForm() {
-    return this.fb.group<IForm<ISearchFlight>>({
-      passengers: [null, [Validators.required]],
-      travelType: [TravelTypesEnum.OneWay],
-      classType: [null, [Validators.required]],
-      routes: [null, [Validators.required]],
-    });
+    super();
   }
 
   submit() {
-    this.formValidationError.process(
-      this.flightForm
-    );
+    this.formValidationError.process(this.form);
 
-    if (this.flightForm.invalid) {
-      this.flightForm.markAsDirty();
-      this.flightForm.markAllAsTouched();
+    if (this.form.invalid) {
+      this.form.markAsDirty();
+      this.form.markAllAsTouched();
 
       return;
     }

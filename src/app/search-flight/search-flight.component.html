@@ -1,4 +1,4 @@
-<form [formGroup]="flightForm" (submit)="(submit)">
+<form [formGroup]="form" (submit)="(submit)">
   <div>
     <mat-button-toggle-group formControlName="travelType" id="travelType">
       <mat-button-toggle
@@ -25,7 +25,7 @@
         ></app-passengers>
         <span
           class="passengers-error"
-          *ngIf="flightForm.controls.passengers?.invalid"
+          *ngIf="form.controls.passengers?.invalid"
           >passengers is invalid</span
         >
       </div>
@@ -56,4 +56,4 @@
   </ul> -->
   <button type="submit" (click)="submit()">Submit</button>
 </form>
-{{ flightForm.value | json }}
+{{ form.value | json }}
