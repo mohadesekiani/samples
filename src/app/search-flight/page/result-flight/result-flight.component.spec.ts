@@ -24,25 +24,23 @@ fdescribe('SUT: ResultFlightComponent', () => {
       price: 5,
       class: 'Classy',
       time: 300,
-      company:'Mahan'
-
+      company: 'Mahan',
     },
     {
-      id: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
-      title: 'Abadan',
-      alternateTitle: 'آبادان',
+      id: '2e63cb40-d5f2-4975-a9ef-e6588d1fa503',
+      title: 'Abadan Intl Airport',
+      alternateTitle: 'فرودگاه آبادان',
       code: 'ABD',
-      type: 'GeographicalLocation',
-      subType: 'City',
-      cityId: null,
+      type: 'Facility',
+      subType: 'Airport',
+      cityId: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
       countryCode: 'IR',
       countryTitle: 'Iran (Islamic Republic of)',
       countryAlternateTitle: 'ايران',
       price: 10,
       class: 'CommercialGrade',
       time: 1320,
-      company:'Mahan'
-
+      company: 'Caspian',
     },
   ];
   const dataService = jasmine.createSpyObj<AbstractDataService>({
@@ -63,8 +61,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
       priceRange: { minPrice: 0, maxPrice: 10 },
       class: null,
       airline: '',
-      company:null
-
+      company: null,
     };
 
     // act
@@ -94,8 +91,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
       },
       class: null,
       airline: '',
-      company:null
-
+      company: null,
     };
 
     // act
@@ -119,8 +115,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
       },
       class: null,
       airline: '',
-      company:null
-
+      company: null,
     };
 
     // act
@@ -167,7 +162,12 @@ fdescribe('SUT: ResultFlightComponent', () => {
         minPrice: 0,
         maxPrice: 10,
       },
-      class: { classes: ['Classy', false, false, false] },
+      class: {
+        Classy: true,
+        CommercialGrad: false,
+        EconomicGrade: false,
+        PremiumGrade: false,
+      },
       airline: '',
       company: null,
     };
@@ -209,8 +209,7 @@ fdescribe('SUT: ResultFlightComponent', () => {
       },
       class: null,
       airline: '',
-      company:null
-
+      company: null,
     };
 
     // act
@@ -338,5 +337,49 @@ fdescribe('SUT: ResultFlightComponent', () => {
 
     // assert
     expect(sut.filteredItems).toEqual([]);
+  });
+
+  it('should be filtered by company when company is selected', () => {
+    // arrange
+    const filter = {
+      timeRange: {
+        startTime: 300,
+        endTime: 1320,
+      },
+      priceRange: {
+        minPrice: 0,
+        maxPrice: 10,
+      },
+      class: null,
+      airline: '',
+      company: {
+        Mahan: false,
+        Caspian: true,
+        Chabahar: false,
+      },
+    };
+   console.log(filter.company)
+    // act
+    sut.receiveData(filter);
+
+    // assert
+    expect(sut.filteredItems).toEqual([
+      {
+        id: '2e63cb40-d5f2-4975-a9ef-e6588d1fa503',
+        title: 'Abadan Intl Airport',
+        alternateTitle: 'فرودگاه آبادان',
+        code: 'ABD',
+        type: 'Facility',
+        subType: 'Airport',
+        cityId: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
+        countryCode: 'IR',
+        countryTitle: 'Iran (Islamic Republic of)',
+        countryAlternateTitle: 'ايران',
+        price: 10,
+        class: 'CommercialGrade',
+        time: 1320,
+        company: 'Caspian',
+      },
+    ]);
   });
 });

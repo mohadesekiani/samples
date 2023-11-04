@@ -1,14 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ListFlightComponent } from './list-flight.component';
+import { CompanyFlightComponent } from './company-flight.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
-describe('SUT(Integration): ListFlightComponent', () => {
-  let sut: ListFlightComponent;
-  let fixture: ComponentFixture<ListFlightComponent>;
+describe('SUT(Integration): CompanyFlightComponent', () => {
+  let sut: CompanyFlightComponent;
+  let fixture: ComponentFixture<CompanyFlightComponent>;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -16,14 +15,12 @@ describe('SUT(Integration): ListFlightComponent', () => {
         SharedModule,
         BrowserModule,
         FormsModule,
-        NoopAnimationsModule,
         SharedModule,
-        RouterModule,
       ],
-      declarations: [ListFlightComponent],
+      declarations: [CompanyFlightComponent],
     });
 
-    fixture = TestBed.createComponent(ListFlightComponent);
+    fixture = TestBed.createComponent(CompanyFlightComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();
   });
