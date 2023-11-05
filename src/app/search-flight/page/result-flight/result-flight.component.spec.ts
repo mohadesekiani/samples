@@ -1,14 +1,14 @@
-import { of } from 'rxjs';
-import { ICity } from 'src/app/core/module/interface/city-type.interface';
-import { IFilterFlight } from 'src/app/core/module/interface/search-types.interface';
-import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { ResultFlightComponent } from './result-flight.component';
-import { FormBuilder } from '@angular/forms';
+import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
+import { ICity } from 'src/app/core/module/interface/city-type.interface';
+import { of } from 'rxjs';
+import { ClassesTypesFlightEnum } from 'src/app/core/module/enum/general-types.enum';
+import { IFilterFlight } from 'src/app/core/module/interface/search-types.interface';
 
-describe('SUT: ResultFlightComponent', () => {
+fdescribe('SUT: ResultFlightComponent', () => {
   let sut: ResultFlightComponent;
-  let fb: FormBuilder;
-
   const fakeCities: ICity[] = [
     {
       id: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
@@ -43,23 +43,18 @@ describe('SUT: ResultFlightComponent', () => {
       company: 'Caspian',
     },
   ];
-  fb = new FormBuilder();
   const dataService = jasmine.createSpyObj<AbstractDataService>({
     getAllFakeData: of(fakeCities),
   });
   beforeEach(() => {
-    sut = new ResultFlightComponent(dataService, fb);
+    sut = new ResultFlightComponent(dataService);
     sut.ngOnInit();
   });
 
   it('should create', () => {
     expect(sut).toBeTruthy();
   });
-  it('should be value form', () => {
-    expect(sut.form).toBeTruthy();
-  });
-
-  xit('should be default data filter', () => {
+  it('should be default data', () => {
     // arrange
     const expectedValue: IFilterFlight = {
       timeRange: { startTime: 300, endTime: 1320 },
@@ -69,36 +64,41 @@ describe('SUT: ResultFlightComponent', () => {
       company: null,
     };
 
+    // act
+    sut.receiveData(expectedValue);
+
     // assert
-    expect(sut.form.value.filter).toEqual(expectedValue);
+    expect(sut.filterData).toEqual(expectedValue);
   });
 
   it(`should be have all the cities when we don't have a filter`, () => {
     // assert
-    expect(sut.form.value.result).toEqual(fakeCities);
+    expect(sut.filteredItems).toEqual(fakeCities);
     expect(sut.allData).toEqual(fakeCities);
   });
 
-  xit('should be when call ngOnInit calling applyFilter', () => {
+  it('should be when call receiveData calling applyFilter', () => {
     // arrange
     spyOn(sut as any, 'applyFilter');
+    const expectedValue = {
+      timeRange: {
+        startTime: 300,
+        endTime: 1320,
+      },
+      priceRange: {
+        minPrice: 0,
+        maxPrice: 10,
+      },
+      class: null,
+      airline: '',
+      company: null,
+    };
 
     // act
-    sut.ngOnInit();
+    sut.receiveData(expectedValue);
 
     // assert
     expect((sut as any).applyFilter).toHaveBeenCalled();
-  });
-
-  it('should call subscribe to valueChanges during ngOnInit', () => {
-    // arrange
-    spyOn(sut.form.valueChanges, 'subscribe')
-
-    // act
-    sut.ngOnInit();
-
-    // assert
-    expect(sut.form.valueChanges.subscribe).toHaveBeenCalled();
   });
 
   it('should be when call applyFilter calling timeCombinePrice', () => {
@@ -119,7 +119,7 @@ describe('SUT: ResultFlightComponent', () => {
     };
 
     // act
-    // sut.receiveData(expectedValue);
+    sut.receiveData(expectedValue);
 
     // assert
     expect((sut as any).timeCombinePrice).toHaveBeenCalled();
@@ -144,11 +144,11 @@ describe('SUT: ResultFlightComponent', () => {
     };
 
     // act
-    // sut.receiveData(expectedValue);
+    sut.receiveData(expectedValue);
 
     // assert
     expect((sut as any).selectedCheckBox).not.toHaveBeenCalled();
-    expect(sut.form.value.result).toEqual(fakeCities);
+    expect(sut.filteredItems).toEqual(fakeCities);
   });
 
   it('should be filtered by class when class is selected', () => {
@@ -173,10 +173,10 @@ describe('SUT: ResultFlightComponent', () => {
     };
 
     // act
-    // sut.receiveData(filter);
+    sut.receiveData(filter);
 
     // assert
-    expect(sut.form.value.result).toEqual([
+    expect(sut.filteredItems).toEqual([
       {
         id: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
         title: 'Abadan',
@@ -213,10 +213,10 @@ describe('SUT: ResultFlightComponent', () => {
     };
 
     // act
-    // sut.receiveData(filter);
+    sut.receiveData(filter);
 
     // assert
-    expect(sut.form.value.result).toEqual([
+    expect(sut.filteredItems).toEqual([
       {
         id: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
         title: 'Abadan',
@@ -253,10 +253,10 @@ describe('SUT: ResultFlightComponent', () => {
     };
 
     // act
-    // sut.receiveData(filter);
+    sut.receiveData(filter);
 
     // assert
-    expect(sut.form.value.result).toEqual([
+    expect(sut.filteredItems).toEqual([
       {
         id: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
         title: 'Abadan',
@@ -293,10 +293,10 @@ describe('SUT: ResultFlightComponent', () => {
     };
 
     // act
-    // sut.receiveData(filter);
+    sut.receiveData(filter);
 
     // assert
-    expect(sut.form.value.result).toEqual([
+    expect(sut.filteredItems).toEqual([
       {
         id: '91262c06-0afb-48a0-abbc-0767a1ad07f7',
         title: 'Abadan',
@@ -333,10 +333,10 @@ describe('SUT: ResultFlightComponent', () => {
     };
 
     // act
-    // sut.receiveData(filter);
+    sut.receiveData(filter);
 
     // assert
-    expect(sut.form.value.result).toEqual([]);
+    expect(sut.filteredItems).toEqual([]);
   });
 
   it('should be filtered by company when company is selected', () => {
@@ -360,9 +360,10 @@ describe('SUT: ResultFlightComponent', () => {
     };
 
     // act
+    sut.receiveData(filter);
 
     // assert
-    expect(sut.form.value.result).toEqual([
+    expect(sut.filteredItems).toEqual([
       {
         id: '2e63cb40-d5f2-4975-a9ef-e6588d1fa503',
         title: 'Abadan Intl Airport',

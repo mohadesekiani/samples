@@ -1,13 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { Component } from '@angular/core';
 import { ClassesTypesFlightEnum } from 'src/app/core/module/enum/general-types.enum';
 import { ICity } from 'src/app/core/module/interface/city-type.interface';
-import {
-  IFilterFlight,
-  IForm,
-  ISearchResult,
-} from 'src/app/core/module/interface/search-types.interface';
+import { IFilterFlight } from 'src/app/core/module/interface/search-types.interface';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
 
 @Component({
@@ -16,59 +10,45 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
   styleUrls: ['./result-flight.component.scss'],
 })
 export class ResultFlightComponent {
-  delayTime = 0;
-  // filterData: any;
-  form!: FormGroup;
-  // filteredItems!: ICity[];
+  filterData!: IFilterFlight;
+  filteredItems!: ICity[];
   allData!: ICity[];
-  constructor(
-    private dataService: AbstractDataService,
-    private fb: FormBuilder
-  ) {
+  constructor(private dataService: AbstractDataService) {
     if (!this.dataService) {
       throw 'AbstractDataService is null';
     }
   }
-  createForm() {
-    this.form = this.fb.group<IForm<ISearchResult>>({
-      filter: [null],
-      result: [null],
-    });
-  }
   ngOnInit(): void {
-    this.createForm();
     this.dataService.getAllFakeData().subscribe((items: ICity[]) => {
-      this.form.value.result = items;
+      this.filteredItems = items;
       this.allData = items;
     });
-    this.form.valueChanges
-      .pipe(debounceTime(this.delayTime), distinctUntilChanged())
-      .subscribe((filter: IFilterFlight) => {
-        this.form.value.result = this.applyFilter(filter);
-      });
+  }
+  receiveData(value: IFilterFlight) {
+    this.filterData = value;
+    this.applyFilter(this.filterData);
   }
 
   private applyFilter(filter: IFilterFlight): ICity[] {
-    filter = this.form.value.filter;
-    this.form.value.result = this.timeCombinePrice(this.form.value.filter);
+    this.filteredItems = this.timeCombinePrice(filter);
     if (filter.company) {
       let filterCompany: ICity[] = this.selectedCheckBox(
         filter.company,
         'company'
       );
-      this.form.value.result = this.form.value.result.filter((value: ICity) =>
+      this.filteredItems = this.filteredItems.filter((value) =>
         filterCompany.includes(value)
       );
     }
     if (filter.class) {
       let filterClass: ICity[] = this.selectedCheckBox(filter.class, 'class');
 
-      this.form.value.result = this.form.value.result.filter((value: ICity) =>
+      this.filteredItems = this.filteredItems.filter((value) =>
         filterClass.includes(value)
       );
     }
 
-    return this.form.value.result;
+    return this.filteredItems;
   }
 
   private timeRange(item: ICity, filter: IFilterFlight) {
@@ -109,7 +89,7 @@ export class ResultFlightComponent {
       )
     );
     if (commonElements.length === 0) {
-      return this.form.value.result;
+      return this.filteredItems;
     }
     return commonElements;
   }

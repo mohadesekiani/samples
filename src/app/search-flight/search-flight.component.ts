@@ -16,13 +16,6 @@ import { BaseForm } from '../core/constant/base-component/base-form';
   styleUrls: ['./search-flight.component.scss'],
 })
 export class SearchFlightComponent extends BaseForm<ISearchFlight> {
-  override form: FormGroup<IForm<ISearchFlight>> = super.createForm({
-    passengers: [null, [Validators.required]],
-    travelType: [TravelTypesEnum.OneWay],
-    classType: [null, [Validators.required]],
-    routes: [null, [Validators.required]],
-  });
-
   classTypes = Object.values(ClassTypesEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
     value,
@@ -45,6 +38,12 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
   get travelType(): TravelTypesEnum {
     return this.form.controls.travelType?.value as TravelTypesEnum;
   }
+  override formConfig = {
+    passengers: [null, [Validators.required]],
+    travelType: [TravelTypesEnum.OneWay],
+    classType: [null, [Validators.required]],
+    routes: [null, [Validators.required]],
+  };
 
   constructor(
     private router: Router,
@@ -52,6 +51,7 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
   ) {
     super();
   }
+
 
   submit() {
     this.formValidationError.process(this.form);

@@ -16,7 +16,7 @@ export abstract class BaseForm<T> {
     baseFormConfig?: IForm<T>,
     validators?: ValidatorFn | ValidatorFn[] | null
   ) {
-    return this.fb.group(baseFormConfig as IForm<T>, {
+    this.form = this.fb.group(baseFormConfig as IForm<T>, {
       validators,
     });
   }

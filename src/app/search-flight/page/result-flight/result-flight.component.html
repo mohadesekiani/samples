@@ -1,13 +1,18 @@
-<form [formGroup]="form">
-  <div style="margin: 10px" class="grow flex">
-    <div class="grow w-1/4">
-      <app-filter-flight formControlName="filter"></app-filter-flight>
-      <!-- TODO -->
-      <!-- (newItemEvent)="receiveData($event)" -->
-    </div>
-    <div class="grow w-2/4 m-4">
-      <app-list-flight [filteredItems]="form.value.result"></app-list-flight>
-    </div>
+<!-- <div style="margin: 10px" class="grow grid grid-cols-5">
+  <div class="grow grid grid-cols-2 gap-4">
+    <app-filter-flight (newItemEvent)="receiveData($event)"></app-filter-flight>
   </div>
-</form>
-{{ form.value | json }}
+  <div class="grow col-span-3">
+    <app-list-flight [filteredItems]="filteredItems"></app-list-flight>
+  </div>
+</div> -->
+<div style="margin: 10px"
+     class="grow flex">
+  <div class="grow w-1/4">
+    <app-filter-flight [delayTime]="300"
+                       (valueChange)="receiveData($event)"></app-filter-flight>
+  </div>
+  <div class="grow w-2/4 m-4">
+    <app-list-flight [filteredItems]="filteredItems"></app-list-flight>
+  </div>
+</div>

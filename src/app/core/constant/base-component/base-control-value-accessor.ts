@@ -1,4 +1,4 @@
-import { Directive, Host, Injector, Input, Optional } from '@angular/core';
+import { Directive, EventEmitter, Host, Injector, Input, Optional, Output } from '@angular/core';
 import {
   ControlContainer,
   ControlValueAccessor,
@@ -9,15 +9,14 @@ import { noop } from 'lodash-es';
 @Directive()
 export abstract class BaseControlValueAccessor<T>
   implements ControlValueAccessor {
-  value!: T;
   onChange = noop;
   onTouched = noop;
   disabled = false;
   touched: any;
   result!: any[];
   @Input() error = '';
-
-  writeValue(obj: any): void { }
+  @Input() value!: T;
+  @Output() valueChange = new EventEmitter();
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -36,5 +35,15 @@ export abstract class BaseControlValueAccessor<T>
       this.onTouched();
       this.touched = true;
     }
+  }
+
+  writeValue(obj: any): void {
+    this.value = obj;
+  }
+
+  updateValueAndValidity(newValue: any): void {
+    this.onChange(newValue);
+    this.markAsTouched();
+    this.valueChange.emit(newValue);
   }
 }

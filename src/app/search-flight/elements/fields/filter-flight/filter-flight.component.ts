@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ValidatorFn } from '@angular/forms';
 import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
 import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import {
@@ -20,13 +20,13 @@ import {
   ],
 })
 export class FilterFlightComponent extends BaseFormControlValueAccessor<IFilterFlight> {
-  override formConfig: IForm<IFilterFlight> = {
-    timeRange: [{ startTime: 300, endTime: 1320 }],
-    priceRange: [{ minPrice: 0, maxPrice: 10 }],
-    class: [],
-    company: [],
-    airline: [null],
-  };
+  // override formConfig: IForm<IFilterFlight> = {
+  //   timeRange: [{ startTime: 300, endTime: 1320 }],
+  //   priceRange: [{ minPrice: 0, maxPrice: 10 }],
+  //   class: [],
+  //   company: [],
+  //   airline: [null],
+  // };
   allItems!: ICity[];
   filteredItems!: ICity[];
   get formValue(): IFilterFlight {
@@ -37,4 +37,13 @@ export class FilterFlightComponent extends BaseFormControlValueAccessor<IFilterF
     super();
   }
 
+  override createForm(): void {
+    super.createForm({
+      timeRange: [{ startTime: 300, endTime: 1320 }],
+      priceRange: [{ minPrice: 0, maxPrice: 10 }],
+      class: [],
+      company: [],
+      airline: [null],
+    });
+  }
 }
