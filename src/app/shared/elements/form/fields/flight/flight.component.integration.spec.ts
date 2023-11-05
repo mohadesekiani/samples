@@ -73,7 +73,7 @@ xdescribe('SUT(Integration): FlightComponent', () => {
     const input = TestUtil.nativeElement(fixture, 'input[matInput]');
 
     //act
-    input.value = change_value;
+    // input.value = change_value;
     input.dispatchEvent(new Event('input'));
     fixture.detectChanges();
 

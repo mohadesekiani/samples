@@ -1,23 +1,18 @@
-import { Component, Injector, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   FormArray,
-  FormBuilder,
-  FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
-  ValidationErrors,
-  Validators,
+  Validators
 } from '@angular/forms';
-import { distinctUntilChanged } from 'rxjs';
-import { CustomValidators } from 'src/app/core/validations/custom.validators';
+import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
+import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
 import {
   IForm,
   ISearchMultiPath,
   ISearchRoute,
 } from 'src/app/core/module/interface/search-types.interface';
-import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
-import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
-import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
+import { CustomValidators } from 'src/app/core/validations/custom.validators';
 
 @Component({
   selector: 'app-multi-path',

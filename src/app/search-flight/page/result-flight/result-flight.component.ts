@@ -16,7 +16,7 @@ import { AbstractDataService } from 'src/app/core/services/data/abstract-data.se
   styleUrls: ['./result-flight.component.scss'],
 })
 export class ResultFlightComponent {
-  delayTime = 300;
+  delayTime = 0;
   // filterData: any;
   form!: FormGroup;
   // filteredItems!: ICity[];
