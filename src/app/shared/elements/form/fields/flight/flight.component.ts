@@ -19,7 +19,7 @@ import { BaseInputControlValueAccessor } from 'src/app/core/constant/base-compon
 export class FlightComponent extends BaseInputControlValueAccessor<any> {
   @Input() validationErrorMessage!: any;
 
-  @Input() label = '';
+  // @Input() label = '';
   override value: any = '';
   filterText = '';
   filteredCities!: Array<any>;
