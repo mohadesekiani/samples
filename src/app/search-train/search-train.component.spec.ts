@@ -12,11 +12,10 @@ fdescribe('SUT: SearchTrainComponent', () => {
   let validationErrorService;
 
   beforeEach(() => {
-    debugger
     fb = new FormBuilder();
     router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
     validationErrorService = new ValidationErrorService();
-    sut = new SearchTrainComponent();
+    sut = new SearchTrainComponent(router);
     sut.ngOnInit();
   });
 
@@ -30,7 +29,7 @@ fdescribe('SUT: SearchTrainComponent', () => {
   it('should be set initialization form', () => {
     // assert
     expect(sut.form.value).toEqual({
-      routes: null,
+      route: null,
       passengers: null,
       general: null,
       travelType: TravelTypesEnum.OneWay,
@@ -39,15 +38,15 @@ fdescribe('SUT: SearchTrainComponent', () => {
 
   it(`should be when submit routing to "result-train with condition valid form "`, () => {
     // arrange
+    sut.path = '/result-train';
     sut.form.setValue({
-      routes: [
+      route: 
         {
-          departureDate: Date,
-          returnDate: Date,
+          departureDate: new Date(),
+          returnDate: new Date(),
           origin: 'Abadan',
           destination: 'Abu Musa',
         },
-      ],
       passengers: { Adult: 1, Child: 1, Infant: 1 },
       general: GeneralTypesEnum.General,
       travelType: TravelTypesEnum.OneWay,
@@ -57,7 +56,7 @@ fdescribe('SUT: SearchTrainComponent', () => {
     sut.submit();
 
     // assert
-    expect(router.navigate).toHaveBeenCalledWith(['/results-train']);
+    expect(router.navigate).toHaveBeenCalledWith(['/result-train']);
   });
 
   it('should be check form is invalid ', () => {

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
@@ -9,42 +9,80 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FlightComponent } from '../shared/elements/form/fields/flight/flight.component';
 import { SearchTrainComponent } from './search-train.component';
 import { TestUtil } from '../core/utils/test';
+import { MultiPathComponent } from '../shared/elements/form/fields/multi-path/multi-path.component';
+import { PassengersComponent } from '../shared/elements/form/fields/passengers/passengers.component';
+import {
+  TravelTrainTypesEnum,
+  TravelTypesEnum,
+} from '../core/module/enum/travel-types.enum';
+import { MatButtonToggle } from '@angular/material/button-toggle';
 
-
-describe('SearchTrainComponent', () => {
+fdescribe('SUT(Integration): SearchTrainComponent', () => {
   let sut: SearchTrainComponent;
   let fixture: ComponentFixture<SearchTrainComponent>;
-  let appFlight:FlightComponent;
-  let appDatepicker;
-  let appPassengers;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, SharedModule,FormsModule,BrowserModule,RouterTestingModule],
+      imports: [
+        NoopAnimationsModule,
+        SharedModule,
+        FormsModule,
+        BrowserModule,
+        RouterTestingModule,
+      ],
       declarations: [SearchTrainComponent],
       providers: [AbstractDataService],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
+      schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(SearchTrainComponent);
     sut = fixture.componentInstance;
     fixture.detectChanges();
-    appFlight = TestUtil.queryComponent(fixture,'app-flight')
-    appDatepicker = TestUtil.queryComponent(fixture,'app-datepicker')
-    appPassengers = TestUtil.queryComponent(fixture,'app-passengers')
-
   });
 
   it('should create', () => {
+    // assert
     expect(sut).toBeTruthy();
   });
-  // [(ngModel)]="formData.origin"
-  it('should bind ngModel to formData.origin', () => {
-    let value:string  = 'some_text';
-    // sut.formData = { origin: value };
-    appFlight.value = value;
-    fixture.detectChanges()
-    // expect(appFlight.value).toBe(sut.formData.origin)
 
+  it('should be binding formControlName', () => {
+    // arrange
+    const formEl = TestUtil.formGroup(fixture, 'form');
+    const routeCtrl = TestUtil.formControl(fixture, '#route');
+    const travelTypeCtrl = TestUtil.formControl(fixture, '#travelType');
+    const passengersCtrl = TestUtil.formControl(fixture, '#passengers');
+    // const generalCtrl = TestUtil.formControl(fixture, '[item-id=General]');
+
+    // assert
+    expect(sut.form).toBe(formEl.form);
+    expect(sut.form.controls.route).toBe(routeCtrl.control);
+    expect(sut.form.controls.travelType).toBe(travelTypeCtrl.control);
+    expect(sut.form.controls.passengers).toBe(passengersCtrl.control);
+    // expect(sut.form.controls.general).toBe(generalCtrl.control);
+  });
+
+  it('should be binding  value', () => {
+    // arrange
+    const buttonToggles = TestUtil.directiveAllElement(
+      fixture,
+      MatButtonToggle
+    );
+    const buttonElement = TestUtil.nativeElement(fixture, '#button');
+    
+    sut.showDrop = true
+    // const radioButtons = TestUtil.queryAllElement(fixture,'.radio-inline input')
+
+    // act
+    fixture.detectChanges();
+    spyOn(sut, 'submit');
+    buttonElement.click();
+
+    // assert
+    expect(buttonToggles.length).toBe(sut.travelTypes.length);
+    buttonToggles.forEach((buttonToggle, index) => {
+      expect(buttonToggle.componentInstance.value).toBe(
+        sut.travelTypes[index].value
+      );
+    });
+    expect(sut.submit).toHaveBeenCalled()
   });
 });

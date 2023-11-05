@@ -1,57 +1,63 @@
-<form [formGroup]="form">
-  <div class="flex flex-wrap">
-    <app-flight
-      label="Origin"
-      name="origin"
-    ></app-flight>
-    <app-flight
-      label="Destination"
-      name="destination"
-    ></app-flight>
-    <app-datepicker
-      placeholder="your departure date"
-      label="departure Date"
-      name="departureDate"
-      ></app-datepicker>
-      <!-- [(value)]="formData.departureDate" -->
+<form [formGroup]="form" (submit)="(submit)">
+  <div>
+    <mat-button-toggle-group formControlName="travelType" id="travelType">
+      <mat-button-toggle
+        *ngFor="let item of travelTypes"
+        [value]="item.value"
+        >{{ item.title }}</mat-button-toggle
+      >
+    </mat-button-toggle-group>
   </div>
-  <div class="flex flex-wrap">
-    <div class="w-1/2">
-      <span class="m-2">passenger</span>
-      <app-passengers
-        style="width: 45%"
-        name="passengers"
-      ></app-passengers>
-    </div>
+  <div>
+    <app-multi-path
+      id="route"
+      formControlName="route"
+      [travelType]="travelType"
+      class="app-multi-path"
+    ></app-multi-path>
 
-    <div class="w-1/2 p-4">
-      <span class="m-2">General</span>
-      <!-- <span>my input value: {{ value | json }}</span> -->
-      <div class="m-2 flex flex-wrap">
-        <div class="m-auto" style="text-align: center">
-        </div>
-        <div>
-          <button (click)="showDrop = !showDrop">
-            <i class="fa fa-users"></i>
-          </button>
-        </div>
+    <hr />
+    <div class="flex flex-wrap">
+      <div class="w-1/2">
+        <span class="m-2">passengers</span>
+        <app-passengers
+          id="passengers"
+          formControlName="passengers"
+          class="app-passengers"
+        ></app-passengers>
+        <span class="passengers-error" *ngIf="form.controls.passengers?.invalid"
+          >passengers is invalid</span
+        >
       </div>
-      <div class="bg-white" *ngIf="showDrop">
-        <div class="form-group">
-          <div class="form-control m-2 flex flex-col">
-            <label class="radio-inline" *ngFor="let general of generalTypes">
-              <input
-                type="radio"
-                id="WomenOnly"
-                name="option"
-                [value]="general.value"
-              />
-              {{ general.title }}
-            </label>
+      <div class="w-1/2">
+        <span class="m-2">general</span>
+
+        <div class="m-2 flex flex-wrap">
+          <div class="m-auto" style="text-align: center"></div>
+          <div>
+            <button (click)="showDrop = !showDrop">
+              <i class="fa fa-users"></i>
+            </button>
+          </div>
+        </div>
+        <div class="bg-white" *ngIf="showDrop">
+          <div class="form-group">
+            <div class="form-control m-2 flex flex-col">
+              <label class="radio-inline" *ngFor="let general of generalTypes">
+                <input
+                  [attr.item-id]="general.value"
+                  formControlName="general"
+                  type="radio"
+                  [value]="general.value"
+                />
+                {{ general.title }}
+              </label>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  {{ form.value | json }}
+  <button type="submit" id="button" (click)="submit()">Submit</button>
 </form>
+{{ form.value | json }}

@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
 @Directive()
 export abstract class BaseForm<T> {
   form!: FormGroup<IForm<T>>;
-  path!:string
+  path!: string;
   protected formConfig!: IForm<T>;
   protected fb = new FormBuilder();
   protected validationErrorService = new ValidationErrorService();
-  protected router = new Router();
+  constructor(protected router: Router) {}
 
   ngOnInit() {
     this.createForm(this.formConfig);
@@ -35,10 +35,12 @@ export abstract class BaseForm<T> {
 
       return;
     }
-    this.navigate(this.path)
+    this.navigate(this.path);
   }
 
   navigate(path: string) {
-    // this.router.navigate([path]);
+    console.log(path);
+
+    this.router.navigate([path]);
   }
 }

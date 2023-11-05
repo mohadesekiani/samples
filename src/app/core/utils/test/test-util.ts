@@ -14,6 +14,9 @@ export class TestUtil {
       .query(By.directive(directive))
       .injector.get<any>(directive);
   }
+  static directiveAllElement(fixture: ComponentFixture<any>, directive: any) {
+    return fixture.debugElement.queryAll(By.directive(directive));
+  }
   private static directiveForm(
     fixture: ComponentFixture<any>,
     selector: string,
@@ -45,7 +48,9 @@ export class TestUtil {
       .query(By.css(cssSelector))
       .injector.get<any>(directiveElement);
   }
-
+  static queryAllElement(fixture: ComponentFixture<any>, cssSelector: string) {
+    return fixture.debugElement.queryAll(By.css(cssSelector));
+  }
   static queryComponent(fixture: ComponentFixture<any>, cssSelector: string) {
     const debugElement = this.debugElement(fixture, cssSelector);
     return debugElement.componentInstance;

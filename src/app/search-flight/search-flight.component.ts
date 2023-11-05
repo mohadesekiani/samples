@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ClassTypesEnum } from 'src/app/core/module/enum/class-types.enum';
 import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
-import {
-  ISearchFlight
-} from 'src/app/core/module/interface/search-types.interface';
+import { ISearchFlight } from 'src/app/core/module/interface/search-types.interface';
 import { BaseForm } from '../core/constant/base-component/base-form';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-flight',
@@ -35,7 +34,7 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
   get travelType(): TravelTypesEnum {
     return this.form.controls.travelType?.value as TravelTypesEnum;
   }
-  override path: string = '/result-flight'
+  override path: string = '/result-flight';
 
   override formConfig = {
     passengers: [null, [Validators.required]],
@@ -44,7 +43,7 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
     routes: [null, [Validators.required]],
   };
 
-  constructor() {
-    super();
+  constructor(router: Router) {
+    super(router);
   }
 }
