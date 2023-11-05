@@ -1,5 +1,5 @@
 import { ClassTypesEnum } from '../enum/class-types.enum';
-import { ClassesTypesFlightEnum } from '../enum/general-types.enum';
+import { ClassesTypesFlightEnum, GeneralTypesEnum } from '../enum/general-types.enum';
 import { TravelTypesEnum } from '../enum/travel-types.enum';
 import { ICity } from './city-type.interface';
 
@@ -20,6 +20,12 @@ export interface ISearchFlight {
   travelType: TravelTypesEnum;
   classType: ClassTypesEnum;
   routes: ISearchRoute[];
+}
+export interface ISearchTrain {
+  routes: ISearchRoute[];
+  travelType: TravelTypesEnum;
+  passengers: ISearchPassenger;
+  general: GeneralTypesEnum;
 }
 export interface IFilterFlight {
   timeRange: IRangeTime;

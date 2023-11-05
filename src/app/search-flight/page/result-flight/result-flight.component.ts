@@ -14,7 +14,7 @@ export class ResultFlightComponent {
   filteredItems!: ICity[];
   allData!: ICity[];
   constructor(private dataService: AbstractDataService) {
-    if (!this.dataService) {
+    if (!dataService) {
       throw 'AbstractDataService is null';
     }
   }

@@ -15,7 +15,7 @@ xdescribe('SUT: SearchFlightComponent', () => {
     router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
     formValidationError = new ValidationErrorService();
 
-    sut = new SearchFlightComponent( router, formValidationError);
+    sut = new SearchFlightComponent();
     sut.today = new Date();
     sut.ngOnInit();
   });
