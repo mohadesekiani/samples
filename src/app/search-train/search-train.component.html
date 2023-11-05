@@ -35,7 +35,7 @@
         <div class="m-2 flex flex-wrap">
           <div class="m-auto" style="text-align: center"></div>
           <div>
-            <button (click)="showDrop = !showDrop">
+            <button id="showDrop" (click)="showDrop = !showDrop">
               <i class="fa fa-users"></i>
             </button>
           </div>
@@ -45,7 +45,7 @@
             <div class="form-control m-2 flex flex-col">
               <label class="radio-inline" *ngFor="let general of generalTypes">
                 <input
-                  [attr.item-id]="general.value"
+                  id="general"
                   formControlName="general"
                   type="radio"
                   [value]="general.value"

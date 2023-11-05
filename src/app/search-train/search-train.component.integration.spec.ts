@@ -50,31 +50,39 @@ fdescribe('SUT(Integration): SearchTrainComponent', () => {
     const routeCtrl = TestUtil.formControl(fixture, '#route');
     const travelTypeCtrl = TestUtil.formControl(fixture, '#travelType');
     const passengersCtrl = TestUtil.formControl(fixture, '#passengers');
-    // const generalCtrl = TestUtil.formControl(fixture, '[item-id=General]');
+
+    // const generalCtrl = TestUtil.formControl(fixture, '#general');
 
     // assert
     expect(sut.form).toBe(formEl.form);
     expect(sut.form.controls.route).toBe(routeCtrl.control);
     expect(sut.form.controls.travelType).toBe(travelTypeCtrl.control);
     expect(sut.form.controls.passengers).toBe(passengersCtrl.control);
+
     // expect(sut.form.controls.general).toBe(generalCtrl.control);
   });
 
   it('should be binding  value', () => {
     // arrange
+    sut.showDrop = false;
     const buttonToggles = TestUtil.directiveAllElement(
       fixture,
       MatButtonToggle
     );
-    const buttonElement = TestUtil.nativeElement(fixture, '#button');
-    
-    sut.showDrop = true
-    // const radioButtons = TestUtil.queryAllElement(fixture,'.radio-inline input')
+    const buttonElement = TestUtil.nativeElement<HTMLInputElement>(
+      fixture,
+      '#button'
+    );
+    const showDropElement = TestUtil.nativeElement(fixture, '#showDrop');
+
+    // const radioButtons = TestUtil.queryAllElement(fixture, '#general');
+    // const input = TestUtil.nativeElement<HTMLInputElement>(fixture, '#general');
 
     // act
     fixture.detectChanges();
     spyOn(sut, 'submit');
     buttonElement.click();
+    showDropElement.click();
 
     // assert
     expect(buttonToggles.length).toBe(sut.travelTypes.length);
@@ -83,6 +91,9 @@ fdescribe('SUT(Integration): SearchTrainComponent', () => {
         sut.travelTypes[index].value
       );
     });
-    expect(sut.submit).toHaveBeenCalled()
+    expect(sut.submit).toHaveBeenCalled();
+    expect(sut.showDrop).toBe(true);
+    expect(buttonElement.type).toBe('submit');
+    // expect(input.type).toBe('radio');
   });
 });
