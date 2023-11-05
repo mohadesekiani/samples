@@ -18,7 +18,7 @@ describe('SUT: SearchTrainComponent', () => {
     sut.ngOnInit();
   });
 
-  fit('should be create', () => {
+  it('should be create', () => {
     // assert
     console.log(sut);
 
