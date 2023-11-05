@@ -10,8 +10,8 @@ export abstract class BaseForm<T> {
   path!:string
   protected formConfig!: IForm<T>;
   protected fb = new FormBuilder();
-  protected router = new Router();
   protected validationErrorService = new ValidationErrorService();
+  protected router = new Router();
 
   ngOnInit() {
     this.createForm(this.formConfig);
@@ -37,7 +37,8 @@ export abstract class BaseForm<T> {
     }
     this.navigate(this.path)
   }
+
   navigate(path: string) {
-    this.router.navigate([path]);
+    // this.router.navigate([path]);
   }
 }

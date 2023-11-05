@@ -5,12 +5,14 @@ import { GeneralTypesEnum } from '../core/module/enum/general-types.enum';
 import { TravelTypesEnum } from '../core/module/enum/travel-types.enum';
 import { ValidationErrorService } from '../shared/services/validation-error.service';
 
-describe('SUT: SearchTrainComponent', () => {
+fdescribe('SUT: SearchTrainComponent', () => {
   let sut: SearchTrainComponent;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
   let validationErrorService;
+
   beforeEach(() => {
+    debugger
     fb = new FormBuilder();
     router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
     validationErrorService = new ValidationErrorService();
