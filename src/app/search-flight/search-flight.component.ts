@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Validators } from '@angular/forms';
 import { ClassTypesEnum } from 'src/app/core/module/enum/class-types.enum';
 import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
 import {
-  IForm,
-  ISearchFlight,
+  ISearchFlight
 } from 'src/app/core/module/interface/search-types.interface';
-import { ValidationErrorService } from '../shared/services/validation-error.service';
 import { BaseForm } from '../core/constant/base-component/base-form';
 
 @Component({
@@ -38,6 +35,8 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
   get travelType(): TravelTypesEnum {
     return this.form.controls.travelType?.value as TravelTypesEnum;
   }
+  override path: string = '/result-flight'
+
   override formConfig = {
     passengers: [null, [Validators.required]],
     travelType: [TravelTypesEnum.OneWay],
@@ -45,24 +44,7 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
     routes: [null, [Validators.required]],
   };
 
-  constructor(
-    private router: Router,
-    private formValidationError: ValidationErrorService
-  ) {
+  constructor() {
     super();
-  }
-
-
-  submit() {
-    this.formValidationError.process(this.form);
-
-    if (this.form.invalid) {
-      this.form.markAsDirty();
-      this.form.markAllAsTouched();
-
-      return;
-    }
-
-    this.router.navigate(['/result-flight']);
   }
 }

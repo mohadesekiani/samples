@@ -1,14 +1,12 @@
-<form #f="ngForm">
+<form [formGroup]="form">
   <div class="flex flex-wrap">
     <app-flight
       label="Origin"
       name="origin"
-      [(ngModel)]="formData.origin"
     ></app-flight>
     <app-flight
       label="Destination"
       name="destination"
-      [(ngModel)]="formData.destination"
     ></app-flight>
     <app-datepicker
       placeholder="your departure date"
@@ -23,7 +21,6 @@
       <app-passengers
         style="width: 45%"
         name="passengers"
-        [(ngModel)]="formData.passengers"
       ></app-passengers>
     </div>
 
@@ -32,7 +29,6 @@
       <!-- <span>my input value: {{ value | json }}</span> -->
       <div class="m-2 flex flex-wrap">
         <div class="m-auto" style="text-align: center">
-          {{ formData.option }}
         </div>
         <div>
           <button (click)="showDrop = !showDrop">
@@ -49,7 +45,6 @@
                 id="WomenOnly"
                 name="option"
                 [value]="general.value"
-                [(ngModel)]="formData.option"
               />
               {{ general.title }}
             </label>
@@ -58,5 +53,5 @@
       </div>
     </div>
   </div>
-  {{ formData | json }}
+  {{ form | json }}
 </form>
