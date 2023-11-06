@@ -85,7 +85,6 @@ describe('SUT(Integration): SearchTrainComponent', () => {
     buttonElement.click();
     showDropElement.click();
     fixture.detectChanges();
-    console.log(radio);
 
     // assert
     expect(buttonToggles.length).toBe(sut.travelTypes.length);

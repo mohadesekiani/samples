@@ -30,13 +30,10 @@ export abstract class BaseFormControlValueAccessor<
 
   refersValue() {
     if (this.form.valid) {
-      console.log('fff');
-
       this.onChange(this.form.value);
       this.onTouched();
       return;
     }
-    console.log('kkkk');
 
     this.onChange(null);
   }
