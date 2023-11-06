@@ -1,12 +1,11 @@
 <div class="m-2">
   <mat-form-field>
-    <mat-label> select {{ label }}</mat-label>
+    <mat-label > select {{ label }}</mat-label>
     <input
       matInput
       placeholder="select"
       type="text"
       [matAutocomplete]="auto"
-      id="input"
       (ngModelChange)="onCityInputChange($event)"
       [ngModel]="value"
     />
@@ -25,7 +24,6 @@
     (optionSelected)="optionSelected($event.option.value)"
   >
     <mat-option
-      id="option"
       *ngFor="let city of filteredCities"
       [value]="city"
       style="border: 1px solid red"

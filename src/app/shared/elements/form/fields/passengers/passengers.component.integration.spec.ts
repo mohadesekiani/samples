@@ -7,7 +7,7 @@ import { NumberPassengersComponent } from '../number-passengers/number-passenger
 import { MatMenuTrigger } from '@angular/material/menu';
 import { TestUtil } from 'src/app/core/utils/test';
 
-describe('SUT(Integration): PassengersComponent', () => {
+fdescribe('SUT(Integration): PassengersComponent', () => {
   let sut: PassengersComponent;
   let fixture: ComponentFixture<PassengersComponent>;
   let btnPassenger: HTMLButtonElement;
@@ -44,4 +44,17 @@ describe('SUT(Integration): PassengersComponent', () => {
     expect(sut.form.controls.Child).toBe(ChildCtrl.control);
     expect(sut.form.controls.Infant).toBe(InfantCtrl.control);
   });
+
+  fit(`should be call #toggleDropDown when button clicked`, () => {
+
+    // arrange
+    spyOn(sut, 'toggleDropDown');
+
+    // action
+    btnPassenger.click();
+
+    // assert
+    expect(sut.toggleDropDown).toHaveBeenCalled();
+  });
+
 });

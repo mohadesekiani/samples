@@ -16,7 +16,7 @@ describe('SUT: SearchFlightComponent', () => {
     classType: null,
   };
   TestInitialize.unitTestInitialize(sut, initializeForm, '/result-flight');
-  TestInitialize.initializeEnum(
+  TestInitialize.ShouldBeSetWithProperValueWhenConstructorCalled(
     sut.classTypes,
     [
       { title: 'First Class', value: ClassTypesEnum.FirstClass },
@@ -26,7 +26,7 @@ describe('SUT: SearchFlightComponent', () => {
     ],
     'classFlightTypes'
   );
-  TestInitialize.initializeEnum(
+  TestInitialize.ShouldBeSetWithProperValueWhenConstructorCalled(
     sut.travelTypes,
     [
       { title: 'One Way', value: TravelTypesEnum.OneWay },
@@ -36,8 +36,34 @@ describe('SUT: SearchFlightComponent', () => {
     'travelTypesFlight'
   );
   TestInitialize.initializeForm(sut, initializeForm);
+  // const path='/result-flight';
+  // it(`should be when submit routing to ${path} with condition valid form `, () => {
+  //   // arrange
+  //   sut.resultUrl = path;
+  //   sut.form.setValue({
+  //     routes: {
+  //       travelType: TravelTypesEnum.OneWay,
+  //       routes: [
+  //         {
+  //           origin: 'San Antonio',
+  //           destination: 'San Antonio',
+  //           departureDate: '2023-09-04T11:53:30.877Z',
+  //           returnDate: '2023-09-04T11:53:30.877Z',
+  //         },
+  //       ],
+  //     },
+  //     passengers: { Adult: 1, Child: 1, Infant: 1 },
+  //     travelType: 'OneWay',
+  //     classType: 'FirstClass',
+  //   });
 
-  TestInitialize.validForm(
+  //   // act
+  //   sut.submit();
+
+  //   // assert
+  //   expect(router).toHaveBeenCalledWith([path]);
+  // });
+  TestInitialize.validFormTests(
     sut,
     router.navigate,
     {

@@ -45,7 +45,7 @@
             <div class="form-control m-2 flex flex-col">
               <label class="radio-inline" *ngFor="let general of generalTypes">
                 <input
-                  id="general"
+                  [attr.item-id]="'type'+general"
                   formControlName="general"
                   type="radio"
                   [value]="general.value"

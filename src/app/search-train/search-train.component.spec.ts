@@ -21,7 +21,7 @@ describe('SUT: SearchTrainComponent', () => {
   };
 
   TestInitialize.unitTestInitialize(sut, initializeForm, '/result-train');
-  TestInitialize.initializeEnum(
+  TestInitialize.ShouldBeSetWithProperValueWhenConstructorCalled(
     sut.generalTypes,
     [
       { title: 'General', value: GeneralTypesEnum.General },
@@ -31,7 +31,7 @@ describe('SUT: SearchTrainComponent', () => {
     'generalTrainTypes'
   );
 
-  TestInitialize.initializeEnum(
+  TestInitialize.ShouldBeSetWithProperValueWhenConstructorCalled(
     sut.travelTypes,
     [
       { title: 'One Way', value: TravelTrainTypesEnum.OneWay },
@@ -40,7 +40,7 @@ describe('SUT: SearchTrainComponent', () => {
     'travelTrainTypes'
   );
   TestInitialize.initializeForm(sut, initializeForm);
-  TestInitialize.validForm(
+  TestInitialize.validFormTests(
     sut,
     router.navigate,
     {
