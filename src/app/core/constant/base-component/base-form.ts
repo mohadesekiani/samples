@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Directive()
 export abstract class BaseForm<T> {
   form!: FormGroup<IForm<T>>;
-  path!: string;
+  resultUrl!: string;
   protected formConfig!: IForm<T>;
   protected fb = new FormBuilder();
   protected validationErrorService = new ValidationErrorService();
@@ -35,7 +35,8 @@ export abstract class BaseForm<T> {
 
       return;
     }
-    this.navigate(this.path);
+
+    this.navigate(this.resultUrl);
   }
 
   navigate(path: string) {

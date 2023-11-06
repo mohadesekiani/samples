@@ -26,7 +26,7 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
     return this.form.controls.travelType?.value as TravelTypesEnum;
   }
 
-  override path: string = '/result-flight';
+  override resultUrl: string = '/result-flight';
 
   override formConfig = {
     passengers: [null, [Validators.required]],

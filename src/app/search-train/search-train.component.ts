@@ -31,13 +31,14 @@ export class SearchTrainComponent extends BaseForm<ISearchTrain> {
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
     value,
   }));
-  override path: string = '/result-train';
+  override resultUrl: string = '/result-train';
   override formConfig: IForm<ISearchTrain> = {
     travelType: [TravelTypesEnum.OneWay],
     route: [null, [Validators.required]],
     passengers: [null, [Validators.required]],
     general: [null, [Validators.required]],
   };
+
   constructor(router: Router) {
     super(router);
   }

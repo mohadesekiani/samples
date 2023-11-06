@@ -1,56 +1,46 @@
-import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassTypesEnum } from '../core/module/enum/class-types.enum';
 import { TravelTypesEnum } from '../core/module/enum/travel-types.enum';
-import { ValidationErrorService } from '../shared/services/validation-error.service';
+import { TestInitialize } from '../core/utils/test';
 import { SearchFlightComponent } from './search-flight.component';
 
 describe('SUT: SearchFlightComponent', () => {
   let sut: SearchFlightComponent;
-  let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
-  let formValidationError;
-  beforeEach(() => {
-    fb = new FormBuilder();
-    router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
-    formValidationError = new ValidationErrorService();
-
-    sut = new SearchFlightComponent(router);
-    sut.ngOnInit();
-  });
-
-  it('should be create', () => {
-    expect(sut).toBeTruthy();
-    expect(sut.classTypes).toEqual([
+  router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
+  sut = new SearchFlightComponent(router);
+  const initializeForm = {
+    routes: null,
+    passengers: null,
+    travelType: 'OneWay',
+    classType: null,
+  };
+  TestInitialize.unitTestInitialize(sut, initializeForm, '/result-flight');
+  TestInitialize.initializeEnum(
+    sut.classTypes,
+    [
       { title: 'First Class', value: ClassTypesEnum.FirstClass },
       { title: 'Business', value: ClassTypesEnum.Business },
       { title: 'Economy', value: ClassTypesEnum.Economy },
       { title: 'Premium Class', value: ClassTypesEnum.PremiumClass },
-    ]);
-    expect(sut.travelTypes).toEqual([
+    ],
+    'classFlightTypes'
+  );
+  TestInitialize.initializeEnum(
+    sut.travelTypes,
+    [
       { title: 'One Way', value: TravelTypesEnum.OneWay },
       { title: 'Round Trip', value: TravelTypesEnum.RoundTrip },
       { title: 'Multi Path', value: TravelTypesEnum.MultiPath },
-    ]);
-    expect(sut.path).toBe('/result-flight');
-  });
+    ],
+    'travelTypesFlight'
+  );
+  TestInitialize.initializeForm(sut, initializeForm);
 
-  it('should be create form with default value', () => {
-    // arrange
-    const expectedFormValue = {
-      routes: null,
-      passengers: null,
-      travelType: 'OneWay',
-      classType: null,
-    };
-
-    // assert
-    expect(sut.form.value).toEqual(expectedFormValue);
-  });
-
-  it('should check form is valid then go to result page ', () => {
-    // arrange
-    sut.form.setValue({
+  TestInitialize.validForm(
+    sut,
+    router.navigate,
+    {
       routes: {
         travelType: TravelTypesEnum.OneWay,
         routes: [
@@ -65,28 +55,9 @@ describe('SUT: SearchFlightComponent', () => {
       passengers: { Adult: 1, Child: 1, Infant: 1 },
       travelType: 'OneWay',
       classType: 'FirstClass',
-    });
+    },
+    '/result-flight'
+  );
 
-    // act
-    sut.submit();
-
-    // assert
-    expect(router.navigate).toHaveBeenCalledWith(['/result-flight']);
-  });
-
-  it('should be check form is invalid ', () => {
-    // arrange
-    spyOn(sut.form, 'markAllAsTouched');
-    spyOn(sut.form, 'markAsDirty');
-    sut.form.patchValue({
-      passengers: null,
-    });
-
-    // act
-    sut.submit();
-
-    // assert
-    expect(sut.form.markAllAsTouched).toHaveBeenCalled();
-    expect(sut.form.markAsDirty).toHaveBeenCalled();
-  });
+  TestInitialize.invalidForm(sut, { passengers: null });
 });
