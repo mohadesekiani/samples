@@ -63,7 +63,6 @@ describe('SUT(Integration): SearchTrainComponent', () => {
     // expect(sut.form.controls.general).toBe(generalCtrl.control);
   });
 
-  
   // fit(`should be call #toggleDropDown when button clicked`, () => {
 
   //   // arrange
@@ -76,7 +75,7 @@ describe('SUT(Integration): SearchTrainComponent', () => {
   //   expect(sut.toggleDropDown).toHaveBeenCalled();
   // });
 
-  fit('should be binding value', () => {
+  it('should be binding value', () => {
     // arrange
     sut.showDrop = true;
     const buttonToggles = TestUtil.directiveAllElement(
@@ -91,9 +90,11 @@ describe('SUT(Integration): SearchTrainComponent', () => {
     const showDropElement = TestUtil.nativeElement(fixture, '#showDrop');
 
     // const input = TestUtil.nativeElement<HTMLInputElement>(fixture, '#general');
-    debugger
-    const radioButtons = TestUtil.queryAllElement(fixture, 'input[type=radio]')/*?*/;
-    
+    const radioButtons = TestUtil.queryAllElement(
+      fixture,
+      'input[type=radio]'
+    ); /*?*/
+
     // act
     spyOn(sut, 'submit');
     fixture.detectChanges();
@@ -110,5 +111,4 @@ describe('SUT(Integration): SearchTrainComponent', () => {
     expect(buttonElement.type).toBe('submit');
     // expect(input.type).toBe('radio');
   });
-
 });

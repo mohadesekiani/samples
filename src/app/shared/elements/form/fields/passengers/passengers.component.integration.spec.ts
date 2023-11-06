@@ -45,7 +45,7 @@ fdescribe('SUT(Integration): PassengersComponent', () => {
     expect(sut.form.controls.Infant).toBe(InfantCtrl.control);
   });
 
-  fit(`should be call #toggleDropDown when button clicked`, () => {
+  it(`should be call #toggleDropDown when button clicked`, () => {
 
     // arrange
     spyOn(sut, 'toggleDropDown');

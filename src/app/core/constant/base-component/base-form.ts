@@ -24,6 +24,7 @@ export abstract class BaseForm<T> {
     this.form = this.fb.group(baseFormConfig as IForm<T>, {
       validators,
     });
+    
     this.validationErrorService.process(this.form);
   }
 

@@ -1,6 +1,4 @@
 import { FormBuilder } from '@angular/forms';
-import { SearchTrainComponent } from 'src/app/search-train/search-train.component';
-import { TravelTypesEnum } from '../../module/enum/travel-types.enum';
 import { BaseForm } from '../../constant/base-component/base-form';
 
 export class TestInitialize {
