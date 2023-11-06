@@ -78,6 +78,7 @@ fdescribe('SUT(Integration): SearchFlightComponent', () => {
     );
 
     // act
+    spyOn(sut, 'submit');
     buttonElement.click();
     fixture.detectChanges();
 

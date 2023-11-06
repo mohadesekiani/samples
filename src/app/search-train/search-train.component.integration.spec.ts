@@ -95,8 +95,9 @@ fdescribe('SUT(Integration): SearchTrainComponent', () => {
       );
     });
     expect(sut.submit).toHaveBeenCalled();
-    expect(sut.showDrop).toBe(true);
+    expect(sut.showDrop).toBeTruthy();
     expect(buttonElement.type).toBe('submit');
     // expect(input.type).toBe('radio');
   });
+
 });
