@@ -9,7 +9,7 @@ import {
 import { ValidationErrorService } from '../shared/services/validation-error.service';
 import { TestInitialize } from '../core/utils/test';
 
-fdescribe('SUT: SearchTrainComponent', () => {
+describe('SUT: SearchTrainComponent', () => {
   let sut: SearchTrainComponent;
   let router: jasmine.SpyObj<Router>;
 

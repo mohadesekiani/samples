@@ -18,7 +18,7 @@ import {
 import { MatButtonToggle } from '@angular/material/button-toggle';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 
-fdescribe('SUT(Integration): SearchTrainComponent', () => {
+describe('SUT(Integration): SearchTrainComponent', () => {
   let sut: SearchTrainComponent;
   let fixture: ComponentFixture<SearchTrainComponent>;
 
