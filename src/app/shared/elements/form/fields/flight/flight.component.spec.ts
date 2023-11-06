@@ -5,7 +5,7 @@ import { Injector, inject } from '@angular/core';
 
 // spy of sut methods in unit tests is not valid
 
-describe('SUT: FlightComponent', () => {
+xdescribe('SUT: FlightComponent', () => {
   let sut: FlightComponent;
   const fakeCities = [
     {

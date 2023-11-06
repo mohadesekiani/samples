@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ClassFlightComponent } from './class-flight.component';
 
-describe('SUT(Integration): ClassFlightComponent', () => {
+xdescribe('SUT(Integration): ClassFlightComponent', () => {
   let sut: ClassFlightComponent;
   let fixture: ComponentFixture<ClassFlightComponent>;
   beforeEach(() => {

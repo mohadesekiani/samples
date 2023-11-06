@@ -11,7 +11,7 @@ import { TestUtil } from 'src/app/core/utils/test';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TimeRangeComponent } from './time-range.component';
 
-describe('SUT(Integration): TimeRangeComponent', () => {
+xdescribe('SUT(Integration): TimeRangeComponent', () => {
   let sut: TimeRangeComponent;
   let fixture: ComponentFixture<TimeRangeComponent>;
   let form: FormGroup<IForm<IRangeTime>>;

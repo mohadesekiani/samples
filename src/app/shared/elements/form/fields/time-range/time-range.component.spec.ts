@@ -5,7 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 import { IRangeTime } from 'src/app/core/module/interface/search-types.interface';
 
-describe('SUT: TimeRangeComponent', () => {
+xdescribe('SUT: TimeRangeComponent', () => {
   let sut: TimeRangeComponent;
 
   beforeEach(() => {

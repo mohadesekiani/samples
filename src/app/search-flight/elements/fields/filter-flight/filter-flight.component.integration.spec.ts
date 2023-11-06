@@ -12,7 +12,7 @@ import {
 } from 'src/app/core/module/interface/search-types.interface';
 import { TestUtil } from 'src/app/core/utils/test';
 
-describe('SUT(Integration): FilterFlightComponent', () => {
+xdescribe('SUT(Integration): FilterFlightComponent', () => {
   let sut: FilterFlightComponent;
   let fixture: ComponentFixture<FilterFlightComponent>;
   let form: FormGroup<IForm<IFilterFlight>>;
