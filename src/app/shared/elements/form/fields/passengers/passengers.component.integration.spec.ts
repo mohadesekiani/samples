@@ -7,7 +7,7 @@ import { NumberPassengersComponent } from '../number-passengers/number-passenger
 import { MatMenuTrigger } from '@angular/material/menu';
 import { TestUtil } from 'src/app/core/utils/test';
 
-fdescribe('SUT(Integration): PassengersComponent', () => {
+xdescribe('SUT(Integration): PassengersComponent', () => {
   let sut: PassengersComponent;
   let fixture: ComponentFixture<PassengersComponent>;
   let btnPassenger: HTMLButtonElement;

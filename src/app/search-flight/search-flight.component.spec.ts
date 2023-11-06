@@ -6,7 +6,7 @@ import { SearchFlightComponent } from './search-flight.component';
 import { FormBuilder } from '@angular/forms';
 import { ValidationErrorService } from '../shared/services/validation-error.service';
 
-fdescribe('SUT: SearchFlightComponent', () => {
+describe('SUT: SearchFlightComponent', () => {
   let sut: SearchFlightComponent;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
