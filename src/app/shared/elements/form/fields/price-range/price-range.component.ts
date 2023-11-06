@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
-import { IRangePrice } from 'src/app/core/module/interface/search-types.interface';
+import { IRangePrice } from 'src/app/core/module/interface/range-price.model';
 
 @Component({
   selector: 'app-price-range',

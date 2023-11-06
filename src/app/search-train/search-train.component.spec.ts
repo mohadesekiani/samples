@@ -8,7 +8,7 @@ import {
 } from '../core/module/enum/travel-types.enum';
 import { ValidationErrorService } from '../shared/services/validation-error.service';
 
-fdescribe('SUT: SearchTrainComponent', () => {
+describe('SUT: SearchTrainComponent', () => {
   let sut: SearchTrainComponent;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;

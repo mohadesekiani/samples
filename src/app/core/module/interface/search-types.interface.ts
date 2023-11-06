@@ -4,6 +4,7 @@ import {
   GeneralTypesEnum,
 } from '../enum/general-types.enum';
 import { TravelTypesEnum } from '../enum/travel-types.enum';
+import { IRangePrice } from './range-price.model';
 import { ICity } from './city-type.interface';
 
 export type IForm<T> = {
@@ -40,10 +41,6 @@ export interface IFilterFlight {
 export interface IRangeTime {
   startTime: number;
   endTime: number;
-}
-export interface IRangePrice {
-  minPrice: number;
-  maxPrice: number;
 }
 export interface ISearchPassenger {
   Adult: number;

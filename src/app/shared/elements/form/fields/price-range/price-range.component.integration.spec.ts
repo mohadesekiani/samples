@@ -1,7 +1,7 @@
 import {
   IForm,
-  IRangePrice,
 } from 'src/app/core/module/interface/search-types.interface';
+import { IRangePrice } from 'src/app/core/module/interface/range-price.model';
 import { PriceRangeComponent } from './price-range.component';
 import { FormGroup, FormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';

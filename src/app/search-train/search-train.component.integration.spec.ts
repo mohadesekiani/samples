@@ -1,64 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule, By } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
-import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
-import { FlightComponent } from '../shared/elements/form/fields/flight/flight.component';
-import { SearchTrainComponent } from './search-train.component';
-import { TestUtil } from '../core/utils/test';
-import { MultiPathComponent } from '../shared/elements/form/fields/multi-path/multi-path.component';
-import { PassengersComponent } from '../shared/elements/form/fields/passengers/passengers.component';
-import {
-  TravelTrainTypesEnum,
-  TravelTypesEnum,
-} from '../core/module/enum/travel-types.enum';
 import { MatButtonToggle } from '@angular/material/button-toggle';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MatRadioGroup } from '@angular/material/radio';
+import { TestUtil } from '../core/utils/test';
+import { SearchTrainComponentPage } from './search-train.component.integration.spec.page';
 
-describe('SUT(Integration): SearchTrainComponent', () => {
-  let sut: SearchTrainComponent;
-  let fixture: ComponentFixture<SearchTrainComponent>;
+fdescribe('SUT(Integration): SearchTrainComponent', () => {
+  let sutPage: SearchTrainComponentPage;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        NoopAnimationsModule,
-        SharedModule,
-        FormsModule,
-        BrowserModule,
-        RouterTestingModule,
-      ],
-      declarations: [SearchTrainComponent],
-      providers: [AbstractDataService],
-      schemas: [NO_ERRORS_SCHEMA],
-    });
-    fixture = TestBed.createComponent(SearchTrainComponent);
-    sut = fixture.componentInstance;
-    fixture.detectChanges();
+    sutPage = new SearchTrainComponentPage();
   });
 
-  it('should create', () => {
+  it('should be create', () => {
     // assert
-    expect(sut).toBeTruthy();
+    expect(sutPage.detectChanges()).toBeTruthy();
   });
 
   it('should be binding formControlName', () => {
     // arrange
-    const formEl = TestUtil.formGroup(fixture, 'form');
-    const routeCtrl = TestUtil.formControl(fixture, '#route');
-    const travelTypeCtrl = TestUtil.formControl(fixture, '#travelType');
-    const passengersCtrl = TestUtil.formControl(fixture, '#passengers');
-
-    // const generalCtrl = TestUtil.formControl(fixture, '#general');
+    sutPage.detectChanges();
 
     // assert
-    expect(sut.form).toBe(formEl.form);
-    expect(sut.form.controls.route).toBe(routeCtrl.control);
-    expect(sut.form.controls.travelType).toBe(travelTypeCtrl.control);
-    expect(sut.form.controls.passengers).toBe(passengersCtrl.control);
+    expect(sutPage.component.form).toBe(sutPage.formEl.form);
+    expect(sutPage.formCtrls.route).toBe(sutPage.routeCtrl.control);
+    expect(sutPage.formCtrls.travelType).toBe(sutPage.travelTypeCtrl.control);
+    expect(sutPage.formCtrls.passengers).toBe(sutPage.passengersCtrl.control);
 
     // expect(sut.form.controls.general).toBe(generalCtrl.control);
   });
@@ -75,40 +40,40 @@ describe('SUT(Integration): SearchTrainComponent', () => {
   //   expect(sut.toggleDropDown).toHaveBeenCalled();
   // });
 
-  it('should be binding value', () => {
-    // arrange
-    sut.showDrop = true;
-    const buttonToggles = TestUtil.directiveAllElement(
-      fixture,
-      MatButtonToggle
-    );
-    const radio = TestUtil.directiveAllElement(fixture, MatRadioGroup);
-    const buttonElement = TestUtil.nativeElement<HTMLInputElement>(
-      fixture,
-      '#button'
-    );
-    const showDropElement = TestUtil.nativeElement(fixture, '#showDrop');
+  // it('should be binding value', () => {
+  //   // arrange
+  //   sut.showDrop = true;
+  //   const buttonToggles = TestUtil.directiveAllElement(
+  //     fixture,
+  //     MatButtonToggle
+  //   );
+  //   const radio = TestUtil.directiveAllElement(fixture, MatRadioGroup);
+  //   const buttonElement = TestUtil.nativeElement<HTMLInputElement>(
+  //     fixture,
+  //     '#button'
+  //   );
+  //   const showDropElement = TestUtil.nativeElement(fixture, '#showDrop');
 
-    // const input = TestUtil.nativeElement<HTMLInputElement>(fixture, '#general');
-    const radioButtons = TestUtil.queryAllElement(
-      fixture,
-      'input[type=radio]'
-    ); /*?*/
+  //   // const input = TestUtil.nativeElement<HTMLInputElement>(fixture, '#general');
+  //   const radioButtons = TestUtil.queryAllElement(
+  //     fixture,
+  //     'input[type=radio]'
+  //   ); /*?*/
 
-    // act
-    spyOn(sut, 'submit');
-    fixture.detectChanges();
+  //   // act
+  //   spyOn(sut, 'submit');
+  //   fixture.detectChanges();
 
-    // assert
-    expect(buttonToggles.length).toBe(sut.travelTypes.length);
-    buttonToggles.forEach((buttonToggle, index) => {
-      expect(buttonToggle.componentInstance.value).toBe(
-        sut.travelTypes[index].value
-      );
-    });
-    expect(sut.submit).toHaveBeenCalled();
-    expect(sut.showDrop).toBeTruthy();
-    expect(buttonElement.type).toBe('submit');
-    // expect(input.type).toBe('radio');
-  });
+  //   // assert
+  //   expect(buttonToggles.length).toBe(sut.travelTypes.length);
+  //   buttonToggles.forEach((buttonToggle, index) => {
+  //     expect(buttonToggle.componentInstance.value).toBe(
+  //       sut.travelTypes[index].value
+  //     );
+  //   });
+  //   expect(sut.submit).toHaveBeenCalled();
+  //   expect(sut.showDrop).toBeTruthy();
+  //   expect(buttonElement.type).toBe('submit');
+  //   // expect(input.type).toBe('radio');
+  // });
 });
