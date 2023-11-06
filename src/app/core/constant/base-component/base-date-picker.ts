@@ -18,6 +18,9 @@ export abstract class BaseDatepickerComponent extends BaseInputControlValueAcces
     // const date = new Date(numericDate);
     // this.value = date;
     this.value = value;
-    // this.updateValue();
+    this.updateValueAndValidity(this.value);
+    // super.messageError(this.name);
+    this.valueChange.emit(this.value);
+
   }
 }
