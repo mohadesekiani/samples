@@ -17,15 +17,6 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
     value,
   }));
 
-  today = new Date();
-  showDrop = false;
-  passenger: Array<any> = [
-    { value: 0, name: 'Adult' },
-    { value: 0, name: 'Child' },
-    { value: 0, name: 'Infant' },
-  ];
-
-  // travelTypes
   travelTypes = Object.values(TravelTypesEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
     value,
@@ -34,6 +25,7 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
   get travelType(): TravelTypesEnum {
     return this.form.controls.travelType?.value as TravelTypesEnum;
   }
+
   override path: string = '/result-flight';
 
   override formConfig = {

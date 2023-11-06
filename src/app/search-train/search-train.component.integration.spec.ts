@@ -16,6 +16,7 @@ import {
   TravelTypesEnum,
 } from '../core/module/enum/travel-types.enum';
 import { MatButtonToggle } from '@angular/material/button-toggle';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 
 fdescribe('SUT(Integration): SearchTrainComponent', () => {
   let sut: SearchTrainComponent;
@@ -69,20 +70,22 @@ fdescribe('SUT(Integration): SearchTrainComponent', () => {
       fixture,
       MatButtonToggle
     );
+    const radio = TestUtil.directiveAllElement(fixture, MatRadioGroup);
     const buttonElement = TestUtil.nativeElement<HTMLInputElement>(
       fixture,
       '#button'
     );
     const showDropElement = TestUtil.nativeElement(fixture, '#showDrop');
 
-    // const radioButtons = TestUtil.queryAllElement(fixture, '#general');
+    const radioButtons = TestUtil.queryAllElement(fixture, '#general');
     // const input = TestUtil.nativeElement<HTMLInputElement>(fixture, '#general');
 
     // act
-    fixture.detectChanges();
     spyOn(sut, 'submit');
     buttonElement.click();
     showDropElement.click();
+    fixture.detectChanges();
+    console.log(radio);
 
     // assert
     expect(buttonToggles.length).toBe(sut.travelTypes.length);

@@ -5,7 +5,7 @@ import { TravelTypesEnum } from '../core/module/enum/travel-types.enum';
 import { ValidationErrorService } from '../shared/services/validation-error.service';
 import { SearchFlightComponent } from './search-flight.component';
 
-xdescribe('SUT: SearchFlightComponent', () => {
+fdescribe('SUT: SearchFlightComponent', () => {
   let sut: SearchFlightComponent;
   let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
@@ -16,7 +16,6 @@ xdescribe('SUT: SearchFlightComponent', () => {
     formValidationError = new ValidationErrorService();
 
     sut = new SearchFlightComponent(router);
-    sut.today = new Date();
     sut.ngOnInit();
   });
 
@@ -28,6 +27,12 @@ xdescribe('SUT: SearchFlightComponent', () => {
       { title: 'Economy', value: ClassTypesEnum.Economy },
       { title: 'Premium Class', value: ClassTypesEnum.PremiumClass },
     ]);
+    expect(sut.travelTypes).toEqual([
+      { title: 'One Way', value: TravelTypesEnum.OneWay },
+      { title: 'Round Trip', value: TravelTypesEnum.RoundTrip },
+      { title: 'Multi Path', value: TravelTypesEnum.MultiPath },
+    ]);
+    expect(sut.path).toBe('/result-flight');
   });
 
   it('should be create form with default value', () => {
@@ -38,10 +43,11 @@ xdescribe('SUT: SearchFlightComponent', () => {
       travelType: 'OneWay',
       classType: null,
     };
+
+    // assert
     expect(sut.form.value).toEqual(expectedFormValue);
   });
 
-  // onSubmit
   it('should check form is valid then go to result page ', () => {
     // arrange
     sut.form.setValue({
@@ -65,18 +71,22 @@ xdescribe('SUT: SearchFlightComponent', () => {
     sut.submit();
 
     // assert
-    expect(router.navigate).toHaveBeenCalledWith(['/results']);
+    expect(router.navigate).toHaveBeenCalledWith(['/result-flight']);
   });
 
-  it('should check form is valid then go to result alert', () => {
+  it('should be check form is invalid ', () => {
     // arrange
-    spyOn(window, 'alert');
+    spyOn(sut.form, 'markAllAsTouched');
+    spyOn(sut.form, 'markAsDirty');
     sut.form.patchValue({
       passengers: null,
     });
+
     // act
     sut.submit();
+
     // assert
-    expect(window.alert).toHaveBeenCalledWith('فرم ثبت نشد');
+    expect(sut.form.markAllAsTouched).toHaveBeenCalled();
+    expect(sut.form.markAsDirty).toHaveBeenCalled();
   });
 });

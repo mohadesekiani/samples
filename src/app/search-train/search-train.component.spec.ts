@@ -2,7 +2,10 @@ import { FormBuilder } from '@angular/forms';
 import { SearchTrainComponent } from './search-train.component';
 import { Router } from '@angular/router';
 import { GeneralTypesEnum } from '../core/module/enum/general-types.enum';
-import { TravelTypesEnum } from '../core/module/enum/travel-types.enum';
+import {
+  TravelTrainTypesEnum,
+  TravelTypesEnum,
+} from '../core/module/enum/travel-types.enum';
 import { ValidationErrorService } from '../shared/services/validation-error.service';
 
 fdescribe('SUT: SearchTrainComponent', () => {
@@ -21,9 +24,17 @@ fdescribe('SUT: SearchTrainComponent', () => {
 
   it('should be create', () => {
     // assert
-    console.log(sut);
-
     expect(sut).toBeTruthy();
+    expect(sut.generalTypes).toEqual([
+      { title: 'General', value: GeneralTypesEnum.General },
+      { title: 'Men Only', value: GeneralTypesEnum.MenOnly },
+      { title: 'Women Only', value: GeneralTypesEnum.WomenOnly },
+    ]);
+    expect(sut.travelTypes).toEqual([
+      { title: 'One Way', value: TravelTrainTypesEnum.OneWay },
+      { title: 'Round Trip', value: TravelTrainTypesEnum.RoundTrip },
+    ]);
+    expect(sut.path).toBe('/result-train');
   });
 
   it('should be set initialization form', () => {
@@ -40,13 +51,12 @@ fdescribe('SUT: SearchTrainComponent', () => {
     // arrange
     sut.path = '/result-train';
     sut.form.setValue({
-      route: 
-        {
-          departureDate: new Date(),
-          returnDate: new Date(),
-          origin: 'Abadan',
-          destination: 'Abu Musa',
-        },
+      route: {
+        departureDate: new Date(),
+        returnDate: new Date('2023/11/10'),
+        origin: 'Abadan',
+        destination: 'Abu Musa',
+      },
       passengers: { Adult: 1, Child: 1, Infant: 1 },
       general: GeneralTypesEnum.General,
       travelType: TravelTypesEnum.OneWay,
@@ -66,8 +76,10 @@ fdescribe('SUT: SearchTrainComponent', () => {
     sut.form.patchValue({
       passengers: null,
     });
+
     // act
     sut.submit();
+
     // assert
     expect(sut.form.markAllAsTouched).toHaveBeenCalled();
     expect(sut.form.markAsDirty).toHaveBeenCalled();

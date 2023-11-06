@@ -39,8 +39,6 @@ export abstract class BaseForm<T> {
   }
 
   navigate(path: string) {
-    console.log(path);
-
     this.router.navigate([path]);
   }
 }
