@@ -7,19 +7,25 @@ import {
   TravelTypesEnum,
 } from '../core/module/enum/travel-types.enum';
 import { ValidationErrorService } from '../shared/services/validation-error.service';
+import { TestInitialize } from '../core/utils/test';
 
 fdescribe('SUT: SearchTrainComponent', () => {
   let sut: SearchTrainComponent;
-  let fb: FormBuilder;
   let router: jasmine.SpyObj<Router>;
-  let validationErrorService;
 
   beforeEach(() => {
-    fb = new FormBuilder();
     router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
-    validationErrorService = new ValidationErrorService();
     sut = new SearchTrainComponent(router);
-    sut.ngOnInit();
+    TestInitialize.initializeTest(
+      sut,
+      {
+        route: null,
+        passengers: null,
+        general: null,
+        travelType: TravelTypesEnum.OneWay,
+      },
+      '/result-train'
+    );
   });
 
   it('should be create', () => {
