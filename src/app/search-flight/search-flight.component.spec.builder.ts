@@ -3,6 +3,7 @@ import { ISearchFlight } from "../core/module/interface/search-types.interface";
 import { SearchFlightComponent } from "./search-flight.component";
 import { TravelTypesEnum } from "../core/module/enum/travel-types.enum";
 import { ClassTypesEnum } from "../core/module/enum/class-types.enum";
+import { SearchFlightConst } from "../core/module/interface/search-flight.spec.const";
 
 export class SearchFlightFormBuilder {
     router: jasmine.SpyObj<Router>
@@ -16,17 +17,7 @@ export class SearchFlightFormBuilder {
     }
 
     with_some_valid_data_for_form(): SearchFlightFormBuilder {
-        this.formValue = {
-            routes: [{
-                departureDate: new Date(),
-                returnDate: new Date('2023/11/10'),
-                origin: 'Abadan',
-                destination: 'Abu Musa',
-            }],
-            classType: ClassTypesEnum.Business,
-            passengers: { Adult: 1, Child: 1, Infant: 1 },
-            travelType: TravelTypesEnum.OneWay,
-        };
+        this.formValue = SearchFlightConst.SomeSearchFlight;
         return this;
     }
 

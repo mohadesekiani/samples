@@ -85,4 +85,16 @@ fdescribe('SUT: SearchTrainComponent', () => {
     expect(generalCtrl.valid).toBeFalsy();
   });
 
+  it('should be check form is invalid', () => {
+    // arrange
+    sut = sutBuilder.with_some_invalid_data_for_form().build()
+    sut.form.markAsPristine();
+
+    // act
+    sut.submit();
+
+    // assert
+    expect(sut.form.dirty).toBeTrue();
+    expect(sut.form.touched).toBeTrue();
+  });
 });
