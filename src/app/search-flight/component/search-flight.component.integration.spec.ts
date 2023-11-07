@@ -28,11 +28,11 @@ fdescribe('SUT(Integration): SearchFlightComponent', () => {
     sutPage.detectChanges();
 
     // act
-    spyOn(sutPage.component, 'submit');
     sutPage.buttonElement.click();
 
     // assert
     expect(sutPage.buttonToggles.length).toBe(sutPage.component.travelTypes.length);
+    //wrong
     sutPage.buttonToggles.forEach((buttonToggle, index) => {
       expect(buttonToggle.componentInstance.value).toBe(
         sutPage.component.travelTypes[index].value

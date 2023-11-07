@@ -16,18 +16,23 @@ export class SearchFlightFormBuilder {
         this.router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
     }
 
+    with_data_for_form(value:ISearchFlight): SearchFlightFormBuilder {
+        this.formValue = value;
+        return this;
+    }
+
     with_some_valid_data_for_form(): SearchFlightFormBuilder {
-        this.formValue = SearchFlightConst.SomeSearchFlight;
+        this.with_data_for_form(SearchFlightConst.SomeSearchFlight);
         return this;
     }
 
     with_some_invalid_data_for_form(): SearchFlightFormBuilder {
-        this.formValue = {
+        this.with_data_for_form({
             routes: null,
             classType: ClassTypesEnum.Business,
             passengers: { Adult: 1, Child: 1, Infant: 1 },
             travelType: TravelTypesEnum.OneWay,
-        };
+        });
         return this;
     }
 

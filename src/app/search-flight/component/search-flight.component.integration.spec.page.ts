@@ -16,6 +16,7 @@ export class SearchFlightComponentPage {
 
     constructor() {
         this.init()
+        spyOn(this.component, 'submit');
     }
 
     init() {

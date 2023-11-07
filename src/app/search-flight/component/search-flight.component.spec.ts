@@ -5,7 +5,11 @@ import { SearchFlightFormBuilder } from './search-flight.component.spec.builder'
 
 fdescribe('SUT: SearchFlightComponent', () => {
   let sut: SearchFlightComponent;
-  const sutBuilder = new SearchFlightFormBuilder()
+  let sutBuilder: SearchFlightFormBuilder;
+
+  beforeEach(() => {
+    sutBuilder = new SearchFlightFormBuilder();
+  });
 
 
   it('should be create properly', () => {
@@ -19,7 +23,7 @@ fdescribe('SUT: SearchFlightComponent', () => {
 
   it('should be set classFlightTypes with proper value when constructor called', () => {
     // arrange 
-    sut= sutBuilder.build() 
+    sut = sutBuilder.build()
 
     // assert
     expect(sut.classTypes).toEqual([
@@ -32,7 +36,7 @@ fdescribe('SUT: SearchFlightComponent', () => {
 
   it('should be set travelFlightTypes with proper value when constructor called', () => {
     // arrange 
-    sut= sutBuilder.build() 
+    sut = sutBuilder.build()
 
     // assert 
     expect(sut.travelTypes).toEqual([
@@ -42,7 +46,7 @@ fdescribe('SUT: SearchFlightComponent', () => {
     ]);
   });
 
-  xit('should be create form with default value', () => {
+  it('should be create form with default value', () => {
     // arrange
     sut = sutBuilder.build();
 
@@ -81,19 +85,13 @@ fdescribe('SUT: SearchFlightComponent', () => {
 
   it('should validate "fomControl" field as required', () => {
     // arrange
-    sut = sutBuilder.with_some_valid_data_for_form().build()
-    const passengerCtrl = sut.form.controls.passengers;
-    const routesCtrl = sut.form.controls.routes;
-    const classTypeCtrl = sut.form.controls.classType;
-
-    // act
-    passengerCtrl.setValue(null);
-    routesCtrl.setValue(null);
-    classTypeCtrl.setValue(null);
+    sut = sutBuilder.with_data_for_form({
+      passengers: null, routes: null, classType: null
+    } as any).build();
 
     // assert
-    expect(passengerCtrl.valid).toBeFalsy();
-    expect(routesCtrl.valid).toBeFalsy();
-    expect(classTypeCtrl.valid).toBeFalsy();
+    expect(sut.form.controls.passengers.valid).toBeFalsy();
+    expect(sut.form.controls.routes.valid).toBeFalsy();
+    expect(sut.form.controls.classType.valid).toBeFalsy();
   });
 });
