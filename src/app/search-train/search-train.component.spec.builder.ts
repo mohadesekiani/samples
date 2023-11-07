@@ -31,7 +31,12 @@ export class SearchTrainFormBuilder {
   }
 
   with_some_invalid_data_for_form(): SearchTrainFormBuilder {
-    this.formValue = SearchFlightConst.SomeSearchFlight;
+    this.formValue = {
+      route: null,
+      passengers: { Adult: 1, Child: 1, Infant: 1 },
+      general: GeneralTypesEnum.General,
+      travelType: TravelTypesEnum.OneWay,
+    };
     return this;
   }
 
@@ -40,10 +45,9 @@ export class SearchTrainFormBuilder {
 
     sut.ngOnInit();
 
-    if(this.formValue){
-        sut.form.patchValue(this.formValue);
+    if (this.formValue) {
+      sut.form.patchValue(this.formValue);
     }
-
     return sut;
   }
 }

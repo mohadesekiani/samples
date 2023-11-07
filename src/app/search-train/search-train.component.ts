@@ -42,4 +42,8 @@ export class SearchTrainComponent extends BaseForm<ISearchTrain> {
   constructor(router: Router) {
     super(router);
   }
+
+  toggleDropDown() {
+    this.showDrop = !this.showDrop;
+  }
 }

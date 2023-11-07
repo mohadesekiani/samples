@@ -17,63 +17,49 @@ fdescribe('SUT(Integration): SearchTrainComponent', () => {
 
   it('should be binding formControlName', () => {
     // arrange
+    spyOn(sutPage.component, 'toggleDropDown');
     sutPage.detectChanges();
+
+    // act
+    sutPage.showDropElement.click();
 
     // assert
     expect(sutPage.component.form).toBe(sutPage.formEl.form);
     expect(sutPage.formCtrls.route).toBe(sutPage.routeCtrl.control);
     expect(sutPage.formCtrls.travelType).toBe(sutPage.travelTypeCtrl.control);
     expect(sutPage.formCtrls.passengers).toBe(sutPage.passengersCtrl.control);
-
-    // expect(sut.form.controls.general).toBe(generalCtrl.control);
+    // expect(sutPage.formCtrls.general).toBe(sutPage.generalCtrl.control);
   });
 
-  // fit(`should be call #toggleDropDown when button clicked`, () => {
+  it(`should be call #toggleDropDown when button clicked`, () => {
 
-  //   // arrange
-  //   spyOn(sut, 'toggleDropDown');
+    // arrange
+    spyOn(sutPage.component, 'toggleDropDown');
 
-  //   // action
-  //   btnPassenger.click();
+    // act
+    sutPage.showDropElement.click();
 
-  //   // assert
-  //   expect(sut.toggleDropDown).toHaveBeenCalled();
-  // });
+    // assert
+    expect(sutPage.component.toggleDropDown).toHaveBeenCalled();
+  });
 
-  // it('should be binding value', () => {
-  //   // arrange
-  //   sut.showDrop = true;
-  //   const buttonToggles = TestUtil.directiveAllElement(
-  //     fixture,
-  //     MatButtonToggle
-  //   );
-  //   const radio = TestUtil.directiveAllElement(fixture, MatRadioGroup);
-  //   const buttonElement = TestUtil.nativeElement<HTMLInputElement>(
-  //     fixture,
-  //     '#button'
-  //   );
-  //   const showDropElement = TestUtil.nativeElement(fixture, '#showDrop');
+  it('should be binding value', () => {
+    // arrange
+    spyOn(sutPage.component, 'submit');
+    sutPage.detectChanges();
 
-  //   // const input = TestUtil.nativeElement<HTMLInputElement>(fixture, '#general');
-  //   const radioButtons = TestUtil.queryAllElement(
-  //     fixture,
-  //     'input[type=radio]'
-  //   ); /*?*/
+    // act 
+    sutPage.buttonElement.click()
 
-  //   // act
-  //   spyOn(sut, 'submit');
-  //   fixture.detectChanges();
-
-  //   // assert
-  //   expect(buttonToggles.length).toBe(sut.travelTypes.length);
-  //   buttonToggles.forEach((buttonToggle, index) => {
-  //     expect(buttonToggle.componentInstance.value).toBe(
-  //       sut.travelTypes[index].value
-  //     );
-  //   });
-  //   expect(sut.submit).toHaveBeenCalled();
-  //   expect(sut.showDrop).toBeTruthy();
-  //   expect(buttonElement.type).toBe('submit');
-  //   // expect(input.type).toBe('radio');
-  // });
+    // assert
+    expect(sutPage.buttonToggles.length).toBe(sutPage.component.travelTypes.length);
+    sutPage.buttonToggles.forEach((buttonToggle, index) => {
+      expect(buttonToggle.componentInstance.value).toBe(
+        sutPage.component.travelTypes[index].value
+      );
+    });
+    expect(sutPage.component.submit).toHaveBeenCalled();
+    expect(sutPage.buttonElement.type).toBe('submit');
+    // expect(sutPage.input.type).toBe('radio');
+  });
 });

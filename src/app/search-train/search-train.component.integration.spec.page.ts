@@ -8,9 +8,12 @@ import { SearchTrainComponent } from "./search-train.component";
 import { AbstractDataService } from "../core/services/data/abstract-data.service";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { TestUtil } from "../core/utils/test";
+import { MatButtonToggle } from "@angular/material/button-toggle";
+import { MatRadioGroup } from "@angular/material/radio";
+import { ComponentFixture } from '@angular/core/testing';
 
 export class SearchTrainComponentPage {
-    fixture: any;
+    fixture!: ComponentFixture<SearchTrainComponent>;
     component!: SearchTrainComponent;
 
     constructor() {
@@ -57,5 +60,24 @@ export class SearchTrainComponentPage {
     get passengersCtrl() {
         return TestUtil.formControl(this.fixture, '#passengers');
     }
+    get generalCtrl() {
+        return TestUtil.formControl(this.fixture, '[item-id]="typeGeneral"');
+    }
+    get buttonToggles() {
+
+        return TestUtil.directiveAllElement(this.fixture, MatButtonToggle);
+    }
+    get radio() { return TestUtil.directiveAllElement(this.fixture, MatRadioGroup); }
+    get buttonElement() {
+        return TestUtil.nativeElement<HTMLInputElement>(
+            this.fixture,
+            '#button'
+        );
+    }
+    get showDropElement() { return TestUtil.nativeElement(this.fixture, '#showDrop'); }
+    get radioButtons() {
+        return TestUtil.queryAllElement(this.fixture, 'input[type=radio]');
+    }
+    get input() { return TestUtil.nativeElement<HTMLInputElement>(this.fixture, '#general') }
 
 }
