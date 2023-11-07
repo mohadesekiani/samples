@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { ClassTypesEnum } from 'src/app/core/module/enum/class-types.enum';
 import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
 import { ISearchFlight } from 'src/app/core/module/interface/search-types.interface';
-import { BaseForm } from '../core/constant/base-component/base-form';
+import { BaseForm } from '../../core/constant/base-component/base-form';
 import { Router } from '@angular/router';
 
 @Component({

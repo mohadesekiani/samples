@@ -1,16 +1,16 @@
 import { Component, Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BaseForm } from '../core/constant/base-component/base-form';
-import { GeneralTypesEnum } from '../core/module/enum/general-types.enum';
+import { BaseForm } from '../../core/constant/base-component/base-form';
+import { GeneralTypesEnum } from '../../core/module/enum/general-types.enum';
 import {
   TravelTrainTypesEnum,
   TravelTypesEnum,
-} from '../core/module/enum/travel-types.enum';
+} from '../../core/module/enum/travel-types.enum';
 import {
   IForm,
   ISearchTrain,
-} from '../core/module/interface/search-types.interface';
+} from '../../core/module/interface/search-types.interface';
 
 @Component({
   selector: 'app-search-train',

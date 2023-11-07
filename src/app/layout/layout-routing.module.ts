@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ResultFlightComponent } from '../search-flight/page/result-flight/result-flight.component';
+import { ResultFlightComponent } from '../search-flight/component/result-flight/result-flight.component';
 import { LayoutComponent } from './components/layout.component';
 
 const routes: Routes = [

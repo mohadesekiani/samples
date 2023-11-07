@@ -1,8 +1,8 @@
-import { GeneralTypesEnum } from '../core/module/enum/general-types.enum';
+import { GeneralTypesEnum } from '../../core/module/enum/general-types.enum';
 import {
   TravelTrainTypesEnum,
   TravelTypesEnum,
-} from '../core/module/enum/travel-types.enum';
+} from '../../core/module/enum/travel-types.enum';
 import { SearchTrainComponent } from './search-train.component';
 import { SearchTrainFormBuilder } from './search-train.component.spec.builder';
 

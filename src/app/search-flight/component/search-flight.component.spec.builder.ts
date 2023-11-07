@@ -1,9 +1,9 @@
 import { Router } from "@angular/router";
-import { ISearchFlight } from "../core/module/interface/search-types.interface";
+import { ISearchFlight } from "../../core/module/interface/search-types.interface";
 import { SearchFlightComponent } from "./search-flight.component";
-import { TravelTypesEnum } from "../core/module/enum/travel-types.enum";
-import { ClassTypesEnum } from "../core/module/enum/class-types.enum";
-import { SearchFlightConst } from "../core/module/interface/search-flight.spec.const";
+import { TravelTypesEnum } from "../../core/module/enum/travel-types.enum";
+import { ClassTypesEnum } from "../../core/module/enum/class-types.enum";
+import { SearchFlightConst } from "../../core/module/interface/search-flight.spec.const";
 
 export class SearchFlightFormBuilder {
     router: jasmine.SpyObj<Router>

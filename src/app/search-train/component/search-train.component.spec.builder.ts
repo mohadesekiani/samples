@@ -1,11 +1,11 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ValidationErrorService } from '../shared/services/validation-error.service';
-import { ISearchTrain } from '../core/module/interface/search-types.interface';
-import { GeneralTypesEnum } from '../core/module/enum/general-types.enum';
-import { TravelTypesEnum } from '../core/module/enum/travel-types.enum';
+import { ValidationErrorService } from '../../shared/services/validation-error.service';
+import { ISearchTrain } from '../../core/module/interface/search-types.interface';
+import { GeneralTypesEnum } from '../../core/module/enum/general-types.enum';
+import { TravelTypesEnum } from '../../core/module/enum/travel-types.enum';
 import { SearchTrainComponent } from './search-train.component';
-import { SearchTrainConst } from '../core/module/interface/search-train.spec.const';
+import { SearchTrainConst } from '../../core/module/interface/search-train.spec.const';
 
 export class SearchTrainFormBuilder {
   router: jasmine.SpyObj<Router>;

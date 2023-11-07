@@ -1,13 +1,13 @@
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { SearchFlightComponent } from "./search-flight.component";
-import { SharedModule } from "../shared/shared.module";
+import { SharedModule } from "../../shared/shared.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { TestBed } from "@angular/core/testing";
-import { AbstractDataService } from "../core/services/data/abstract-data.service";
+import { AbstractDataService } from "../../core/services/data/abstract-data.service";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { TestUtil } from "../core/utils/test";
+import { TestUtil } from "../../core/utils/test";
 import { MatButtonToggle } from "@angular/material/button-toggle";
 
 export class SearchFlightComponentPage {
