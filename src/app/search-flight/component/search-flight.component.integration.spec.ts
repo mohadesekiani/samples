@@ -1,6 +1,6 @@
 import { SearchFlightComponentPage } from './search-flight.component.integration.spec.page';
 
-fdescribe('SUT(Integration): SearchFlightComponent', () => {
+describe('SUT(Integration): SearchFlightComponent', () => {
   let sutPage: SearchFlightComponentPage
 
   beforeEach(() => {

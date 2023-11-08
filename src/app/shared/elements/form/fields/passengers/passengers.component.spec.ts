@@ -1,7 +1,7 @@
 import { PassengersComponent } from './passengers.component';
 import { PassengersFormBuilder } from './passengers.component.spec.builder';
 
-fdescribe('SUT: PassengersComponent', () => {
+describe('SUT: PassengersComponent', () => {
   let sut: PassengersComponent;
   let sutBuilder: PassengersFormBuilder;
 

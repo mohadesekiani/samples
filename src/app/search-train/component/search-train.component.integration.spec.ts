@@ -1,9 +1,6 @@
-import { MatButtonToggle } from '@angular/material/button-toggle';
-import { MatRadioGroup } from '@angular/material/radio';
-import { TestUtil } from '../../core/utils/test';
 import { SearchTrainComponentPage } from './search-train.component.integration.spec.page';
 
-fdescribe('SUT(Integration): SearchTrainComponent', () => {
+describe('SUT(Integration): SearchTrainComponent', () => {
   let sutPage: SearchTrainComponentPage;
 
   beforeEach(() => {

@@ -7,7 +7,7 @@ import {
 import { SearchTrainComponent } from './search-train.component';
 import { SearchTrainFormBuilder } from './search-train.component.spec.builder';
 
-fdescribe('SUT: SearchTrainComponent', () => {
+describe('SUT: SearchTrainComponent', () => {
   let sut: SearchTrainComponent;
   let sutBuilder: SearchTrainFormBuilder
 

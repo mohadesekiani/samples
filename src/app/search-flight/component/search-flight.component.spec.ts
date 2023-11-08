@@ -4,7 +4,7 @@ import { TravelTypesEnum } from '../../core/module/enum/travel-types.enum';
 import { SearchFlightComponent } from './search-flight.component';
 import { SearchFlightFormBuilder } from './search-flight.component.spec.builder';
 
-fdescribe('SUT: SearchFlightComponent', () => {
+describe('SUT: SearchFlightComponent', () => {
   let sut: SearchFlightComponent;
   let sutBuilder: SearchFlightFormBuilder;
 
