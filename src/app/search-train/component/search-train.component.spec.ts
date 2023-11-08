@@ -9,7 +9,11 @@ import { SearchTrainFormBuilder } from './search-train.component.spec.builder';
 
 fdescribe('SUT: SearchTrainComponent', () => {
   let sut: SearchTrainComponent;
-  const sutBuilder = new SearchTrainFormBuilder();
+  let sutBuilder: SearchTrainFormBuilder
+
+  beforeEach(() => {
+    sutBuilder = new SearchTrainFormBuilder();
+  });
 
   it('should be create properly', () => {
     // arrange
@@ -43,7 +47,7 @@ fdescribe('SUT: SearchTrainComponent', () => {
     ]);
   });
 
-  xit('should be create form with default value', () => {
+  it('should be create form with default value', () => {
     // arrange
     sut = sutBuilder.build(SearchTrainComponent);
 

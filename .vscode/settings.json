@@ -468,5 +468,8 @@
     },
     "scss.format.newlineBetweenSelectors": false,
     "workbench.layoutControl.enabled": false,
-    "window.commandCenter": false
+    "window.commandCenter": false,
+    "cSpell.words": [
+        "Chabahar"
+    ]
 }

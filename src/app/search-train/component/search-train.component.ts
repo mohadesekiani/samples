@@ -17,7 +17,6 @@ import {
   templateUrl: './search-train.component.html',
   styleUrls: ['./search-train.component.scss'],
 })
-@Injectable()
 export class SearchTrainComponent extends BaseForm<ISearchTrain> {
   showDrop = false;
   travelTypes = Object.values(TravelTrainTypesEnum).map((value) => ({

@@ -12,7 +12,6 @@ fdescribe('SUT: SearchFlightComponent', () => {
     sutBuilder = new SearchFlightFormBuilder();
   });
 
-
   it('should be create properly', () => {
     // arrange
     sut = sutBuilder.build(SearchFlightComponent);

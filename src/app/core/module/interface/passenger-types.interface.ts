@@ -7,5 +7,20 @@ export type PassengerTypesType = Partial<{
   // [key in  PassengerTypesEnum]: number;
 }>;
 
-export interface IPassengerTypes extends PassengerTypesType {
+export interface IPassengerTypes extends PassengerTypesType { }
+export class PassengerConst {
+  static get SomePassenger() {
+    return {
+      Adult: 1,
+      Child: 1,
+      Infant: 1,
+    }
+  }
+  static get SomeInvalidPassenger() {
+    return {
+      Adult: 0,
+      Child: 0,
+      Infant: 1,
+    }
+  }
 }

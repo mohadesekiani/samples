@@ -26,41 +26,23 @@ import {
   ],
 })
 export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPassenger> {
-  // errorMessage!: { actual: number; max: number };
-  _result: any;
-
-  // @Input() override get validationErrorMessage(): ValidationErrors | null {
-  //   return this.validation.getFormValidationErrors(this.form);
-  // }
-  // override set validationErrorMessage(value) {
-  //   this._result = value;
-  // }
-
-  errorTexts: any;
-  hasError = false;
-  buttonText = '+';
   showDrop = false;
-  //rename
-  passengers: Array<any> = [
-    { value: 0, name: 'Adult' },
-    { value: 0, name: 'Child' },
-    { value: 0, name: 'Infant' },
-  ];
+  passengers = Object.values(PassengerTypesEnum).map((value) => ({
+    name: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
+    value:0,
+  }));
   oldValue!: ISearchPassenger;
+
+  constructor() {
+    super();
+  }
+
   getInfantError(item: string) {
     return (
       item == PassengerTypesEnum.Infant &&
       this.form.controls.Infant.hasError('max')
     );
   }
-
-  constructor() {
-    super();
-  }
-  // errMes(x:any){
-  //    this.errorTexts = this.errorMessage.getErrorMessage(x)
-
-  // }
 
   override createForm() {
     super.createForm({
@@ -70,24 +52,9 @@ export class PassengersComponent extends BaseFormControlValueAccessor<ISearchPas
     },[
       CustomValidators.maxFrom('Infant', 'Adult'),
       Validators.required,
-    ]);
-    // this.vService.addCustomErrorValidator('Child', this.validation());
-
-
-
-    // this.form.valueChanges
-    //   .pipe(distinctUntilChanged((p, c) => isEqual(p, c)))
-    //   .subscribe((x: any) => {
-    //     this.refersValue();
-    //     setTimeout(() => {
-    //       this.oldValueValid(x);
-    //     });
-    //   });
-
-    
+    ]); 
   }
 
-  // Infant should be set 20 not 1100
   validation(): any {
     return (control: AbstractControl): ValidationErrors | null => {
       if(!control.value){
