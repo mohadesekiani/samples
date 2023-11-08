@@ -1,11 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultFlightComponent } from './result-flight.component';
-import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
-import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import { of } from 'rxjs';
-import { ClassesTypesFlightEnum } from 'src/app/core/module/enum/general-types.enum';
+import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import { IFilterFlight } from 'src/app/core/module/interface/search-types.interface';
+import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';
+import { ResultFlightComponent } from './result-flight.component';
 
 describe('SUT: ResultFlightComponent', () => {
   let sut: ResultFlightComponent;

@@ -11,9 +11,10 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { SearchTrainModule } from './search-train/search-train.module';
 import { ValidationErrorService } from './shared/services/validation-error.service';
+import { SearchBusComponent } from './search-bus/search-bus.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SearchBusComponent],
   imports: [BrowserAnimationsModule, RouterModule, AppRoutingModule],
 
   providers: [
