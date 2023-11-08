@@ -12,6 +12,7 @@ import { ClassFlightComponent } from './form/fields/class-flight/class-flight.co
 import { CompanyFlightComponent } from './form/fields/company-flight/company-flight.component';
 import { CheckBoxComponent } from './form/fields/check-box/check-box.component';
 import { CheckBoxGroupComponent } from './form/fields/check-box-group/check-box-group.component';
+import { ButtonToggleComponent } from './form/fields/button-toggle/button-toggle.component';
 const COMPONENTS = [
   FlightComponent,
   PassengersComponent,
@@ -22,14 +23,13 @@ const COMPONENTS = [
   ClassFlightComponent,
   CheckBoxGroupComponent,
   CompanyFlightComponent,
-
+  ButtonToggleComponent
 ];
 
 @NgModule({
   declarations: [
     COMPONENTS,
-    ClassFlightComponent,
-    CheckBoxComponent,
+    CheckBoxComponent,  
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, MaterialModule],
   exports: [COMPONENTS],

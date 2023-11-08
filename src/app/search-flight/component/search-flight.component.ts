@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./search-flight.component.scss'],
 })
 export class SearchFlightComponent extends BaseForm<ISearchFlight> {
+  xx=['gg']
   classTypes = Object.values(ClassTypesEnum).map((value) => ({
     title: value.replace(/([a-z])([A-Z])/g, '$1 $2'),
     value,
