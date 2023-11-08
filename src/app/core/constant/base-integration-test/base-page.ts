@@ -8,12 +8,13 @@ import { AbstractDataService } from "../../services/data/abstract-data.service";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { TestUtil } from "../../utils/test";
 
-export class BasePage<T>{
+export abstract class BasePage<T>{
     fixture!: ComponentFixture<T>;
     component!: T;
     constructor(componentType: any, additionalConfig: any = {}) {
         this.init(componentType, additionalConfig);
     }
+
     init(componentType: any, additionalConfig: any = {}) {
         TestBed.configureTestingModule({
             imports: [
@@ -42,4 +43,5 @@ export class BasePage<T>{
         return TestUtil.formGroup(this.fixture, 'form');
     }
     
+
 }

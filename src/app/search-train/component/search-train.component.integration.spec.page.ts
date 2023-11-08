@@ -7,11 +7,8 @@ import { SearchTrainComponent } from "./search-train.component";
 
 export class SearchTrainComponentPage extends BasePage<SearchTrainComponent>{
     constructor() {
-        const additionalConfig = {
-            imports: [],
-            providers: [],
-        };
-        super(SearchTrainComponent, additionalConfig);
+        
+        super(SearchTrainComponent);
     }
 
     get formCtrls() {

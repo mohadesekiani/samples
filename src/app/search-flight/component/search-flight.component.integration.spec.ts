@@ -28,7 +28,7 @@ describe('SUT(Integration): SearchFlightComponent', () => {
     sutPage.detectChanges();
 
     // act
-    sutPage.buttonElement.click();
+    sutPage.submitElement.click();
 
     // assert
     expect(sutPage.buttonToggles.length).toBe(sutPage.component.travelTypes.length);
@@ -40,6 +40,6 @@ describe('SUT(Integration): SearchFlightComponent', () => {
     });
     expect(sutPage.ariaLabel).toBe('Select an option');
     expect(sutPage.component.submit).toHaveBeenCalled();
-    expect(sutPage.buttonElement.type).toBe('submit');
+    expect(sutPage.submitElement.type).toBe('submit');
   });
 });

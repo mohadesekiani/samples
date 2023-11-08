@@ -5,11 +5,7 @@ import { SearchFlightComponent } from "./search-flight.component";
 
 export class SearchFlightComponentPage extends BasePage<SearchFlightComponent>{
     constructor() {
-        const additionalConfig = {
-            imports: [],
-            providers: [],
-        };
-        super(SearchFlightComponent, additionalConfig);
+        super(SearchFlightComponent);
         spyOn(this.component, 'submit');
 
     }
@@ -32,7 +28,7 @@ export class SearchFlightComponentPage extends BasePage<SearchFlightComponent>{
     get ariaLabel() {
         return TestUtil.querySelector(this.fixture, 'mat-radio-group').getAttribute('aria-label');
     }
-    get buttonElement() {
-        return TestUtil.nativeElement<HTMLInputElement>(this.fixture, '#button');
+    get submitElement() {
+        return TestUtil.nativeElement<HTMLInputElement>(this.fixture, '#submit');
     }
 }

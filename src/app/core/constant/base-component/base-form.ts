@@ -11,6 +11,8 @@ export abstract class BaseForm<T> {
   protected formConfig!: IForm<T>;
   protected fb = new FormBuilder();
   protected validationErrorService = new ValidationErrorService();
+  entity?: T;
+
   constructor(protected router: Router) { }
 
   ngOnInit() {
@@ -24,7 +26,7 @@ export abstract class BaseForm<T> {
     this.form = this.fb.group(baseFormConfig as IForm<T>, {
       validators,
     });
-    
+
     this.validationErrorService.process(this.form);
   }
 

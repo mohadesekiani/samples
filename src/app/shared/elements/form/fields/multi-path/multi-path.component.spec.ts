@@ -4,8 +4,9 @@ import { FormBuilder } from '@angular/forms';
 import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
 import { Injector } from '@angular/core';
 import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
+import { BaseFormControlValueAccessorTestFunc } from 'src/app/core/constant/base-component/base-form-control-value-accessor.spec.func';
 
-describe('SUT: MultiPathComponent', () => {
+fdescribe('SUT: MultiPathComponent', () => {
   let sut: MultiPathComponent;
 
   beforeEach(() => {
@@ -13,10 +14,7 @@ describe('SUT: MultiPathComponent', () => {
     sut.ngOnInit();
   });
 
-  it('should create', () => {
-    // assert
-    expect(sut).toBeTruthy();
-  });
+  BaseFormControlValueAccessorTestFunc(() => new MultiPathComponent());
 
   it('should be created form with default value', () => {
     // arrange

@@ -23,7 +23,7 @@ export interface ISearchFlight {
   passengers: ISearchPassenger;
   travelType: TravelTypesEnum;
   classType: ClassTypesEnum;
-  routes: ISearchRoute[] | null;
+  routes?: ISearchRoute[];
 }
 export interface ISearchTrain {
   route: ISearchRoute | null;

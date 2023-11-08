@@ -30,7 +30,7 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
 
   override formConfig = {
     passengers: [null, [Validators.required]],
-    travelType: [TravelTypesEnum.OneWay],
+    travelType: [TravelTypesEnum.RoundTrip],
     classType: [null, [Validators.required]],
     routes: [null, [Validators.required]],
   };

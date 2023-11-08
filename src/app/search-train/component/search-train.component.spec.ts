@@ -5,19 +5,19 @@ import {
   TravelTypesEnum,
 } from '../../core/module/enum/travel-types.enum';
 import { SearchTrainComponent } from './search-train.component';
-import { SearchTrainFormBuilder } from './search-train.component.spec.builder';
+import { SearchTrainComponentBuilder } from './search-train.component.spec.builder';
 
 describe('SUT: SearchTrainComponent', () => {
   let sut: SearchTrainComponent;
-  let sutBuilder: SearchTrainFormBuilder
+  let sutBuilder: SearchTrainComponentBuilder
 
   beforeEach(() => {
-    sutBuilder = new SearchTrainFormBuilder();
+    sutBuilder = new SearchTrainComponentBuilder();
   });
 
   it('should be create properly', () => {
     // arrange
-    sut = sutBuilder.build(SearchTrainComponent);
+    sut = sutBuilder.build();
 
     // assert
     expect(sut).toBeTruthy();
@@ -26,7 +26,7 @@ describe('SUT: SearchTrainComponent', () => {
 
   it('should be set generalTrainTypes with proper value when constructor called', () => {
     // arrange 
-    sut = sutBuilder.build(SearchTrainComponent)
+    sut = sutBuilder.build()
 
     // assert
     expect(sut.generalTypes).toEqual([
@@ -38,7 +38,7 @@ describe('SUT: SearchTrainComponent', () => {
 
   it('should be set travelTrainTypes with proper value when constructor called', () => {
     // arrange 
-    sut = sutBuilder.build(SearchTrainComponent)
+    sut = sutBuilder.build()
 
     // assert
     expect(sut.travelTypes).toEqual([
@@ -49,7 +49,7 @@ describe('SUT: SearchTrainComponent', () => {
 
   it('should be create form with default value', () => {
     // arrange
-    sut = sutBuilder.build(SearchTrainComponent);
+    sut = sutBuilder.build();
 
     // assert
     expect(sut.form.value).toEqual({
@@ -62,7 +62,7 @@ describe('SUT: SearchTrainComponent', () => {
 
   it('should be when submit routing to `/result-train` with condition valid form', () => {
     // arrange
-    sut = sutBuilder.with_some_valid_data_for_form(SearchTrainConst.SomeSearchTrain).build(SearchTrainComponent);
+    sut = sutBuilder.with_some_valid_data_for_form(SearchTrainConst.SomeSearchTrain).build();
 
     // act
     sut.submit();
@@ -74,7 +74,7 @@ describe('SUT: SearchTrainComponent', () => {
 
   it('should validate "fomControl" field as required', () => {
     // arrange
-    sut = sutBuilder.with_some_valid_data_for_form(SearchTrainConst.SomeSearchTrain).build(SearchTrainComponent)
+    sut = sutBuilder.with_some_valid_data_for_form(SearchTrainConst.SomeSearchTrain).build()
     const passengerCtrl = sut.form.controls.passengers;
     const routesCtrl = sut.form.controls.route;
     const generalCtrl = sut.form.controls.general;
@@ -92,7 +92,7 @@ describe('SUT: SearchTrainComponent', () => {
 
   it('should be check form is invalid', () => {
     // arrange
-    sut = sutBuilder.with_some_invalid_data_for_form(SearchTrainConst.SomeInvalidSearchTrain).build(SearchTrainComponent)
+    sut = sutBuilder.with_some_invalid_data_for_form(SearchTrainConst.SomeInvalidSearchTrain).build()
     sut.form.markAsPristine();
 
     // act

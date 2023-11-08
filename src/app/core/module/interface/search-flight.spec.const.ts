@@ -3,6 +3,7 @@ import { TravelTypesEnum } from "../enum/travel-types.enum";
 import { ISearchFlight } from "./search-types.interface";
 
 export class SearchFlightConst {
+    
     static get SomeSearchFlight(): ISearchFlight {
         return {
             routes: [{

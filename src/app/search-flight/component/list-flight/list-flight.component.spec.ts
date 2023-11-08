@@ -1,5 +1,3 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ListFlightComponent } from './list-flight.component';
 import { ICity } from 'src/app/core/module/interface/city-type.interface';
 import { AbstractDataService } from 'src/app/core/services/data/abstract-data.service';

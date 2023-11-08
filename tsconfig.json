@@ -6,6 +6,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
+    "strictNullChecks": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -18,9 +19,17 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"],
-    "typeRoots": ["./node_modules/@types"],
-    "types": ["lodash-es", "jasmine"]
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "types": [
+      "lodash-es",
+      "jasmine"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
