@@ -1,55 +1,21 @@
-import { TestBed } from "@angular/core/testing";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { SharedModule } from "../../shared/shared.module";
-import { FormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
-import { RouterTestingModule } from "@angular/router/testing";
-import { SearchTrainComponent } from "./search-train.component";
-import { AbstractDataService } from "../../core/services/data/abstract-data.service";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { TestUtil } from "../../core/utils/test";
 import { MatButtonToggle } from "@angular/material/button-toggle";
 import { MatRadioGroup } from "@angular/material/radio";
-import { ComponentFixture } from '@angular/core/testing';
+import { BasePage } from "src/app/core/constant/base-integration-test/base-page";
+import { TestUtil } from "../../core/utils/test";
+import { SearchTrainComponent } from "./search-train.component";
 
-export class SearchTrainComponentPage {
-    fixture!: ComponentFixture<SearchTrainComponent>;
-    component!: SearchTrainComponent;
 
+export class SearchTrainComponentPage extends BasePage<SearchTrainComponent>{
     constructor() {
-        this.init();
-    }
-
-    init() {
-        TestBed.configureTestingModule({
-            imports: [
-                NoopAnimationsModule,
-                SharedModule,
-                FormsModule,
-                BrowserModule,
-                RouterTestingModule,
-            ],
-            declarations: [SearchTrainComponent],
-            providers: [AbstractDataService],
-            schemas: [NO_ERRORS_SCHEMA],
-        });
-
-        this.fixture = TestBed.createComponent(SearchTrainComponent);
-        this.component = this.fixture.componentInstance;
-
-        this.fixture.detectChanges();
-    }
-
-    detectChanges() {
-        this.fixture.detectChanges();
-        return this;
+        const additionalConfig = {
+            imports: [],
+            providers: [],
+        };
+        super(SearchTrainComponent, additionalConfig);
     }
 
     get formCtrls() {
         return this.component.form.controls;
-    }
-    get formEl() {
-        return TestUtil.formGroup(this.fixture, 'form');
     }
     get routeCtrl() {
         return TestUtil.formControl(this.fixture, '#route');
@@ -79,5 +45,4 @@ export class SearchTrainComponentPage {
         return TestUtil.queryAllElement(this.fixture, 'input[type=radio]');
     }
     get input() { return TestUtil.nativeElement<HTMLInputElement>(this.fixture, '#general') }
-
 }

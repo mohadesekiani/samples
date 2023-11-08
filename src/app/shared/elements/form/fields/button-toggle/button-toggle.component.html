@@ -1,4 +1,5 @@
 <mat-button-toggle-group>
     <mat-button-toggle *ngFor="let item of items"
-                       [value]="item.value">{{ item.title }}</mat-button-toggle>
+                       [value]="item.value"
+                       (change)="onValueChange(item)">{{ item.title }}</mat-button-toggle>
 </mat-button-toggle-group>

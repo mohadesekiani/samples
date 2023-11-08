@@ -1,8 +1,6 @@
-import { Directive, EventEmitter, Host, Injector, Input, Optional, Output } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import {
-  ControlContainer,
-  ControlValueAccessor,
-  NgControl,
+  ControlValueAccessor
 } from '@angular/forms';
 import { noop } from 'lodash-es';
 

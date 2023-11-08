@@ -1,50 +1,19 @@
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { SearchFlightComponent } from "./search-flight.component";
-import { SharedModule } from "../../shared/shared.module";
-import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
-import { RouterModule } from "@angular/router";
-import { TestBed } from "@angular/core/testing";
-import { AbstractDataService } from "../../core/services/data/abstract-data.service";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { TestUtil } from "../../core/utils/test";
 import { MatButtonToggle } from "@angular/material/button-toggle";
+import { BasePage } from "src/app/core/constant/base-integration-test/base-page";
+import { TestUtil } from "../../core/utils/test";
+import { SearchFlightComponent } from "./search-flight.component";
 
-export class SearchFlightComponentPage {
-    fixture: any;
-    component!: SearchFlightComponent;
-
+export class SearchFlightComponentPage extends BasePage<SearchFlightComponent>{
     constructor() {
-        this.init()
+        const additionalConfig = {
+            imports: [],
+            providers: [],
+        };
+        super(SearchFlightComponent, additionalConfig);
         spyOn(this.component, 'submit');
-    }
-
-    init() {
-        TestBed.configureTestingModule({
-            imports: [
-                NoopAnimationsModule,
-                SharedModule,
-                BrowserModule,
-                FormsModule,
-                RouterModule,
-            ],
-            declarations: [SearchFlightComponent],
-            providers: [AbstractDataService],
-            schemas: [NO_ERRORS_SCHEMA],
-        })
-        this.fixture = TestBed.createComponent(SearchFlightComponent);
-        this.component = this.fixture.componentInstance;
-        this.fixture.detectChanges();
 
     }
-    detectChanges() {
-        this.fixture.detectChanges();
-        return this;
-    }
 
-    get formEl() {
-        return TestUtil.formGroup(this.fixture, 'form')
-    }
     get routesCtrl() {
         return TestUtil.formControl(this.fixture, '#routes')
     }

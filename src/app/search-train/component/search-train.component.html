@@ -1,55 +1,47 @@
-<form [formGroup]="form" (submit)="(submit)">
+<form [formGroup]="form"
+      (submit)="(submit)">
+    <app-button-toggle formControlName="travelType"
+                       id="travelType"
+                       [items]="travelTypes"></app-button-toggle>
   <div>
-    <mat-button-toggle-group formControlName="travelType" id="travelType">
-      <mat-button-toggle
-        *ngFor="let item of travelTypes"
-        [value]="item.value"
-        >{{ item.title }}</mat-button-toggle
-      >
-    </mat-button-toggle-group>
-  </div>
-  <div>
-    <app-multi-path
-      id="route"
-      formControlName="route"
-      [travelType]="travelType"
-      class="app-multi-path"
-    ></app-multi-path>
+    <app-multi-path id="route"
+                    formControlName="route"
+                    [travelType]="travelType"
+                    class="app-multi-path"></app-multi-path>
 
     <hr />
     <div class="flex flex-wrap">
       <div class="w-1/2">
         <span class="m-2">passengers</span>
-        <app-passengers
-          id="passengers"
-          formControlName="passengers"
-          class="app-passengers"
-        ></app-passengers>
-        <span class="passengers-error" *ngIf="form.controls.passengers?.invalid"
-          >passengers is invalid</span
-        >
+        <app-passengers id="passengers"
+                        formControlName="passengers"
+                        class="app-passengers"></app-passengers>
+        <span class="passengers-error"
+              *ngIf="form.controls.passengers?.invalid">passengers is invalid</span>
       </div>
       <div class="w-1/2">
         <span class="m-2">general</span>
 
         <div class="m-2 flex flex-wrap">
-          <div class="m-auto" style="text-align: center"></div>
+          <div class="m-auto"
+               style="text-align: center"></div>
           <div>
-            <button id="showDrop" (click)="toggleDropDown()">
+            <button id="showDrop"
+                    (click)="toggleDropDown()">
               <i class="fa fa-users"></i>
             </button>
           </div>
         </div>
-        <div class="bg-white" *ngIf="showDrop">
+        <div class="bg-white"
+             *ngIf="showDrop">
           <div class="form-group">
             <div class="form-control m-2 flex flex-col">
-              <label class="radio-inline" *ngFor="let general of generalTypes">
-                <input
-                  [attr.item-id]="'type'+general"
-                  formControlName="general"
-                  type="radio"
-                  [value]="general.value"
-                />
+              <label class="radio-inline"
+                     *ngFor="let general of generalTypes">
+                <input [attr.item-id]="'type'+general"
+                       formControlName="general"
+                       type="radio"
+                       [value]="general.value" />
                 {{ general.title }}
               </label>
             </div>
@@ -58,6 +50,8 @@
       </div>
     </div>
   </div>
-  <button type="submit" id="button" (click)="submit()">Submit</button>
+  <button type="submit"
+          id="button"
+          (click)="submit()">Submit</button>
 </form>
 {{ form.value | json }}

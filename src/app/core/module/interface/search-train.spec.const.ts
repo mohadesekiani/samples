@@ -15,5 +15,12 @@ export class SearchTrainConst {
             travelType: TravelTypesEnum.OneWay,
         }
     }
-
+    static get SomeInvalidSearchTrain() {
+        return {
+            route: null,
+            passengers: { Adult: 1, Child: 1, Infant: 1 },
+            general: GeneralTypesEnum.General,
+            travelType: TravelTypesEnum.OneWay,
+          }
+    }
 }

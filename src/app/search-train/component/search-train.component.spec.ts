@@ -1,3 +1,4 @@
+import { SearchTrainConst } from 'src/app/core/module/interface/search-train.spec.const';
 import { GeneralTypesEnum } from '../../core/module/enum/general-types.enum';
 import {
   TravelTrainTypesEnum,
@@ -12,7 +13,7 @@ fdescribe('SUT: SearchTrainComponent', () => {
 
   it('should be create properly', () => {
     // arrange
-    sut = sutBuilder.build();
+    sut = sutBuilder.build(SearchTrainComponent);
 
     // assert
     expect(sut).toBeTruthy();
@@ -21,7 +22,7 @@ fdescribe('SUT: SearchTrainComponent', () => {
 
   it('should be set generalTrainTypes with proper value when constructor called', () => {
     // arrange 
-    sut = sutBuilder.build()
+    sut = sutBuilder.build(SearchTrainComponent)
 
     // assert
     expect(sut.generalTypes).toEqual([
@@ -33,7 +34,7 @@ fdescribe('SUT: SearchTrainComponent', () => {
 
   it('should be set travelTrainTypes with proper value when constructor called', () => {
     // arrange 
-    sut = sutBuilder.build()
+    sut = sutBuilder.build(SearchTrainComponent)
 
     // assert
     expect(sut.travelTypes).toEqual([
@@ -44,7 +45,7 @@ fdescribe('SUT: SearchTrainComponent', () => {
 
   xit('should be create form with default value', () => {
     // arrange
-    sut = sutBuilder.build();
+    sut = sutBuilder.build(SearchTrainComponent);
 
     // assert
     expect(sut.form.value).toEqual({
@@ -57,7 +58,7 @@ fdescribe('SUT: SearchTrainComponent', () => {
 
   it('should be when submit routing to `/result-train` with condition valid form', () => {
     // arrange
-    sut = sutBuilder.with_some_valid_data_for_form().build();
+    sut = sutBuilder.with_some_valid_data_for_form(SearchTrainConst.SomeSearchTrain).build(SearchTrainComponent);
 
     // act
     sut.submit();
@@ -69,7 +70,7 @@ fdescribe('SUT: SearchTrainComponent', () => {
 
   it('should validate "fomControl" field as required', () => {
     // arrange
-    sut = sutBuilder.with_some_valid_data_for_form().build()
+    sut = sutBuilder.with_some_valid_data_for_form(SearchTrainConst.SomeSearchTrain).build(SearchTrainComponent)
     const passengerCtrl = sut.form.controls.passengers;
     const routesCtrl = sut.form.controls.route;
     const generalCtrl = sut.form.controls.general;
@@ -87,7 +88,7 @@ fdescribe('SUT: SearchTrainComponent', () => {
 
   it('should be check form is invalid', () => {
     // arrange
-    sut = sutBuilder.with_some_invalid_data_for_form().build()
+    sut = sutBuilder.with_some_invalid_data_for_form(SearchTrainConst.SomeInvalidSearchTrain).build(SearchTrainComponent)
     sut.form.markAsPristine();
 
     // act

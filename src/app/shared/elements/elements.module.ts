@@ -29,7 +29,7 @@ const COMPONENTS = [
 @NgModule({
   declarations: [
     COMPONENTS,
-    CheckBoxComponent,  
+    CheckBoxComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, MaterialModule],
   exports: [COMPONENTS],

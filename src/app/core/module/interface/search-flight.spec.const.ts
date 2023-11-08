@@ -16,5 +16,12 @@ export class SearchFlightConst {
             travelType: TravelTypesEnum.OneWay,
         }
     }
-
+    static get SomeInvalidSearchFlight(): ISearchFlight {
+        return {
+            routes: null,
+            classType: ClassTypesEnum.Business,
+            passengers: { Adult: 1, Child: 1, Infant: 1 },
+            travelType: TravelTypesEnum.OneWay,
+        }
+    }
 }

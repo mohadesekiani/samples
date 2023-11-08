@@ -1,3 +1,4 @@
+import { SearchFlightConst } from 'src/app/core/module/interface/search-flight.spec.const';
 import { ClassTypesEnum } from '../../core/module/enum/class-types.enum';
 import { TravelTypesEnum } from '../../core/module/enum/travel-types.enum';
 import { SearchFlightComponent } from './search-flight.component';
@@ -14,7 +15,7 @@ fdescribe('SUT: SearchFlightComponent', () => {
 
   it('should be create properly', () => {
     // arrange
-    sut = sutBuilder.build();
+    sut = sutBuilder.build(SearchFlightComponent);
 
     // assert 
     expect(sut).toBeTruthy();
@@ -23,7 +24,7 @@ fdescribe('SUT: SearchFlightComponent', () => {
 
   it('should be set classFlightTypes with proper value when constructor called', () => {
     // arrange 
-    sut = sutBuilder.build()
+    sut = sutBuilder.build(SearchFlightComponent)
 
     // assert
     expect(sut.classTypes).toEqual([
@@ -36,7 +37,7 @@ fdescribe('SUT: SearchFlightComponent', () => {
 
   it('should be set travelFlightTypes with proper value when constructor called', () => {
     // arrange 
-    sut = sutBuilder.build()
+    sut = sutBuilder.build(SearchFlightComponent)
 
     // assert 
     expect(sut.travelTypes).toEqual([
@@ -48,7 +49,7 @@ fdescribe('SUT: SearchFlightComponent', () => {
 
   it('should be create form with default value', () => {
     // arrange
-    sut = sutBuilder.build();
+    sut = sutBuilder.build(SearchFlightComponent);
 
     // assert
     expect(sut.form.value).toEqual({
@@ -61,7 +62,7 @@ fdescribe('SUT: SearchFlightComponent', () => {
 
   it('should be when submit routing to `/result-flight` with condition valid form', () => {
     // arrange
-    sut = sutBuilder.with_some_valid_data_for_form().build()
+    sut = sutBuilder.with_some_valid_data_for_form(SearchFlightConst.SomeSearchFlight).build(SearchFlightComponent)
 
     // act
     sut.submit();
@@ -72,7 +73,7 @@ fdescribe('SUT: SearchFlightComponent', () => {
 
   it('should be check form is invalid', () => {
     // arrange
-    sut = sutBuilder.with_some_invalid_data_for_form().build()
+    sut = sutBuilder.with_some_invalid_data_for_form(SearchFlightConst.SomeInvalidSearchFlight).build(SearchFlightComponent)
     sut.form.markAsPristine();
 
     // act
@@ -87,7 +88,7 @@ fdescribe('SUT: SearchFlightComponent', () => {
     // arrange
     sut = sutBuilder.with_data_for_form({
       passengers: null, routes: null, classType: null
-    } as any).build();
+    } as any).build(SearchFlightComponent);
 
     // assert
     expect(sut.form.controls.passengers.valid).toBeFalsy();
