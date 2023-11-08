@@ -7,15 +7,20 @@ fdescribe('SUT: PassengersComponent', () => {
 
   beforeEach(() => {
     sutBuilder = new PassengersFormBuilder();
-    sut = sutBuilder.build(PassengersComponent);
   });
 
   it('should be create', () => {
+    // arrange 
+    sut = sutBuilder.build(PassengersComponent);
+
     // assert
     expect(sut).toBeTruthy();
   });
 
   it('should be created form with default value', () => {
+    // arrange 
+    sut = sutBuilder.build(PassengersComponent);
+
     // assert
     expect(sut.form.value).toEqual({ Adult: null, Child: null, Infant: null });
   });
