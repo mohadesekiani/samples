@@ -1,3 +1,4 @@
+import { BaseFormTestFunc } from 'src/app/core/constant/base-unit-test/base-form.spec.func';
 import { SearchTrainConst } from 'src/app/core/module/interface/search-train.spec.const';
 import { GeneralTypesEnum } from '../../core/module/enum/general-types.enum';
 import {
@@ -5,15 +6,17 @@ import {
   TravelTypesEnum,
 } from '../../core/module/enum/travel-types.enum';
 import { SearchTrainComponent } from './search-train.component';
-import { SearchTrainComponentBuilder } from './search-train.component.spec.builder';
+import { SearchTrainFormBuilder } from './search-train.component.spec.builder';
 
 describe('SUT: SearchTrainComponent', () => {
   let sut: SearchTrainComponent;
-  let sutBuilder: SearchTrainComponentBuilder
+  let sutBuilder: SearchTrainFormBuilder
 
   beforeEach(() => {
-    sutBuilder = new SearchTrainComponentBuilder();
+    sutBuilder = new SearchTrainFormBuilder();
   });
+
+  BaseFormTestFunc(() => sutBuilder);
 
   it('should be create properly', () => {
     // arrange

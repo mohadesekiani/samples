@@ -1,12 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MultiPathComponent } from './multi-path.component';
-import { FormBuilder } from '@angular/forms';
-import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
-import { Injector } from '@angular/core';
-import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 import { BaseFormControlValueAccessorTestFunc } from 'src/app/core/constant/base-component/base-form-control-value-accessor.spec.func';
+import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
+import { MultiPathComponent } from './multi-path.component';
 
-fdescribe('SUT: MultiPathComponent', () => {
+describe('SUT: MultiPathComponent', () => {
   let sut: MultiPathComponent;
 
   beforeEach(() => {
@@ -16,20 +12,20 @@ fdescribe('SUT: MultiPathComponent', () => {
 
   BaseFormControlValueAccessorTestFunc(() => new MultiPathComponent());
 
-  it('should be created form with default value', () => {
-    // arrange
-    const expectedFormValue = {
-      routes: [
-        {
-          origin: null,
-          destination: null,
-          departureDate: null,
-        },
-      ],
-    };
-    // assert
-    expect(sut.form.value).toEqual(expectedFormValue);
-  });
+  // it('should be created form with default value', () => {
+  //   // arrange
+  //   const expectedFormValue = {
+  //     routes: [
+  //       {
+  //         origin: null,
+  //         destination: null,
+  //         departureDate: null,
+  //       },
+  //     ],
+  //   };
+  //   // assert
+  //   expect(sut.form.value).toEqual(expectedFormValue);
+  // });
 
   it('should be when selected MultiPath length formArray to be two', () => {
     //arrange

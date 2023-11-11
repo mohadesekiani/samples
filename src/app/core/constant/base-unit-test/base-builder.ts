@@ -15,16 +15,16 @@ export abstract class BaseBuilder<Q extends BaseForm<any>> {
     return this.with_data_for_form(this.some_data);
   }
 
-  with_data_for_form(value: T): this {
+  with_data_for_form(value:  Partial<Q['entity']>): this {
     this.formValue = value;
     return this;
   }
-  with_some_valid_data_for_form(valueForm: T): this {
+  with_some_valid_data_for_form(valueForm: Partial<Q['entity']>): this {
     this.with_data_for_form(valueForm);
     return this;
   }
 
-  with_some_invalid_data_for_form(valueForm: T): this {
+  with_some_invalid_data_for_form(valueForm:  Partial<Q['entity']>): this {
     this.with_data_for_form(valueForm);
     return this;
   }
