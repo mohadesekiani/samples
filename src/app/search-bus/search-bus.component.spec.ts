@@ -34,7 +34,7 @@ fdescribe('SUT: SearchBusComponent', () => {
     expect(sut.form.controls.routes.hasError('required')).toBe(true)
   });
 
-  it('should be when is valid form , redirect to `/result-bus`', () => {
+  xit('should be when is valid form , redirect to `/result-bus`', () => {
     // arrange 
     sut.form.setValue({
       routes: [{

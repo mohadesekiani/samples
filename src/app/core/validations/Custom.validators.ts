@@ -16,7 +16,6 @@ export class CustomValidators {
   static maxFrom(fromField: string, toField: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const formGroup = control as FormGroup;
-
       if (!formGroup) {
         return null;
       }
@@ -49,7 +48,7 @@ export class CustomValidators {
 
       var targetDate = moment(selectedDate).format('YYYY-MM-DD');
       var today = moment(currentDate).format('YYYY-MM-DD');
-      
+
       if (targetDate < today) {
         return { minDateToday: true, actualValue: targetDate, expected: today };
       }
@@ -59,7 +58,24 @@ export class CustomValidators {
   }
 
   static maxDateFrom(arg0: string, arg1: string): ValidatorFn {
-    throw new Error('Method not implemented.');
+    return (control: AbstractControl): ValidationErrors | null => {
+      const formGroup = control as FormGroup;
+      if (!formGroup) {
+        return null;
+      }
+      const returnDate = formGroup.get(arg1);
+      const departureDate = formGroup.get(arg0);
+
+      if (departureDate && returnDate) {
+        const time1 = new Date(departureDate.value)
+        const time2 = new Date(returnDate.value)
+
+        if (time2 < time1) return { maxDateFrom: true };
+      }
+
+      return null;
+
+    }
   }
 
   static returnDateValidator(nameArray: string): ValidatorFn {

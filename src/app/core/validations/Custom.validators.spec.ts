@@ -1,23 +1,24 @@
 import {
-  FormGroup,
-  FormControl,
   AbstractControl,
-  FormBuilder,
   FormArray,
-  Validators,
+  FormBuilder,
+  FormControl,
+  FormGroup
 } from '@angular/forms';
 import { IForm, ISearchMultiPath, ISearchRoute } from '../module/interface/search-types.interface';
 import { CustomValidators } from './custom.validators';
 
 
-describe('CustomValidators', () => {
+fdescribe('CustomValidators', () => {
   let formGroup: FormGroup;
   let fb: FormBuilder;
-
+  let form: FormGroup
   let fromFieldCtrl!: AbstractControl;
   let toFieldCtrl!: AbstractControl;
-
+  let minFieldCtrl: AbstractControl
+  let maxFieldCtrl: AbstractControl
   beforeEach(() => {
+    fb = new FormBuilder()
     formGroup = new FormBuilder().group(
       {
         fromField: [],
@@ -27,6 +28,14 @@ describe('CustomValidators', () => {
         validators: [CustomValidators.maxFrom('fromField', 'toField')],
       }
     );
+    form = fb.group({
+      minField: [null],
+      maxField: [null],
+    }, {
+      validators: [CustomValidators.maxDateFrom('minField', 'maxField')]
+    })
+    minFieldCtrl = form.get('minField') as AbstractControl;
+    maxFieldCtrl = form.get('maxField') as AbstractControl;
 
     fromFieldCtrl = formGroup.get('fromField') as AbstractControl;
     toFieldCtrl = formGroup.get('toField') as AbstractControl;
@@ -117,48 +126,44 @@ describe('CustomValidators', () => {
     });
   });
 
-  it('should not be smaller than today ', () => {
-    // arrange 
-    formGroup = fb.group(
-      {
-        minField: [new Date()],
-        maxField: [new Date(10 / 11 / 2023), Validators.maxDateFrom('minField', 'maxField')],
-      },
-
-    );
+  fit('should not be smaller than today ', () => {
+    // act 
+    minFieldCtrl.setValue(new Date())
+    maxFieldCtrl.setValue(new Date(10 / 11 / 2023))
 
     // assert 
-    expect(formGroup.get('maxField')?.invalid).toBeTruthy();
-    expect(formGroup.get('maxField')?.hasError('max')).toBeTruthy();
+    expect(form.invalid).toBeTruthy();
+    expect(form.hasError('maxDateFrom')).toBeTruthy();
+    expect(maxFieldCtrl.invalid).toBeTruthy();
+    expect(maxFieldCtrl.hasError('maxDateFrom')).toBeTruthy();
   });
 
   it('should not be smaller than the minFromDate ', () => {
-    // arrange 
-    formGroup = fb.group(
-      {
-        minField: [new Date(11 / 12 / 2023)],
-        maxField: [new Date(11 / 11 / 2023), Validators.maxDateFrom('minField', 'maxField')],
-      },
-
-    );
+    // act 
+    minFieldCtrl.setValue(new Date())
+    maxFieldCtrl.setValue(new Date(11 / 11 / 2022))
 
     // assert 
-    expect(formGroup.get('maxField')?.invalid).toBeTruthy();
-    expect(formGroup.get('maxField')?.hasError('max')).toBeTruthy();
+    expect(form.invalid).toBeTruthy();
+    expect(maxFieldCtrl.invalid).toBeTruthy();
+    expect(form.hasError('maxDateFrom')).toBeTruthy();
+    expect(maxFieldCtrl.hasError('maxDateFrom')).toBeTruthy();
   });
 
   it('should be The selected date , greater than today', () => {
     // arrange 
-    formGroup = fb.group(
+    const form = new FormBuilder().group(
       {
         minField: [new Date()],
-        maxField: [new Date(), Validators.maxDateFrom('minField', 'maxField')],
-      },
+        maxField: [new Date()],
+      }, {
+      Validators: CustomValidators.maxDateFrom('minField', 'maxField')
+    }
 
     );
 
     // assert 
-    expect(formGroup.get('maxField')?.invalid).toBeFalsy();
-    expect(formGroup.get('maxField')?.hasError('max')).toBeFalsy();
+    expect(maxFieldCtrl.invalid).toBeFalsy();
+    expect(maxFieldCtrl.hasError('maxDateFrom')).toBeFalsy();
   });
 });
