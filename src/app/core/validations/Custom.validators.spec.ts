@@ -4,6 +4,7 @@ import {
   AbstractControl,
   FormBuilder,
   FormArray,
+  Validators,
 } from '@angular/forms';
 import { IForm, ISearchMultiPath, ISearchRoute } from '../module/interface/search-types.interface';
 import { CustomValidators } from './custom.validators';
@@ -94,7 +95,7 @@ describe('CustomValidators', () => {
           origin: new FormControl(null),
           destination: new FormControl(null),
           departureDate: new FormControl(null, [
-            CustomValidators.dateValidator(),
+            CustomValidators.minDateToday(),
           ]),
           returnDate: new FormControl(null),
         }),
@@ -114,5 +115,50 @@ describe('CustomValidators', () => {
     expect(routeFormGroup.controls.departureDate.errors).toEqual({
       dateInvalid: true,
     });
+  });
+
+  it('should not be smaller than today ', () => {
+    // arrange 
+    formGroup = fb.group(
+      {
+        minField: [new Date()],
+        maxField: [new Date(10 / 11 / 2023), Validators.maxDateFrom('minField', 'maxField')],
+      },
+
+    );
+
+    // assert 
+    expect(formGroup.get('maxField')?.invalid).toBeTruthy();
+    expect(formGroup.get('maxField')?.hasError('max')).toBeTruthy();
+  });
+
+  it('should not be smaller than the minFromDate ', () => {
+    // arrange 
+    formGroup = fb.group(
+      {
+        minField: [new Date(11 / 12 / 2023)],
+        maxField: [new Date(11 / 11 / 2023), Validators.maxDateFrom('minField', 'maxField')],
+      },
+
+    );
+
+    // assert 
+    expect(formGroup.get('maxField')?.invalid).toBeTruthy();
+    expect(formGroup.get('maxField')?.hasError('max')).toBeTruthy();
+  });
+
+  it('should be The selected date , greater than today', () => {
+    // arrange 
+    formGroup = fb.group(
+      {
+        minField: [new Date()],
+        maxField: [new Date(), Validators.maxDateFrom('minField', 'maxField')],
+      },
+
+    );
+
+    // assert 
+    expect(formGroup.get('maxField')?.invalid).toBeFalsy();
+    expect(formGroup.get('maxField')?.hasError('max')).toBeFalsy();
   });
 });

@@ -9,7 +9,7 @@ import { Validators } from '@angular/forms';
   styleUrls: ['./search-bus.component.scss']
 })
 export class SearchBusComponent extends BaseForm<ISearchBus>{
-  override resultUrl: string = '/result-bus';
+  override resultUrl: string = 'result-bus';
   override formConfig = {
     routes: [null, [Validators.required]],
     passengers: [null, [Validators.required]],

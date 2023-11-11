@@ -11,6 +11,8 @@ import { IForm, ISearchRoute } from 'src/app/core/module/interface/search-types.
 import * as moment from 'moment';
 
 export class CustomValidators {
+
+
   static maxFrom(fromField: string, toField: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const formGroup = control as FormGroup;
@@ -39,18 +41,25 @@ export class CustomValidators {
     };
   }
 
-  static dateValidator(): ValidatorFn {
+  static minDateToday(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const currentDate = new Date();
       const selectedDate = control.value;
-      if (selectedDate) {
-        var time1 = moment(selectedDate).format('YYYY-MM-DD');
-        var time2 = moment(currentDate).format('YYYY-MM-DD');
-        if ( time1 < time2) return { dateInvalid: true };
+      if (!selectedDate) { return null; }
+
+      var targetDate = moment(selectedDate).format('YYYY-MM-DD');
+      var today = moment(currentDate).format('YYYY-MM-DD');
+      
+      if (targetDate < today) {
+        return { minDateToday: true, actualValue: targetDate, expected: today };
       }
 
       return null;
     };
+  }
+
+  static maxDateFrom(arg0: string, arg1: string): ValidatorFn {
+    throw new Error('Method not implemented.');
   }
 
   static returnDateValidator(nameArray: string): ValidatorFn {
@@ -70,7 +79,7 @@ export class CustomValidators {
     };
   }
 
-  static childrenCountValidator(): ValidatorFn {
+  static maxFromValidator(from: string, to: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       var fg = control?.parent as FormGroup;
       if (!fg) {

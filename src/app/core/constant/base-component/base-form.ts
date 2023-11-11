@@ -13,7 +13,9 @@ export abstract class BaseForm<T> {
   protected validationErrorService = new ValidationErrorService();
   entity?: T;
 
-  constructor(protected router: Router) { }
+  constructor(protected router: Router) {
+    if (!router) { throw new Error('router is null'); }
+  }
 
   ngOnInit() {
     this.createForm(this.formConfig);
@@ -44,4 +46,7 @@ export abstract class BaseForm<T> {
   navigate(path: string) {
     this.router.navigate([path]);
   }
+
+
+  
 }

@@ -7,20 +7,24 @@ fdescribe('SUT: SearchBusComponent', () => {
   let router: jasmine.SpyObj<Router>
   beforeEach(() => {
     router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
-    sut = new SearchBusComponent(router)
+    sut = new SearchBusComponent(router);
     sut.ngOnInit()
   });
 
   it('should be create', () => {
     expect(sut).toBeTruthy();
   });
+
+  it('should be throw exception with empty router',()=>{
+    expect(()=>new SearchBusComponent(null)).toThrowError('router is null');
+  })
+
   it('should be defualt value form', () => {
-    debugger
     expect(sut.form.value).toEqual({
       routes: null,
       passengers: null,
       classBus: null
-    })
+    });
   });
 
   it('should be have an error when the value is null', () => {
