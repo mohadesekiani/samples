@@ -40,37 +40,44 @@ export class CustomValidators {
     };
   }
 
-  static minDateToday(): ValidatorFn {
+  static minDateToday(fromField: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const currentDate = new Date();
-      const selectedDate = control.value;
-      if (!selectedDate) { return null; }
-
-      var targetDate = moment(selectedDate).format('YYYY-MM-DD');
-      var today = moment(currentDate).format('YYYY-MM-DD');
-
-      if (targetDate < today) {
-        return { minDateToday: true, actualValue: targetDate, expected: today };
+      const formGroup = control as FormGroup;
+      if (!formGroup) {
+        return null;
+      }
+      const today = new Date();
+      const selectedCtrl = formGroup.get(fromField)
+      const time1 = new Date(selectedCtrl.value)
+      if (time1.getTime() < today.getTime()) {
+        selectedCtrl.setErrors({ today: { minDateToday: true, actualValue: time1, expected: today } });
       }
 
       return null;
     };
   }
 
-  static maxDateFrom(arg0: string, arg1: string): ValidatorFn {
+  static maxDateTo(fromField: string, toField: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const formGroup = control as FormGroup;
       if (!formGroup) {
         return null;
       }
-      const returnDate = formGroup.get(arg1);
-      const departureDate = formGroup.get(arg0);
+      const fromDateCtrl = formGroup.get(fromField);
+      const toDateCtrl = formGroup.get(toField);
 
-      if (departureDate && returnDate) {
-        const time1 = new Date(departureDate.value)
-        const time2 = new Date(returnDate.value)
+      if (fromDateCtrl && toDateCtrl) {
+        const time1 = new Date(fromDateCtrl.value)
+        const time2 = new Date(toDateCtrl.value)
+        const oneMonthLater = new Date();
+        const x = oneMonthLater.setMonth(oneMonthLater.getMonth() + 1)
+        if (time2.getTime() > x) {
+          toDateCtrl?.setErrors({ max: { actual: toDateCtrl.value, max: new Date().getMonth() + 1 } });
+        }
+        if (time2.getTime() < time1.getTime()) {
+          toDateCtrl?.setErrors({ min: { actual: toDateCtrl.value, min: fromDateCtrl?.value } });
+        };
 
-        if (time2 < time1) return { maxDateFrom: true };
       }
 
       return null;
@@ -78,37 +85,30 @@ export class CustomValidators {
     }
   }
 
-  static returnDateValidator(nameArray: string): ValidatorFn {
+  static minDateTo(fromField: string, toField: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const formArray = control.root.get(nameArray) as FormArray<
-        FormGroup<IForm<ISearchRoute>>
-      >;
-
-      const departureDate = formArray.at(0).controls.departureDate.value;
-      const returnDate = control.value;
-      if (departureDate && returnDate) {
-        var time1 = moment(departureDate).format('YYYY-MM-DD');
-        var time2 = moment(returnDate).format('YYYY-MM-DD');
-        if (time2 < time1) return { returnDateInvalid: true };
-      }
-      return null;
-    };
-  }
-
-  static maxFromValidator(from: string, to: string): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      var fg = control?.parent as FormGroup;
-      if (!fg) {
+      const formGroup = control as FormGroup;
+      if (!formGroup) {
         return null;
       }
-      // let infantValue = fg.value?.Infant;
-      let infantValue = control.value;
-      let adultValue = fg.value?.Adult;
-      if (+infantValue > +adultValue) {
-        return { max: { actual: infantValue, max: adultValue } };
+      const fromDateCtrl = formGroup.get(fromField);
+      const toDateCtrl = formGroup.get(toField);
+
+      if (fromDateCtrl && toDateCtrl) {
+        const time1 = new Date(fromDateCtrl.value)
+        const time2 = new Date(toDateCtrl.value)
+        if (time2.getTime() < time1.getTime()) {
+          toDateCtrl?.setErrors({ min: { actual: toDateCtrl.value, min: fromDateCtrl?.value } });
+        };
+
       }
 
       return null;
-    };
+
+    }
   }
+
+
+
+
 }

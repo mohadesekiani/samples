@@ -71,7 +71,7 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
             destination: [null, [Validators.required]],
             departureDate: [
               null,
-              [Validators.required, CustomValidators.minDateToday()],
+              [Validators.required,],
             ],
             returnDate: [
               { value: null, disabled: true },
@@ -82,7 +82,8 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
             ],
           }, {
             validators: [
-              CustomValidators.maxDateFrom('departureDate', 'returnDate')
+              CustomValidators.maxDateTo('departureDate', 'returnDate'), CustomValidators.minDateTo('departureDate', 'returnDate')
+
             ]
           }),
         ],
@@ -102,7 +103,6 @@ export class MultiPathComponent extends BaseFormControlValueAccessor<ISearchMult
         null,
         [
           Validators.required,
-          CustomValidators.minDateToday()
         ],
       ],
     });
