@@ -1,10 +1,14 @@
+import { Router } from "@angular/router";
 import { LayoutComponent } from "./layout.component";
 
 describe('SUT: LayoutComponent', () => {
   let sut: LayoutComponent;
+  let router: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
-    sut = new LayoutComponent();
+    router = jasmine.createSpyObj<Router>('Router', ['navigate']) as any;
+
+    sut = new LayoutComponent(router);
   });
 
   it('should create', () => {

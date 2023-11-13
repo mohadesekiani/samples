@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
@@ -5,8 +6,6 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { AbstractDataService } from "../../services/data/abstract-data.service";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { TestUtil } from "../../utils/test";
 
 export abstract class BasePage<T>{
     fixture!: ComponentFixture<T>;
@@ -39,9 +38,5 @@ export abstract class BasePage<T>{
         return this;
     }
 
-    get formEl() {
-        return TestUtil.formGroup(this.fixture, 'form');
-    }
-    
 
 }

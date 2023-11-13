@@ -23,6 +23,7 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
   }));
 
   get travelType(): TravelTypesEnum {
+    // debugger
     return this.form.controls.travelType?.value as TravelTypesEnum;
   }
 

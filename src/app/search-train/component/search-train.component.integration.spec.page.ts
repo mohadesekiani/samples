@@ -11,6 +11,9 @@ export class SearchTrainComponentPage extends BasePage<SearchTrainComponent>{
         super(SearchTrainComponent);
     }
 
+    get formEl() {
+        return TestUtil.formGroup(this.fixture, 'form');
+    }
     get formCtrls() {
         return this.component.form.controls;
     }

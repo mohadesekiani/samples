@@ -52,6 +52,11 @@ describe('SUT: ResultFlightComponent', () => {
   it('should create', () => {
     expect(sut).toBeTruthy();
   });
+
+  it('should be throw exception with empty AbstractDataService',()=>{
+    expect(()=>new ResultFlightComponent(null)).toThrowError('AbstractDataService is null');
+  })
+
   it('should be default data', () => {
     // arrange
     const expectedValue: IFilterFlight = {

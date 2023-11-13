@@ -152,5 +152,5 @@ fdescribe('SUT: CustomValidators', () => {
     // assert 
     expect(fromFieldCtrlDate.hasError('today')).toBeTruthy()
   });
-  
+
 });

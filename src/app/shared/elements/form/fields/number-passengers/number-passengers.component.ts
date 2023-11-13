@@ -38,7 +38,7 @@ export class NumberPassengersComponent extends BaseInputControlValueAccessor<num
     const target = event.target as HTMLInputElement;
     const value = target.value;
     this.value = +value;
-    
+
     this.updateValueAndValidity(this.value);
   }
 }

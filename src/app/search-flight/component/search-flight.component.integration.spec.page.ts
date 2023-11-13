@@ -10,6 +10,9 @@ export class SearchFlightComponentPage extends BasePage<SearchFlightComponent>{
 
     }
 
+    get formEl() {
+        return TestUtil.formGroup(this.fixture, 'form');
+    }
     get routesCtrl() {
         return TestUtil.formControl(this.fixture, '#routes')
     }

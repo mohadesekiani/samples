@@ -47,6 +47,4 @@ export abstract class BaseForm<T> {
     this.router.navigate([path]);
   }
 
-
-  
 }

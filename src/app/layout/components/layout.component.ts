@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ITab } from 'src/app/core/module/interface/search-types.interface'
 
 @Component({
@@ -12,12 +13,21 @@ export class LayoutComponent {
     { title: 'Train', active: false, route: '/Train' },
   ];
 
-  constructor() {}
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activeRouting()
+  }
 
   activateTab(selectedTab: ITab) {
     this.tabs.forEach((tab) => (tab.active = false));
     selectedTab.active = true;
+  }
+  private activeRouting() {
+    let activeRoute = this.tabs.find(x => x.route === this.router.url)
+    if (activeRoute) {
+      this.tabs.forEach((tab) => (tab.active = false));
+      activeRoute.active = true
+    }
   }
 }

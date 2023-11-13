@@ -18,7 +18,7 @@ import { BaseInputControlValueAccessor } from 'src/app/core/constant/base-compon
 export class CheckBoxComponent extends BaseInputControlValueAccessor<boolean> {
   override value: boolean = false;
   onCheckboxChange() {
-    this.value = !this.value;
+    this.value = !this.value;    
     this.onChange(this.value);
   }
 }
