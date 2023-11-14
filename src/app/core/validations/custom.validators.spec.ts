@@ -189,7 +189,7 @@ describe('SUT: CustomValidators', () => {
 
   });
 
-  fit('should not be Its length less than 3', () => {
+  it('should not be Its length less than 3', () => {
     // arrange 
     let routesCtrl = formBuilderInstance.form_Validation_length().routesCtrl
 
