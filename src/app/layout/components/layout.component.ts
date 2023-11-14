@@ -16,18 +16,18 @@ export class LayoutComponent {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.activeRouting()
+    this.activateTabByRouting()
   }
 
   activateTab(selectedTab: ITab) {
     this.tabs.forEach((tab) => (tab.active = false));
     selectedTab.active = true;
   }
-  private activeRouting() {
+
+  private activateTabByRouting() {
     let activeRoute = this.tabs.find(x => x.route === this.router.url)
     if (activeRoute) {
-      this.tabs.forEach((tab) => (tab.active = false));
-      activeRoute.active = true
+      this.activateTab(activeRoute);
     }
   }
 }

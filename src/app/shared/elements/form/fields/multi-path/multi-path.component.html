@@ -18,15 +18,16 @@
             formControlName="departureDate"
             id="departureDate"
             placeholder="your departure date"
+            [error]="messages['routes['+i+'].departureDate']"
             label="departure Date"
             [name]="nameCtrl"
             />
-            <mat-error *ngIf="form.controls.routes.invalid">{{messages['routes['+i+'].departureDate']}} </mat-error>
             <app-datepicker
               *ngIf="item.get('returnDate')?.enabled"
               formControlName="returnDate"
               id="returnDate"
-              placeholder="your return date"
+            [error]="messages['routes[0].returnDate']"
+            placeholder="your return date"
               label="return Date"
             />
             <!-- <span

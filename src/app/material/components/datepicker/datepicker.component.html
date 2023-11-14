@@ -11,6 +11,7 @@
       (click)="picker.open()"
       (dateChange)="onDateValueChanged($event)"
       [value]="value"
+      matNativeControl
       item-id="input"
       class="mat-input-invalid"
       [errorStateMatcher]="matcher"
@@ -21,6 +22,7 @@
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+  <mat-error>{{error}}</mat-error>
   <span *ngFor="let item of result">
     <!-- <mat-error *ngIf="item.controller.valid === false">
       {{ item.error | errorMessage }}

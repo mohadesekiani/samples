@@ -1,7 +1,7 @@
 import { ButtonToggleComponent } from './button-toggle.component';
 import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
 
-fdescribe('SUT: ButtonToggleComponent', () => {
+describe('SUT: ButtonToggleComponent', () => {
   let sut: ButtonToggleComponent;
 
   beforeEach(() => {

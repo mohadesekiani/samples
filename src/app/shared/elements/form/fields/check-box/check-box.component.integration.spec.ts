@@ -1,6 +1,6 @@
 import { checkBoxComponentPage } from "./check-box.component.integration.spec.page"
 
-fdescribe('SUT(Integration): CheckBoxComponent', () => {
+describe('SUT(Integration): CheckBoxComponent', () => {
     let sutPage: checkBoxComponentPage
     beforeEach(() => {
         sutPage = new checkBoxComponentPage()

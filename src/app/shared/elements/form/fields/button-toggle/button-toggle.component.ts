@@ -17,7 +17,7 @@ import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
 })
 export class ButtonToggleComponent extends BaseControlValueAccessor<string>{
   override value = TravelTypesEnum.OneWay
-  @Input() items!: Array<{ value: any, title: string }>
+  @Input() items: Array<{ value: any, title: string }> = [];
 
   onValueChange(item: { value: any, title: string }) {
     this.value = item.value

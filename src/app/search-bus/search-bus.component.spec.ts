@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { SearchBusComponent } from './search-bus.component';
 import { ClassTypesEnum } from '../core/module/enum/class-types.enum';
 
-fdescribe('SUT: SearchBusComponent', () => {
+describe('SUT: SearchBusComponent', () => {
   let sut: SearchBusComponent;
   let router: jasmine.SpyObj<Router>
   beforeEach(() => {

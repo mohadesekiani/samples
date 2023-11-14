@@ -57,7 +57,7 @@ export class CustomValidators {
     };
   }
 
-  static maxDateTo(fromField: string, toField: string): ValidatorFn {
+  static maxDateTo(fromField: string, toField: string, maxDate?: Date): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const formGroup = control as FormGroup;
       if (!formGroup) {
@@ -66,22 +66,22 @@ export class CustomValidators {
       const fromDateCtrl = formGroup.get(fromField);
       const toDateCtrl = formGroup.get(toField);
 
-      if (fromDateCtrl && toDateCtrl) {
-        const time1 = new Date(fromDateCtrl.value)
-        const time2 = new Date(toDateCtrl.value)
-        const oneMonthLater = new Date();
-        const x = oneMonthLater.setMonth(oneMonthLater.getMonth() + 1)
-        if (time2.getTime() > x) {
-          toDateCtrl?.setErrors({ max: { actual: toDateCtrl.value, max: new Date().getMonth() + 1 } });
-        }
-        if (time2.getTime() < time1.getTime()) {
-          toDateCtrl?.setErrors({ min: { actual: toDateCtrl.value, min: fromDateCtrl?.value } });
-        };
+      if (!fromDateCtrl || !toDateCtrl) {
+        return null;
+      }
 
+      const time1 = new Date(fromDateCtrl.value);
+      const time2 = new Date(toDateCtrl.value);
+      // const oneMonthLater = new Date();
+      // const x = oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+      // if (time2.getTime() > x) {
+      //   toDateCtrl?.setErrors({ max: { actual: toDateCtrl.value, max: new Date().getMonth() + 1 } });
+      // }
+      if (time2.getTime() < time1.getTime()) {
+        toDateCtrl?.setErrors({ min: { actual: toDateCtrl.value, min: fromDateCtrl?.value } });
       }
 
       return null;
-
     }
   }
 

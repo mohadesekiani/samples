@@ -4,8 +4,6 @@ import { ButtonToggleComponentPage } from './button-toggle.component.integration
 fdescribe('SUT(Integration): ButtonToggleComponent', () => {
     let sutPage: ButtonToggleComponentPage;
 
-
-
     beforeEach(() => {
         sutPage = new ButtonToggleComponentPage()
     });
@@ -14,19 +12,18 @@ fdescribe('SUT(Integration): ButtonToggleComponent', () => {
         // assert
         expect(sutPage.detectChanges()).toBeTruthy();
     });
-    xit('should be binding formControl and formGroup', () => {
+
+    fit('should be binding formControl and formGroup', () => {
         // arrange 
-        // sutPage.detectChanges();
+        sutPage.detectChanges();
+        debugger
         // sutPage.buttonToggle is null
 
         // act
-        sutPage.buttonToggle.click()
+        // sutPage.buttonToggle.click()
 
         // assert 
         expect(sutPage.component.onValueChange).toHaveBeenCalledWith({ value: 'example', title: 'Example' });
 
     });
-
-
-
 });
