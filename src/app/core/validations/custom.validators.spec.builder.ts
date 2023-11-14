@@ -1,5 +1,5 @@
 import { FormBuilder } from "@angular/forms";
-import { CustomValidators } from "./_custom.validators";
+import { CustomValidators } from "./custom.validators";
 
 export class customValidatorsBuilder {
 
