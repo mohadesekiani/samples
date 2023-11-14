@@ -6,7 +6,7 @@ import {
   Validators
 } from '@angular/forms';
 import { PassengerTypesEnum } from 'src/app/core/module/enum/general-types.enum';
-import { CustomValidators } from 'src/app/core/validations/custom.validators';
+import { CustomValidators } from 'src/app/core/validations/_custom.validators';
 
 import { BaseFormControlValueAccessor } from 'src/app/core/constant/base-component/base-form-control-value-accessor';
 import {

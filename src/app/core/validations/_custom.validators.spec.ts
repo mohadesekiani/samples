@@ -3,7 +3,7 @@ import {
   FormBuilder,
   FormGroup
 } from '@angular/forms';
-import { CustomValidators } from './custom.validators';
+import { CustomValidators } from './_custom.validators';
 import { customValidatorsBuilder } from './custom.validators.spec.builder';
 
 

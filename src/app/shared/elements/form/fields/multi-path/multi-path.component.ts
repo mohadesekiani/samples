@@ -12,7 +12,7 @@ import {
   ISearchMultiPath,
   ISearchRoute,
 } from 'src/app/core/module/interface/search-types.interface';
-import { CustomValidators } from 'src/app/core/validations/custom.validators';
+import { CustomValidators } from 'src/app/core/validations/_custom.validators';
 
 @Component({
   selector: 'app-multi-path',
