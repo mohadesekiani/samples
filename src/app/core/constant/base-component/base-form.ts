@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { FormBuilder, FormGroup, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn } from '@angular/forms';
 import { IForm } from '../../module/interface/search-types.interface';
 import { ValidationErrorService } from 'src/app/shared/services/validation-error.service';
 import { Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 @Directive()
 export abstract class BaseForm<T> {
   form!: FormGroup<IForm<T>>;
+  messages !: { [key: string]: string };
   protected resultUrl!: string;
   protected formConfig!: IForm<T>;
   protected fb = new FormBuilder();
@@ -30,6 +31,7 @@ export abstract class BaseForm<T> {
     });
 
     this.validationErrorService.process(this.form);
+    this.messages = this.validationErrorService.messages
   }
 
   submit() {

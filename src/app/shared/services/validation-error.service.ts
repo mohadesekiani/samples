@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
-  FormControl,
   FormControlStatus,
-  FormGroup,
-  ValidatorFn,
+  FormGroup
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -43,6 +41,7 @@ export class ValidationErrorService {
         return;
       }
       this.setErrorMessage(control, parentKey);
+      
     });
     this.setErrorMessage(control, parentKey);
   }
@@ -92,9 +91,8 @@ export class ValidationErrorService {
     errorValue: any
   ) {
     if (typeof errorValue === 'object') {
-      return `${customMessage} with value: ${Object.keys(errorValue)[0]}:${
-        Object.values(errorValue)[0]
-      },${Object.keys(errorValue)[1]}:${Object.values(errorValue)[1]}.`;
+      return `${customMessage} with value: ${Object.keys(errorValue)[0]}:${Object.values(errorValue)[0]
+        },${Object.keys(errorValue)[1]}:${Object.values(errorValue)[1]}.`;
     } else {
       return `${customMessage}`;
     }

@@ -21,15 +21,7 @@
             label="departure Date"
             [name]="nameCtrl"
             />
-            <!-- [validationErrorMessage]="validationErrorMessage" -->
-              <!-- [error]="validationMessages['routes['+i+'].origin']" -->
-              <!-- [error]="messages.departureDate" -->
-            <!-- <mat-error *ngIf="isDateInvalid(i)">invalid </mat-error> -->
-            <!-- <span
-              class="passengers-error"
-              *ngIf="item.controls.departureDate.invalid"
-              >date is invalid</span
-            > -->
+            <mat-error *ngIf="form.controls.routes.invalid">{{messages['routes['+i+'].departureDate']}} </mat-error>
             <app-datepicker
               *ngIf="item.get('returnDate')?.enabled"
               formControlName="returnDate"

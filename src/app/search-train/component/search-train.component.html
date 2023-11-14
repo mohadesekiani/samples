@@ -1,14 +1,16 @@
 <form [formGroup]="form"
       (submit)="(submit)">
-    <app-button-toggle formControlName="travelType"
-                       id="travelType"
-                       [items]="travelTypes"></app-button-toggle>
+  <app-button-toggle formControlName="travelType"
+                     id="travelType"
+                     [items]="travelTypes"></app-button-toggle>
   <div>
     <app-multi-path id="route"
                     formControlName="route"
                     [travelType]="travelType"
                     class="app-multi-path"></app-multi-path>
-
+    <mat-error *ngIf="form.controls.route.invalid">
+      error:{{messages['route']}}
+    </mat-error>
     <hr />
     <div class="flex flex-wrap">
       <div class="w-1/2">
@@ -16,8 +18,9 @@
         <app-passengers id="passengers"
                         formControlName="passengers"
                         class="app-passengers"></app-passengers>
-        <span class="passengers-error"
-              *ngIf="form.controls.passengers?.invalid">passengers is invalid</span>
+        <mat-error *ngIf="form.controls.passengers.invalid">
+          error:{{messages['passengers']}}
+        </mat-error>
       </div>
       <div class="w-1/2">
         <span class="m-2">general</span>
@@ -47,6 +50,9 @@
             </div>
           </div>
         </div>
+        <mat-error *ngIf="form.controls.general.invalid">
+          error:{{messages['general']}}
+        </mat-error>
       </div>
     </div>
   </div>

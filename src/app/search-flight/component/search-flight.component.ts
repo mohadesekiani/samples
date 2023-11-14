@@ -5,6 +5,7 @@ import { TravelTypesEnum } from 'src/app/core/module/enum/travel-types.enum';
 import { ISearchFlight } from 'src/app/core/module/interface/search-types.interface';
 import { BaseForm } from '../../core/constant/base-component/base-form';
 import { Router } from '@angular/router';
+import { IFlightMessage } from 'src/app/core/module/interface/errorMessage.interface';
 
 @Component({
   selector: 'app-search-flight',
@@ -23,7 +24,6 @@ export class SearchFlightComponent extends BaseForm<ISearchFlight> {
   }));
 
   get travelType(): TravelTypesEnum {
-    // debugger
     return this.form.controls.travelType?.value as TravelTypesEnum;
   }
 

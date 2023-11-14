@@ -10,7 +10,7 @@ export abstract class BaseFormControlValueAccessor<
   T
 > extends BaseControlValueAccessor<T> {
   form!: FormGroup<IForm<T>>;
-
+  messages !: { [key: string]: string };
   protected formConfig!: IForm<T>;
   protected fb = new FormBuilder();
   protected validationErrorService = new ValidationErrorService();
@@ -51,5 +51,9 @@ export abstract class BaseFormControlValueAccessor<
       .subscribe((x: any) => {
         this.refersValue();
       });
+      this.validationErrorService.process(this.form)
+      this.messages = this.validationErrorService.messages
+      console.log(this.messages);
+
   }
 }
