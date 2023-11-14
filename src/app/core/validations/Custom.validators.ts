@@ -3,12 +3,10 @@ import {
   FormArray,
   FormGroup,
   ValidationErrors,
-  ValidatorFn,
+  ValidatorFn
 } from '@angular/forms';
-import { IForm, ISearchRoute } from 'src/app/core/module/interface/search-types.interface'
 
 
-import * as moment from 'moment';
 
 export class CustomValidators {
 
@@ -108,7 +106,57 @@ export class CustomValidators {
     }
   }
 
+  static unique(arrayCtrl: string, comparison: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      // debugger
+      const formArray = control.get(arrayCtrl) as FormArray;
+      if (!formArray) {
+        return null;
+      }
+      const origins = formArray.controls.map((group) => group.get(comparison).value);
 
+      const isDuplicate = origins.some((origin: string, index: number) => {
+        const nextOrigins = [...origins];
+        nextOrigins.splice(index, 1);
+
+        return origin && nextOrigins.includes(origin);
+      });
+      if (isDuplicate) {
+        formArray.controls.forEach((group) => {
+          const originControl = group.get(comparison);
+          originControl.setErrors({ unique: true });
+        });
+
+        return { unique: true };
+      }
+      formArray.controls.forEach((group) => {
+        const originControl = group.get(comparison);
+        if (originControl?.hasError('unique')) {
+          originControl?.setErrors({ unique: null });
+          console.log(originControl);
+        }
+      });
+      return null;
+    };
+  }
+
+  static atLeseNumber(arrayCtrl: string, length: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const formArray = control.get(arrayCtrl) as FormArray;
+      if (!formArray) {
+        return null;
+      }
+
+      if (formArray.controls.length < length) {
+        formArray.setErrors({ length: true });
+      }
+
+      if (formArray?.hasError('length') && formArray.controls.length >= length) {
+        formArray?.setErrors({ length: null });
+      }
+      return null;
+    };
+  }
 
 
 }

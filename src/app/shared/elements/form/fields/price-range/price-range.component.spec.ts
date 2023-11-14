@@ -16,9 +16,6 @@ xdescribe('SUT: PriceRangeComponent', () => {
   });
 
   it('should be call refersValue on value change', () => {
-    // arrange
-    spyOn(sut, 'refersValue');
-
     // act
     sut.form.setValue({ minPrice: 120000, maxPrice: 10000000 });
 

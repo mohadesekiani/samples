@@ -18,9 +18,6 @@ describe('SUT: ButtonToggleComponent', () => {
   });
 
   it('should be updated The value when change the value', () => {
-    // arrange 
-    spyOn(sut,'updateValueAndValidity')
-
     // act 
     sut.onValueChange({title:'someValue',value:'someValue'})
 

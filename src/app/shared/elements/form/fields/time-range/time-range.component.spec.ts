@@ -38,9 +38,6 @@ xdescribe('SUT: TimeRangeComponent', () => {
   });
 
   it('should be call refersValue on value change', () => {
-    // arrange
-    spyOn(sut, 'refersValue');
-
     // act
     sut.form.patchValue({ startTime: 1320 });
 

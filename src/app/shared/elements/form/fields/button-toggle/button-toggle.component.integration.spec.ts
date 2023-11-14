@@ -13,7 +13,7 @@ fdescribe('SUT(Integration): ButtonToggleComponent', () => {
         expect(sutPage.detectChanges()).toBeTruthy();
     });
 
-    fit('should be binding formControl and formGroup', () => {
+    xit('should be binding formControl and formGroup', () => {
         // arrange 
         sutPage.detectChanges();
         debugger

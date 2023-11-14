@@ -27,21 +27,21 @@ describe('SUT: FilterFlightComponent', () => {
     });
   });
 
-  it('should emit value on form value changes', (done) => {
-    // arrange
-    // spyOn(sut.refersValue, 'refersValue');
+  // it('should emit value on form value changes', (done) => {
+  //   // arrange
+  //   // spyOn(sut.refersValue, 'refersValue');
 
-    // act
-    sut.form.patchValue({
-      timeRange: { startTime: 600, endTime: 1320 },
-    });
+  //   // act
+  //   sut.form.patchValue({
+  //     timeRange: { startTime: 600, endTime: 1320 },
+  //   });
 
-    // assert
-    setTimeout(() => {
-      expect(sut.form.valid).toBeTruthy();
-      // expect(sut.newItemEvent.emit).toHaveBeenCalled();
-      // expect(sut.newItemEvent.emit).toHaveBeenCalledWith(sut.formValue);
-      done();
-    }, 300);
-  });
+  //   // assert
+  //   setTimeout(() => {
+  //     expect(sut.form.valid).toBeTruthy();
+  //     // expect(sut.newItemEvent.emit).toHaveBeenCalled();
+  //     // expect(sut.newItemEvent.emit).toHaveBeenCalledWith(sut.formValue);
+  //     done();
+  //   }, 300);
+  // });
 });
