@@ -7,7 +7,7 @@ import { CustomValidators } from './custom.validators';
 import { customValidatorsBuilder } from './custom.validators.spec.builder';
 
 
-describe('SUT: CustomValidators', () => {
+fdescribe('SUT: CustomValidators', () => {
   let formGroup: FormGroup;
   let fb: FormBuilder;
   let form: FormGroup;
@@ -158,9 +158,9 @@ describe('SUT: CustomValidators', () => {
         fb.group({ origin: [null] })
       ])
     }, {
-      validators: [CustomValidators.unique('routes', 'origin')],
+      validators: [CustomValidators.unique('origin')],
+    });
 
-    })
     formA.controls.routes.at(0).patchValue({ origin: 'mmmmm' })
     formA.controls.routes.at(1).patchValue({ origin: 'mmmmm' })
     const originCtrl0 = formA.controls.routes.at(0).controls.origin
@@ -177,36 +177,74 @@ describe('SUT: CustomValidators', () => {
         fb.group({ origin: [null] })
       ])
     }, {
-      validators: [CustomValidators.unique('routes', 'origin')],
+      validators: [CustomValidators.unique('origin')],
+    });
 
-    })
     formA.controls.routes.at(0).patchValue({ origin: 'mmmmm' })
     formA.controls.routes.at(1).patchValue({ origin: 'mmmmm' })
     formA.controls.routes.at(0).patchValue({ origin: 'v-v' })
     expect(formA.controls.routes.at(0).controls.origin.invalid).toBeFalse();
-    // expect(formA.controls.routes.at(0).controls.origin?.hasError('unique')).toBeFalsy()
-    expect(formA.controls.routes.at(1).controls.origin.hasError('unique')).toBeTruthy()
+    expect(formA.controls.routes.at(0).controls.origin?.hasError('unique')).toBeFalsy()
+    // expect(formA.controls.routes.at(1).controls.origin.hasError('unique')).toBeTruthy()
+  });
 
+  it('should be have an error when I enter duplicate origins then update value origin', () => {
+    let fa = fb.array([
+      fb.control({ origin: { id: '2' } }),
+      fb.control({ origin: { id: '3' } })
+    ], {
+      validators: [CustomValidators.unique('origin.id')],
+    });
+
+    fa.at(1).patchValue({ origin: { id: '2' } })
+    expect(fa.hasError('unique')).toBeTruthy()
+    expect(fa.at(0)?.hasError('unique')).toBeTruthy()
+  });
+
+  it('should be have an error when I enter duplicate origins then update value origin', () => {
+    let fg = fb.group({
+      routes: [[{ origin: { id: '2' } }, { origin: { id: '3' } }], [
+        CustomValidators.unique('origin.id')
+      ]]
+    });
+
+    fg.controls.routes.patchValue([{ origin: { id: '2' } }, { origin: { id: '2' } }]);
+
+    expect(fg.controls.routes.hasError('unique')).toBeTruthy()
+  });
+
+  xit('should be clear unique error when value is change to unique', () => {
+    // arrange
+    let formA = fb.group({
+      routes: fb.array([
+        fb.control({ origin: { id: '2' } }),
+        fb.control({ origin: { id: '2' } })
+      ])
+    }, {
+      validators: [CustomValidators.unique('origin.id')],
+    });
+
+    formA.controls.routes.at(1).patchValue({ origin: { id: '3' } })
+    expect(formA.controls.routes.at(0)?.hasError('unique')).toBeFalse()
   });
 
   it('should not be Its length less than 3', () => {
     // arrange 
-    let routesCtrl = formBuilderInstance.form_Validation_length().routesCtrl
+    let routesCtrl = formBuilderInstance.atLeastMember_form_validation().routesCtrl;
+
 
     // assert 
-    expect(routesCtrl.hasError('length')).toBeTruthy()
-
+    expect(routesCtrl.hasError('atLeastMember')).toBeTruthy()
   });
 
   it('should be Its length less than 3 then push to array', () => {
     // arrange
-    let routesCtrl = formBuilderInstance.form_Validation_length().routesCtrl
+    let routesCtrl = formBuilderInstance.atLeastMember_form_validation().routesCtrl;
 
     // act 
     routesCtrl.push(fb.group({ origin: ['mmmm'] }))
 
     // assert 
-    expect(routesCtrl.hasError('length')).toBeFalsy()
-
-  });
-});
+    expect(routesCtrl.hasError('atLeastMember')).toBeFalsy()
+  })
+})

@@ -5,6 +5,7 @@ import {
   ValidationErrors,
   ValidatorFn
 } from '@angular/forms';
+import { get } from 'lodash-es';
 
 
 
@@ -14,9 +15,6 @@ export class CustomValidators {
   static maxFrom(fromField: string, toField: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const formGroup = control as FormGroup;
-      if (!formGroup) {
-        return null;
-      }
 
       const fromFieldCtrl = formGroup.get(fromField);
       const toFieldCtrl = formGroup.get(toField);
@@ -106,54 +104,45 @@ export class CustomValidators {
     }
   }
 
-  static unique(arrayCtrl: string, comparison: string): ValidatorFn {
+  static unique(comparison: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      // debugger
-      const formArray = control.get(arrayCtrl) as FormArray;
-      if (!formArray) {
-        return null;
-      }
-      const origins = formArray.controls.map((group) => group.get(comparison).value);
+      debugger
+      const formArray = control as FormArray;
 
+      const origins = formArray.value.map((value: any) => get(value, comparison));
+      
       const isDuplicate = origins.some((origin: string, index: number) => {
         const nextOrigins = [...origins];
         nextOrigins.splice(index, 1);
 
         return origin && nextOrigins.includes(origin);
       });
+
       if (isDuplicate) {
-        formArray.controls.forEach((group) => {
-          const originControl = group.get(comparison);
-          originControl.setErrors({ unique: true });
+        formArray.controls?.forEach((ctrl) => {
+          ctrl.setErrors({ unique: true });
         });
 
         return { unique: true };
       }
-      formArray.controls.forEach((group) => {
-        const originControl = group.get(comparison);
-        if (originControl?.hasError('unique')) {
-          originControl?.setErrors({ unique: null });
-          console.log(originControl);
+
+      formArray.controls?.forEach((ctrl) => {
+        if (ctrl?.hasError('unique')) {
+          ctrl?.setErrors({ unique: null });
         }
       });
       return null;
     };
   }
 
-  static atLeseNumber(arrayCtrl: string, length: number): ValidatorFn {
+  static atLeastMember(length: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const formArray = control.get(arrayCtrl) as FormArray;
-      if (!formArray) {
-        return null;
-      }
+      const formArray = control as FormArray;
 
       if (formArray.controls.length < length) {
-        formArray.setErrors({ length: true });
+        return ({ atLeastMember: true });
       }
 
-      if (formArray?.hasError('length') && formArray.controls.length >= length) {
-        formArray?.setErrors({ length: null });
-      }
       return null;
     };
   }

@@ -1,7 +1,7 @@
 
 import { ButtonToggleComponentPage } from './button-toggle.component.integration.spec.page';
 
-fdescribe('SUT(Integration): ButtonToggleComponent', () => {
+describe('SUT(Integration): ButtonToggleComponent', () => {
     let sutPage: ButtonToggleComponentPage;
 
     beforeEach(() => {

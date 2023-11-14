@@ -7,19 +7,23 @@ export class customValidatorsBuilder {
     routesCtrl!: any
     constructor(private fb: FormBuilder) {
     }
-    form_Validation_length() {
+
+    atLeastMember_form_validation() {
         this.formValue = this.fb.group({
             routes: this.fb.array([
                 this.fb.group({ origin: ['mm'] }),
                 this.fb.group({ origin: ['mmm'] })
-            ])
+            ], {
+                validators: [CustomValidators.atLeastMember(3)],
+            })
         }, {
-            validators: [CustomValidators.atLeseNumber('routes', 3)],
+            // validators: [CustomValidators.atLeastMember('routes', 3)],
+        });
 
-        })
         this.routesCtrl = this.formValue.controls.routes
         return this
     }
+
     form_Validation_unique() {
         this.formValue = this.fb.group({
             routes: this.fb.array([
@@ -27,11 +31,11 @@ export class customValidatorsBuilder {
                 this.fb.group({ origin: [null] })
             ])
         }, {
-            validators: [CustomValidators.unique('routes', 'origin')],
-
+            validators: [CustomValidators.unique('origin')],
         })
         return this
     }
+
     build() {
         if (this.formValue) {
             this.formValue.patchValue(this.formValue);
