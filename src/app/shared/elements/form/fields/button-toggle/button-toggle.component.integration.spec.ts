@@ -16,7 +16,6 @@ describe('SUT(Integration): ButtonToggleComponent', () => {
     xit('should be binding formControl and formGroup', () => {
         // arrange 
         sutPage.detectChanges();
-        debugger
         // sutPage.buttonToggle is null
 
         // act

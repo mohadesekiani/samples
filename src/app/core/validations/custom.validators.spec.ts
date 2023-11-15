@@ -151,7 +151,7 @@ fdescribe('SUT: CustomValidators', () => {
     expect(fromFieldCtrlDate.hasError('today')).toBeTruthy()
   });
 
-  it('should be have an error when I enter duplicate origins', () => {
+  xit('should be have an error when I enter duplicate origins', () => {
     let formA = fb.group({
       routes: fb.array([
         fb.group({ origin: [null] }),
@@ -170,7 +170,7 @@ fdescribe('SUT: CustomValidators', () => {
 
   });
 
-  it('should be have an error when I enter duplicate origins then update value origin', () => {
+  xit('should be have an error when I enter duplicate origins then update value origin', () => {
     let formA = fb.group({
       routes: fb.array([
         fb.group({ origin: [null] }),

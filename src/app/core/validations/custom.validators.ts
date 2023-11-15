@@ -106,7 +106,6 @@ export class CustomValidators {
 
   static unique(comparison: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      debugger
       const formArray = control as FormArray;
 
       const origins = formArray.value.map((value: any) => get(value, comparison));

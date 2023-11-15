@@ -38,7 +38,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     control: FormControl | null,
     form: FormGroupDirective | NgForm | null
   ): boolean {
-    debugger
     const routes = form?.form.controls['routes'] as FormArray<
       FormGroup<IForm<ISearchRoute>>
     >;
