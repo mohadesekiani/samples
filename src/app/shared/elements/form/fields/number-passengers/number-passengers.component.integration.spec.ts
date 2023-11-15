@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NumberPassengersComponent } from './number-passengers.component';
 import { TestUtil } from 'src/app/core/utils/test/test-util';
 
-xdescribe('NumberPassengersComponent', () => {
+xdescribe('SUT(Integration): NumberPassengersComponent', () => {
   let sut: NumberPassengersComponent;
   let fixture: ComponentFixture<NumberPassengersComponent>;
 
