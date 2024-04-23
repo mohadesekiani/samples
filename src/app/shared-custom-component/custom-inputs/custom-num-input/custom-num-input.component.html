@@ -1,0 +1,42 @@
+<!-- number input -->
+<div class="form-floating">
+  <input
+    type="text"
+    class="form-control"
+    id="numInput"
+    [formControl]="formControl"
+    [placeholder]="placeholder"
+    [minlength]="minlength"
+    [maxlength]="maxlength"
+    [required]="required"
+  />
+  <label for="numInput">
+    <span *ngIf="required || requiredValidator">*</span> <span>{{ label }}</span>
+  </label>
+</div>
+<!-- error handling-->
+<ng-container *ngIf="formControl.dirty || formControl.touched">
+  <div *ngIf="formControl.errors?.required" class="text-danger my-1">
+    {{ '::FieldRequired' | abpLocalization }}
+  </div>
+  <div *ngIf="formControl.errors?.minlength" class="text-danger my-1">
+    {{ 'حداقل ' + this.minlength + ' عدد وارد کنید' }}
+  </div>
+  <div *ngIf="formControl.errors?.maxlength" class="text-danger my-1">
+    {{ 'حداکثر ' + this.maxlength + ' عدد وارد کنید' }}
+  </div>
+
+  <div *ngIf="formControl.errors?.pattern" class="text-danger my-1">
+    {{ 'عدد وارد کنید.' }}
+  </div>
+
+  <div
+    *ngIf="!formControl.errors?.pattern && formControl.errors?.absoluteLength"
+    class="text-danger my-1"
+  >
+    {{ 'تعداد ' + this.absoluteLength + ' رقم وارد کنید.' }}
+  </div>
+
+  <!-- other errors -->
+  <ng-content />
+</ng-container>

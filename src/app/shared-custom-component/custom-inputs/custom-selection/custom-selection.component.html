@@ -1,0 +1,30 @@
+<label class="form-label" for="price-range-businessRole-id">
+  <span>{{ label }}</span>
+  <span *ngIf="required && formControl.errors.required" style="color: rgb(145, 0, 0)">*</span>
+</label>
+
+<select
+  class="form-select form-select-lg pointer"
+  aria-label=".form-select-lg example"
+  [formControl]="formControl"
+>
+  <ng-container *ngFor="let item of items">
+    <ng-container *ngIf="item.title === this.selectOneStr; else elseTemplate">
+      <option selected [value]="item.value">{{ item.title }}</option>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <option [value]="item.value">{{ item.title }}</option>
+    </ng-template>
+  </ng-container>
+</select>
+<!-- error handling-->
+<ng-container *ngIf="required">
+  <ng-container *ngIf="formControl.dirty || formControl.touched">
+    <div *ngIf="formControl.errors?.required" class="text-danger my-1">
+      {{ 'وارد کردن یک مقدار الزامی می باشد.' }}
+    </div>
+
+    <!-- other errors -->
+    <ng-content />
+  </ng-container>
+</ng-container>

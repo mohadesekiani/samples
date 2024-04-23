@@ -1,0 +1,25 @@
+<!-- text input -->
+<div class="form-floating">
+  <input
+    type="email"
+    class="form-control"
+    id="textInput"
+    [formControl]="formControl"
+    [placeholder]="placeholder"
+    [required]="required"
+    [email]="true"
+  />
+  <span *ngIf="required || requiredValidator">*</span> <span>{{ label }}</span>
+</div>
+<!-- error handling-->
+<ng-container *ngIf="formControl.dirty || formControl.touched">
+  <div *ngIf="formControl.errors?.required" class="text-danger my-1">
+    {{ '::FieldRequired' | abpLocalization }}
+  </div>
+  <div *ngIf="formControl.errors?.email" class="text-danger my-1">
+    {{ 'ایمیل وارد کنید.' }}
+  </div>
+
+  <!-- other errors -->
+  <ng-content />
+</ng-container>

@@ -1,0 +1,16 @@
+$width: 140px;
+
+.refresh-btn {
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+.captcha-container {
+  width: $width;
+  height: 100%;
+}
+.captcha-image {
+  border-radius: 5px;
+  object-fit: contain;
+  width: $width;
+}

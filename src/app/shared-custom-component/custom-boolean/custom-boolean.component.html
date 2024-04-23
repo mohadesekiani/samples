@@ -1,0 +1,18 @@
+<div [class]="cusClass">
+  <ng-container *ngIf="this.bool; else isFalse">
+    <ng-container *ngIf="outputType === 'text'; else trueIconType">
+      <p>{{ '::Yes' | abpLocalization }}</p>
+    </ng-container>
+    <ng-template #trueIconType>
+      <i class="fas fa-check" style="color: green"></i>
+    </ng-template>
+  </ng-container>
+  <ng-template #isFalse>
+    <ng-container *ngIf="outputType === 'text'; else falseIconType">
+      <p>{{ '::No' | abpLocalization }}</p>
+    </ng-container>
+    <ng-template #falseIconType>
+      <i class="bi bi-x-lg" style="-webkit-text-stroke: 1px; color: red"></i>
+    </ng-template>
+  </ng-template>
+</div>

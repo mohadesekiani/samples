@@ -1,0 +1,31 @@
+<div class="input-group">
+  <div class="form-floating">
+    <input
+      type="text"
+      class="form-control"
+      id="floatingInput"
+      [formControl]="formControl"
+      placeholder="yyyy / mm / dd"
+      name="dp"
+      ngbDatepicker
+      #d="ngbDatepicker"
+      onfocus="this.blur()"
+      [required]="required"
+    />
+    <label for="floatingInput">
+      {{ label }}
+    </label>
+  </div>
+
+  <button
+    class="btn btn-outline-secondary bi bi-calendar3"
+    (click)="d.toggle(); clicked()"
+    type="button"
+  ></button>
+</div>
+<!-- error handling-->
+<ng-container *ngIf="formControl?.dirty || formControl?.touched">
+  <div *ngIf="formControl?.errors?.required" class="text-danger my-1">
+    {{ '::FieldRequired' | abpLocalization }}
+  </div>
+</ng-container>

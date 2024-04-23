@@ -1,0 +1,55 @@
+<!-- input -->
+<div class="input-group d-flex gap-2 m-0">
+  <div class="form-floating position-relative">
+    <input
+      type="text"
+      class="form-control"
+      id="textInput"
+      [formControl]="valueControl"
+      [placeholder]="null"
+    />
+    <label for="textInput">{{ label }}</label>
+
+    <!-- refresh icon -->
+    <i
+      class="bi bi-arrow-clockwise refresh-btn position-absolute"
+      *ngIf="refreshButton"
+      (click)="refresh($event)"
+    ></i>
+  </div>
+
+  <div class="captcha-container position-relative">
+    <ng-container *ngIf="loading; else hasResponse">
+      <!-- loading icon -->
+      <div class="d-flex align-items-center justify-content-center mt-2">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #hasResponse>
+      <ng-container *ngIf="captchaResponse; else hasError">
+        <!-- captcha image -->
+        <img
+          class="position-absolute captcha-image border-box"
+          src="{{ 'data:image/jpg;base64,' + this.captchaResponse.image }}"
+        />
+      </ng-container>
+      <ng-template #hasError>{{ '::ErrorLoadingCaptcha' | abpLocalization }}</ng-template>
+    </ng-template>
+  </div>
+</div>
+
+<!-- error handling-->
+<ng-container *ngIf="isNotCorrect; else otherErrors">
+  <div class="text-danger my-1">
+    {{ isNotCorrectError }}
+  </div>
+</ng-container>
+<ng-template #otherErrors>
+  <ng-container *ngIf="valueControl.dirty || valueControl.touched">
+    <div *ngIf="valueControl.errors?.required" class="text-danger my-1 position-absolute">
+      {{ '::EnterTheCodeInTheImage' | abpLocalization }}
+    </div>
+  </ng-container>
+</ng-template>

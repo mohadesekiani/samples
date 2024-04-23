@@ -1,0 +1,34 @@
+<!-- text input -->
+<div class="form-floating">
+  <input
+    type="text"
+    class="form-control"
+    id="textInput"
+    [formControl]="formControl"
+    [placeholder]="placeholder"
+    [minlength]="minlength"
+    [maxlength]="maxlength"
+    [required]="required"
+  />
+  <label for="textInput">
+    <span *ngIf="required || requiredValidator">*</span> <span>{{ label }}</span>
+  </label>
+</div>
+<!-- error handling-->
+<ng-container *ngIf="formControl.dirty || formControl.touched">
+  <div *ngIf="formControl.errors?.required" class="text-danger my-1">
+    {{ '::FieldRequired' | abpLocalization }}
+  </div>
+  <div *ngIf="formControl.errors?.minlength" class="text-danger my-1">
+    {{ 'حداقل ' + this.minlength + ' کاراکتر وارد کنید' }}
+  </div>
+  <div *ngIf="formControl.errors?.maxlength" class="text-danger my-1">
+    {{ 'حداکثر ' + this.maxlength + ' کاراکتر وارد کنید' }}
+  </div>
+  <div *ngIf="formControl.errors?.latinCharacters" class="text-danger my-1">
+    {{ 'کاراکتر لاتین وارد کنید.' }}
+  </div>
+
+  <!-- other errors -->
+  <ng-content />
+</ng-container>

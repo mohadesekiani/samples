@@ -1,0 +1,40 @@
+<div class="d-inline-block w-100 dropDownRolesWrapp" ngbDropdown #myDrop="ngbDropdown">
+  <button
+    type="button"
+    class="btn btn-info me-2 my-2 w-100 font-14 dropDownRolesBBtn"
+    id="dropdownManual"
+    ngbDropdownAnchor
+    (focus)="myDrop.open()"
+  >
+    <ng-container *ngIf="selectedBusinessRoleInfo; else desc">
+      <span class="RolesBBtnText">
+        {{ selectedBusinessRoleInfo.businessRoleTitle }} -- {{ selectedBusinessRoleInfo.title }}({{
+          selectedBusinessRoleInfo.userAccountName
+        }})</span
+      >
+    </ng-container>
+    <ng-template #desc>
+      <span>{{ 'انتخاب نقش' }}</span>
+    </ng-template>
+    <i class="bi bi-gear RolesBBtnIcon"></i>
+  </button>
+  <div ngbDropdownMenu aria-labelledby="dropdownManual" class="w-100 p-2 custom-bg-dark">
+    <button
+      type="button"
+      (click)="onTempMenuChange(item)"
+      class="btn text-primary"
+      *ngFor="let item of confirmedUserBusiness"
+      ngbDropdownItem
+    >
+      {{ item.businessRoleTitle }} ({{ item.title }})
+    </button>
+    <hr />
+    <button
+      class="btn btn-outline-danger d-flex align-items-center w-100"
+      (click)="onRemoveselectedBusinessRole()"
+    >
+      <i class="bi bi-bootstrap-reboot font-16"></i>
+      <span class="mx-2"> حالت پیش فرض</span>
+    </button>
+  </div>
+</div>

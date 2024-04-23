@@ -1,0 +1,37 @@
+<abp-modal [busy]="isBusy" [(visible)]="isVisible">
+  <ng-template #abpHeader>
+    <h3 class="iran-sans">
+      {{ (service.selected ? 'AbpUi::Edit ' : '::BusinessRoleLists') | abpLocalization }}
+    </h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <div class="card">
+      <div class="card-body">
+        <p-tree
+          [value]="menuTree"
+          class="w-full md:w-30rem"
+          [filter]="true"
+          filterMode="strict"
+          filterPlaceholder="Strict Filter"
+          selectionMode="checkbox"
+          [(selection)]="selectedNodes"
+        ></p-tree>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type="button" class="btn btn-secondary" abpClose (click)="closeModal()">
+      {{ 'AbpUi::Cancel' | abpLocalization }}
+    </button>
+    <abp-button
+      iconClass="fa fa-check"
+      buttonType="submit"
+      formName="measure-unit"
+      (click)="saveSelectedItems()"
+    >
+      {{ 'AbpUi::Save' | abpLocalization }}
+    </abp-button>
+  </ng-template>
+</abp-modal>

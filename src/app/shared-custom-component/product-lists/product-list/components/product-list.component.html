@@ -1,0 +1,119 @@
+<abp-modal [busy]="isBusy" [(visible)]="isVisible" [options]="{ size: 'xl', }">
+  <ng-template #abpHeader>
+    <h3 class="iran-sans">
+      {{ (service.selected ? 'AbpUi::Edit ' : '::ProductList') | abpLocalization }}
+    </h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <abp-advanced-entity-filters-form *ngIf="service.filters as filters">
+      <form #filterForm (keyup.enter)="list.get()">
+        <div class="row">
+          <div class="col-12 col-sm-auto">
+            <div class="mb-3">
+              <label class="form-label" for="nameFilter">
+                {{ '::Name' | abpLocalization }}
+              </label>
+
+              <input
+                id="nameFilter"
+                class="form-control"
+                [(ngModel)]="filters.name"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-auto align-self-end mb-3">
+            <div class="row">
+              <div class="col-6 col-sm-auto d-grid">
+                <button type="button" class="btn btn-primary" (click)="list.get()">
+                  <span>{{ 'AbpUi::Search' | abpLocalization }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </abp-advanced-entity-filters-form>
+
+    <ngx-datatable
+      [rows]="service.data.items"
+      [count]="service.data.totalCount"
+      [list]="list"
+      default
+    >
+      <ngx-datatable-column
+        *ngIf="ShowCheckbox"
+        name="{{ '::Select' | abpLocalization }}"
+        [sortable]="false"
+        [canAutoResize]="false"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [checked]="isItemSelected(row)"
+            [ngClass]="mode === 'show' ? 'disabledAction' : ''"
+            (change)="toggleSelectProduct(row)"
+          />
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="{{ '::Name' | abpLocalization }}" prop="name">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.name }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="{{ '::Type' | abpLocalization }}" prop="type">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div [ngSwitch]="row.type">
+            <span *ngSwitchCase="1">وارداتی</span>
+            <span *ngSwitchCase="2">داخلی</span>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column
+        name="{{ '::CategoryLevel1' | abpLocalization }}"
+        prop="categoryLevel1Id"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.categoryLevel1Name }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        name="{{ '::CategoryLevel2' | abpLocalization }}"
+        prop="categoryLevel2Id"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.categoryLevel2Name }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        name="{{ '::CategoryLevel3' | abpLocalization }}"
+        prop="categoryLevel3Id"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.categoryLevel3Name }}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type="button" class="btn btn-secondary" abpClose (click)="closeModal()">
+      {{ 'AbpUi::Close' | abpLocalization }}
+    </button>
+
+    <abp-button
+      *ngIf="mode === 'update'"
+      iconClass="fa fa-check"
+      buttonType="submit"
+      formName="measure-unit"
+      (click)="updateProductsList()"
+    >
+      {{ 'AbpUi::Update' | abpLocalization }}
+    </abp-button>
+  </ng-template>
+</abp-modal>
